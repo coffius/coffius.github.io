@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>KOFF.io</title>
-    <link>http://www.example.com/</link>
+    <link>http://coffius.github.io/</link>
     <description>Recent content on KOFF.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-EN</language>
     <copyright>(c) 2015</copyright>
     <lastBuildDate>Sat, 19 Sep 2015 22:01:13 +0300</lastBuildDate>
-    <atom:link href="http://www.example.com/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://coffius.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Lens in scala</title>
-      <link>http://www.example.com/2015/09/19/lens-in-scala/</link>
+      <link>http://coffius.github.io/2015/09/19/lens-in-scala/</link>
       <pubDate>Sat, 19 Sep 2015 22:01:13 +0300</pubDate>
       
-      <guid>http://www.example.com/2015/09/19/lens-in-scala/</guid>
+      <guid>http://coffius.github.io/2015/09/19/lens-in-scala/</guid>
       <description>
 
 &lt;p&gt;In this article let&amp;rsquo;s take a look at such a thing as lens(or lenses).
@@ -337,10 +337,10 @@ println(updatedPerson)
     
     <item>
       <title>True fail-fast async error handling with Expression</title>
-      <link>http://www.example.com/2015/09/12/true-fail-fast-async-error-handling-with-expression/</link>
+      <link>http://coffius.github.io/2015/09/12/true-fail-fast-async-error-handling-with-expression/</link>
       <pubDate>Sat, 12 Sep 2015 22:01:13 +0300</pubDate>
       
-      <guid>http://www.example.com/2015/09/12/true-fail-fast-async-error-handling-with-expression/</guid>
+      <guid>http://coffius.github.io/2015/09/12/true-fail-fast-async-error-handling-with-expression/</guid>
       <description>
 
 &lt;p&gt;How it was said in the previous &lt;a href=&#34;http://koff.io/posts/290071-make-async-with-scalaz-either-and-futures&#34;&gt;article&lt;/a&gt; there is no way to do truly fail-fast async error handling using only scala or scalaz.&lt;/p&gt;
@@ -541,10 +541,10 @@ libraryDependencies += &amp;quot;com.github.jedesah&amp;quot; % &amp;quot;comput
     
     <item>
       <title>Practical Scalaz: Make async operations with scalaz.Either and Futures</title>
-      <link>http://www.example.com/2015/09/05/practical-scalaz-make-async-operations-with-scalaz.either-and-futures/</link>
+      <link>http://coffius.github.io/2015/09/05/practical-scalaz-make-async-operations-with-scalaz.either-and-futures/</link>
       <pubDate>Sat, 05 Sep 2015 22:01:13 +0300</pubDate>
       
-      <guid>http://www.example.com/2015/09/05/practical-scalaz-make-async-operations-with-scalaz.either-and-futures/</guid>
+      <guid>http://coffius.github.io/2015/09/05/practical-scalaz-make-async-operations-with-scalaz.either-and-futures/</guid>
       <description>
 
 &lt;p&gt;Many of us know about such library as scalaz. For those who don&amp;rsquo;t know it is a library for functional programming in scala. You can find it &lt;a href=&#34;https://github.com/scalaz/scalaz&#34; title=&#34;Scalaz on github&#34;&gt;here&lt;/a&gt;.
