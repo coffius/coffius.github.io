@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>True fail-fast async error handling with Expression  &middot; KOFF.io</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+<link rel="author" href="http://plus.google.com/+102671541320733671208">
+
+
+<meta property="og:title" content="True fail-fast async error handling with Expression  &middot; KOFF.io ">
+<meta property="og:site_name" content="KOFF.io"/>
+<meta property="og:url" content="http://localhost:1313/posts/true-fail-fast-async-error-handling-with-expression" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="2015-09-12T22:01:13&#43;03:00" />
+<meta property="og:article:modified_time" content="2015-09-12T22:01:13&#43;03:00" />
+
+  
+
+  
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@coffius" />
+<meta name="twitter:creator" content="@coffius" />
+<meta name="twitter:title" content="True fail-fast async error handling with Expression" />
+<meta name="twitter:description" content="" />
+<meta name="twitter:url" content="http://localhost:1313/posts/true-fail-fast-async-error-handling-with-expression" />
+<meta name="twitter:domain" content="http://localhost:1313/">
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "True fail-fast async error handling with Expression",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+102671541320733671208?rel=author"
+    },
+    "datePublished": "2015-09-12",
+    "description": "",
+    "wordCount":  879 
+  }
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/true-fail-fast-async-error-handling-with-expression" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:1313/touch-icon-144-precomposed.png">
+<link href="http://localhost:1313/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.14" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="http://localhost:1313/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://localhost:1313/css/style.css">
+<link rel="stylesheet" href="http://localhost:1313/css/highlight/default.css">
+
+  
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="http://localhost:1313/">
+  KOFF.io
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  where scala is beloved
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="http://localhost:1313/">Home</a>
+
+
+  
+<a href="http://localhost:1313/about">About</a>
+
+<a href="http://localhost:1313/post" title="Show list of posts">Posts</a>
+
+<a href="http://localhost:1313/tags" title="Show list of tags">Tags</a>
+
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+
+
+<a id="contact-link-github" class="contact_link" href="https://github.com/coffius">
+  <span class="fa fa-github-square"></span><span>github</span></a>
+
+
+
+
+
+
+
+<a id="contact-link-googleplus" class="contact_link" href="https://plus.google.com/u/0/+102671541320733671208">
+  <span class="fa fa-google-plus-square"></span><span>google+</span></a>
+
+
+
+
+
+<a id="contact-link-twitter" class="contact_link" href="https://twitter.com/coffius">
+  <span class="fa fa-twitter-square"></span><span>twitter</span></a>
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>True fail-fast async error handling with Expression
+</h1>
+
+  <div class="metas">
+<time datetime="2015-09-12">12 Sep, 2015</time>
+
+
+  
+  &middot; Read in about 5 min
+  &middot; (879 Words)
+  <br>
+  
+
+
+</div>
+
+</header>
+
+  <div class="container content">
+  
+
+<p>How it was said in the previous <a href="http://koff.io/posts/290071-make-async-with-scalaz-either-and-futures">article</a> there is no way to do truly fail-fast async error handling using only scala or scalaz.</p>
+
+<p>Look at the example below:</p>
+
+<pre><code class="language-scala">val longFut = longFuture() // very long future
+val shortFut = shortFuture()
+val failedFut = failedFuture() // throw new IllegalStateException(&quot;future is failed&quot;)
+
+val result = for {
+  long &lt;- longFut
+  short &lt;- shortFut
+  failed &lt;- failedFut
+} yield {
+  long + &quot; | &quot; + short + &quot; | &quot; + failed
+}
+</code></pre>
+
+<p>In that example we will wait all the futures until we get <code>IllegalStateException</code> because <code>for-comprehension</code> always handle futures in the order which we define them since Scala translates the example above to this:</p>
+
+<pre><code class="language-scala">longFut.flatMap { long =&gt;
+  shortFut.flatMap { short =&gt;
+    failedFut.map { failed =&gt;
+      long + &quot; | &quot; + short + &quot; | &quot; + failed
+    }
+  }
+}
+</code></pre>
+
+<p>But it is possible to avoid this problem with Expression library(<a href="https://github.com/jedesah/computation-expressions" title="Computation-expressions">link</a>)</p>
+
+<h2 id="simple-example">Simple example</h2>
+
+<p>You can checkout a project with examples for this article <a href="https://github.com/coffius/koffio-expression-example" title="Sources for examples">here</a>
+Let&rsquo;s take a look at a simple example at first:</p>
+
+<pre><code class="language-scala">def future1(): Future[String] = Future.successful(&quot;future1&quot;)
+def future2(): Future[String] = Future.successful(&quot;future2&quot;)
+
+def resultCalc(str1: String, str2: String): String = str1 + &quot; | &quot; + str2
+
+def expression(): Future[String] = Expression[Future, String] {
+  val result1 = extract(future1())
+  val result2 = extract(future2())
+  resultCalc(result1, result2)
+}
+</code></pre>
+
+<p>In the example above we defined <code>Expression</code> block, executed our async methods inside it, used <code>extract(...)</code> method to get a result from a future and passed the future resuts as params to <code>resultCalc(...)</code>.
+<code>expression()</code> method will behave almost like this code:</p>
+
+<pre><code class="language-scala">def forComprehension(): Future[String] = {
+  val fut1 = future1()
+  val fut2 = future2()
+  for {
+    result1 &lt;- fut1
+    result2 &lt;- fut2
+  } yield {
+    resultCalc(result1, result2)
+  }
+}
+</code></pre>
+
+<p>except the case when the futures have finished with exceptions.</p>
+
+<h2 id="async-fail-fast-error-handling">Async fail-fast error handling</h2>
+
+<p>In this case <code>Expression</code> block will be completed with an error as soon as any of the futures is finished with an failure.
+Take a look:</p>
+
+<pre><code class="language-scala">def expressionFailFast(): Unit = {
+  val startTime = System.currentTimeMillis()
+  val result = Expression[Future, String] {
+    //same order as in the for-comprehension example
+    val long = extract(longFuture())    //Thread.sleep(15000)
+    val short = extract(shortFuture())  //Thread.sleep(3000)
+    val failed = extract(failedFuture())//Thread.sleep(6000);throw new IllegalStateException()
+    short + &quot; | &quot; + long + &quot; | &quot; + failed
+  }
+  try {
+    Await.result(result, 30 seconds)
+  } catch {
+    case err: Throwable =&gt; println(&quot;error: &quot; + err.getMessage)
+  }
+
+  val duration = System.currentTimeMillis() - startTime
+  println(&quot;duration: &quot; + duration / 1000.0d)
+}
+</code></pre>
+
+<p>If you run this code you will see that the code will be completed during ~6 seconds instead of 15 seconds for <code>forComprehensionFailFast(...)</code> below:</p>
+
+<pre><code class="language-scala">def forComprehensionFailFast(): Unit = {  
+  val startTime = System.currentTimeMillis()
+
+  val longFut = longFuture()
+  val shortFut = shortFuture()
+  val failedFut = failedFuture()
+
+  val result = for {
+    long &lt;- longFut
+    short &lt;- shortFut
+    failed &lt;- failedFut
+  } yield {
+    long + &quot; | &quot; + short + &quot; | &quot; + failed
+  }
+
+  try {
+    Await.result(result, 30 seconds)
+  } catch {
+    case err: Throwable =&gt; println(&quot;error: &quot; + err.getMessage)
+  }
+
+  val duration = System.currentTimeMillis() - startTime
+  println(&quot;duration: &quot; + duration / 1000.0d)
+}
+</code></pre>
+
+<p>So now it is not nessesary to wait long operations if any other operation already completed with an error. It might be helpful for working with external services which can be very slow.</p>
+
+<h2 id="futures-and-if-statements">Futures and If-Statements</h2>
+
+<p>One more thing. Sometimes you may need to use <code>if-statement</code> blocks along with async operations. In this case Expression library can also be useful. Let&rsquo;s imagine that we want to get and to check some information. After the checking we decide what we will do next. And all these operations should be asynchronous.
+If we use <code>for-comprehension</code> then a code will be like this:</p>
+
+<pre><code class="language-scala">def forComprehensionIf(): Future[String] = {
+  (for {
+    condition &lt;- trueFuture()
+  } yield {
+    if(condition) {
+      for{
+        normal &lt;- normalFuture()
+        long &lt;- longFuture()
+      } yield {
+        resultCalc(normal, long)
+      }
+    } else {
+      for{
+        failed &lt;- failedFuture()
+      } yield {
+        resultCalc(&quot;default&quot;, failed)
+      }
+    }
+  }).flatMap(identity)
+}
+</code></pre>
+
+<p>It&rsquo;s quite tricky, isn&rsquo;t it?
+But if we use <code>Expression</code> then we can rewrite it like this:</p>
+
+<pre><code class="language-scala">def expressionIf(): Future[String] = {
+  //we can use extract(trueFuture())
+  //or we can import Expression.auto.extract instead
+  import com.github.jedesah.Expression.auto.extract
+  Expression[Future, String] {
+    if(trueFuture()) {
+      //A-branch
+      resultCalc(normalFuture(), longFuture())
+    } else {
+      //B-branch
+      resultCalc(&quot;default&quot;, failedFuture())
+    }
+  }
+}
+</code></pre>
+
+<p>Much simpler :)</p>
+
+<h2 id="git-as-maven-repo">Git as Maven Repo</h2>
+
+<p>And one more trick for github. Sometimes you can find useful projects or libs which you want to use it in your sbt project as a managed dependency but they are not published on any public repositories. In this case <a href="https://jitpack.io/" title="jitpack.io">jitpack.io</a> might help you.
+I&rsquo;ve used it in the example project for this article to add <a href="https://github.com/jedesah/computation-expressions" title="Computation-expressions">jedesah/computation-expressions</a> to <code>build.sbt</code></p>
+
+<pre><code class="language-scala">//add jitpack.io to resolvers
+resolvers += &quot;jitpack.io&quot; at &quot;https://jitpack.io&quot;
+
+//add github project as a dependency
+//https://github.com/jedesah -&gt; &quot;com.github.jedesah&quot; as a group id
+//project name &quot;computation-expressions&quot; as an artifact id
+//and commit id &quot;5ef11fc97c&quot; as a revision
+libraryDependencies += &quot;com.github.jedesah&quot; % &quot;computation-expressions&quot; % &quot;5ef11fc97c&quot;
+</code></pre>
+
+<p>That`s all. Now you can use any github projects as a sbt dependency.</p>
+
+<h2 id="links">Links</h2>
+
+<ul>
+<li><a href="https://github.com/coffius/koffio-expression-example" title="Sources for examples">Sources for examples</a> - sbt project with examples</li>
+<li><a href="https://github.com/jedesah/computation-expressions" title="Computation-expressions">jedesah/computation-expressions</a> - Expression project</li>
+<li><a href="https://jitpack.io/" title="jitpack.io">jitpack.io</a> - package repository for GitHub</li>
+<li><a href="https://youtu.be/tU4pU5vaddU" title="Lecture from creators of Expression library">Building a Better Future</a> - Jean-Remi Desjardins &amp; Eddie Carlson talk about how they have created Expression library</li>
+<li><a href="http://slides.com/jedesah/deck-1#/">Slides</a> - slides of a presentation. Can be useful.</li>
+</ul>
+
+</div>
+
+
+  <footer class="container">
+  <div class="container navigation no-print">
+  <h2>Navigation</h2>
+  
+  
+
+    
+    <a class="prev" href="http://localhost:1313/posts/291279-true-fail-fast-with-expression-magic" title="Practical Scalaz: Make async operations with scalaz.Either and Futures">
+      Previous
+    </a>
+    
+
+    
+    <a class="next" href="http://localhost:1313/posts/292173-lens-in-scala" title="Lens in scala">
+      Next
+    </a>
+    
+
+  
+
+
+</div>
+
+  <div class="container comments">
+  <h2>Comments</h2>
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//koff-io.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div>
+
+</footer>
+
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+<a href="http://localhost:1313/license">license</a>
+
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+  code with <i class='fa fa-heart'></i>
+
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  &copy; 2015
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//koff-io.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="http://localhost:1313/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+<script>
+  var _gaq=[['_setAccount','102671541320733671208'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+
+    
+  <script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>
+

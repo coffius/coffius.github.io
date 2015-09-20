@@ -8,17 +8,17 @@
   </url>
   
   <url>
-    <loc>http://coffius.github.io/2015/09/19/lens-in-scala/</loc>
+    <loc>http://coffius.github.io/posts/292173-lens-in-scala</loc>
     <lastmod>2015-09-19T22:01:13+03:00</lastmod>
   </url>
   
   <url>
-    <loc>http://coffius.github.io/2015/09/12/true-fail-fast-async-error-handling-with-expression/</loc>
+    <loc>http://coffius.github.io/posts/291279-true-fail-fast-with-expression-magic</loc>
     <lastmod>2015-09-12T22:01:13+03:00</lastmod>
   </url>
   
   <url>
-    <loc>http://coffius.github.io/2015/09/05/practical-scalaz-make-async-operations-with-scalaz.either-and-futures/</loc>
+    <loc>http://coffius.github.io/posts/290071-make-async-with-scalaz-either-and-futures</loc>
     <lastmod>2015-09-05T22:01:13+03:00</lastmod>
   </url>
   
