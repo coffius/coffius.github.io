@@ -1,0 +1,735 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>KOFF.io</title>
+    <link>http://www.example.com/</link>
+    <description>Recent content on KOFF.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-EN</language>
+    <copyright>(c) 2015</copyright>
+    <lastBuildDate>Sat, 19 Sep 2015 22:01:13 +0300</lastBuildDate>
+    <atom:link href="http://www.example.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Lens in scala</title>
+      <link>http://www.example.com/2015/09/19/lens-in-scala/</link>
+      <pubDate>Sat, 19 Sep 2015 22:01:13 +0300</pubDate>
+      
+      <guid>http://www.example.com/2015/09/19/lens-in-scala/</guid>
+      <description>
+
+&lt;p&gt;In this article let&amp;rsquo;s take a look at such a thing as lens(or lenses).
+A Lens is an abstraction from functional programming which helps to deal with a problem of updating complex immutable nested objects like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;case class User(id: UserId, generalInfo: GeneralInfo, billInfo: BillInfo)
+case class UserId(value: Long)
+case class GeneralInfo(email: Email,
+                       password: String,
+                       siteInfo: SiteInfo,
+                       isEmailConfirmed: Boolean = false,
+                       phone: String,
+                       isPhoneConfirmed: Boolean = false)
+case class SiteInfo(alias: String, avatarUrl: String, userRating: Double = 0.0d)
+case class Email(value: String)
+case class BillInfo(addresses: Seq[Address], name: Name)
+case class Name(firstName: String, secondName: String)
+case class Address(country: Country, city: City, street: String, house: String, isConfirmed: Boolean = false)
+case class City(name: String)
+case class Country(name: String)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If we want to increase &lt;code&gt;userRating&lt;/code&gt; in this model then we will have to write such a code:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;val updatedUser = user.copy(
+  generalInfo = user.generalInfo.copy(
+    siteInfo = user.generalInfo.siteInfo.copy(
+      userRating = user.generalInfo.siteInfo.userRating + 1
+    )
+  )
+)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And we have to write the code below to confirm all of the addresses in BillInfo&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;val updatedAddresses = user.billInfo.addresses.map(_.copy(isConfirmed = true))
+val updatedUser = user.copy(
+	billInfo = user.billInfo.copy(addresses = updatedAddresses)
+)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If we increase a level of nesting in our structures then we will considerably increase amount of a code like this. In such cases lens give a cleaner way to make changes in nested structures.&lt;/p&gt;
+
+&lt;p&gt;Using quicklens we can do it much simpler:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;import com.softwaremill.quicklens._
+//update rating using quicklens
+val userWithRating = user.modify(_.generalInfo.siteInfo.userRating).using(_ + 1)
+//confirm all the addresses of a user with quicklens
+val userWithConfimedAddresses = user.modify(_.billInfo.addresses.each.isConfirmed).using(_ =&amp;gt; true)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now we have base understanding of lens purpose. In the next parts of this article we will see how to use each of the libraries from the list.&lt;/p&gt;
+
+&lt;h1 id=&#34;available-implementations&#34;&gt;Available implementations&lt;/h1&gt;
+
+&lt;p&gt;There are several implementations in scala:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;scalaz.Lens&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/adamw/quicklens&#34; title=&#34;Quicklens&#34;&gt;Quicklens&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/pathikrit/sauron&#34; title=&#34;Sauron&#34;&gt;Sauron&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://julien-truffaut.github.io/Monocle/&#34; title=&#34;Monocle&#34;&gt;Monocle&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We will take a look at all of them in this article. A project with examples can be found &lt;a href=&#34;https://github.com/coffius/koffio-lenses&#34; title=&#34;Examples of lens use&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;scalaz-lens&#34;&gt;scalaz.Lens&lt;/h1&gt;
+
+&lt;p&gt;If we want to use &lt;code&gt;scalaz.Lens&lt;/code&gt; at first we should define lens:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;val siteInfoRatingLens = Lens.lensu[SiteInfo, Double](
+  (info, value) =&amp;gt; info.copy(userRating = value),
+  _.userRating
+)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The first type parameter is needed to set in which class(&lt;code&gt;MainClass&lt;/code&gt;) we will change value and the second type parameter defines the class(&lt;code&gt;FieldClass&lt;/code&gt;) of the field which we will change with the lens. As you can see we should also send two functions to &lt;code&gt;lensu(...)&lt;/code&gt; method. The first function defines how to change &lt;code&gt;MainClass&lt;/code&gt; using a new value. The second function is used to get value of the field which we want to change.
+In order to make possible changes of &lt;code&gt;userRating&lt;/code&gt; field directly in &lt;code&gt;User&lt;/code&gt; object we should create additional lens.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;val generalInfoSiteInfoLens = Lens.lensu[GeneralInfo, SiteInfo](
+  (general, site) =&amp;gt; general.copy(siteInfo = site),
+  _.siteInfo
+)
+
+val userGeneralInfoLens = Lens.lensu[User, GeneralInfo](
+  (user, info) =&amp;gt; user.copy(generalInfo = info),
+  _.generalInfo
+)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and compose them in the chain &lt;code&gt;User.generalInfo -&amp;gt; GeneralInfo.siteInfo -&amp;gt; SiteInfo.userRating&lt;/code&gt;.
+We can use different approaches:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;&amp;gt;=&amp;gt;&lt;/code&gt; - alias for &lt;code&gt;andThen(...)&lt;/code&gt; method&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;=&amp;lt;&lt;/code&gt; - alias for &lt;code&gt;compose(...)&lt;/code&gt; method&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Example below:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;//andThen
+val userRatingLens1 = userGeneralInfoLens &amp;gt;=&amp;gt; generalInfoSiteInfoLens &amp;gt;=&amp;gt; siteInfoRatingLens
+val userRatingLens2 = userGeneralInfoLens.andThen(generalInfoSiteInfoLens).andThen(siteInfoRatingLens)
+
+//compose
+val userRatingLens3 = siteInfoRatingLens &amp;lt;=&amp;lt; generalInfoSiteInfoLens &amp;lt;=&amp;lt; userGeneralInfoLens
+val userRatingLens4 = siteInfoRatingLens.compose(generalInfoSiteInfoLens).compose(userGeneralInfoLens)
+
+val user = ProblemExample.user
+
+//same operations
+println(userRatingLens1.set(user, 1).generalInfo.siteInfo.userRating)
+println(userRatingLens2.set(user, 2).generalInfo.siteInfo.userRating)
+println(userRatingLens3.set(user, 3).generalInfo.siteInfo.userRating)
+println(userRatingLens4.set(user, 4).generalInfo.siteInfo.userRating)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you want to change &lt;code&gt;isConfirmed&lt;/code&gt; to true in each address as it is described in the introduction example then you should use a different operator: &lt;code&gt;=&amp;gt;=&lt;/code&gt; - alias for &lt;code&gt;mod(...)&lt;/code&gt; method
+This operator get value using lens, modify it and create a new object with a changed value.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;val userBillInfoLens = Lens.lensu[User, BillInfo](
+  (user, info) =&amp;gt; user.copy(billInfo = info),
+  _.billInfo
+)
+
+val billInfoAddressesLens = Lens.lensu[BillInfo, Seq[Address]](
+  (info, addresses) =&amp;gt; info.copy(addresses = addresses),
+  _.addresses
+)
+
+val isConfirmedLens = (userBillInfoLens &amp;gt;=&amp;gt; billInfoAddressesLens) =&amp;gt;= { _.map(_.copy(isConfirmed = true)) }
+
+val user = ProblemExample.user
+println(isConfirmedLens(user).billInfo.addresses)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That is how we can use scalaz.Lens. It is quite hard and we will reduce amount of the code only if we have very complex nesting and implement enough lens to compose them. But now we have a notion about how we can use scalaz.Lens&lt;/p&gt;
+
+&lt;h1 id=&#34;quicklens&#34;&gt;Quicklens&lt;/h1&gt;
+
+&lt;p&gt;Use of scalaz.Lens is quite difficult but if we are not afraid to use macros in a project we might use &lt;code&gt;quicklens&lt;/code&gt; instead. You have already seen a simple example for &lt;code&gt;quicklens&lt;/code&gt; so let&amp;rsquo;s go deeper and see what else &lt;code&gt;quicklens&lt;/code&gt; can do.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;Quicklens&lt;/code&gt; has support of chain modifications which can be helpful if you want to change several fields at the same time&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;import com.softwaremill.quicklens._
+val user = ProblemExample.user
+val updatedUser = user
+   .modify(_.generalInfo.siteInfo.userRating).using(_ + 1)
+   .modify(_.billInfo.addresses.each.isConfirmed).using(_ =&amp;gt; true)
+
+println(updatedUser.generalInfo.siteInfo.userRating)
+println(updatedUser.billInfo.addresses)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It is also possible to create reusable lens as well as in scalaz.Lens&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;import com.softwaremill.quicklens._
+val userRatingLens = modify(_:User)(_.generalInfo.siteInfo.userRating).using _
+val user = ProblemExample.user
+val updatedUser1 = userRatingLens(user)(_ + 10)
+val updatedUser2 = userRatingLens(user)(_ + 12)
+
+println(updatedUser1.generalInfo.siteInfo.userRating)
+println(updatedUser2.generalInfo.siteInfo.userRating)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Of course lens composition is also possible:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;import com.softwaremill.quicklens._
+//create lens
+val generalInfoLens = modify(_:User)(_.generalInfo)
+val emailConfirmedLens = modify(_:GeneralInfo)(_.isEmailConfirmed)
+val phoneConfirmedLens = modify(_:GeneralInfo)(_.isPhoneConfirmed)
+
+//compose the lens
+val confirmEmail = generalInfoLens.andThenModify(emailConfirmedLens)(_:User).using(_ =&amp;gt; true)
+val confirmPhone = generalInfoLens.andThenModify(phoneConfirmedLens)(_:User).using(_ =&amp;gt; true)
+
+val user = ProblemExample.user
+//compose the functions in order to make both changes at once
+val updatedUser = confirmEmail.andThen(confirmPhone)(user)
+
+println(updatedUser.generalInfo.isEmailConfirmed)
+println(updatedUser.generalInfo.isPhoneConfirmed)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;sauron&#34;&gt;Sauron&lt;/h1&gt;
+
+&lt;p&gt;As it is said on the main page of &lt;code&gt;Sauron&lt;/code&gt; repo it has been inspired by &lt;code&gt;quicklens&lt;/code&gt; but it has much simpler implementation and less number of features. And also has additional dependency on &lt;code&gt;&amp;quot;org.scalamacros&amp;quot; % &amp;quot;paradise&amp;quot; % &amp;quot;2.1.0-M5&amp;quot;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;So lets see what exactly &lt;code&gt;sauron&lt;/code&gt; can do.
+The first is changing of value of userRating&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;import com.github.pathikrit.sauron._
+
+val user = ProblemExample.user
+val updatedUser = lens(user)(_.generalInfo.siteInfo.userRating)(_ + 10)
+println(updatedUser.generalInfo.siteInfo.userRating)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then reusing lens in order to change a specific object:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;import com.github.pathikrit.sauron._
+val user = ProblemExample.user
+val userRatingLens = lens(user)(_.generalInfo.siteInfo.userRating)
+val userWith20Rating = userRatingLens(_ =&amp;gt; 20)
+val userWith100Rating = userRatingLens( _ + 100 )
+
+println(userWith20Rating.generalInfo.siteInfo.userRating)
+println(userWith100Rating.generalInfo.siteInfo.userRating)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And the example below shows hot to define lens for changing different objects:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;import com.github.pathikrit.sauron._
+
+val userRatingLens = lens(_:User)(_.generalInfo.siteInfo.userRating)
+
+val user = ProblemExample.user
+
+val userWith20Rating = userRatingLens(user)(_ =&amp;gt; 20)
+val userWith100Rating = userRatingLens(user)( _ + 100 )
+
+println(userWith20Rating.generalInfo.siteInfo.userRating)
+println(userWith100Rating.generalInfo.siteInfo.userRating)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Also &lt;code&gt;sauron&lt;/code&gt; has lens composition:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;import com.github.pathikrit.sauron._
+val generalInfoLens = lens(_:User)(_.generalInfo)
+val emailConfirmedLens = lens(_:GeneralInfo)(_.isEmailConfirmed)
+val phoneConfirmedLens = lens(_:GeneralInfo)(_.isPhoneConfirmed)
+
+val user = ProblemExample.user
+val confirmEmail = generalInfoLens.andThenLens(emailConfirmedLens)(_:User)(_ =&amp;gt; true)
+val confirmPhone = generalInfoLens.andThenLens(phoneConfirmedLens)(_:User)(_ =&amp;gt; true)
+
+//compose the functions in order to make both changes at once
+val updatedUser = confirmEmail.andThen(confirmPhone)(user)
+
+println(updatedUser.generalInfo.isEmailConfirmed)
+println(updatedUser.generalInfo.isPhoneConfirmed)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can see that the example above is quite similar to &lt;code&gt;quicklens&lt;/code&gt; example of lens composition.&lt;/p&gt;
+
+&lt;h1 id=&#34;monocle&#34;&gt;Monocle&lt;/h1&gt;
+
+&lt;p&gt;The last lens library which we will direct our attention to is &lt;code&gt;Monocle&lt;/code&gt;. It is not just a lens library. It also contains logic for work with prisms but here we will only look at a lens&amp;rsquo;s part of the library.
+As other libraries &lt;code&gt;Monocle&lt;/code&gt; supports lens creation. Common way to create lens is very similar to scalaz.Lens - we should create individual lens for our types manually:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;import monocle.Lens
+
+//create lens
+val generalInfoLens = Lens[User, GeneralInfo](_.generalInfo)(info =&amp;gt; user =&amp;gt; user.copy(generalInfo = info))
+val siteInfoLens = Lens[GeneralInfo, SiteInfo](_.siteInfo)(site =&amp;gt; general =&amp;gt; general.copy(siteInfo = site))
+val userRatingLens = 
+        Lens[SiteInfo, Double](_.userRating)(rating =&amp;gt; siteInfo =&amp;gt; siteInfo.copy(userRating = rating))
+
+//and compose them together
+val changeRatingLens = generalInfoLens.composeLens(siteInfoLens).composeLens(userRatingLens)
+val user = ProblemExample.user
+
+val updatedUser = changeRatingLens.set(20)(user)
+println(updatedUser.generalInfo.siteInfo.userRating)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Simpler way is to use macros&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;import monocle.macros.GenLens
+val changeRatingLens = GenLens[User](_.generalInfo.siteInfo.userRating)
+val plus100RatingLens = changeRatingLens.modify(_ + 100)
+
+val user = ProblemExample.user
+val updatedUser = plus100RatingLens(user)
+println(updatedUser.generalInfo.siteInfo.userRating)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There also is support of the annotation &lt;code&gt;@Lenses&lt;/code&gt; which generates &lt;code&gt;monocle.Lenses&lt;/code&gt; for all fields of a case class. If we define a case class using this annotation all its fields will have type like &lt;code&gt;monocle.Lens[S, A]&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;import monocle.macros.Lenses
+@Lenses case class Address(name: String)
+@Lenses case class Person(address: Address)
+
+val addressNameLens = Person.address composeLens Address.name
+val changeNameFunc = addressNameLens.modify(_.toUpperCase)(_:Person)
+
+val person = Person(Address(&amp;quot;person_address&amp;quot;))
+val updatedPerson = changeNameFunc(person)
+
+println(updatedPerson)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This annontation might be helpful if you want to use lens pretty often in your code.&lt;/p&gt;
+
+&lt;h1 id=&#34;results&#34;&gt;Results&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;scalaz.Lens - if you already have scalaz in a project and you are not bothered to write some code in order to define lens&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/adamw/quicklens&#34; title=&#34;Quicklens&#34;&gt;Quicklens&lt;/a&gt; - easy to use and powerful enough to deal with the described problem&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/pathikrit/sauron&#34; title=&#34;Sauron&#34;&gt;Sauron&lt;/a&gt; - very similar to &lt;a href=&#34;https://github.com/adamw/quicklens&#34; title=&#34;Quicklens&#34;&gt;Quicklens&lt;/a&gt; and has a less size but also has less fucntionality&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://julien-truffaut.github.io/Monocle/&#34; title=&#34;Monocle&#34;&gt;Monocle&lt;/a&gt; - a powerful library which can help if there is necessity to use lots of lens in a code.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;My choise is &lt;a href=&#34;https://github.com/adamw/quicklens&#34; title=&#34;Quicklens&#34;&gt;Quicklens&lt;/a&gt; because it is not so complex as scalaz.Lens and it does what is needed.&lt;/p&gt;
+
+&lt;h1 id=&#34;links&#34;&gt;Links&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/coffius/koffio-lenses&#34; title=&#34;coffius/koffio-lenses&#34;&gt;coffius/koffio-lenses&lt;/a&gt; - examples for this article&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/adamw/quicklens&#34; title=&#34;Quicklens&#34;&gt;Quicklens&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/pathikrit/sauron&#34; title=&#34;Sauron&#34;&gt;Sauron&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://julien-truffaut.github.io/Monocle/&#34; title=&#34;Monocle&#34;&gt;Monocle&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>True fail-fast async error handling with Expression</title>
+      <link>http://www.example.com/2015/09/12/true-fail-fast-async-error-handling-with-expression/</link>
+      <pubDate>Sat, 12 Sep 2015 22:01:13 +0300</pubDate>
+      
+      <guid>http://www.example.com/2015/09/12/true-fail-fast-async-error-handling-with-expression/</guid>
+      <description>
+
+&lt;p&gt;How it was said in the previous &lt;a href=&#34;http://koff.io/posts/290071-make-async-with-scalaz-either-and-futures&#34;&gt;article&lt;/a&gt; there is no way to do truly fail-fast async error handling using only scala or scalaz.&lt;/p&gt;
+
+&lt;p&gt;Look at the example below:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;val longFut = longFuture() // very long future
+val shortFut = shortFuture()
+val failedFut = failedFuture() // throw new IllegalStateException(&amp;quot;future is failed&amp;quot;)
+
+val result = for {
+  long &amp;lt;- longFut
+  short &amp;lt;- shortFut
+  failed &amp;lt;- failedFut
+} yield {
+  long + &amp;quot; | &amp;quot; + short + &amp;quot; | &amp;quot; + failed
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In that example we will wait all the futures until we get &lt;code&gt;IllegalStateException&lt;/code&gt; because &lt;code&gt;for-comprehension&lt;/code&gt; always handle futures in the order which we define them since Scala translates the example above to this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;longFut.flatMap { long =&amp;gt;
+  shortFut.flatMap { short =&amp;gt;
+    failedFut.map { failed =&amp;gt;
+      long + &amp;quot; | &amp;quot; + short + &amp;quot; | &amp;quot; + failed
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;But it is possible to avoid this problem with Expression library(&lt;a href=&#34;https://github.com/jedesah/computation-expressions&#34; title=&#34;Computation-expressions&#34;&gt;link&lt;/a&gt;)&lt;/p&gt;
+
+&lt;h2 id=&#34;simple-example&#34;&gt;Simple example&lt;/h2&gt;
+
+&lt;p&gt;You can checkout a project with examples for this article &lt;a href=&#34;https://github.com/coffius/koffio-expression-example&#34; title=&#34;Sources for examples&#34;&gt;here&lt;/a&gt;
+Let&amp;rsquo;s take a look at a simple example at first:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;def future1(): Future[String] = Future.successful(&amp;quot;future1&amp;quot;)
+def future2(): Future[String] = Future.successful(&amp;quot;future2&amp;quot;)
+
+def resultCalc(str1: String, str2: String): String = str1 + &amp;quot; | &amp;quot; + str2
+
+def expression(): Future[String] = Expression[Future, String] {
+  val result1 = extract(future1())
+  val result2 = extract(future2())
+  resultCalc(result1, result2)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In the example above we defined &lt;code&gt;Expression&lt;/code&gt; block, executed our async methods inside it, used &lt;code&gt;extract(...)&lt;/code&gt; method to get a result from a future and passed the future resuts as params to &lt;code&gt;resultCalc(...)&lt;/code&gt;.
+&lt;code&gt;expression()&lt;/code&gt; method will behave almost like this code:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;def forComprehension(): Future[String] = {
+  val fut1 = future1()
+  val fut2 = future2()
+  for {
+    result1 &amp;lt;- fut1
+    result2 &amp;lt;- fut2
+  } yield {
+    resultCalc(result1, result2)
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;except the case when the futures have finished with exceptions.&lt;/p&gt;
+
+&lt;h2 id=&#34;async-fail-fast-error-handling&#34;&gt;Async fail-fast error handling&lt;/h2&gt;
+
+&lt;p&gt;In this case &lt;code&gt;Expression&lt;/code&gt; block will be completed with an error as soon as any of the futures is finished with an failure.
+Take a look:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;def expressionFailFast(): Unit = {
+  val startTime = System.currentTimeMillis()
+  val result = Expression[Future, String] {
+    //same order as in the for-comprehension example
+    val long = extract(longFuture())    //Thread.sleep(15000)
+    val short = extract(shortFuture())  //Thread.sleep(3000)
+    val failed = extract(failedFuture())//Thread.sleep(6000);throw new IllegalStateException()
+    short + &amp;quot; | &amp;quot; + long + &amp;quot; | &amp;quot; + failed
+  }
+  try {
+    Await.result(result, 30 seconds)
+  } catch {
+    case err: Throwable =&amp;gt; println(&amp;quot;error: &amp;quot; + err.getMessage)
+  }
+
+  val duration = System.currentTimeMillis() - startTime
+  println(&amp;quot;duration: &amp;quot; + duration / 1000.0d)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you run this code you will see that the code will be completed during ~6 seconds instead of 15 seconds for &lt;code&gt;forComprehensionFailFast(...)&lt;/code&gt; below:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;def forComprehensionFailFast(): Unit = {  
+  val startTime = System.currentTimeMillis()
+
+  val longFut = longFuture()
+  val shortFut = shortFuture()
+  val failedFut = failedFuture()
+
+  val result = for {
+    long &amp;lt;- longFut
+    short &amp;lt;- shortFut
+    failed &amp;lt;- failedFut
+  } yield {
+    long + &amp;quot; | &amp;quot; + short + &amp;quot; | &amp;quot; + failed
+  }
+
+  try {
+    Await.result(result, 30 seconds)
+  } catch {
+    case err: Throwable =&amp;gt; println(&amp;quot;error: &amp;quot; + err.getMessage)
+  }
+
+  val duration = System.currentTimeMillis() - startTime
+  println(&amp;quot;duration: &amp;quot; + duration / 1000.0d)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So now it is not nessesary to wait long operations if any other operation already completed with an error. It might be helpful for working with external services which can be very slow.&lt;/p&gt;
+
+&lt;h2 id=&#34;futures-and-if-statements&#34;&gt;Futures and If-Statements&lt;/h2&gt;
+
+&lt;p&gt;One more thing. Sometimes you may need to use &lt;code&gt;if-statement&lt;/code&gt; blocks along with async operations. In this case Expression library can also be useful. Let&amp;rsquo;s imagine that we want to get and to check some information. After the checking we decide what we will do next. And all these operations should be asynchronous.
+If we use &lt;code&gt;for-comprehension&lt;/code&gt; then a code will be like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;def forComprehensionIf(): Future[String] = {
+  (for {
+    condition &amp;lt;- trueFuture()
+  } yield {
+    if(condition) {
+      for{
+        normal &amp;lt;- normalFuture()
+        long &amp;lt;- longFuture()
+      } yield {
+        resultCalc(normal, long)
+      }
+    } else {
+      for{
+        failed &amp;lt;- failedFuture()
+      } yield {
+        resultCalc(&amp;quot;default&amp;quot;, failed)
+      }
+    }
+  }).flatMap(identity)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It&amp;rsquo;s quite tricky, isn&amp;rsquo;t it?
+But if we use &lt;code&gt;Expression&lt;/code&gt; then we can rewrite it like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;def expressionIf(): Future[String] = {
+  //we can use extract(trueFuture())
+  //or we can import Expression.auto.extract instead
+  import com.github.jedesah.Expression.auto.extract
+  Expression[Future, String] {
+    if(trueFuture()) {
+      //A-branch
+      resultCalc(normalFuture(), longFuture())
+    } else {
+      //B-branch
+      resultCalc(&amp;quot;default&amp;quot;, failedFuture())
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Much simpler :)&lt;/p&gt;
+
+&lt;h2 id=&#34;git-as-maven-repo&#34;&gt;Git as Maven Repo&lt;/h2&gt;
+
+&lt;p&gt;And one more trick for github. Sometimes you can find useful projects or libs which you want to use it in your sbt project as a managed dependency but they are not published on any public repositories. In this case &lt;a href=&#34;https://jitpack.io/&#34; title=&#34;jitpack.io&#34;&gt;jitpack.io&lt;/a&gt; might help you.
+I&amp;rsquo;ve used it in the example project for this article to add &lt;a href=&#34;https://github.com/jedesah/computation-expressions&#34; title=&#34;Computation-expressions&#34;&gt;jedesah/computation-expressions&lt;/a&gt; to &lt;code&gt;build.sbt&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;//add jitpack.io to resolvers
+resolvers += &amp;quot;jitpack.io&amp;quot; at &amp;quot;https://jitpack.io&amp;quot;
+
+//add github project as a dependency
+//https://github.com/jedesah -&amp;gt; &amp;quot;com.github.jedesah&amp;quot; as a group id
+//project name &amp;quot;computation-expressions&amp;quot; as an artifact id
+//and commit id &amp;quot;5ef11fc97c&amp;quot; as a revision
+libraryDependencies += &amp;quot;com.github.jedesah&amp;quot; % &amp;quot;computation-expressions&amp;quot; % &amp;quot;5ef11fc97c&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That`s all. Now you can use any github projects as a sbt dependency.&lt;/p&gt;
+
+&lt;h2 id=&#34;links&#34;&gt;Links&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/coffius/koffio-expression-example&#34; title=&#34;Sources for examples&#34;&gt;Sources for examples&lt;/a&gt; - sbt project with examples&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/jedesah/computation-expressions&#34; title=&#34;Computation-expressions&#34;&gt;jedesah/computation-expressions&lt;/a&gt; - Expression project&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://jitpack.io/&#34; title=&#34;jitpack.io&#34;&gt;jitpack.io&lt;/a&gt; - package repository for GitHub&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://youtu.be/tU4pU5vaddU&#34; title=&#34;Lecture from creators of Expression library&#34;&gt;Building a Better Future&lt;/a&gt; - Jean-Remi Desjardins &amp;amp; Eddie Carlson talk about how they have created Expression library&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://slides.com/jedesah/deck-1#/&#34;&gt;Slides&lt;/a&gt; - slides of a presentation. Can be useful.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Practical Scalaz: Make async operations with scalaz.Either and Futures</title>
+      <link>http://www.example.com/2015/09/05/practical-scalaz-make-async-operations-with-scalaz.either-and-futures/</link>
+      <pubDate>Sat, 05 Sep 2015 22:01:13 +0300</pubDate>
+      
+      <guid>http://www.example.com/2015/09/05/practical-scalaz-make-async-operations-with-scalaz.either-and-futures/</guid>
+      <description>
+
+&lt;p&gt;Many of us know about such library as scalaz. For those who don&amp;rsquo;t know it is a library for functional programming in scala. You can find it &lt;a href=&#34;https://github.com/scalaz/scalaz&#34; title=&#34;Scalaz on github&#34;&gt;here&lt;/a&gt;.
+Then I was trying to learn and understand this lib it was quite difficult to realize how exactly it can be used in a real code in a real system. I looked thought lots of articles about it, but there were only abstract examples. So I`ve decided to write a little example in order to show how scalaz can be used in a real system.&lt;/p&gt;
+
+&lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Idea:&lt;/strong&gt; Future and scalaz.Either can be used as a result of an asynchronous operation.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Reason:&lt;/strong&gt; We must compose futures and eithers in order to deal with possible errors which may occur during execution of async operations.&lt;/p&gt;
+
+&lt;p&gt;For example we have to gather information from several different DBs and an external service like Twitter. We also don`t want to use exceptions as notifications about errors. Why? Because it sucks ^_^ It will be better if exceptions are used for something really exceptional. One more thing which we should implement is fail-fast error handling because it will be wasteful to continue program execution if it already contains some errors.&lt;/p&gt;
+
+&lt;h2 id=&#34;simple-example&#34;&gt;Simple example&lt;/h2&gt;
+
+&lt;p&gt;You can find sources for this article &lt;a href=&#34;https://github.com/coffius/koffio-examples/blob/master/src/main/scala/io/koff/examples/async_services/EitherFutureSimpleExample.scala&#34; title=&#34;Example&#34;&gt;here&lt;/a&gt;
+As a result of an operation we use scalaz.Either. Let`t redefine either classes for better readability like that:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;type ActionResult[T] = String \/ T
+val ActionSuccess = \/-
+val ActionFailure = -\/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;ServiceResult[T]&lt;/code&gt; is a generic type for passing an operation result
+We use &lt;code&gt;String&lt;/code&gt; as error object for passing information about error, &lt;code&gt;-\/&lt;/code&gt; indicates an error and &lt;code&gt;\/-&lt;/code&gt; indicates success.&lt;/p&gt;
+
+&lt;p&gt;Define one more type to make possible async actions:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;type FutureActionResult[T] = Future[ActionResult[T]]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and one more as the outcome&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;case class Outcome(value: String)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then define async methods:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;def doSuccessAction1(): FutureActionResult[Outcome] = {
+  Future {
+    Thread.sleep(5000)
+    println(&amp;quot;success-action#1 is completed&amp;quot;)
+    ActionSuccess(Outcome(&amp;quot;success#first&amp;quot;))
+  }
+}
+def doSuccessAction2(): FutureActionResult[Outcome] = { /*...*/ }
+def doSuccessAction3(): FutureActionResult[Outcome] = { /*...*/ }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now we have almost all what we need. Right now we have to write something like that to compose results of our methods:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;def doUglyComplexAction(): FutureActionResult[String] = {
+  //start execution in parallel
+  val futureResult1 = doSuccessAction1()
+  val futureResult2 = doSuccessAction2()
+  val futureResult3 = doSuccessAction3()
+
+  for{
+    eitherResult1 &amp;lt;- futureResult1
+    eitherResult2 &amp;lt;- futureResult2
+    eitherResult3 &amp;lt;- futureResult3
+  } yield {
+    for {
+      result1 &amp;lt;- eitherResult1
+      result2 &amp;lt;- eitherResult2
+      result3 &amp;lt;- eitherResult3
+    } yield {
+      // if all operations complete successfully we will concatenate string
+      result1.value + &amp;quot; &amp;quot; + result2.value + &amp;quot; &amp;quot; + result3.value
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There are several problems in the code above.
+The first one is that the second &lt;code&gt;for-comprehension&lt;/code&gt; block will execute only after all of the futures will have finished. And the second problem is that code is quite a big bunch of text and we can write it in shorter way. But for this we need some additional scalaz magic: Monad[Future] and monad transformer.&lt;/p&gt;
+
+&lt;p&gt;Let&lt;code&gt;s define&lt;/code&gt;Monad[Future]`:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;  //define Monad[Future] for work with future`s monad transformer
+  implicit val FutureMonad = new Monad[Future] {
+    def point[A](a: =&amp;gt; A): Future[A] = Future(a)
+    def bind[A, B](fa: Future[A])(f: (A) =&amp;gt; Future[B]): Future[B] = fa flatMap f
+  }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And now we can replace two blocks of &lt;code&gt;for-comprehension&lt;/code&gt; by one nice block:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;val result = for {
+  result1 &amp;lt;- eitherT(futureResult1)
+  result2 &amp;lt;- eitherT(futureResult2)
+  result3 &amp;lt;- eitherT(futureResult3)
+} yield {
+  // if all operations complete successfully we will concatenate string
+  result1.value + &amp;quot; &amp;quot; + result2.value + &amp;quot; &amp;quot; + result3.value
+}
+//return final result
+result.run
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If we run it like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;//print result of calculation
+val futResult = doSuccessfulComplexAction().map{
+  case ActionSuccess(value) =&amp;gt; println(&amp;quot;success value: &amp;quot; + value)
+  case ActionFailure(error) =&amp;gt; println(&amp;quot;err value: &amp;quot; + error)
+}
+
+//Wait 20 seconds for result
+Await.result(futResult, 20.seconds)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We will see that in console:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;success-action#1 is completed
+success-action#2 is completed
+success-action#3 is completed
+success value: success#first success#second success#third
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;error-handling&#34;&gt;Error handling&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s add a failed action in order to show how the code above behaves itself in case of return of &lt;code&gt;ActionFailure&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;def doShortFailedAction(): FutureActionResult[Outcome] = {
+  Future {
+    println(&amp;quot;short failed action is completed&amp;quot;)
+    ActionFailure(&amp;quot;failed#short&amp;quot;)
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Add a call of &lt;code&gt;doShortFailedAction()&lt;/code&gt; in &lt;code&gt;for-comprehension&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;//...
+val failedAction  = doShortFailedAction()
+//...
+val result = for {
+  result1 &amp;lt;- eitherT(futureResult1)
+  failed  &amp;lt;- eitherT(failedAction) //&amp;lt;-- this is fail
+  result3 &amp;lt;- eitherT(futureResult3)
+} yield {
+  // if all operations complete successfully we will concatenate string
+  result1.value + &amp;quot; &amp;quot; + failed.value + &amp;quot; &amp;quot; + result3.value
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If we execute this code we will see this in console:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;short failed action is completed
+success-action#1 is completed
+err value: failed#short
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As you can see this code doesn&amp;rsquo;t wait until all of futureResult-s will be available because in any case there will be &lt;code&gt;ActionFailure&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;But there is still a problem. If we swap lines like that:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;val result = for {
+  result1 &amp;lt;- eitherT(futureResult1)
+  result3 &amp;lt;- eitherT(futureResult3)
+  failed  &amp;lt;- eitherT(failedAction)
+} yield {
+  //...
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We will see that we have to wait completion of all the futures despite &lt;code&gt;failedAction&lt;/code&gt; always finishes in first. In general there is no way to do using common scala. But after some magic tricks it will be possible ^_^ This kind of scala magic will be discussed in the next chapter.&lt;/p&gt;
+
+&lt;h2 id=&#34;links&#34;&gt;Links&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/coffius/koffio-examples/blob/master/src/main/scala/io/koff/examples/async_services/EitherFutureSimpleExample.scala&#34;&gt;EitherFutureSimpleExample.scala&lt;/a&gt; - an example app for this article&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/coffius/koffio-examples&#34; title=&#34;Sources of the example&#34;&gt;coffius/koffio-examples&lt;/a&gt; - Repository with all the examples&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/scalaz/scalaz&#34; title=&#34;Scalaz on GitHub&#34;&gt;scalaz/scalaz&lt;/a&gt; - sources of scalaz. You can also find &lt;a href=&#34;https://github.com/scalaz/scalaz/tree/series/7.2.x/example/src/main/scala/scalaz/example&#34; title=&#34;Simple scalaz examples&#34;&gt;here&lt;/a&gt; simple examples how to use different parts of scalaz&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://eed3si9n.com/learning-scalaz/&#34; title=&#34;Learning scalaz&#34;&gt;Learning scalaz&lt;/a&gt; - a really big source of information about most of parts of the library with shotr examples&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;upd&#34;&gt;UPD&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;(14/08/2015) Get rid of &lt;code&gt;Function[Future]&lt;/code&gt; in the article and in the code example because it&amp;rsquo;s unnecessary&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
