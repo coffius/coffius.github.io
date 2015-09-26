@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Comparison of HLL implementations  &middot; KOFF.io</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+<link rel="author" href="http://plus.google.com/+102671541320733671208">
+
+
+<meta property="og:title" content="Comparison of HLL implementations  &middot; KOFF.io ">
+<meta property="og:site_name" content="KOFF.io"/>
+<meta property="og:url" content="http://localhost:1313/posts/comparison-of-hll" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="2015-09-22T22:01:13&#43;03:00" />
+<meta property="og:article:modified_time" content="2015-09-22T22:01:13&#43;03:00" />
+
+  
+
+  
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@coffius" />
+<meta name="twitter:creator" content="@coffius" />
+<meta name="twitter:title" content="Comparison of HLL implementations" />
+<meta name="twitter:description" content="" />
+<meta name="twitter:url" content="http://localhost:1313/posts/comparison-of-hll" />
+<meta name="twitter:domain" content="http://localhost:1313/">
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "Comparison of HLL implementations",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+102671541320733671208?rel=author"
+    },
+    "datePublished": "2015-09-22",
+    "description": "",
+    "wordCount":  1282 
+  }
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/comparison-of-hll" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:1313/touch-icon-144-precomposed.png">
+<link href="http://localhost:1313/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.14" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="http://localhost:1313/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://localhost:1313/css/style.css">
+<link rel="stylesheet" href="http://localhost:1313/css/highlight/default.css">
+
+  
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="http://localhost:1313/">
+  KOFF.io
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  where scala is beloved
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="http://localhost:1313/">Home</a>
+
+
+  
+<a href="http://localhost:1313/about">About</a>
+
+<a href="http://localhost:1313/post" title="Show list of posts">Posts</a>
+
+<a href="http://localhost:1313/tags" title="Show list of tags">Tags</a>
+
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+
+
+<a id="contact-link-github" class="contact_link" href="https://github.com/coffius">
+  <span class="fa fa-github-square"></span><span>github</span></a>
+
+
+
+
+
+
+
+<a id="contact-link-googleplus" class="contact_link" href="https://plus.google.com/u/0/+102671541320733671208">
+  <span class="fa fa-google-plus-square"></span><span>google+</span></a>
+
+
+
+
+
+<a id="contact-link-twitter" class="contact_link" href="https://twitter.com/coffius">
+  <span class="fa fa-twitter-square"></span><span>twitter</span></a>
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>DRAFT :: Comparison of HLL implementations
+</h1>
+
+  <div class="metas">
+<time datetime="2015-09-22">22 Sep, 2015</time>
+
+
+  
+  &middot; Read in about 7 min
+  &middot; (1282 Words)
+  <br>
+  
+
+
+</div>
+
+</header>
+
+  <div class="container content">
+  
+
+<p>In this article we will compare different implementations of HLL algorithm.</p>
+
+<h2 id="general-info">General Info</h2>
+
+<p>HLL is propabalistic algorithm which is used for estimation of unique values.
+More details about HLL you can get <a href="https://en.wikipedia.org/wiki/HyperLogLog" title="Wikipedia:HyperLogLog">here</a>.
+The main reason to use HLL is necessity to estimate uniques in very big amount of data
+in case if it is possible to sacrifice accuracy of an unique counter.</p>
+
+<h2 id="list-of-implementations">List of implementations</h2>
+
+<p>You can find several implementations of HLL:</p>
+
+<ul>
+<li><a href="https://github.com/twitter/algebird" title="twitter/algebird">twitter/algebird</a> - a scala library from twitter which contains lots of different algorithms including HLL</li>
+<li><a href="https://github.com/prasanthj/hyperloglog" title="prasanthj/hyperloglog">prasanthj/hyperloglog</a> - a detached java library for HLL</li>
+<li><a href="https://github.com/addthis/stream-lib" title="addthis/stream-lib">addthis/stream-lib</a> - another java lib which have an implementation of HLL.</li>
+</ul>
+
+<p>Next in this article we will take a close look at all these libs and ask the question: &laquo;Why should we use HLL?&raquo;.</p>
+
+<h2 id="example-of-use">Example of use</h2>
+
+<p>So why should we use HLL in our programs? In our company the main reason is reducing of data which we have to store.</p>
+
+<p>For example you need to count the number of unique visitors for every page on a site. You can use a structure like this:</p>
+
+<pre><code class="language-scala">case class PageVisitors(pageUrl: String, visitors: Set[UUID])
+</code></pre>
+
+<p>And it will work until you have a lot of pages and very many visitors on each page.
+For instance let`s assume that we have an analytic system which work with visit statistic of different sites. If we have 1000 pretty popular sites and because sites are popular each site have about 100000 unique visitors per day.
+We also want to save statistic of unique visitors per day for each site at least one year. We mark visitors using UUID - 128 bits identifier.</p>
+
+<pre><code>one UUID = 128 bits = 16 bytes per unique visitor
+
+# for one site per day
+100000 unique visitors * 16 bytes = 1600000 bytes ~= 1.52 Mbyte of data 
+
+# for one site per year
+1.52 Mbyte * 365 days = 556 Mbyte 
+
+# total amount of data for 1000 sites
+556 Mbyte * 1000 = 556 Gbyte of total data
+</code></pre>
+
+<p>But if we are ready to sacrifice accuracy a little bit we will considerably reduce amount of stored data. Usage of HLL instead of Set[UUID] allow us to use constant amount of memory.
+For example if we use <code>prasanthj/hyperloglog</code> to store unique counter <code>16Kbytes</code> will be enough to store <code>10.000.000</code> unique values only with <code>~0.52%</code> of error.</p>
+
+<pre><code>16Kbyte per site * 365 days * 1000 sites = 5.5Gbyte of total data
+</code></pre>
+
+<p>We will reduce needed size of data a hundredfold if we agree with 0.52% of error.</p>
+
+<h2 id="twitter-algebird">twitter/algebird</h2>
+
+<p>This library contains various algorithms like <code>HyperLogLog</code>, <code>CountMinSketch</code> and others. The full list you can find <a href="https://github.com/twitter/algebird/wiki" title="Algebird docs">here</a>.</p>
+
+<p>Below is an example of using <code>algebird.HyperLogLogMonoid</code>:</p>
+
+<pre><code class="language-scala">object SimpleAlgebirdExample {
+  import com.twitter.algebird.HyperLogLogMonoid
+
+  def main(args: Array[String]) {
+    //define test data
+    val data = Seq(&quot;aaa&quot;, &quot;bbb&quot;, &quot;ccc&quot;)
+    //create algebird HLL
+    val hll = new HyperLogLogMonoid(bits = 10)
+    //convert data elements to a seq of hlls
+    val hlls = data.map { str =&gt;
+      val bytes = str.getBytes(&quot;utf-8&quot;)
+      hll.create(bytes)
+    }
+
+    //merge seq of hlls in one hll object
+    val merged = hll.sum(hlls)
+
+    //WARN: don`t use merged.size - it is a different thing
+    //get the estimate count from merged hll
+    println(&quot;estimate count: &quot; + hll.sizeOf(merged).estimate)
+    //or
+    println(&quot;estimate count: &quot; + merged.approximateSize.estimate)
+  }
+}
+</code></pre>
+
+<h2 id="prasanthj-hyperloglog">prasanthj/hyperloglog</h2>
+
+<p>It is a java library containing only an implementation of <code>HyperLogLog</code>.
+There is no a maven artefact for this library, so you can build it manually or use <a href="https://jitpack.io/" title="jitpack.io">jitpack.io</a> as it was described at the end of <a href="http://koff.io/posts/291279-true-fail-fast-with-expression-magic">this article</a>.</p>
+
+<p>Also it contains command line test tool which can help to choose settings for HLL and to see how accurate estimation will be. In order to use it you should build  the library locally using <code>maven</code> and execute <code>hll</code> script.</p>
+
+<pre><code class="language-bash"># clone repo
+git clone https://github.com/prasanthj/hyperloglog.git hyperloglog
+cd hyperloglog
+
+# build the library
+mvn package -DskipTests
+
+# execute tests
+./hll -n 10000000 -s -o ./out.hll
+</code></pre>
+
+<p>You should see something like that:</p>
+
+<pre><code>Actual count: 10000000
+Encoding: DENSE, p : 14, chosenHashBits: 128, estimatedCardinality: 10052011
+Relative error: -0.52011013%
+Serialized hyperloglog to ./out.hll
+Serialized size: 10248 bytes
+Serialization time: 13 ms
+</code></pre>
+
+<p>You can find out more details about params of <code>hll</code> on the <a href="https://github.com/prasanthj/hyperloglog" title="prasanthj/hyperloglog">github page</a> of the library.</p>
+
+<p>The example of how to use it is below:</p>
+
+<pre><code class="language-scala">object SimplePrasanthjHllExample {
+  import hyperloglog.HyperLogLog.HyperLogLogBuilder
+  def main(args: Array[String]) {
+    //define test data
+    val data = Seq(&quot;aaa&quot;, &quot;bbb&quot;, &quot;ccc&quot;)
+
+    //create a builder for HLL.
+    val hllBuilder = new HyperLogLogBuilder()
+    // You can set different parameters for it using
+    // hllBuilder.setEncoding(...)
+    // hllBuilder.setNumHashBits(...)
+    // hllBuilder.setNumRegisterIndexBits(...)
+    // hllBuilder.enableBitPacking(...)
+    // hllBuilder.enableNoBias(...)
+
+    //create hll object in which we will merge our data
+    val mergedHll = hllBuilder.build()
+
+    //merge data
+    data.foreach { elem =&gt;
+      //explicitly set using encoding
+      val bytes = elem.getBytes(&quot;utf-8&quot;)
+      mergedHll.addBytes(bytes)
+    }
+
+    //print the estimation of count
+    println(&quot;estimate count: &quot; + mergedHll.count())
+  }
+}
+</code></pre>
+
+<h2 id="addthis-stream-lib">addthis/stream-lib</h2>
+
+<p>It is another java library where you can find lots of algorithms. But I have not found any documentation for it. So it can be a problem. If you have a question how to use this library you can try to ask it in the mailing list <a href="http://groups.google.com/group/stream-lib-user">here</a></p>
+
+<p>The simple example is here:</p>
+
+<pre><code class="language-scala">object SimpleStreamExample {
+  import com.clearspring.analytics.stream.cardinality.HyperLogLogPlus
+  def main(args: Array[String]) {
+    //define test data
+    val data = Seq(&quot;aaa&quot;, &quot;bbb&quot;, &quot;ccc&quot;)
+
+    //create HLL object in which we will add our data.
+    // You can set parameters here in a constructor
+    val merged = new HyperLogLogPlus(5, 25)
+
+    //adding data in hll
+    data.foreach{ elem =&gt;
+      //in order to control string encoding during string conversion to bytes we explicitly set using encoding
+      val bytes = elem.getBytes(&quot;utf-8&quot;)
+      merged.offer(bytes)
+    }
+
+    //print the estimation
+    println(&quot;estimate count: &quot; + merged.cardinality())
+  }
+}
+</code></pre>
+
+<h2 id="bonus-intersection-of-hlls">Bonus: Intersection of HLLs</h2>
+
+<p>It is possible to make intersections of HLL counters in order to find the number of common elements in them. Such logic is implemented in <code>twitter/algebird</code> <a href="https://github.com/twitter/algebird/blob/develop/algebird-core/src/main/scala/com/twitter/algebird/HyperLogLog.scala#L601">here</a>.
+The main underlying principle in this algorithm is <a href="https://en.wikipedia.org/wiki/Inclusion%E2%80%93exclusion_principle">&laquo;Inclusion–exclusion principle&raquo;</a>.
+But you should be aware about how intersection affect an estimation error. I have found <a href="http://research.neustar.biz/2012/12/17/hll-intersections-2/" title="HLL Intersections">this article</a> which helps to understand possible issues.</p>
+
+<p>In order to make possible computation of intersection for other libs I have also created small facade which can be found in the package <code>io.koff.hll.facade</code>.
+And below you can see the example of how to use it in order to find intersection of four hlls:</p>
+
+<pre><code class="language-scala">package io.koff.hll
+
+/**
+ * A common algorithm to find intersection of several HLL counters
+ */
+object Intersection {
+  import io.koff.hll.facade._
+  import io.koff.hll.facade.impl.algebird._
+  def main(args: Array[String]) {
+    //&quot;444&quot;, &quot;555&quot; and &quot;666&quot; are common elements
+    def set1 = Seq(&quot;111&quot;, &quot;222&quot;, &quot;333&quot;, &quot;444&quot;, &quot;555&quot;, &quot;666&quot;).toHLL
+    def set2 = Seq(&quot;222&quot;, &quot;333&quot;, &quot;444&quot;, &quot;555&quot;, &quot;666&quot;, &quot;777&quot;).toHLL
+    def set3 = Seq(&quot;333&quot;, &quot;444&quot;, &quot;555&quot;, &quot;666&quot;, &quot;777&quot;, &quot;888&quot;).toHLL
+    def set4 = Seq(&quot;444&quot;, &quot;555&quot;, &quot;666&quot;, &quot;777&quot;, &quot;888&quot;, &quot;999&quot;).toHLL
+
+    val intersectionCount = HLLUtils.intersection(set1, set2, set3, set4)
+    println(&quot;intersection: &quot; + intersectionCount) //will print &quot;intersection: 3&quot;
+  }
+}
+
+</code></pre>
+
+<h2 id="comparison-results">Comparison Results</h2>
+
+<p>I have also written a little test which compares described libraries. You can find it <a href="https://github.com/coffius/koffio-hll/blob/master/src/main/scala/io/koff/hll/Comparison.scala" title="GitHub: source code">here</a>.
+Results you can see below:</p>
+
+<pre><code>algebird    [error: 0,007217%, calcTime: 8445 msecs, estimateCount: 992784, dataSize: 65536 bytes]
+prasanthj   [error: 0,003138%, calcTime: 559  msecs, estimateCount: 996863, dataSize: 10247 bytes]
+stream      [error: 0,002794%, calcTime: 293  msecs, estimateCount: 997207, dataSize: 43702 bytes]
+</code></pre>
+
+<p>So as you can see:</p>
+
+<ul>
+<li><code>twitter/algebird</code> has showed itself as quite a slow library. It can be a problem if you work with big data.</li>
+<li><code>prasanthj/hyperloglog</code> always needs minimal space to store serialized data of HLL counter.</li>
+<li><code>addthis/stream-lib</code> is the fastest library in those that we have looked at.</li>
+</ul>
+
+<h2 id="links">Links</h2>
+
+<ul>
+<li><a href="https://github.com/coffius/koffio-hll" title="GitHub: coffius/koffio-hll">Example sources</a> - an example project can be found here</li>
+<li><a href="https://github.com/twitter/algebird" title="twitter/algebird">twitter/algebird</a> - a scala library from twitter which contains lots of different algorithms including HLL</li>
+<li><a href="https://github.com/prasanthj/hyperloglog" title="prasanthj/hyperloglog">prasanthj/hyperloglog</a> - a detached java library for HLL</li>
+<li><a href="https://github.com/addthis/stream-lib" title="addthis/stream-lib">addthis/stream-lib</a> - another java lib which have an implementation of HLL.</li>
+<li><a href="http://research.neustar.biz/2012/12/17/hll-intersections-2/">HLL Intersections</a> - an article about accuracy of the HLL`s intersections.</li>
+</ul>
+
+</div>
+
+
+  <footer class="container">
+  <div class="container navigation no-print">
+  <h2>Navigation</h2>
+  
+  
+
+    
+    <a class="prev" href="http://localhost:1313/posts/292173-lens-in-scala" title="Lens in scala">
+      Previous
+    </a>
+    
+
+    
+
+  
+
+
+</div>
+
+  <div class="container comments">
+  <h2>Comments</h2>
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//koff-io.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div>
+
+</footer>
+
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+<a href="http://localhost:1313/license">license</a>
+
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+  code with <i class='fa fa-heart'></i>
+
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  &copy; 2015
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//koff-io.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="http://localhost:1313/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+<script>
+  var _gaq=[['_setAccount','102671541320733671208'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+
+    
+  <script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>
+
