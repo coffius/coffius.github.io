@@ -3,8 +3,13 @@
   
   <url>
     <loc>http://coffius.github.io/</loc>
-    <lastmod>2015-09-19T22:01:13+03:00</lastmod>
+    <lastmod>2015-09-22T22:01:13+03:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://coffius.github.io/posts/comparison-of-hll</loc>
+    <lastmod>2015-09-22T22:01:13+03:00</lastmod>
   </url>
   
   <url>

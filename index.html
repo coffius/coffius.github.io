@@ -131,11 +131,60 @@
     <h1>KOFF.io
 </h1>
 
-    <span>last update: <time datetime="2015-09-19T22:01:13&#43;03:00">19 September at 10:01pm</time>
+    <span>last update: <time datetime="2015-09-22T22:01:13&#43;03:00">22 September at 10:01pm</time>
 </span>
 
   </header>
   
+  
+    <article class="container content summary">
+  <div class="container hat">
+  <h2><a href="http://coffius.github.io/posts/comparison-of-hll">Comparison of HLL implementations
+</a>
+</h2>
+
+  <time datetime="2015-09-22">22 Sep, 2015</time>
+
+</div>
+
+  <p class="container content">
+  
+  
+    <p>In this article we will compare different implementations of HLL algorithm.</p>
+
+<h2 id="general-info">General Info</h2>
+
+<p>HLL is propabalistic algorithm which is used for estimation of unique values.
+More details about HLL you can get <a href="https://en.wikipedia.org/wiki/HyperLogLog" title="Wikipedia:HyperLogLog">here</a>.
+The main reason to use HLL is necessity to estimate uniques in very big amount of data
+in case if it is possible to sacrifice accuracy of an unique counter.</p>
+
+<h2 id="list-of-implementations">List of implementations</h2>
+
+<p>You can find several implementations of HLL:</p>
+
+<ul>
+<li><a href="https://github.com/twitter/algebird" title="twitter/algebird">twitter/algebird</a> - a scala library from twitter which contains lots of different algorithms including HLL</li>
+<li><a href="https://github.com/prasanthj/hyperloglog" title="prasanthj/hyperloglog">prasanthj/hyperloglog</a> - a detached java library for HLL</li>
+<li><a href="https://github.com/addthis/stream-lib" title="addthis/stream-lib">addthis/stream-lib</a> - another java lib which have an implementation of HLL.</li>
+</ul>
+
+<p>Next in this article we will take a close look at all these libs and ask the question: &laquo;Why should we use HLL?&raquo;.</p>
+
+  
+
+
+</p>
+
+
+  <div class="container readlink">
+  <a href="http://coffius.github.io/posts/comparison-of-hll">Read more &rarr;</a>
+
+</div>
+
+
+</article>
+
   
     <article class="container content summary">
   <div class="container hat">
