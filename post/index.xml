@@ -22,10 +22,9 @@
 
 &lt;h2 id=&#34;general-info&#34;&gt;General Info&lt;/h2&gt;
 
-&lt;p&gt;HLL is propabalistic algorithm which is used for estimation of unique values.
+&lt;p&gt;HLL is a propabalistic algorithm which is used for a estimation of unique values.
 More details about HLL you can get &lt;a href=&#34;https://en.wikipedia.org/wiki/HyperLogLog&#34; title=&#34;Wikipedia:HyperLogLog&#34;&gt;here&lt;/a&gt;.
-The main reason to use HLL is necessity to estimate uniques in very big amount of data
-in case if it is possible to sacrifice accuracy of an unique counter.&lt;/p&gt;
+The main reason to use HLL is necessity to estimate uniques in very big amount of data in case if it is possible to sacrifice accuracy of an unique counter.&lt;/p&gt;
 
 &lt;h2 id=&#34;list-of-implementations&#34;&gt;List of implementations&lt;/h2&gt;
 
@@ -41,7 +40,7 @@ in case if it is possible to sacrifice accuracy of an unique counter.&lt;/p&gt;
 
 &lt;h2 id=&#34;example-of-use&#34;&gt;Example of use&lt;/h2&gt;
 
-&lt;p&gt;So why should we use HLL in our programs? In our company the main reason is reducing of data which we have to store.&lt;/p&gt;
+&lt;p&gt;So why should we might use HLL in our programs? The main reason is reducing of data which we have to store.&lt;/p&gt;
 
 &lt;p&gt;For example you need to count the number of unique visitors for every page on a site. You can use a structure like this:&lt;/p&gt;
 
@@ -49,7 +48,7 @@ in case if it is possible to sacrifice accuracy of an unique counter.&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;And it will work until you have a lot of pages and very many visitors on each page.
-For instance let`s assume that we have an analytic system which work with visit statistic of different sites. If we have 1000 pretty popular sites and because sites are popular each site have about 100000 unique visitors per day.
+For instance let`s assume that we have an analytic system which work with visit statistic of different sites. Suppose we have 1000 pretty popular sites and because sites are popular each site have about 100000 unique visitors per day.
 We also want to save statistic of unique visitors per day for each site at least one year. We mark visitors using UUID - 128 bits identifier.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;one UUID = 128 bits = 16 bytes per unique visitor
@@ -64,13 +63,13 @@ We also want to save statistic of unique visitors per day for each site at least
 556 Mbyte * 1000 = 556 Gbyte of total data
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;But if we are ready to sacrifice accuracy a little bit we will considerably reduce amount of stored data. Usage of HLL instead of Set[UUID] allow us to use constant amount of memory.
+&lt;p&gt;But if we are ready to sacrifice accuracy a little bit we will considerably reduce amount of stored data.
 For example if we use &lt;code&gt;prasanthj/hyperloglog&lt;/code&gt; to store unique counter &lt;code&gt;16Kbytes&lt;/code&gt; will be enough to store &lt;code&gt;10.000.000&lt;/code&gt; unique values only with &lt;code&gt;~0.52%&lt;/code&gt; of error.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;16Kbyte per site * 365 days * 1000 sites = 5.5Gbyte of total data
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;We will reduce needed size of data a hundredfold if we agree with 0.52% of error.&lt;/p&gt;
+&lt;p&gt;We will reduce the needed size of data a hundredfold if we agree with 0.52% of error.&lt;/p&gt;
 
 &lt;h2 id=&#34;twitter-algebird&#34;&gt;twitter/algebird&lt;/h2&gt;
 
