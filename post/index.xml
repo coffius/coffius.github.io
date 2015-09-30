@@ -34,6 +34,7 @@ The main reason to use HLL is necessity to estimate uniques in very big amount o
 &lt;li&gt;&lt;a href=&#34;https://github.com/twitter/algebird&#34; title=&#34;twitter/algebird&#34;&gt;twitter/algebird&lt;/a&gt; - a scala library from twitter which contains lots of different algorithms including HLL&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/prasanthj/hyperloglog&#34; title=&#34;prasanthj/hyperloglog&#34;&gt;prasanthj/hyperloglog&lt;/a&gt; - a detached java library for HLL&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/addthis/stream-lib&#34; title=&#34;addthis/stream-lib&#34;&gt;addthis/stream-lib&lt;/a&gt; - another java lib which have an implementation of HLL.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/aggregateknowledge/java-hll&#34; title=&#34;java-hll&#34;&gt;aggregateknowledge/java-hll&lt;/a&gt; - a low-level java implementation of HLL&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Next in this article we will take a close look at all these libs and answer the question: &amp;laquo;Why should we use HLL?&amp;raquo;.&lt;/p&gt;
@@ -195,6 +196,42 @@ Serialization time: 13 ms
 }
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;h2 id=&#34;aggregateknowledge-java-hll&#34;&gt;aggregateknowledge/java-hll&lt;/h2&gt;
+
+&lt;p&gt;This is a low-level java implementation of a hll counter. The main principle is the same but you have to define and to use your own hash function(&lt;code&gt;murmur3_128&lt;/code&gt; in the example below)&lt;/p&gt;
+
+&lt;p&gt;Simple example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;object SimpleAgknHllExample {
+  import net.agkn.hll.HLL
+  import com.google.common.hash.Hashing
+
+  private val seed = 123456
+  /** use murmur3 hash function from `com.google.common.hash`*/
+  private val hash = Hashing.murmur3_128(seed)
+
+  def main(args: Array[String]) {
+    //define test data
+    val data = Seq(&amp;quot;aaa&amp;quot;, &amp;quot;bbb&amp;quot;, &amp;quot;ccc&amp;quot;)
+
+    //create hll object in which we will merge our data with default values of params
+    val hll = new HLL(13, 5)
+
+    //add data to the hll counter
+    data.foreach(str =&amp;gt; hll.addRaw(toHash(str)))
+
+    println(&amp;quot;estimate count: &amp;quot; + hll.cardinality())
+  }
+
+  def toHash(str: String): Long = {
+    val hasher = hash.newHasher()
+    //As always we set encoding explicitly
+    hasher.putBytes(str.getBytes(&amp;quot;utf-8&amp;quot;))
+    hasher.hash().asLong()
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;h2 id=&#34;bonus-intersection-of-hlls&#34;&gt;Bonus: Intersection of HLLs&lt;/h2&gt;
 
 &lt;p&gt;It is possible to make intersections of HLL counters in order to find the number of common elements in them. Such logic is implemented in &lt;code&gt;twitter/algebird&lt;/code&gt; &lt;a href=&#34;https://github.com/twitter/algebird/blob/develop/algebird-core/src/main/scala/com/twitter/algebird/HyperLogLog.scala#L601&#34;&gt;here&lt;/a&gt;.
@@ -231,9 +268,10 @@ object Intersection {
 &lt;p&gt;I have also written a little test which compares described libraries. You can find it &lt;a href=&#34;https://github.com/coffius/koffio-hll/blob/master/src/main/scala/io/koff/hll/Comparison.scala&#34; title=&#34;GitHub: source code&#34;&gt;here&lt;/a&gt;.
 Results you can see below:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;algebird    [error: 0,007217%, calcTime: 8445 msecs, estimateCount: 992784, dataSize: 65536 bytes]
-prasanthj   [error: 0,003138%, calcTime: 559  msecs, estimateCount: 996863, dataSize: 10247 bytes]
-stream      [error: 0,002794%, calcTime: 293  msecs, estimateCount: 997207, dataSize: 43702 bytes]
+&lt;pre&gt;&lt;code&gt;algebird    [error: 0,000758%,  calcTime: 8547 msecs, estimateCount: 999243,  dataSize: 65536 bytes]
+prasanthj   [error: -0,003540%, calcTime: 643 msecs,  estimateCount: 1003541, dataSize: 10247 bytes]
+stream      [error: -0,001181%, calcTime: 294 msecs,  estimateCount: 1001182, dataSize: 43702 bytes]
+agkn-hll    [error: 0,003895%,  calcTime: 508 msecs,  estimateCount: 996106,  dataSize: 40963 bytes]
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;So as you can see:&lt;/p&gt;
@@ -242,6 +280,7 @@ stream      [error: 0,002794%, calcTime: 293  msecs, estimateCount: 997207, data
 &lt;li&gt;&lt;code&gt;twitter/algebird&lt;/code&gt; has showed itself as quite a slow library. It can be a problem if you work with big data.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;prasanthj/hyperloglog&lt;/code&gt; always needs minimal space to store serialized data of HLL counter.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;addthis/stream-lib&lt;/code&gt; is the fastest library in those that we have looked at.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;aggregateknowledge/java-hll&lt;/code&gt;(last row) is average. Not too slow, but also not super-fast, average data size.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&#34;links&#34;&gt;Links&lt;/h2&gt;
@@ -251,6 +290,7 @@ stream      [error: 0,002794%, calcTime: 293  msecs, estimateCount: 997207, data
 &lt;li&gt;&lt;a href=&#34;https://github.com/twitter/algebird&#34; title=&#34;twitter/algebird&#34;&gt;twitter/algebird&lt;/a&gt; - a scala library from twitter which contains lots of different algorithms including HLL&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/prasanthj/hyperloglog&#34; title=&#34;prasanthj/hyperloglog&#34;&gt;prasanthj/hyperloglog&lt;/a&gt; - a detached java library for HLL&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/addthis/stream-lib&#34; title=&#34;addthis/stream-lib&#34;&gt;addthis/stream-lib&lt;/a&gt; - another java lib which have an implementation of HLL.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/aggregateknowledge/java-hll&#34; title=&#34;aggregateknowledge/java-hll&#34;&gt;aggregateknowledge/java-hll&lt;/a&gt; - a low-level java implementation of HLL&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://research.neustar.biz/2012/12/17/hll-intersections-2/&#34;&gt;HLL Intersections&lt;/a&gt; - an article about accuracy of the HLL`s intersections.&lt;/li&gt;
 &lt;/ul&gt;
 </description>

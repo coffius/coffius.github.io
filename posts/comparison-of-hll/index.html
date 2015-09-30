@@ -53,7 +53,7 @@
     },
     "datePublished": "2015-09-22",
     "description": "",
-    "wordCount":  1273 
+    "wordCount":  1442 
   }
 </script>
 
@@ -164,8 +164,8 @@
 
 
   
-  &middot; Read in about 6 min
-  &middot; (1273 Words)
+  &middot; Read in about 7 min
+  &middot; (1442 Words)
   <br>
   
 
@@ -193,6 +193,7 @@ The main reason to use HLL is necessity to estimate uniques in very big amount o
 <li><a href="https://github.com/twitter/algebird" title="twitter/algebird">twitter/algebird</a> - a scala library from twitter which contains lots of different algorithms including HLL</li>
 <li><a href="https://github.com/prasanthj/hyperloglog" title="prasanthj/hyperloglog">prasanthj/hyperloglog</a> - a detached java library for HLL</li>
 <li><a href="https://github.com/addthis/stream-lib" title="addthis/stream-lib">addthis/stream-lib</a> - another java lib which have an implementation of HLL.</li>
+<li><a href="https://github.com/aggregateknowledge/java-hll" title="java-hll">aggregateknowledge/java-hll</a> - a low-level java implementation of HLL</li>
 </ul>
 
 <p>Next in this article we will take a close look at all these libs and answer the question: &laquo;Why should we use HLL?&raquo;.</p>
@@ -354,6 +355,42 @@ Serialization time: 13 ms
 }
 </code></pre>
 
+<h2 id="aggregateknowledge-java-hll">aggregateknowledge/java-hll</h2>
+
+<p>This is a low-level java implementation of a hll counter. The main principle is the same but you have to define and to use your own hash function(<code>murmur3_128</code> in the example below)</p>
+
+<p>Simple example:</p>
+
+<pre><code class="language-scala">object SimpleAgknHllExample {
+  import net.agkn.hll.HLL
+  import com.google.common.hash.Hashing
+
+  private val seed = 123456
+  /** use murmur3 hash function from `com.google.common.hash`*/
+  private val hash = Hashing.murmur3_128(seed)
+
+  def main(args: Array[String]) {
+    //define test data
+    val data = Seq(&quot;aaa&quot;, &quot;bbb&quot;, &quot;ccc&quot;)
+
+    //create hll object in which we will merge our data with default values of params
+    val hll = new HLL(13, 5)
+
+    //add data to the hll counter
+    data.foreach(str =&gt; hll.addRaw(toHash(str)))
+
+    println(&quot;estimate count: &quot; + hll.cardinality())
+  }
+
+  def toHash(str: String): Long = {
+    val hasher = hash.newHasher()
+    //As always we set encoding explicitly
+    hasher.putBytes(str.getBytes(&quot;utf-8&quot;))
+    hasher.hash().asLong()
+  }
+}
+</code></pre>
+
 <h2 id="bonus-intersection-of-hlls">Bonus: Intersection of HLLs</h2>
 
 <p>It is possible to make intersections of HLL counters in order to find the number of common elements in them. Such logic is implemented in <code>twitter/algebird</code> <a href="https://github.com/twitter/algebird/blob/develop/algebird-core/src/main/scala/com/twitter/algebird/HyperLogLog.scala#L601">here</a>.
@@ -390,9 +427,10 @@ object Intersection {
 <p>I have also written a little test which compares described libraries. You can find it <a href="https://github.com/coffius/koffio-hll/blob/master/src/main/scala/io/koff/hll/Comparison.scala" title="GitHub: source code">here</a>.
 Results you can see below:</p>
 
-<pre><code>algebird    [error: 0,007217%, calcTime: 8445 msecs, estimateCount: 992784, dataSize: 65536 bytes]
-prasanthj   [error: 0,003138%, calcTime: 559  msecs, estimateCount: 996863, dataSize: 10247 bytes]
-stream      [error: 0,002794%, calcTime: 293  msecs, estimateCount: 997207, dataSize: 43702 bytes]
+<pre><code>algebird    [error: 0,000758%,  calcTime: 8547 msecs, estimateCount: 999243,  dataSize: 65536 bytes]
+prasanthj   [error: -0,003540%, calcTime: 643 msecs,  estimateCount: 1003541, dataSize: 10247 bytes]
+stream      [error: -0,001181%, calcTime: 294 msecs,  estimateCount: 1001182, dataSize: 43702 bytes]
+agkn-hll    [error: 0,003895%,  calcTime: 508 msecs,  estimateCount: 996106,  dataSize: 40963 bytes]
 </code></pre>
 
 <p>So as you can see:</p>
@@ -401,6 +439,7 @@ stream      [error: 0,002794%, calcTime: 293  msecs, estimateCount: 997207, data
 <li><code>twitter/algebird</code> has showed itself as quite a slow library. It can be a problem if you work with big data.</li>
 <li><code>prasanthj/hyperloglog</code> always needs minimal space to store serialized data of HLL counter.</li>
 <li><code>addthis/stream-lib</code> is the fastest library in those that we have looked at.</li>
+<li><code>aggregateknowledge/java-hll</code>(last row) is average. Not too slow, but also not super-fast, average data size.</li>
 </ul>
 
 <h2 id="links">Links</h2>
@@ -410,6 +449,7 @@ stream      [error: 0,002794%, calcTime: 293  msecs, estimateCount: 997207, data
 <li><a href="https://github.com/twitter/algebird" title="twitter/algebird">twitter/algebird</a> - a scala library from twitter which contains lots of different algorithms including HLL</li>
 <li><a href="https://github.com/prasanthj/hyperloglog" title="prasanthj/hyperloglog">prasanthj/hyperloglog</a> - a detached java library for HLL</li>
 <li><a href="https://github.com/addthis/stream-lib" title="addthis/stream-lib">addthis/stream-lib</a> - another java lib which have an implementation of HLL.</li>
+<li><a href="https://github.com/aggregateknowledge/java-hll" title="aggregateknowledge/java-hll">aggregateknowledge/java-hll</a> - a low-level java implementation of HLL</li>
 <li><a href="http://research.neustar.biz/2012/12/17/hll-intersections-2/">HLL Intersections</a> - an article about accuracy of the HLL`s intersections.</li>
 </ul>
 
