@@ -131,11 +131,69 @@
     <h1>KOFF.io
 </h1>
 
-    <span>last update: <time datetime="2015-09-22T22:01:13&#43;03:00">22 September at 10:01pm</time>
+    <span>last update: <time datetime="2015-10-13T22:01:13&#43;03:00">13 October at 10:01pm</time>
 </span>
 
   </header>
   
+  
+    <article class="container content summary">
+  <div class="container hat">
+  <h2><a href="http://coffius.github.io/posts/using-t-digest">Using T-Digest: Median calculation and anomaly detection
+</a>
+</h2>
+
+  <time datetime="2015-10-13">13 Oct, 2015</time>
+
+</div>
+
+  <p class="container content">
+  
+  
+    <p>In this article you can find information about using <code>t-digest</code> library in order to measure average value of some quantity(average session time).
+There is also an answer for the question: What and why should you use to make such the measurement mean or median?
+Besides, list and comparison of different implementations is presented below in the article.</p>
+
+<h2 id="main-problem">Main problem</h2>
+
+<p>So in what cases we have need to calculate mean/median? For example we have a site and we want to understand how much time an average user spent on our site.
+In order to do it we should calculate an average duration of a user session.
+And there are at least two ways to do it - calculate an arithmetic mean(or just mean) or calculate a median.
+The calculation of mean is very simple. You need two fields: one for a sum of elements and another for their count. But it doesn`t work very well with anomalies in the data.
+I mean the case when one or several elements differ greatly from others.
+Lets assume that we have such values for our session durations(in milliseconds):</p>
+
+<pre><code>3000, 2000, 3000, 5000, 3000, 4000, 4500, 3200, 2700, 3380
+</code></pre>
+
+<p>mean = <code>(3000+2000+3000+5000+3000+4000+4500+3200+2700+3380) / 10 = 3378 msecs</code>. In this case all is ok.</p>
+
+<p>But what if one of these users opens the site, forgets to close a browser tab and goes afk for an hour(3.600.000 msecs):</p>
+
+<pre><code>3000, 2000, 3000, 5000, 3000, 4000, 4500, 3200, 2700, 3600000
+</code></pre>
+
+<p>mean = <code>(3000+2000+3000+5000+3000+4000+4500+3200+2700+3600000) / 10 = 363040 msecs</code>. Just one of the users influences strongly on mean value.
+Generally speaking, the mean is only representative if the distribution of the data is symmetric, otherwise it may be heavily influenced by outlying measurements.
+In simple cases it is possible to use some kind of a filter.
+But often we just don&rsquo;t know what threshold we should use to filter values.
+Whereas the median value is the same in both cases and is equal to <code>3100</code>. So in the cases like this the median will be more useful then the mean.
+However the calculation of the median in general case needs a lot of memory - O(n)</p>
+
+  
+
+
+</p>
+
+
+  <div class="container readlink">
+  <a href="http://coffius.github.io/posts/using-t-digest">Read more &rarr;</a>
+
+</div>
+
+
+</article>
+
   
     <article class="container content summary">
   <div class="container hat">

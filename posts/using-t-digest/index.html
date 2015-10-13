@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Using T-Digest: Median calculation and anomaly detection  &middot; KOFF.io</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+<link rel="author" href="http://plus.google.com/+102671541320733671208">
+
+
+<meta property="og:title" content="Using T-Digest: Median calculation and anomaly detection  &middot; KOFF.io ">
+<meta property="og:site_name" content="KOFF.io"/>
+<meta property="og:url" content="http://coffius.github.io/posts/using-t-digest" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="2015-10-13T22:01:13&#43;03:00" />
+<meta property="og:article:modified_time" content="2015-10-13T22:01:13&#43;03:00" />
+
+  
+
+  
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@coffius" />
+<meta name="twitter:creator" content="@coffius" />
+<meta name="twitter:title" content="Using T-Digest: Median calculation and anomaly detection" />
+<meta name="twitter:description" content="" />
+<meta name="twitter:url" content="http://coffius.github.io/posts/using-t-digest" />
+<meta name="twitter:domain" content="http://coffius.github.io/">
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "Using T-Digest: Median calculation and anomaly detection",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+102671541320733671208?rel=author"
+    },
+    "datePublished": "2015-10-13",
+    "description": "",
+    "wordCount":  1122 
+  }
+</script>
+
+
+
+<link rel="canonical" href="http://coffius.github.io/posts/using-t-digest" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://coffius.github.io/touch-icon-144-precomposed.png">
+<link href="http://coffius.github.io/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.14" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="http://coffius.github.io/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://coffius.github.io/css/style.css">
+<link rel="stylesheet" href="http://coffius.github.io/css/highlight/default.css">
+
+  
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="http://coffius.github.io/">
+  KOFF.io
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  where scala is beloved
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="http://coffius.github.io/">Home</a>
+
+
+  
+<a href="http://coffius.github.io/about">About</a>
+
+<a href="http://coffius.github.io/post" title="Show list of posts">Posts</a>
+
+<a href="http://coffius.github.io/tags" title="Show list of tags">Tags</a>
+
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+
+
+<a id="contact-link-github" class="contact_link" href="https://github.com/coffius">
+  <span class="fa fa-github-square"></span><span>github</span></a>
+
+
+
+
+
+
+
+<a id="contact-link-googleplus" class="contact_link" href="https://plus.google.com/u/0/+102671541320733671208">
+  <span class="fa fa-google-plus-square"></span><span>google+</span></a>
+
+
+
+
+
+<a id="contact-link-twitter" class="contact_link" href="https://twitter.com/coffius">
+  <span class="fa fa-twitter-square"></span><span>twitter</span></a>
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>Using T-Digest: Median calculation and anomaly detection
+</h1>
+
+  <div class="metas">
+<time datetime="2015-10-13">13 Oct, 2015</time>
+
+
+  
+  &middot; Read in about 6 min
+  &middot; (1122 Words)
+  <br>
+  
+
+
+</div>
+
+</header>
+
+  <div class="container content">
+  
+
+<p>In this article you can find information about using <code>t-digest</code> library in order to measure average value of some quantity(average session time).
+There is also an answer for the question: What and why should you use to make such the measurement mean or median?
+Besides, list and comparison of different implementations is presented below in the article.</p>
+
+<h2 id="main-problem">Main problem</h2>
+
+<p>So in what cases we have need to calculate mean/median? For example we have a site and we want to understand how much time an average user spent on our site.
+In order to do it we should calculate an average duration of a user session.
+And there are at least two ways to do it - calculate an arithmetic mean(or just mean) or calculate a median.
+The calculation of mean is very simple. You need two fields: one for a sum of elements and another for their count. But it doesn`t work very well with anomalies in the data.
+I mean the case when one or several elements differ greatly from others.
+Lets assume that we have such values for our session durations(in milliseconds):</p>
+
+<pre><code>3000, 2000, 3000, 5000, 3000, 4000, 4500, 3200, 2700, 3380
+</code></pre>
+
+<p>mean = <code>(3000+2000+3000+5000+3000+4000+4500+3200+2700+3380) / 10 = 3378 msecs</code>. In this case all is ok.</p>
+
+<p>But what if one of these users opens the site, forgets to close a browser tab and goes afk for an hour(3.600.000 msecs):</p>
+
+<pre><code>3000, 2000, 3000, 5000, 3000, 4000, 4500, 3200, 2700, 3600000
+</code></pre>
+
+<p>mean = <code>(3000+2000+3000+5000+3000+4000+4500+3200+2700+3600000) / 10 = 363040 msecs</code>. Just one of the users influences strongly on mean value.
+Generally speaking, the mean is only representative if the distribution of the data is symmetric, otherwise it may be heavily influenced by outlying measurements.
+In simple cases it is possible to use some kind of a filter.
+But often we just don&rsquo;t know what threshold we should use to filter values.
+Whereas the median value is the same in both cases and is equal to <code>3100</code>. So in the cases like this the median will be more useful then the mean.
+However the calculation of the median in general case needs a lot of memory - O(n)</p>
+
+<h2 id="t-digest">T-digest</h2>
+
+<p>In order to deal with memory consumption <a href="http://www.cs.virginia.edu/~son/cs851/papers/ucsb.sensys04.pdf" title="Pdf: Medians and Beyond: New Aggregation Techniques
+for Sensor Networks"><code>Q-Digest</code> algorithm</a> has been developed and after that <code>T-digest</code> has been created as improvement of <code>Q-digest</code>.
+The main idea of these algorithms is to sacrifice accuracy of calculation for decrease of required amount of memory.</p>
+
+<h2 id="list-of-implementations">List of implementations</h2>
+
+<p>I&rsquo;ve found these libs for median calculation:</p>
+
+<ul>
+<li><a href="https://github.com/tdunning/t-digest" title="GitHub: t-digest">tdunning/t-digest</a> - a java library with implementation of <code>t-digest</code> algorithm</li>
+<li><a href="https://github.com/addthis/stream-lib" title="GitHub: stream-lib">addthis/stream-lib</a> - we already saw it in <a href="/posts/comparison-of-hll">previous article</a>. It&rsquo;s a library of streaming algorithms written in Java.</li>
+<li><a href="http://commons.apache.org/proper/commons-math/" title="Commons Math: The Apache Commons Mathematics Library">apache/commons-math</a> - it&rsquo;s a library of different mathematics and statistics components from apache.</li>
+</ul>
+
+<p><code>apache/commons-math</code> implements a regular algorithm for median calculation. It is used for the estimation of calculation accuracy of viewed <code>t-digest</code> implementations.</p>
+
+<h2 id="tdunning-t-digest-simple-example">tdunning/t-digest: simple example</h2>
+
+<p>A short description from github page:</p>
+
+<pre><code class="language-text">A new data structure for accurate on-line accumulation of rank-based statistics such as quantiles and trimmed means. The t-digest algorithm is also very parallel friendly making it useful in map-reduce and parallel streaming applications.
+</code></pre>
+
+<p>Friendliness for a parallel calculation shows itself by support of a merging operation. You can see it in the example below.</p>
+
+<p>Example of the code for t-digest:</p>
+
+<pre><code class="language-scala">object TDigestExample {
+  import com.madhukaraphatak.sizeof.SizeEstimator
+  import com.tdunning.math.stats.TDigest
+
+  def main(args: Array[String]) {
+    //define constants for experiments
+    val oneSecond = 1000
+    val twoMinutes = 2 * 60 * 1000
+    val tenMinutes = 10 * 60 * 1000
+    val twoHours = 2 * 60 * 60 * 1000
+
+    val mainValues = 10000000
+    val badValues = 100000
+
+    //generate 10.000.000 pseudo-random values for normal user session durations
+    val mainData = Generator.generate(count = mainValues, from = oneSecond, to = twoMinutes)
+
+    //generate 100.000(1%) pseudo-random values for invalid user session durations
+    val badData = Generator.generate(count = badValues, from = tenMinutes, to = twoHours)
+
+    //generate one united collection. For further details see below
+    val totalData = {
+      Generator.generate(count = mainValues, from = oneSecond, to = twoMinutes) ++
+        Generator.generate(count = badValues, from = tenMinutes, to = twoHours)
+    }
+
+    // Experiment #1
+    // All data in one digest object
+    // all values from one collection(totalData) are added to one digest object
+
+    // recommend default value of compression = 100
+    val totalDigest = TDigest.createArrayDigest(100)
+
+    //the timing of the median calculation
+    val startTime = System.currentTimeMillis()
+    totalData.foreach(value =&gt; totalDigest.add(value))
+    val median = totalDigest.quantile(0.5d)               //the median is a 0.5 quantile
+    val calcTime = System.currentTimeMillis() - startTime
+    println(&quot;calcTime: &quot; + calcTime)
+
+    // Experiment #2
+    // Separate objects for normal(mainData) and bad data(badData) to check accuracy of t-digest merging
+    val mainDigest = TDigest.createArrayDigest(100)
+    mainData.foreach(value =&gt; mainDigest.add(value))
+
+    val badDigest = TDigest.createArrayDigest(100)
+    badData.foreach(value =&gt; badDigest.add(value))
+
+    //to check accuracy of merging several digests
+    val mergedDigest = TDigest.createArrayDigest(100)
+    mergedDigest.add(mainDigest)
+    mergedDigest.add(badDigest)
+
+    val mergedMedian = mergedDigest.quantile(0.5d)
+    println(&quot;median:       &quot; + median)
+    println(&quot;mergedMedian: &quot; + mergedMedian)
+
+    //how many bytes is needed to serialize t-digest object
+    println(&quot;byte size:    &quot; + totalDigest.byteSize())
+
+    //how much memory is needed for totalDigest object
+    val sizeInMem = SizeEstimator.estimate(totalDigest)
+    println(s&quot;size in mem:  $sizeInMem bytes&quot;)
+  }
+}
+</code></pre>
+
+<h2 id="addthis-stream-lib">addthis/stream-lib</h2>
+
+<p>In general there is no much difference in the interface between <code>tdunning/t-digest</code> and <code>addthis/stream-lib</code>. The example for <code>addthis/stream-lib</code> you can find in <a href="https://github.com/coffius/koffio-t-digest/blob/master/src/main/scala/io/koff/t_digest/StreamLibExample.scala"><code>StreamLibExample.scala</code> file</a>.
+However <code>tdunning/t-digest</code> has more accuracy and less calculation time. More details about lib comparison are below.</p>
+
+<h2 id="comparison">Comparison</h2>
+
+<p>Now lets compare our libraries. The libraries are compared by:</p>
+
+<ul>
+<li>Time of calculation</li>
+<li>Calculation accuracy</li>
+<li>Serialization size</li>
+<li>Needed memory</li>
+</ul>
+
+<p><strong>Results:</strong></p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Median Value</th>
+<th>Calc.Time(msec)</th>
+<th>Calc. Acc.(%)</th>
+<th>Serial. size(bytes)</th>
+<th align="right">Memory(bytes)</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><strong>commons-math</strong></td>
+<td>61084,0000</td>
+<td>5.922</td>
+<td>100,000000</td>
+<td>not-supported</td>
+<td align="right">134.218.824</td>
+</tr>
+
+<tr>
+<td><strong>t-digest</strong></td>
+<td>61084,6668</td>
+<td>8.234</td>
+<td>100,001090</td>
+<td>15740</td>
+<td align="right">29.688</td>
+</tr>
+
+<tr>
+<td><strong>stream-lib</strong></td>
+<td>60763,2110</td>
+<td>20.142</td>
+<td>99,474839</td>
+<td>24820</td>
+<td align="right">231.784</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="anomaly-detection">Anomaly detection</h2>
+
+<p>One more interesting application of the median is anomaly detection. In order to find anomalies in your data sequence threshold should be calculated.
+For this you need to get 99.9%-quantile which means that we expect ~0.1% of anomalies in the data sequence. Look below to see how to do it using <code>tdunning/t-digest</code>.</p>
+
+<pre><code class="language-scala">/**
+ * Example of anomaly detection
+ */
+object AnomalyDetectionExample {
+  import com.tdunning.math.stats.TDigest
+  def main(args: Array[String]) {
+    //define constants for experiments
+    val oneSecond = 1000
+    val twoMinutes = 2 * 60 * 1000
+    val tenMinutes = 10 * 60 * 1000
+    val twoHours = 2 * 60 * 60 * 1000
+
+    val mainValues = 10000000
+    val badValues = 10000
+
+    //generate 10.000.000 pseudo-random values for normal user session durations
+    val mainData = Generator.generate(count = mainValues, from = oneSecond, to = twoMinutes)
+
+    //generate 100.000(1%) pseudo-random values for invalid user session durations
+    val badData = Generator.generate(count = badValues, from = tenMinutes, to = twoHours)
+
+    val totalData = mainData ++ badData
+
+    val totalDigest = TDigest.createArrayDigest(100)
+
+    totalData.foreach(value =&gt; totalDigest.add(value))
+    //this threshold means that we expect ~0.1% of data is anomalies
+    val threshold = totalDigest.quantile(0.999d).toInt
+
+    println(s&quot;threshold: $threshold msec&quot;)
+  }
+}
+</code></pre>
+
+<h2 id="links">Links</h2>
+
+<ul>
+<li><a href="https://github.com/coffius/koffio-t-digest" title="GitHub: Example project">Example project</a> - sources for this article</li>
+<li><a href="https://github.com/tdunning/t-digest" title="GitHub: t-digest">tdunning/t-digest</a> - github page of <code>t-digest</code></li>
+<li><a href="https://github.com/addthis/stream-lib" title="GitHub: stream-lib">addthis/stream-lib</a></li>
+<li><a href="https://commons.apache.org/proper/commons-math/">apache/math</a> - the apache commons mathematics library</li>
+</ul>
+
+</div>
+
+
+  <footer class="container">
+  <div class="container navigation no-print">
+  <h2>Navigation</h2>
+  
+  
+
+    
+    <a class="prev" href="http://coffius.github.io/posts/comparison-of-hll" title="Comparison of HLL implementations">
+      Previous
+    </a>
+    
+
+    
+
+  
+
+
+</div>
+
+  <div class="container comments">
+  <h2>Comments</h2>
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//koff-io.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div>
+
+</footer>
+
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+<a href="http://coffius.github.io/license">license</a>
+
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+  code with <i class='fa fa-heart'></i>
+
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  &copy; 2015
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//koff-io.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="http://coffius.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+<script>
+  var _gaq=[['_setAccount','102671541320733671208'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+
+    
+  </body>
+</html>
+
