@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Validation in scala  &middot; KOFF.io</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+<link rel="author" href="http://plus.google.com/+102671541320733671208">
+
+
+<meta property="og:title" content="Validation in scala  &middot; KOFF.io ">
+<meta property="og:site_name" content="KOFF.io"/>
+<meta property="og:url" content="http://coffius.github.io/posts/292173-validation-in-scala" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="2015-11-27T00:11:00&#43;03:00" />
+<meta property="og:article:modified_time" content="2015-11-27T00:11:00&#43;03:00" />
+
+  
+
+  
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@coffius" />
+<meta name="twitter:creator" content="@coffius" />
+<meta name="twitter:title" content="Validation in scala" />
+<meta name="twitter:description" content="" />
+<meta name="twitter:url" content="http://coffius.github.io/posts/292173-validation-in-scala" />
+<meta name="twitter:domain" content="http://coffius.github.io/">
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "Validation in scala",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+102671541320733671208?rel=author"
+    },
+    "datePublished": "2015-11-27",
+    "description": "",
+    "wordCount":  2241 
+  }
+</script>
+
+
+
+<link rel="canonical" href="http://coffius.github.io/posts/292173-validation-in-scala" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://coffius.github.io/touch-icon-144-precomposed.png">
+<link href="http://coffius.github.io/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.14" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="http://coffius.github.io/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://coffius.github.io/css/style.css">
+<link rel="stylesheet" href="http://coffius.github.io/css/highlight/default.css">
+
+  
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="http://coffius.github.io/">
+  KOFF.io
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  where scala is beloved
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="http://coffius.github.io/">Home</a>
+
+
+  
+<a href="http://coffius.github.io/about">About</a>
+
+<a href="http://coffius.github.io/post" title="Show list of posts">Posts</a>
+
+<a href="http://coffius.github.io/tags" title="Show list of tags">Tags</a>
+
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+
+
+<a id="contact-link-github" class="contact_link" href="https://github.com/coffius">
+  <span class="fa fa-github-square"></span><span>github</span></a>
+
+
+
+
+
+
+
+<a id="contact-link-googleplus" class="contact_link" href="https://plus.google.com/u/0/+102671541320733671208">
+  <span class="fa fa-google-plus-square"></span><span>google+</span></a>
+
+
+
+
+
+<a id="contact-link-twitter" class="contact_link" href="https://twitter.com/coffius">
+  <span class="fa fa-twitter-square"></span><span>twitter</span></a>
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>Validation in scala
+</h1>
+
+  <div class="metas">
+<time datetime="2015-11-27">27 Nov, 2015</time>
+
+
+  
+  &middot; Read in about 11 min
+  &middot; (2241 Words)
+  <br>
+  
+
+
+</div>
+
+</header>
+
+  <div class="container content">
+  
+
+<p>This article is about possible solutions for validation in scala. Validation is the process of checking input data in order to provide its correctness and requirements compliance.</p>
+
+<h1 id="implementations">Implementations</h1>
+
+<p>There are several libraries in scala which can be used for validation:</p>
+
+<ul>
+<li><strong><a href="https://github.com/wix/accord" title="GitHub: Accord">Accord</a></strong> - Accord is a validation library written in and for Scala. <a href="http://wix.github.io/accord/" title="Accord: Docs">Docs here</a></li>
+<li><strong>Skinny validator</strong> - skinny-validator is a portable library, so it is possible to use skinny-validator with Play2, Scalatra and any other web app frameworks. <a href="http://skinny-framework.org/documentation/validator.html" title="Skinny Validator: Docs">Docs here</a></li>
+<li><strong><a href="https://github.com/tobnee/DValidation/" title="GitHub: DValidation">DValidation</a></strong> - A little, opinionated Scala domain object validation toolkit</li>
+<li><strong><a href="https://github.com/davegurnell/validation" title="GitHub: io.underscore.validation">io.underscore.validation</a></strong> - Work-in-progress library demonstrating a functional programming approach to data validation in Scala</li>
+</ul>
+
+<p>The source code for this article is <strong><a href="https://github.com/coffius/koffio-validation">here</a></strong></p>
+
+<h2 id="general">General</h2>
+
+<p>Let&rsquo;s define domain classes which should be validated with the libraries above.</p>
+
+<pre><code class="language-scala">//Phone.scala
+//Phone.scala
+package io.koff.validation.domain
+
+/**
+ * User phone
+ */
+case class Phone(value: String)
+</code></pre>
+
+<pre><code class="language-scala">//Address.scala
+package io.koff.validation.domain
+
+/**
+ * User address
+ * @param street street
+ * @param house house number
+ */
+case class Address(street: String, house: Int)
+</code></pre>
+
+<pre><code class="language-scala">//User.scala
+package io.koff.validation.domain
+
+/**
+ * User - the main example domain class for validation
+ * @param login user login
+ * @param email user email
+ * @param password user password
+ * @param age user age
+ * @param phone user phone
+ * @param addresses list of user addresses - for showing a sequence validation
+ * @param userInfo recursive data for showing a recursive validation
+ */
+case class User(login: String,
+                email: String,
+                password: String,
+                age: Int,
+                phone: Option[Phone],
+                addresses: Seq[Address],
+                userInfo: InfoNode[String] = InfoNode.default)
+</code></pre>
+
+<p>After we defined our domain we can implement validation rules for it using the listed libraries.</p>
+
+<h2 id="accord">Accord</h2>
+
+<p><strong>Accord</strong> is a standalone scala library which is developed and used in <a href="http://www.wix.com/" title="WiX site">WiX</a>.</p>
+
+<p>The full example of using <strong>Accord</strong> can be found <a href="https://github.com/coffius/koffio-validation/blob/master/src/main/scala/io/koff/validation/AccordExample.scala">here</a></p>
+
+<p>First what you need to do is to define validation rules using <code>validator(...)</code> method:</p>
+
+<pre><code class="language-scala">import io.koff.validation.domain.{Address, User, Phone}
+import com.wix.accord._
+import dsl._
+
+/**
+ * Define Accord validator for Address class
+ */
+implicit val addressValidator = validator[Address] { address =&gt;
+  address.street is notEmpty
+  address.house is &gt;(0)
+}
+
+/**
+ * Define Accord validator for Phone class
+ */
+implicit val phoneValidator = validator[Phone]{ phone =&gt;
+  phone.value is notEmpty and startWith(&quot;+7&quot;)
+}
+
+/**
+ * Define Accord validator for User class
+ */
+implicit val userValidator = validator[User] { user =&gt;
+  //It is not possible to make a negative predicate
+  //for example there is no way to forbid using &quot;admin&quot; in user name except for creation of your own validator
+  user.login is notEmpty and startWith(&quot;super_&quot;) and endWith(&quot;!&quot;)
+
+  //just as a sample :)
+  //don`t user regex to validate emails: 
+  // - http://davidcel.is/posts/stop-validating-email-addresses-with-regex/
+  //otherwise your users can face with problems using their emails on your service
+  user.email is matchRegex(&quot;&quot;&quot;\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z&quot;&quot;&quot;)
+
+  // all the definitions below are equal
+  user.password.length is between(6, 12)
+  user.password have size &gt;= 6
+  user.password has size &lt;= 12
+
+  //you can validate number with range
+  user.age.must(between(13, 99))
+
+  //can use &gt;, &lt;, &gt;=, &lt;= etc
+  user.age must &lt;=(99)
+  user.age must &gt;=(13)
+  //can`t write it like this
+  //user.age must &gt;= 13
+  //it will be a compilation error
+
+  //check if a number field is equal or not equal to some value
+  //user.age must equalTo(1000)
+  //user.age must notEqualTo(1)
+
+  //checks if an option field is defined with Some(value)
+  //user.phone is notEmpty
+
+  //make sure that if the phone field is defined then it is defined with correct value
+  user.phone.each is valid
+
+  user.addresses should notEmpty
+  user.addresses.each is valid
+}
+</code></pre>
+
+<p>Then you can check an object using <code>validate[T](...)</code> method. The validator for <code>T</code> must be accessed as an implicit value.</p>
+
+<pre><code class="language-scala">def main(args: Array[String]) {
+  val correctUser = User(
+    login = &quot;super_user_!&quot;,
+    email = &quot;example@example.com&quot;,
+    password = &quot;1234567&quot;,
+    age = 14,
+    phone = Some(Phone(&quot;+78889993322&quot;)),
+    addresses = Seq(Address(&quot;Baker st.&quot;, 221))
+  )
+
+  println(&quot;correct result: &quot; + validate(correctUser))
+  //prints: 'correct result: Success'
+
+  val withWrongPhone = correctUser.copy(phone = Some(Phone(&quot;8889993322&quot;)))
+  println(&quot;withWrongPhone: &quot; + validate(withWrongPhone))
+  //prints: 'withWrongPhone: Failure(Set(GroupViolation(Phone(8889993322),is invalid,Some(phone),Set(RuleViolation(8889993322,must start with '+7',Some(value))))))'
+  
+  //More examples are in the code....
+}
+</code></pre>
+
+<p>In summary this library is quite good but there is one issue: an error message is represented as a sentence with a lexical description(<code>must start with '+7'</code>) instead of an error code like <code>User.phone.invalid</code>. It can be a problem when you want to localize error messages.</p>
+
+<h2 id="skinny-validator">Skinny validator</h2>
+
+<p>Skinny validator is a part of <strong><a href="http://skinny-framework.org/" title="Skinny Framework">Skinny Framework</a></strong> - a full-stack web app framework built on Skinny Micro.</p>
+
+<p>The full example of using <strong>Skinny validator</strong> can be found <a href="https://github.com/coffius/koffio-validation/blob/master/src/main/scala/io/koff/validation/SkinnyExample.scala">here</a></p>
+
+<p>At first let&rsquo;s define a new trait <code>EntityValidator</code> which helps organising validations rules for domain classes.</p>
+
+<pre><code class="language-scala">trait EntityValidator[T] {
+  def getValidator(entity: T): Validator
+}
+</code></pre>
+
+<p>And define the validator for User objects</p>
+
+<pre><code class="language-scala">implicit val userValidator = new EntityValidator[User] {
+  override def getValidator(entity: User): Validator = {
+    import skinny.validator.{email =&gt; correctEmail}
+    import entity._
+    Validator(
+      param(&quot;login&quot; -&gt; login) is notEmpty &amp; startWith(&quot;super_&quot;) &amp; endWith(&quot;!&quot;),
+      // skinny.validator.email using regex for checking email
+      param(&quot;email&quot; -&gt; email) is correctEmail,
+
+      //these definitions are equal
+      param(&quot;password&quot; -&gt; password) is minMaxLength(6, 12),
+      param(&quot;password&quot; -&gt; password) is minLength(6),
+      param(&quot;password&quot; -&gt; password) is maxLength(12),
+
+      //these definitions are equal
+      param(&quot;age&quot; -&gt; age) is intMinMaxValue(13, 99),
+      param(&quot;age&quot; -&gt; age) is intMinValue(13), // &gt;=
+      param(&quot;age&quot; -&gt; age) is intMaxValue(99), // &lt;=
+      //this is how to check equation of values
+      param(&quot;age&quot; -&gt; (age, 14)) is same
+
+      //there is no build-in way to check options(Some|None) and elements of collections
+    )
+  }
+}
+</code></pre>
+
+<p>If we want to add new validation rule we should extend <code>ValidationRule</code> trait like this:</p>
+
+<pre><code class="language-scala">/**
+ * For `startWith` we should create custom ValidationRule
+ */
+case class startWith(value: String) extends ValidationRule {
+  def name = &quot;startWith&quot;
+  def isValid(v: Any) = Option(v) match {
+    case Some(x) =&gt; x.toString.startsWith(value)
+    case None =&gt; true
+  }
+}
+
+/**
+ * For `endWith` we should create custom ValidationRule
+ */
+case class endWith(value: String) extends ValidationRule {
+  def name = &quot;endWith&quot;
+  def isValid(v: Any) = Option(v) match {
+    case Some(x) =&gt; x.toString.endsWith(value)
+    case None =&gt; true
+  }
+}
+</code></pre>
+
+<p>Let&rsquo;s add utility method <code>validate[T](...)</code> in order to make easier using of skinny-validator.</p>
+
+<pre><code class="language-scala">def validate[T](entity: T)(implicit entityValidator: EntityValidator[T]): Either[Errors, _] = {
+  val validator = entityValidator.getValidator(entity)
+  val isOk = validator.validate()
+  if(isOk){
+    Right(())
+  } else {
+    Left(validator.errors)
+  }
+}
+
+def main(args: Array[String]) {
+  val correctUser = User(
+    login = &quot;super_user_!&quot;,
+    email = &quot;example@example.com&quot;,
+    password = &quot;1234567&quot;,
+    age = 14,
+    phone = Some(Phone(&quot;+78889993322&quot;)),
+    addresses = Seq(Address(&quot;Baker st.&quot;, 221))
+  )
+
+  println(&quot;correctUser: &quot; + validate(correctUser))
+  //prints: 'correctUser: Right(())'
+
+  val allWrong = correctUser.copy(
+    login = &quot;not_super_user&quot;,
+    email = &quot;&quot;&quot;&quot;Look at all these spaces!&quot;@example.com&quot;&quot;&quot;, //it is still a valid email address
+    password = &quot;short&quot;,
+    age = 101
+  )
+
+  println(&quot;correctUser: &quot; + validate(allWrong))
+  //prints:
+  //Left(
+  //  Errors(
+  //    Map(
+  //      age -&gt; List(
+  //        Error(name = intMinMaxValue, messageParams = List(13, 99)),
+  //        Error(name = intMaxValue, messageParams = List(99)),
+  //        Error(name = same, messageParams = List())
+  //      ),
+  //      password -&gt; List(
+  //        Error(name = minMaxLength, messageParams = List(6, 12)),
+  //        Error(name = minLength, messageParams = List(6))
+  //      ),
+  //      email -&gt; List(Error(name = email, messageParams = List())),
+  //      login -&gt; List(Error(name = startWith, messageParams = List()))
+  //    )
+  //  )
+  //)'
+}
+</code></pre>
+
+<p>Skinny validator has a basic functionality for validation of simple objects. But if you want to validate more complex structures you have to write your own validation rules. It can be a problem to do it for sequences, options and other generic types.</p>
+
+<h2 id="dvalidation">DValidation</h2>
+
+<p>This library is a small validation toolkit on top of scalaz.</p>
+
+<p>The full example of using <strong>DValidation</strong> can be found <a href="https://github.com/coffius/koffio-validation/blob/master/src/main/scala/io/koff/validation/DValidationExample.scala">here</a></p>
+
+<p>In the first place we have to define instances of <code>DValidator[T]</code> for our domain classes. The important notice - it is necessary to import scalaz.Order[Int] for <code>isInRange</code> and other number checkers.</p>
+
+<pre><code class="language-scala">val phoneValidator = Validator.template[Phone] { phone =&gt;
+  phone.validateWith(
+    startWith(phone.value, &quot;+7&quot;)
+  )
+}
+
+val addressValidator = Validator.template[Address] { address =&gt;
+  address.validateWith(
+    notBlank(address.street) forAttribute 'street,
+    address.house.is_&gt;(0) forAttribute 'house
+  )
+}
+
+val userValidator = Validator.template[User]{ user =&gt;
+  user.validateWith(
+    notBlank(user.login) forAttribute 'login,
+    startWith(user.login, &quot;super_&quot;) forAttribute 'login,
+    ensure(user.login)(&quot;error.dvalidation.end_with&quot;)(_.endsWith(&quot;!&quot;)) forAttribute 'login,
+    regex(user.email, &quot;&quot;&quot;\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z&quot;&quot;&quot;) forAttribute 'email,
+
+    //these definitions are equal
+    isInRange(user.password.length, 6, 12) forAttribute Symbol(&quot;User.password.length.between&quot;),
+    user.password.length.is_&gt;=(6) forAttribute Symbol(&quot;User.password.length.lessThan&quot;),
+    user.password.length.is_&lt;=(12) forAttribute Symbol(&quot;User.password.length.greaterThan&quot;),
+
+    user.age.is_&gt;=(13) forAttribute 'age,
+    user.age.is_&lt;=(99) forAttribute 'age,
+    user.age.is_==(14) forAttribute 'age, // or you can use `is_===` for a strict check
+    validOpt(user.phone)(phoneValidator),
+
+    hasElements(user.addresses) forAttribute 'addresses
+  ).withValidations(
+    // You also can user validSequence(...) to validate elements of a collection
+    validSequence(user.addresses, addressValidator)
+  )
+}
+</code></pre>
+
+<p>You can defile own error codes using <code>scala.Symbol</code> and <code>forAttribute(...)</code> method</p>
+
+<p>Also we need additional validation rules like <code>startWith</code>:</p>
+
+<pre><code class="language-scala">// We need to import scalaz.Order[Int] for `isInRange` and other number checkers
+import scalaz.std.AllInstances._
+/**
+ * Example of a custom validator for DValidation
+ * @param toCheck value that should be checked
+ * @param startWith value that `toCheck` should start with
+ */
+def startWith(toCheck: String, startWith: String): DValidation[String] =
+  ensure(toCheck)(&quot;error.dvalidation.start_with&quot;)(a =&gt; a.startsWith(startWith))
+
+/**
+ * Simple regex checker
+ */
+def regex(toCheck: String, regexStr: String): DValidation[String] = {
+  val regex = regexStr.r
+  ensure(toCheck)(&quot;error.dvalidation.regex&quot;)(a =&gt; regex.pattern.matcher(a).find())
+}
+</code></pre>
+
+<p>Correctness can be checked in this way:</p>
+
+<pre><code class="language-scala">def main(args: Array[String]) {
+  val correctUser = User(
+    login = &quot;super_user_!&quot;,
+    email = &quot;example@example.com&quot;,
+    password = &quot;1234567&quot;,
+    age = 14,
+    //it will also work if phone = None
+    phone = Some(Phone(&quot;+78889993322&quot;)),
+    addresses = Seq(Address(&quot;Baker st.&quot;, 221))
+  )
+
+  println(&quot;correct result: &quot; + userValidator(correctUser))
+  //prints: 'correct result:
+  // Success(
+  //   User(
+  //     super_user_!,
+  //     example@example.com,
+  //     1234567,
+  //     14,
+  //     Some(Phone(+78889993322)),
+  //     List(Address(Baker st.,221)),
+  //     InfoNode(1,None,List())
+  //   )
+  // )
+  //'
+
+  val allWrong = correctUser.copy(
+    login = &quot;not_super_user&quot;,
+    email = &quot;&quot;&quot;&quot;Look at all these spaces!&quot;@example.com&quot;&quot;&quot;, //it is still a valid email address
+    password = &quot;short&quot;,
+    age = 101,
+    phone = Some(Phone(&quot;invalid_phone&quot;))
+  )
+
+  println(&quot;allWrong: &quot; + userValidator(allWrong))
+  //prints: 'allWrong:
+  // Failure(
+  //   DomainError(path: /login, value: not_super_user, msgKey: error.dvalidation.start_with),
+  //   DomainError(path: /login, value: not_super_user, msgKey: error.dvalidation.end_with),
+  //   DomainError(path: /email, value: &quot;Look at all these spaces!&quot;@example.com, msgKey: error.dvalidation.regex),
+  //   DomainError(path: /User.password.length.between, value: 5, msgKey: error.dvalidation.notGreaterThen, args: 6,false),
+  //   DomainError(path: /User.password.length.lessThan, value: 5, msgKey: error.dvalidation.notGreaterThen, args: 6,true),
+  //   DomainError(path: /age, value: 101, msgKey: error.dvalidation.notSmallerThen, args: 99,true),
+  //   DomainError(path: /age, value: 14, msgKey: error.dvalidation.notEqual, args: 101),
+  //   DomainError(path: /, value: invalid_phone, msgKey: error.dvalidation.start_with)
+  // )
+}
+</code></pre>
+
+<p>Although there are not many build-in validators in DValidation, it can be considered as a good option for validation of complex structures if it is ok to have dependency on <code>scalaz</code> in your project.</p>
+
+<h2 id="io-underscore-validation">io.underscore.validation</h2>
+
+<p>Despite that this library is named as &laquo;Work-in-progress&raquo; it has quite a good functionality and it is pretty simple in use.</p>
+
+<p>The full example of using <strong>io.underscore.validation</strong> can be found <a href="https://github.com/coffius/koffio-validation/blob/master/src/main/scala/io/koff/validation/UnderscoreValidation.scala">here</a></p>
+
+<p>You can define validators for our domain classes using <code>validate[T](...)</code> method and define custom validation methods like <code>startWith</code> and <code>endWith</code> extending <code>Validator[T]</code> trait</p>
+
+<pre><code class="language-scala">  /**
+   * Define custom validators for io.underscore.validation
+   */
+  def startWith(value: =&gt; String, msg: =&gt; String): Validator[String] = Validator[String] { in =&gt;
+    if(in.startsWith(value)) pass else fail(msg)
+  }
+
+  def endWith(value: =&gt; String, msg: =&gt; String): Validator[String] = Validator[String] { in =&gt;
+    if(in.endsWith(value)) pass else fail(msg)
+  }
+
+//  implicit val infoNodeValidator = validate[InfoNode]
+//    .field(_.index)(gte(1, &quot;InfoNode.index.gte&quot;))
+
+  implicit val phoneValidator = validate[Phone].field(_.value)(startWith(&quot;+7&quot;, &quot;Phone.value.startWith&quot;))
+
+  implicit val addressValidator = validate[Address]
+    .field(_.street)(nonEmpty(&quot;Address.street.notEmpty&quot;))
+    .field(_.house)(gt(0, &quot;Address.house.gt&quot;))
+
+  implicit val userValidator = validate[User]
+    .field(_.login)(nonEmpty  (&quot;User.login.notEmpty&quot;))
+    .field(_.login)(startWith (&quot;super_&quot;, &quot;User.login.startWith&quot;) and endWith(&quot;!&quot;, &quot;User.login.endWith&quot;))
+    .field(_.email)(matchesRegex(&quot;&quot;&quot;\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z&quot;&quot;&quot;.r, &quot;User.login.invalid&quot;))
+
+    .field(_.password)(lengthGt   (6, &quot;User.password.lengthGt&quot;))
+    .field(_.password)(lengthLte  (12, &quot;User.password.lengthLte&quot;))
+
+    .field(_.age)(gte(13, &quot;User.age.gte&quot;))
+    .field(_.age)(lte(99, &quot;User.age.lte&quot;))
+    .field(_.age)(eql(14, &quot;User.age.eql&quot;))
+    .field(_.phone)(optional(phoneValidator))
+  // also you can use `required(...)` if you want to have a defined optional field
+  //.field(_.phone)(required(phoneValidator))
+  //and `.seqField(...)` for validate Seq[T]
+    .field(_.addresses)(nonEmpty(&quot;User.address.notEmpty&quot;))
+    .field(_.userInfo)(infoNode(nonEmpty(&quot;User.userInfo.value.notEmpty&quot;)))              //using recursion
+    .field(_.userInfo)(infoNode(startWith(&quot;correct_&quot;, &quot;User.userInfo.value.startWith&quot;)))//using recursion
+    .seqField(_.addresses)
+</code></pre>
+
+<p>Lines <code>//using recursion</code> will be discussed in the next section.</p>
+
+<p>Object validation can be done by using implicit method <code>validate</code> in <code>io.underscore.validation</code></p>
+
+<pre><code class="language-scala">def main(args: Array[String]) {
+  val correctUser = User(
+    login = &quot;super_user_!&quot;,
+    email = &quot;example@example.com&quot;,
+    password = &quot;1234567&quot;,
+    age = 14,
+    phone = Some(Phone(&quot;+78889993322&quot;)),
+    addresses = Seq(Address(&quot;Baker st.&quot;, 221)),
+    userInfo = InfoNode(
+      index = 1,
+      value = Some(&quot;correct_parent&quot;),
+      children = Seq(
+        InfoNode(10, Some(&quot;correct_child&quot;), Seq.empty),
+        InfoNode(20, None, Seq.empty)
+      )
+    )
+  )
+
+  println(&quot;correctUser: &quot; + correctUser.validate.errors)
+  // prints: 'correctUser: List()'
+
+  val allWrong = correctUser.copy(
+    login = &quot;not_super_user&quot;,
+    email = &quot;&quot;&quot;&quot;Look at all these spaces!&quot;@example.com&quot;&quot;&quot;, //it is still a valid email address
+    password = &quot;short&quot;,
+    age = 101,
+    addresses = Seq(Address(&quot;&quot;, -1))
+  )
+
+  println(&quot;allWrong: &quot; + allWrong.validate)
+  //prints: 'allWrong:
+  // Validated(
+  //    User(
+  //      not_super_user,
+  //      &quot;Look at all these spaces!&quot;@example.com,
+  //      short,
+  //      101,
+  //      Some(Phone(+78889993322)),
+  //      List(Address(,-1)),
+  //      InfoNode(/* doesn't right now */),
+  //    List(
+  //      ValidationError(User.login.startWith,ValidationPath(login)),
+  //      ValidationError(User.login.endWith,ValidationPath(login)),
+  //      ValidationError(User.login.invalid,ValidationPath(email)),
+  //      ValidationError(User.password.lengthGt,ValidationPath(password)),
+  //      ValidationError(User.age.lte,ValidationPath(age)),
+  //      ValidationError(User.age.eql,ValidationPath(age)),
+  //      ValidationError(Address.street.notEmpty,ValidationPath(addresses[0].street)),
+  //      ValidationError(Address.house.gt,ValidationPath(addresses[0].house))
+  //    )
+  // )
+  //'
+}
+</code></pre>
+
+<p>So davegurnell/validation can be considered as a great lib for validation of very complex structures like generics and recursions if you are not bothered concerning dependence on <code>scala.language.experimental.macros</code> and <code>scala.language.higherKinds</code> which are used in this lib.</p>
+
+<h2 id="bonus-recursive-validation">Bonus: Recursive validation</h2>
+
+<p>And here is a little bonus - validation of recursive structures. Recursive validation was implemented for <code>io.underscore.validation</code> but I think it can be easily ported at least to <code>DValidation</code>.
+In our domains classes we have this generic recursive structure:</p>
+
+<pre><code class="language-scala">//InfoNode.scala
+package io.koff.validation.domain
+
+/**
+ * Generic recursive example of domain class
+ * @param index here it is just a number without additional meaning
+ * @param value some value which we want to store in a node and validate
+ * @param children child nodes which should also be validated
+ * @tparam T value type
+ */
+case class InfoNode[T](index: Int, value: Option[T], children: Seq[InfoNode[T]])
+
+object InfoNode{
+  /**
+   * Just a default value for InfoNode
+   */
+  def default[T]: InfoNode[T] = InfoNode(1, None, Seq.empty)
+}
+</code></pre>
+
+<p>In order to validate it <code>infoNode[T](rule: Validator[T])</code> method has been created:</p>
+
+<pre><code class="language-scala">  /**
+   * Recursive validator for InfoNode
+   */
+  def infoNode[T](rule: Validator[T]): Validator[InfoNode[T]] = Validator[InfoNode[T]] { in =&gt;
+    val generalValidator = validate[InfoNode[T]]
+      .field(_.index)(gte(1, &quot;InfoNode.index.gte&quot;))
+      .field(_.children)(lengthLte(2, &quot;InfoNode.children.lengthLte&quot;))
+      .field(_.value)(optional(rule))
+
+    val resultValidator = if(in.children.isEmpty) {
+      generalValidator
+    } else {
+      generalValidator.seqField(_.children)(infoNode(rule))
+    }
+
+    resultValidator(in)
+  }
+</code></pre>
+
+<p>As the argument this method receives a validation rule for <code>T</code> type - <code>Validator[T]</code>. So you can use other rules or validators in order to check all children in this recursive structure:</p>
+
+<pre><code class="language-scala">.field(_.userInfo)(infoNode(nonEmpty(&quot;User.userInfo.value.notEmpty&quot;)))               //using recursion
+.field(_.userInfo)(infoNode(startWith(&quot;correct_&quot;, &quot;User.userInfo.value.startWith&quot;))) //using recursion
+</code></pre>
+
+<h2 id="links">Links</h2>
+
+<ul>
+<li><strong><a href="https://github.com/coffius/koffio-validation">Article Examples</a></strong></li>
+<li><strong><a href="https://github.com/wix/accord" title="GitHub: Accord">Accord</a></strong></li>
+<li><strong><a href="http://skinny-framework.org/documentation/validator.html" title="Skinny Validator: Docs">Skinny validator</a></strong></li>
+<li><strong><a href="https://github.com/tobnee/DValidation/" title="GitHub: DValidation">DValidation</a></strong></li>
+<li><strong><a href="https://github.com/davegurnell/validation" title="GitHub: io.underscore.validation">io.underscore.validation</a></strong></li>
+</ul>
+
+</div>
+
+
+  <footer class="container">
+  <div class="container navigation no-print">
+  <h2>Navigation</h2>
+  
+  
+
+    
+    <a class="prev" href="http://coffius.github.io/posts/using-t-digest" title="Using T-Digest: Median calculation and anomaly detection">
+      Previous
+    </a>
+    
+
+    
+
+  
+
+
+</div>
+
+  <div class="container comments">
+  <h2>Comments</h2>
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//koff-io.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div>
+
+</footer>
+
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+<a href="http://coffius.github.io/license">license</a>
+
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+  code with <i class='fa fa-heart'></i>
+
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  &copy; 2015
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//koff-io.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="http://coffius.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+<script>
+  var _gaq=[['_setAccount','102671541320733671208'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+
+    
+  </body>
+</html>
+
