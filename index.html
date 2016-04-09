@@ -131,11 +131,48 @@
     <h1>KOFF.io
 </h1>
 
-    <span>last update: <time datetime="2015-11-27T00:11:00&#43;03:00">27 November at 12:11am</time>
+    <span>last update: <time datetime="2016-04-10T00:20:00&#43;03:00">10 April at 12:20am</time>
 </span>
 
   </header>
   
+  
+    <article class="container content summary">
+  <div class="container hat">
+  <h2><a href="http://coffius.github.io/posts/pagination-and-streams">Pagination and Streams
+</a>
+</h2>
+
+  <time datetime="2016-04-10">10 Apr, 2016</time>
+
+</div>
+
+  <p class="container content">
+  
+  
+    <p>In this article we will see how to use different streams(like akka-stream) for pagination and when it can be useful.
+The main idea of pagination is partition of a big sequence of objects into several parts(or pages) in order to make possible its processing page by page.
+For example, you have a 1.000.000 users in the database and you need to send an email to all of them.
+You could try to load all user records in a big list and process it at once but it would not be memory-efficient approach.
+Instead you can partition the list of users into pages by 100 users per page, load one page, send emails to users in this page, load next page and so on.
+This will be a much more efficient way to deal with big collections of records.</p>
+
+<p>So lets try to implement this approach but for a more complex case.</p>
+
+  
+
+
+</p>
+
+
+  <div class="container readlink">
+  <a href="http://coffius.github.io/posts/pagination-and-streams">Read more &rarr;</a>
+
+</div>
+
+
+</article>
+
   
     <article class="container content summary">
   <div class="container hat">

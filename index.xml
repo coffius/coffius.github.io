@@ -7,8 +7,289 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-EN</language>
     <copyright>(c) 2015</copyright>
-    <lastBuildDate>Fri, 27 Nov 2015 00:11:00 +0300</lastBuildDate>
+    <lastBuildDate>Sun, 10 Apr 2016 00:20:00 +0300</lastBuildDate>
     <atom:link href="http://coffius.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Pagination and Streams</title>
+      <link>http://coffius.github.io/posts/pagination-and-streams</link>
+      <pubDate>Sun, 10 Apr 2016 00:20:00 +0300</pubDate>
+      
+      <guid>http://coffius.github.io/posts/pagination-and-streams</guid>
+      <description>
+
+&lt;p&gt;In this article we will see how to use different streams(like akka-stream) for pagination and when it can be useful.
+The main idea of pagination is partition of a big sequence of objects into several parts(or pages) in order to make possible its processing page by page.
+For example, you have a 1.000.000 users in the database and you need to send an email to all of them.
+You could try to load all user records in a big list and process it at once but it would not be memory-efficient approach.
+Instead you can partition the list of users into pages by 100 users per page, load one page, send emails to users in this page, load next page and so on.
+This will be a much more efficient way to deal with big collections of records.&lt;/p&gt;
+
+&lt;p&gt;So lets try to implement this approach but for a more complex case.&lt;/p&gt;
+
+&lt;p&gt;Lets say that we have the big collection of users and each user has the big collection of products and we need to send emails to each user about each his product.
+In this case we can not load all users and/or all user&amp;rsquo;s products in memory at once. So we have to use pagination for users and for user&amp;rsquo;s products.&lt;/p&gt;
+
+&lt;h2 id=&#34;possible-solutions&#34;&gt;Possible solutions&lt;/h2&gt;
+
+&lt;p&gt;To solve that issue I tried to use:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Recursion&lt;/li&gt;
+&lt;li&gt;Akka-stream&lt;/li&gt;
+&lt;li&gt;Twitter AsyncStream&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;All examples can be found &lt;a href=&#34;https://github.com/coffius/koffio-pagination&#34; title=&#34;GitHub: Example project&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;using-recursion&#34;&gt;Using recursion&lt;/h2&gt;
+
+&lt;p&gt;The main idea is to use the recursive helper method &lt;code&gt;forEachPage(...)&lt;/code&gt; which executes page functions &lt;code&gt;forUserPage(...)&lt;/code&gt; and &lt;code&gt;forWarePage(...)&lt;/code&gt; until they return false.
+It is a simple approach but it requires plenty of code.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;import io.koff.pagination.domain.User
+import io.koff.pagination.repo.Repository
+import scala.concurrent.duration._
+
+import scala.concurrent.{Await, ExecutionContext, Future}
+import scala.language.postfixOps
+
+/**
+ * Example of recursive approach
+ */
+object RecursiveMain {
+  import scala.concurrent.ExecutionContext.Implicits.global
+  private val WaitTime  = 10 seconds
+
+  val repo = new Repository
+  val emailService = new EmailService
+
+  def main(args: Array[String]) {
+    val result = forEachPage()(forUserPage)
+    Await.result(result, WaitTime)
+  }
+
+  /**
+   * Execute this function for each page of user wares
+   */
+  private def forWarePage(user: User, page: PageRequest): Future[Boolean] = {
+    for {
+      //get page of user wares
+      wares &amp;lt;- repo.getPageOfWares(user, page)
+      //send email
+      futSeq = wares.map { ware =&amp;gt; emailService.sendEmail(user, ware) }
+      _ &amp;lt;- Future.sequence(futSeq)
+    } yield {
+      wares.nonEmpty
+    }
+  }
+
+  /**
+   * Execute this function for each page of users
+   */
+  private def forUserPage(page: PageRequest): Future[Boolean] = {
+    for{
+      //get a page of users
+      users &amp;lt;- repo.getPageOfUsers(page)
+      //traverse though user wares for each user
+      futSeq = users.map(user =&amp;gt; forEachPage()(forWarePage(user, _)))
+      _ &amp;lt;- Future.sequence(futSeq)
+    } yield {
+      users.nonEmpty
+    }
+  }
+
+  /**
+   * Recursive function for traverse through a collection page by page using `func`
+   * @param currPage current page
+   * @param func function which is called on each step of recursion
+   * @param ctx execution context
+   * @return result future
+   */
+  private def forEachPage(currPage: PageRequest = PageRequest.FirstPage)
+                         (func: PageRequest =&amp;gt; Future[Boolean])
+                         (implicit ctx: ExecutionContext): Future[_] = {
+    func(currPage).flatMap {
+      case true =&amp;gt;
+        forEachPage(currPage.next)(func)
+      case false =&amp;gt;
+        Future.successful(())
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;using-akka-streams&#34;&gt;Using akka-streams&lt;/h2&gt;
+
+&lt;p&gt;It is easy to implement the same logic using the method &lt;code&gt;Source.unfoldAsync(...)&lt;/code&gt; from akka-stream. But it is necessary to have ActorSystem in order to use akka streams.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;import akka.actor.ActorSystem
+import akka.stream.ActorMaterializer
+import akka.stream.scaladsl.Source
+import io.koff.pagination.repo.Repository
+
+import scala.concurrent.duration._
+import scala.concurrent.{Await, Future}
+import scala.language.postfixOps
+
+/**
+ * Pagination using akka-streams
+ */
+object ReactiveMain {
+  import scala.concurrent.ExecutionContext.Implicits.global
+  private val WaitTime  = 10 seconds
+  private val repo = new Repository
+  private val emailService = new EmailService 
+  implicit val system = ActorSystem(&amp;quot;reactive-pagination&amp;quot;)
+  implicit val materializer = ActorMaterializer()
+  def main(args: Array[String]): Unit = {
+    //Define the computation stream
+    val source =
+      //get users page by page
+      asyncPageToSource(repo.getPageOfUsers)
+      .flatMapConcat {
+        //for each user get wares page by page
+        user =&amp;gt; asyncPageToSource(repo.getPageOfWares(user, _)).map((user, _))
+      }.takeWhile{
+        //it is possible to check errors here to stop processing after the first error
+        case (user, _) =&amp;gt; user.name != &amp;quot;user#5&amp;quot;
+      }.mapAsync(1){
+        //send email for each (user, ware) pair
+        (emailService.sendEmail _).tupled
+      }
+
+    //Execute computations
+    //Because all computations are executed inside the stream
+    //We don&#39;t need to do anything here
+    val result = source.runForeach(value =&amp;gt; value)
+    //Wait the result
+    Await.result(result, WaitTime)
+    //Shutdown the actor system
+    system.terminate()
+  }
+
+  /**
+   * Converts page function to Source of pages
+   * @param pageFunc function which receives PageRequest as a parameter and returns an async result
+   * @return [[Source]] of pages
+   */
+  private def asyncPageToPageSource[T](pageFunc: PageRequest =&amp;gt; Future[Seq[T]]): Source[Seq[T], Unit] = {
+    Source.unfoldAsync(PageRequest.FirstPage){ page =&amp;gt;
+      val pageData = pageFunc(page)
+      pageData.map(data =&amp;gt; if (data.isEmpty){ None } else { Some(page.next, data) })
+    }
+  }
+
+  /**
+   * Converts page function to Source of elements of T
+   * @param pageFunc function which receives PageRequest as a parameter and returns an async result
+   * @return [[Source]] of pages
+   */
+  private def asyncPageToSource[T](pageFunc: PageRequest =&amp;gt; Future[Seq[T]]): Source[T, Unit] = {
+    asyncPageToPageSource(pageFunc).mapConcat{ seq =&amp;gt; seq.toList }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;using-twitter-asyncstream&#34;&gt;Using twitter AsyncStream&lt;/h2&gt;
+
+&lt;p&gt;It is possible to implement pagination using twitter AsyncStream in almost the same manner as it is made using akka-stream but with one note. AsyncStream does not have &lt;code&gt;unfoldAsync(...)&lt;/code&gt; so we need to implement it: &lt;code&gt;unfold2(...)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;import com.twitter.concurrent.exp.AsyncStream
+import com.twitter.util.{Await, Future}
+import io.koff.pagination.repo.Repository
+import io.koff.pagination.utils.TwitterScalaFuture._
+
+/**
+ * Example for twitter AsyncStream
+ */
+object TwitterMain {
+  import scala.concurrent.ExecutionContext.Implicits.global
+
+  private val repo = new Repository
+  private val emailService = new EmailService
+
+  def main(args: Array[String]) {
+    //Define the computation stream
+    val stream =
+      //get users page by page
+      //also convert scala future to twitter using &#39;.toTwitter&#39;
+      //see implicit class TwitterScalaFuture.ScalaToTwitter for details
+      asyncPageToStream(repo.getPageOfUsers(_).toTwitter)
+      .flatMap{
+        //for each user get wares page by page
+        user =&amp;gt; asyncPageToStream(repo.getPageOfWares(user, _).toTwitter).map((user, _))
+      }.takeWhile {
+        //it is possible to check errors here to stop processing after the first error
+        case (user, _) =&amp;gt; user.name != &amp;quot;user#5&amp;quot;
+      }.mapF {
+        //send email for each (user, ware) pair
+        case (user, ware) =&amp;gt; emailService.sendEmail(user, ware).toTwitter
+      }
+
+    //Execute computations
+    //Because all computations are executed inside the stream
+    //We don&#39;t need to do anything here
+    val res = stream.foreach { value =&amp;gt; value }
+
+    //Wait the result
+    Await.ready(res)
+  }
+
+  /**
+   * Almost the same as akka-stream Source.unfoldAsync(...)
+   * This function unfolds a value to a sequence of elements
+   */
+  def unfold2[T, K](value: T)(func: (T) =&amp;gt; Future[Option[(T, K)]]): AsyncStream[K] = {
+    val result = func(value)
+    val stream = AsyncStream.fromFuture(result)
+    stream.flatMap{
+      case Some((t,k)) =&amp;gt; stream ++ unfold(t)(func)
+      case None =&amp;gt; AsyncStream.empty
+    }.map(_.get._2)
+  }
+
+  def unfold[T, K](zero: T)(value: (T) =&amp;gt; Future[Option[(T, K)]]): AsyncStream[Option[(T, K)]] = {
+    val result = value(zero)
+    val stream = AsyncStream.fromFuture(result)
+    stream.flatMap {
+      case Some((t,_)) =&amp;gt; stream ++ unfold(t)(value)
+      case None =&amp;gt; AsyncStream.empty
+    }
+  }
+
+  /**
+   * Converts page function to Source of pages
+   * @param pageFunc function which receives PageRequest as a parameter and returns an async result
+   * @return [[AsyncStream]] of pages
+   */
+  def asyncPageToPageStream[T](pageFunc: PageRequest =&amp;gt; Future[Seq[T]]): AsyncStream[Seq[T]] = {
+    unfold2[PageRequest, Seq[T]](PageRequest.FirstPage){ page =&amp;gt;
+      val pageData = pageFunc(page)
+      pageData.map { data =&amp;gt; if (data.isEmpty) { None } else { Some(page.next, data) } }
+    }
+  }
+
+  /**
+   * Converts page function to Source of elements of T
+   * @param pageFunc function which receives PageRequest as a parameter and returns an async result
+   * @return [[AsyncStream]] of pages
+   */
+  def asyncPageToStream[T](pageFunc: PageRequest =&amp;gt; Future[Seq[T]]): AsyncStream[T] = {
+    asyncPageToPageStream(pageFunc).flatMap(AsyncStream.fromSeq)
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;links&#34;&gt;Links&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/coffius/koffio-pagination&#34; title=&#34;GitHub: Example project&#34;&gt;Example project&lt;/a&gt; - sources for this article&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://doc.akka.io/docs/akka/2.4.3/scala/stream/stream-introduction.html&#34; title=&#34;Akka docs&#34;&gt;Akka Stream&lt;/a&gt; - documentation for akka-stream&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://finagle.github.io/blog/2016/02/15/asyncstream&#34; title=&#34;Hello AsyncStream!&#34;&gt;Twitter AsyncStream&lt;/a&gt; - an article about AsyncStream&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Validation in scala</title>
