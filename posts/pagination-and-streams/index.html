@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Pagination and Streams  &middot; KOFF.io</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+<link rel="author" href="http://plus.google.com/+102671541320733671208">
+
+
+<meta property="og:title" content="Pagination and Streams  &middot; KOFF.io ">
+<meta property="og:site_name" content="KOFF.io"/>
+<meta property="og:url" content="http://localhost:1313/posts/pagination-and-streams" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="2016-03-30T22:00:00&#43;03:00" />
+<meta property="og:article:modified_time" content="2016-03-30T22:00:00&#43;03:00" />
+
+  
+
+  
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@coffius" />
+<meta name="twitter:creator" content="@coffius" />
+<meta name="twitter:title" content="Pagination and Streams" />
+<meta name="twitter:description" content="" />
+<meta name="twitter:url" content="http://localhost:1313/posts/pagination-and-streams" />
+<meta name="twitter:domain" content="http://localhost:1313/">
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "Pagination and Streams",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+102671541320733671208?rel=author"
+    },
+    "datePublished": "2016-03-30",
+    "description": "",
+    "wordCount":  1182 
+  }
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/pagination-and-streams" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:1313/touch-icon-144-precomposed.png">
+<link href="http://localhost:1313/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.14" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="http://localhost:1313/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://localhost:1313/css/style.css">
+<link rel="stylesheet" href="http://localhost:1313/css/highlight/default.css">
+
+  
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="http://localhost:1313/">
+  KOFF.io
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  where scala is beloved
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="http://localhost:1313/">Home</a>
+
+
+  
+<a href="http://localhost:1313/about">About</a>
+
+<a href="http://localhost:1313/post" title="Show list of posts">Posts</a>
+
+<a href="http://localhost:1313/tags" title="Show list of tags">Tags</a>
+
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+
+
+<a id="contact-link-github" class="contact_link" href="https://github.com/coffius">
+  <span class="fa fa-github-square"></span><span>github</span></a>
+
+
+
+
+
+
+
+<a id="contact-link-googleplus" class="contact_link" href="https://plus.google.com/u/0/+102671541320733671208">
+  <span class="fa fa-google-plus-square"></span><span>google+</span></a>
+
+
+
+
+
+<a id="contact-link-twitter" class="contact_link" href="https://twitter.com/coffius">
+  <span class="fa fa-twitter-square"></span><span>twitter</span></a>
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>DRAFT :: Pagination and Streams
+</h1>
+
+  <div class="metas">
+<time datetime="2016-03-30">30 Mar, 2016</time>
+
+
+  
+  &middot; Read in about 6 min
+  &middot; (1182 Words)
+  <br>
+  
+
+
+</div>
+
+</header>
+
+  <div class="container content">
+  
+
+<p>In this article we will see how to use different streams(like akka-stream) for pagination and when it can be useful.
+The main idea of pagination is partition of a big sequence of objects into several parts(or pages) in order to make possible its processing page by page.
+For example, you have a 1.000.000 users in the database and you need to send an email to all of them.
+You could try to load all user records in a big list and process it at once but it would not be memory-efficient approach.
+Instead you can partition the list of users into pages by 100 users per page, load one page, send emails to users in this page, load next page and so on.
+This will be a much more efficient way to deal with big collections of records.</p>
+
+<p>So lets try to implement this approach but for a more complex case.</p>
+
+<p>Lets say that we have the big collection of users and each user has the big collection of products and we need to send emails to each user about each his product.
+In this case we can not load all users and/or all user&rsquo;s products in memory at once. So we have to use pagination for users and for user&rsquo;s products.</p>
+
+<h2 id="possible-solutions">Possible solutions</h2>
+
+<p>To solve that issue I tried to use:</p>
+
+<ul>
+<li>Recursion</li>
+<li>Akka-stream</li>
+<li>Twitter AsyncStream</li>
+</ul>
+
+<p>All examples can be found <a href="https://github.com/coffius/koffio-pagination" title="GitHub: Example project">here</a></p>
+
+<h2 id="using-recursion">Using recursion</h2>
+
+<p>The main idea is to use the recursive helper method <code>forEachPage(...)</code> which executes page functions <code>forUserPage(...)</code> and <code>forWarePage(...)</code> until they return false.
+It is a simple approach but it requires plenty of code.</p>
+
+<pre><code class="language-scala">import io.koff.pagination.domain.User
+import io.koff.pagination.repo.Repository
+import scala.concurrent.duration._
+
+import scala.concurrent.{Await, ExecutionContext, Future}
+import scala.language.postfixOps
+
+/**
+ * Example of recursive approach
+ */
+object RecursiveMain {
+  import scala.concurrent.ExecutionContext.Implicits.global
+  private val WaitTime  = 10 seconds
+
+  val repo = new Repository
+  val emailService = new EmailService
+
+  def main(args: Array[String]) {
+    val result = forEachPage()(forUserPage)
+    Await.result(result, WaitTime)
+  }
+
+  /**
+   * Execute this function for each page of user wares
+   */
+  private def forWarePage(user: User, page: PageRequest): Future[Boolean] = {
+    for {
+      //get page of user wares
+      wares &lt;- repo.getPageOfWares(user, page)
+      //send email
+      futSeq = wares.map { ware =&gt; emailService.sendEmail(user, ware) }
+      _ &lt;- Future.sequence(futSeq)
+    } yield {
+      wares.nonEmpty
+    }
+  }
+
+  /**
+   * Execute this function for each page of users
+   */
+  private def forUserPage(page: PageRequest): Future[Boolean] = {
+    for{
+      //get a page of users
+      users &lt;- repo.getPageOfUsers(page)
+      //traverse though user wares for each user
+      futSeq = users.map(user =&gt; forEachPage()(forWarePage(user, _)))
+      _ &lt;- Future.sequence(futSeq)
+    } yield {
+      users.nonEmpty
+    }
+  }
+
+  /**
+   * Recursive function for traverse through a collection page by page using `func`
+   * @param currPage current page
+   * @param func function which is called on each step of recursion
+   * @param ctx execution context
+   * @return result future
+   */
+  private def forEachPage(currPage: PageRequest = PageRequest.FirstPage)
+                         (func: PageRequest =&gt; Future[Boolean])
+                         (implicit ctx: ExecutionContext): Future[_] = {
+    func(currPage).flatMap {
+      case true =&gt;
+        forEachPage(currPage.next)(func)
+      case false =&gt;
+        Future.successful(())
+    }
+  }
+}
+</code></pre>
+
+<h2 id="using-akka-streams">Using akka-streams</h2>
+
+<p>It is easy to implement the same logic using the method <code>Source.unfoldAsync(...)</code> from akka-stream. But it is necessary to have ActorSystem in order to use akka streams.</p>
+
+<pre><code class="language-scala">import akka.actor.ActorSystem
+import akka.stream.ActorMaterializer
+import akka.stream.scaladsl.Source
+import io.koff.pagination.repo.Repository
+
+import scala.concurrent.duration._
+import scala.concurrent.{Await, Future}
+import scala.language.postfixOps
+
+/**
+ * Pagination using akka-streams
+ */
+object ReactiveMain {
+  import scala.concurrent.ExecutionContext.Implicits.global
+  private val WaitTime  = 10 seconds
+  private val repo = new Repository
+  private val emailService = new EmailService 
+  implicit val system = ActorSystem(&quot;reactive-pagination&quot;)
+  implicit val materializer = ActorMaterializer()
+  def main(args: Array[String]): Unit = {
+    //Define the computation stream
+    val source =
+      //get users page by page
+      asyncPageToSource(repo.getPageOfUsers)
+      .flatMapConcat {
+        //for each user get wares page by page
+        user =&gt; asyncPageToSource(repo.getPageOfWares(user, _)).map((user, _))
+      }.takeWhile{
+        //it is possible to check errors here to stop processing after the first error
+        case (user, _) =&gt; user.name != &quot;user#5&quot;
+      }.mapAsync(1){
+        //send email for each (user, ware) pair
+        (emailService.sendEmail _).tupled
+      }
+
+    //Execute computations
+    //Because all computations are executed inside the stream
+    //We don't need to do anything here
+    val result = source.runForeach(value =&gt; value)
+    //Wait the result
+    Await.result(result, WaitTime)
+    //Shutdown the actor system
+    system.terminate()
+  }
+
+  /**
+   * Converts page function to Source of pages
+   * @param pageFunc function which receives PageRequest as a parameter and returns an async result
+   * @return [[Source]] of pages
+   */
+  private def asyncPageToPageSource[T](pageFunc: PageRequest =&gt; Future[Seq[T]]): Source[Seq[T], Unit] = {
+    Source.unfoldAsync(PageRequest.FirstPage){ page =&gt;
+      val pageData = pageFunc(page)
+      pageData.map(data =&gt; if (data.isEmpty){ None } else { Some(page.next, data) })
+    }
+  }
+
+  /**
+   * Converts page function to Source of elements of T
+   * @param pageFunc function which receives PageRequest as a parameter and returns an async result
+   * @return [[Source]] of pages
+   */
+  private def asyncPageToSource[T](pageFunc: PageRequest =&gt; Future[Seq[T]]): Source[T, Unit] = {
+    asyncPageToPageSource(pageFunc).mapConcat{ seq =&gt; seq.toList }
+  }
+}
+</code></pre>
+
+<h2 id="using-twitter-asyncstream">Using twitter AsyncStream</h2>
+
+<p>It is possible to implement pagination using twitter AsyncStream in almost the same manner as it is made using akka-stream but with one note. AsyncStream does not have <code>unfoldAsync(...)</code> so we need to implement it: <code>unfold2(...)</code>.</p>
+
+<pre><code class="language-scala">import com.twitter.concurrent.exp.AsyncStream
+import com.twitter.util.{Await, Future}
+import io.koff.pagination.repo.Repository
+import io.koff.pagination.utils.TwitterScalaFuture._
+
+/**
+ * Example for twitter AsyncStream
+ */
+object TwitterMain {
+  import scala.concurrent.ExecutionContext.Implicits.global
+
+  private val repo = new Repository
+  private val emailService = new EmailService
+
+  def main(args: Array[String]) {
+    //Define the computation stream
+    val stream =
+      //get users page by page
+      //also convert scala future to twitter using '.toTwitter'
+      //see implicit class TwitterScalaFuture.ScalaToTwitter for details
+      asyncPageToStream(repo.getPageOfUsers(_).toTwitter)
+      .flatMap{
+        //for each user get wares page by page
+        user =&gt; asyncPageToStream(repo.getPageOfWares(user, _).toTwitter).map((user, _))
+      }.takeWhile {
+        //it is possible to check errors here to stop processing after the first error
+        case (user, _) =&gt; user.name != &quot;user#5&quot;
+      }.mapF {
+        //send email for each (user, ware) pair
+        case (user, ware) =&gt; emailService.sendEmail(user, ware).toTwitter
+      }
+
+    //Execute computations
+    //Because all computations are executed inside the stream
+    //We don't need to do anything here
+    val res = stream.foreach { value =&gt; value }
+
+    //Wait the result
+    Await.ready(res)
+  }
+
+  /**
+   * Almost the same as akka-stream Source.unfoldAsync(...)
+   * This function unfolds a value to a sequence of elements
+   */
+  def unfold2[T, K](value: T)(func: (T) =&gt; Future[Option[(T, K)]]): AsyncStream[K] = {
+    val result = func(value)
+    val stream = AsyncStream.fromFuture(result)
+    stream.flatMap{
+      case Some((t,k)) =&gt; stream ++ unfold(t)(func)
+      case None =&gt; AsyncStream.empty
+    }.map(_.get._2)
+  }
+
+  def unfold[T, K](zero: T)(value: (T) =&gt; Future[Option[(T, K)]]): AsyncStream[Option[(T, K)]] = {
+    val result = value(zero)
+    val stream = AsyncStream.fromFuture(result)
+    stream.flatMap {
+      case Some((t,_)) =&gt; stream ++ unfold(t)(value)
+      case None =&gt; AsyncStream.empty
+    }
+  }
+
+  /**
+   * Converts page function to Source of pages
+   * @param pageFunc function which receives PageRequest as a parameter and returns an async result
+   * @return [[AsyncStream]] of pages
+   */
+  def asyncPageToPageStream[T](pageFunc: PageRequest =&gt; Future[Seq[T]]): AsyncStream[Seq[T]] = {
+    unfold2[PageRequest, Seq[T]](PageRequest.FirstPage){ page =&gt;
+      val pageData = pageFunc(page)
+      pageData.map { data =&gt; if (data.isEmpty) { None } else { Some(page.next, data) } }
+    }
+  }
+
+  /**
+   * Converts page function to Source of elements of T
+   * @param pageFunc function which receives PageRequest as a parameter and returns an async result
+   * @return [[AsyncStream]] of pages
+   */
+  def asyncPageToStream[T](pageFunc: PageRequest =&gt; Future[Seq[T]]): AsyncStream[T] = {
+    asyncPageToPageStream(pageFunc).flatMap(AsyncStream.fromSeq)
+  }
+}
+</code></pre>
+
+<h2 id="links">Links</h2>
+
+<ul>
+<li><a href="https://github.com/coffius/koffio-pagination" title="GitHub: Example project">Example project</a> - sources for this article</li>
+<li><a href="http://doc.akka.io/docs/akka/2.4.3/scala/stream/stream-introduction.html" title="Akka docs">Akka Stream</a> - documentation for akka-stream</li>
+<li><a href="https://finagle.github.io/blog/2016/02/15/asyncstream" title="Hello AsyncStream!">Twitter AsyncStream</a> - an article about AsyncStream</li>
+</ul>
+
+</div>
+
+
+  <footer class="container">
+  <div class="container navigation no-print">
+  <h2>Navigation</h2>
+  
+  
+
+    
+    <a class="prev" href="http://localhost:1313/posts/292173-validation-in-scala" title="Validation in scala">
+      Previous
+    </a>
+    
+
+    
+
+  
+
+
+</div>
+
+  <div class="container comments">
+  <h2>Comments</h2>
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//koff-io.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div>
+
+</footer>
+
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+<a href="http://localhost:1313/license">license</a>
+
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+  code with <i class='fa fa-heart'></i>
+
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  &copy; 2015
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//koff-io.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="http://localhost:1313/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+<script>
+  var _gaq=[['_setAccount','102671541320733671208'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+
+    
+  <script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>
+
