@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Tips about variance in scala  &middot; KOFF.io</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+<link rel="author" href="http://plus.google.com/+102671541320733671208">
+
+
+<meta property="og:title" content="Tips about variance in scala  &middot; KOFF.io ">
+<meta property="og:site_name" content="KOFF.io"/>
+<meta property="og:url" content="http://coffius.github.io/posts/variance-tip-notes" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="2016-11-26T22:51:18&#43;03:00" />
+<meta property="og:article:modified_time" content="2016-11-26T22:51:18&#43;03:00" />
+
+  
+
+  
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@coffius" />
+<meta name="twitter:creator" content="@coffius" />
+<meta name="twitter:title" content="Tips about variance in scala" />
+<meta name="twitter:description" content="" />
+<meta name="twitter:url" content="http://coffius.github.io/posts/variance-tip-notes" />
+<meta name="twitter:domain" content="http://coffius.github.io/">
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "Tips about variance in scala",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+102671541320733671208?rel=author"
+    },
+    "datePublished": "2016-11-26",
+    "description": "",
+    "wordCount":  1285 
+  }
+</script>
+
+
+
+<link rel="canonical" href="http://coffius.github.io/posts/variance-tip-notes" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://coffius.github.io/touch-icon-144-precomposed.png">
+<link href="http://coffius.github.io/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.14" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="http://coffius.github.io/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://coffius.github.io/css/style.css">
+<link rel="stylesheet" href="http://coffius.github.io/css/highlight/default.css">
+
+  
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="http://coffius.github.io/">
+  KOFF.io
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  where scala is beloved
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="http://coffius.github.io/">Home</a>
+
+
+  
+<a href="http://coffius.github.io/about">About</a>
+
+<a href="http://coffius.github.io/post" title="Show list of posts">Posts</a>
+
+<a href="http://coffius.github.io/tags" title="Show list of tags">Tags</a>
+
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+
+
+<a id="contact-link-github" class="contact_link" href="https://github.com/coffius">
+  <span class="fa fa-github-square"></span><span>github</span></a>
+
+
+
+
+
+
+
+<a id="contact-link-googleplus" class="contact_link" href="https://plus.google.com/u/0/+102671541320733671208">
+  <span class="fa fa-google-plus-square"></span><span>google+</span></a>
+
+
+
+
+
+<a id="contact-link-twitter" class="contact_link" href="https://twitter.com/coffius">
+  <span class="fa fa-twitter-square"></span><span>twitter</span></a>
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>Tips about variance in scala
+</h1>
+
+  <div class="metas">
+<time datetime="2016-11-26">26 Nov, 2016</time>
+
+
+  
+  &middot; Read in about 7 min
+  &middot; (1285 Words)
+  <br>
+  
+
+
+</div>
+
+</header>
+
+  <div class="container content">
+  
+
+<p>Type variance in scala is quite a tricky topic especially if you do not use it often - details might slip out of mind easily in this case. So below you can find very short tips about it which purpose is to remind how it works.</p>
+
+<p>All code for examples below can be found <a href="https://github.com/coffius/koffio-examples/tree/master/src/main/scala/io/koff/examples/variance">here</a>.</p>
+
+<h2 id="java-problem">Java problem</h2>
+
+<p>In Java all generic types are covariant and because of it we can write this non-working code:</p>
+
+<p><a href="https://github.com/coffius/koffio-examples/blob/master/src/main/scala/io/koff/examples/variance/CovarianceProblem.java">CovarianceProblem.java</a></p>
+
+<pre><code class="language-scala">/**
+ * Example of a problem with covariant types in Java
+ */
+public class CovarianceProblem {
+    public static void main(String[] args) {
+        String[] strArray = { &quot;str#1&quot;, &quot;str#2&quot; };
+        Object[] objArray = strArray;
+        objArray[0] = 1; //throws ArrayStoreException: java.lang.Integer
+    }
+}
+</code></pre>
+
+<h2 id="why-do-we-need-it">Why do we need it?</h2>
+
+<p>In order to deal with the problem above we need type variance to define and distinguish different relations between generic classes which specific types have inherited relationships between them.</p>
+
+<p>There are three possible options:</p>
+
+<ul>
+<li>Invariant</li>
+<li>Covariant</li>
+<li>Contravariant</li>
+</ul>
+
+<h2 id="examples">Examples</h2>
+
+<p>Let&rsquo;s use this simple class tree for examples(in <a href="https://github.com/coffius/koffio-examples/blob/master/src/main/scala/io/koff/examples/variance/Variance.scala">Variance.scala</a>):</p>
+
+<pre><code class="language-scala">class GrandParent
+class Parent extends GrandParent
+class Child1 extends Parent
+class Child2 extends Parent
+</code></pre>
+
+<h3 id="invariant">Invariant</h3>
+
+<p>Invariant means that there is no relation between <code>InVariant[Parent]</code> and <code>InVariant[Child1]</code> or <code>InVariant[Child2]</code></p>
+
+<pre><code class="language-scala">val parentInvariant = new InVariant[Parent]
+// Next lines cannot be compiled because of invariant
+//val child1Invariant: InVariant[Child1] = parentInvariant
+//val child2Invariant: InVariant[Child2] = parentInvariant
+</code></pre>
+
+<h3 id="covariant">Covariant</h3>
+
+<p>Covariant means that <code>CoVariant[Child1]</code> and <code>CoVariant[Child2]</code> are subclasses of <code>CoVariant[Parent]</code></p>
+
+<pre><code class="language-scala">val child1Covariant = new CoVariant[Child1]
+val child2Covariant = new CoVariant[Child2]
+//We can use values of CoVariant[Child1|Child2] as CoVariant[Parent]
+val parentCovariant1: CoVariant[Parent] = child1Covariant
+val parentCovariant2: CoVariant[Parent] = child2Covariant
+</code></pre>
+
+<p>Example of correct usage:</p>
+
+<pre><code class="language-scala">//we can use a covariant type as
+class Producer[+A](val value: A) {          // a type for immutable values
+  private[this] var variable: A = ???       // a type for private mutable variables
+  def simpleProduce(): A = ???              // a type for method outputs
+  def complexProduce[B &gt;: A](b: B): A = ??? // a lower type bound
+}
+</code></pre>
+
+<p>Example of incorrect usage:</p>
+
+<pre><code class="language-scala">//code below cannot be compiled
+//we can not use a covariant type as
+class Producer[+A](var variable: A) { // a type for public mutable variables
+  def consume(a: A): Unit = ???       // a type for method parameters
+}
+</code></pre>
+
+<h3 id="contravariant">Contravariant</h3>
+
+<p>Contravariant means that <code>ContraVariant[Parent]</code> is a subclass of <code>ContraVariant[Child2]</code> and <code>ContraVariant[Child2]</code></p>
+
+<pre><code class="language-scala">val parentContravariant = new ContraVariant[Parent]
+//Looks awkward but it is totally legit :)
+val child1Contravariant: ContraVariant[Child1] = parentContravariant
+val child2Contravariant: ContraVariant[Child2] = parentContravariant
+</code></pre>
+
+<p>Example of correct usage:</p>
+
+<pre><code class="language-scala">//we can use a contravariant type as
+class Consumer[-A]() {
+  private[this] var variable: A = ???   // a type for private mutable variables
+  def consume(a: A): Unit = ???         // a type for method parameters
+  def complex[B &lt;: A](b: B): Unit = ??? // a upper type bound
+}
+</code></pre>
+
+<p>Example of incorrect usage:</p>
+
+<pre><code class="language-scala">//code below cannot be compiled
+//we can not use a contravariant type as
+class Producer[-A](val value: A, var variable: A) { // a type for public immutable values and publis mutable variables
+  def produce(): A = ???                            // a type for for method outputs
+  def complexProduce[B &gt;: A](b: B): A = ???         // a lower type bound
+}
+</code></pre>
+
+<h3 id="how-to-use-contravariance">How to use Contravariance</h3>
+
+<p>Code for this part is <a href="https://github.com/coffius/koffio-examples/blob/master/src/main/scala/io/koff/examples/variance/example/HandlingEventsExample.scala">here</a>.</p>
+
+<p>Contravariance probably is a bit counterintuitive thing but the next example should help to understand when it is possible to use it.
+Let&rsquo;s imagine that we want to implement our own type-safe event system with a handler register and event handlers.
+The classic thing but with one requirement - we want to be able to handle events in a generalised way. More details below.</p>
+
+<p>So we have <code>Event</code> trait as a base trait for all possible events, <code>UpdateEvent</code> - for events about update operations and several more specific traits and classes(in <code>Event.scala</code>)</p>
+
+<pre><code class="language-scala">/**
+  * The very basic trait to describe an event
+  */
+trait Event
+/**
+  * The marker trait for events for data updates
+  */
+trait UpdateEvent extends Event{
+  /** Id of the updated entity */
+  def entityId: UUID
+}
+/**
+  * The marker trait for events about wares
+  */
+trait WareEvent extends Event {
+  /**Id the ware which is a reason of the event */
+  def wareId: UUID
+}
+/**
+  * The marker trait for events about users
+  */
+trait UserEvent extends Event {
+  /** Email of the user who is a reason of the event */
+  def email: String
+}
+/*
+ * Specific events
+ */
+case class ChangeWarePriceEvent(wareId: UUID,
+                                oldPrice: BigDecimal,
+                                newPrice: BigDecimal) extends WareEvent with UpdateEvent {
+  override def entityId: UUID = wareId
+}
+
+case class ChangeUserPhoneEvent(userId: UUID, userEmail: String, oldPhone: String, newPhone: String) 
+    extends UserEvent 
+    with UpdateEvent 
+{
+  override def email: String = userEmail
+  /* Let's say that a user email is an unique identifier of a user */
+  override def entityId: UUID = userId
+}
+</code></pre>
+
+<p>Next thing is handling events. And as it was said before we want to handle events in a generalised way which means next:</p>
+
+<ul>
+<li>We have a generalised event handler <code>ConsoleLogEventHandler</code> - can handle all possible types of events</li>
+</ul>
+
+<pre><code class="language-scala">/**
+  * Logs all events to stdout using .toString
+  */
+class ConsoleLogEventHandler extends EventHandler[Event]{
+  override def handle(event: Event): Unit = {
+    println(s&quot;logger - event has been received: [$event]&quot;)
+  }
+}
+</code></pre>
+
+<ul>
+<li>We have specialised handlers like <code>DiscountEventHandler</code> or <code>CheckNumberEventHandler</code> - can handle just one type <code>ChangeWarePriceEvent</code> or <code>ChangeUserPhoneEvent</code></li>
+</ul>
+
+<pre><code class="language-scala">/**
+  * Notifies users about discounts (the new price of a ware is less than the old one)
+  */
+class DiscountEventHandler extends EventHandler[ChangeWarePriceEvent]{
+  override def handle(event: ChangeWarePriceEvent): Unit = {
+    if(event.oldPrice &gt; event.newPrice) {
+      val discount = 1 - event.newPrice / event.oldPrice
+      println(s&quot;there is a discount[${discount * 100} %] for the ware[id: ${event.wareId}]&quot;)
+    }
+  }
+}
+/**
+  * Sends SMS to the new phone number if a user change it.
+  */
+class CheckNumberEventHandler extends EventHandler[ChangeUserPhoneEvent]{
+  override def handle(event: ChangeUserPhoneEvent): Unit = {
+    println(s&quot;SMS has been sent to the phone:${event.newPhone}&quot;)
+  }
+}
+</code></pre>
+
+<ul>
+<li>We want to add several handlers for an event type and make it type-safely:</li>
+</ul>
+
+<pre><code class="language-scala">// ok
+handlerRegister.addHandler(classOf[ChangeUserPhoneEvent], ConsoleLogEventHandler)
+handlerRegister.addHandler(classOf[ChangeWarePriceEvent], ConsoleLogEventHandler)
+handlerRegister.addHandler(classOf[ChangeUserPhoneEvent], CheckNumberEventHandler)
+handlerRegister.addHandler(classOf[ChangeWarePriceEvent], DiscountEventHandler)
+
+// generates compilation errors
+handlerRegister.addHandler(classOf[ChangeUserPhoneEvent], DiscountEventHandler)
+</code></pre>
+
+<p>In order to make it possible we should use a contravariant event handler:</p>
+
+<pre><code class="language-scala">/**
+  * Basic trait for an event handler
+  */
+trait EventHandler[-T &lt;: Event] {
+  /**
+    * Handle a particular event
+    * @param event an event to handle
+    */
+  def handle(event: T): Unit
+}
+</code></pre>
+
+<p>And define <code>addHandler(...)</code> as:</p>
+
+<pre><code class="language-scala">/**
+  * Adds a handler for a particular type of events
+  * @param eventType the class of events handled by the eventHandler
+  * @param eventHandler the event handler which should handle all events of the specific type(eventType)
+  * @tparam E type of the event we want to handle
+  * @tparam T intermediate type.
+  *           Means that we want to handle an event of type `E` as `T`.
+  *           And `T` should be between Event and `E` in the chain of inheritance.
+  *           If we have such types: `Event &lt;- SubEventType &lt;- SubSubEventType &lt;- ... &lt;- E`
+  *           then `T` can be one of these types
+  * @tparam H type of the handler which should handle all events of type `E`
+  */
+def addHandler[E &lt;: Event, T &gt;: E &lt;: Event, H &lt;: EventHandler[T]](eventType: Class[E], eventHandler: H): Unit
+</code></pre>
+
+<p>This is possible only if we use contravariance for EventHandler. If we define it like invariant(<code>EventHandler[T &lt;: Event]</code>) and use generalised handlers then we will have errors like that:</p>
+
+<pre><code class="language-scala">Error:(12, 19) inferred type arguments [ChangeUserPhoneEvent, ChangeUserPhoneEvent, ConsoleLogEventHandler.type] do not conform to method addHandler's type parameter bounds [E &lt;: Event, T &gt;: E &lt;: Event, H &lt;: EventHandler[T]]
+  handlerRegister.addHandler(classOf[ChangeUserPhoneEvent], ConsoleLogEventHandler)
+  
+Error:(12, 37) type mismatch;
+ found   : Class[ChangeUserPhoneEvent](classOf[ChangeUserPhoneEvent])
+ required: Class[E]
+  handlerRegister.addHandler(classOf[ChangeUserPhoneEvent], ConsoleLogEventHandler)
+  
+Error:(12, 61) type mismatch;
+ found   : ConsoleLogEventHandler.type
+ required: H
+  handlerRegister.addHandler(classOf[ChangeUserPhoneEvent], ConsoleLogEventHandler)
+</code></pre>
+
+<p>And of course it is also impossible to use covariance in this case.</p>
+
+<h2 id="links">Links</h2>
+
+<ul>
+<li><a href="http://docs.scala-lang.org/tutorials/tour/variances.html">Official tutorial for variance</a></li>
+<li><a href="https://github.com/coffius/koffio-examples/tree/master/src/main/scala/io/koff/examples/variance">Examples for this article</a></li>
+<li><a href="https://twitter.github.io/scala_school/type-basics.html#variance">About variance in Scala school from Twitter</a></li>
+</ul>
+
+</div>
+
+
+  <footer class="container">
+  <div class="container navigation no-print">
+  <h2>Navigation</h2>
+  
+  
+
+    
+    <a class="prev" href="http://coffius.github.io/posts/pagination-and-streams" title="Pagination and Streams">
+      Previous
+    </a>
+    
+
+    
+
+  
+
+
+</div>
+
+  <div class="container comments">
+  <h2>Comments</h2>
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//koff-io.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div>
+
+</footer>
+
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+<a href="http://coffius.github.io/license">license</a>
+
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+  code with <i class='fa fa-heart'></i>
+
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  &copy; 2015
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//koff-io.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="http://coffius.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+<script>
+  var _gaq=[['_setAccount','102671541320733671208'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+
+    
+  </body>
+</html>
+

@@ -7,8 +7,298 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-EN</language>
     <copyright>(c) 2015</copyright>
-    <lastBuildDate>Sun, 10 Apr 2016 00:20:00 +0300</lastBuildDate>
+    <lastBuildDate>Sat, 26 Nov 2016 22:51:18 +0300</lastBuildDate>
     <atom:link href="http://coffius.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Tips about variance in scala</title>
+      <link>http://coffius.github.io/posts/variance-tip-notes</link>
+      <pubDate>Sat, 26 Nov 2016 22:51:18 +0300</pubDate>
+      
+      <guid>http://coffius.github.io/posts/variance-tip-notes</guid>
+      <description>
+
+&lt;p&gt;Type variance in scala is quite a tricky topic especially if you do not use it often - details might slip out of mind easily in this case. So below you can find very short tips about it which purpose is to remind how it works.&lt;/p&gt;
+
+&lt;p&gt;All code for examples below can be found &lt;a href=&#34;https://github.com/coffius/koffio-examples/tree/master/src/main/scala/io/koff/examples/variance&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;java-problem&#34;&gt;Java problem&lt;/h2&gt;
+
+&lt;p&gt;In Java all generic types are covariant and because of it we can write this non-working code:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/coffius/koffio-examples/blob/master/src/main/scala/io/koff/examples/variance/CovarianceProblem.java&#34;&gt;CovarianceProblem.java&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;/**
+ * Example of a problem with covariant types in Java
+ */
+public class CovarianceProblem {
+    public static void main(String[] args) {
+        String[] strArray = { &amp;quot;str#1&amp;quot;, &amp;quot;str#2&amp;quot; };
+        Object[] objArray = strArray;
+        objArray[0] = 1; //throws ArrayStoreException: java.lang.Integer
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;why-do-we-need-it&#34;&gt;Why do we need it?&lt;/h2&gt;
+
+&lt;p&gt;In order to deal with the problem above we need type variance to define and distinguish different relations between generic classes which specific types have inherited relationships between them.&lt;/p&gt;
+
+&lt;p&gt;There are three possible options:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Invariant&lt;/li&gt;
+&lt;li&gt;Covariant&lt;/li&gt;
+&lt;li&gt;Contravariant&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;examples&#34;&gt;Examples&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s use this simple class tree for examples(in &lt;a href=&#34;https://github.com/coffius/koffio-examples/blob/master/src/main/scala/io/koff/examples/variance/Variance.scala&#34;&gt;Variance.scala&lt;/a&gt;):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;class GrandParent
+class Parent extends GrandParent
+class Child1 extends Parent
+class Child2 extends Parent
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;invariant&#34;&gt;Invariant&lt;/h3&gt;
+
+&lt;p&gt;Invariant means that there is no relation between &lt;code&gt;InVariant[Parent]&lt;/code&gt; and &lt;code&gt;InVariant[Child1]&lt;/code&gt; or &lt;code&gt;InVariant[Child2]&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;val parentInvariant = new InVariant[Parent]
+// Next lines cannot be compiled because of invariant
+//val child1Invariant: InVariant[Child1] = parentInvariant
+//val child2Invariant: InVariant[Child2] = parentInvariant
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;covariant&#34;&gt;Covariant&lt;/h3&gt;
+
+&lt;p&gt;Covariant means that &lt;code&gt;CoVariant[Child1]&lt;/code&gt; and &lt;code&gt;CoVariant[Child2]&lt;/code&gt; are subclasses of &lt;code&gt;CoVariant[Parent]&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;val child1Covariant = new CoVariant[Child1]
+val child2Covariant = new CoVariant[Child2]
+//We can use values of CoVariant[Child1|Child2] as CoVariant[Parent]
+val parentCovariant1: CoVariant[Parent] = child1Covariant
+val parentCovariant2: CoVariant[Parent] = child2Covariant
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Example of correct usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;//we can use a covariant type as
+class Producer[+A](val value: A) {          // a type for immutable values
+  private[this] var variable: A = ???       // a type for private mutable variables
+  def simpleProduce(): A = ???              // a type for method outputs
+  def complexProduce[B &amp;gt;: A](b: B): A = ??? // a lower type bound
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Example of incorrect usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;//code below cannot be compiled
+//we can not use a covariant type as
+class Producer[+A](var variable: A) { // a type for public mutable variables
+  def consume(a: A): Unit = ???       // a type for method parameters
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;contravariant&#34;&gt;Contravariant&lt;/h3&gt;
+
+&lt;p&gt;Contravariant means that &lt;code&gt;ContraVariant[Parent]&lt;/code&gt; is a subclass of &lt;code&gt;ContraVariant[Child2]&lt;/code&gt; and &lt;code&gt;ContraVariant[Child2]&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;val parentContravariant = new ContraVariant[Parent]
+//Looks awkward but it is totally legit :)
+val child1Contravariant: ContraVariant[Child1] = parentContravariant
+val child2Contravariant: ContraVariant[Child2] = parentContravariant
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Example of correct usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;//we can use a contravariant type as
+class Consumer[-A]() {
+  private[this] var variable: A = ???   // a type for private mutable variables
+  def consume(a: A): Unit = ???         // a type for method parameters
+  def complex[B &amp;lt;: A](b: B): Unit = ??? // a upper type bound
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Example of incorrect usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;//code below cannot be compiled
+//we can not use a contravariant type as
+class Producer[-A](val value: A, var variable: A) { // a type for public immutable values and publis mutable variables
+  def produce(): A = ???                            // a type for for method outputs
+  def complexProduce[B &amp;gt;: A](b: B): A = ???         // a lower type bound
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;how-to-use-contravariance&#34;&gt;How to use Contravariance&lt;/h3&gt;
+
+&lt;p&gt;Code for this part is &lt;a href=&#34;https://github.com/coffius/koffio-examples/blob/master/src/main/scala/io/koff/examples/variance/example/HandlingEventsExample.scala&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Contravariance probably is a bit counterintuitive thing but the next example should help to understand when it is possible to use it.
+Let&amp;rsquo;s imagine that we want to implement our own type-safe event system with a handler register and event handlers.
+The classic thing but with one requirement - we want to be able to handle events in a generalised way. More details below.&lt;/p&gt;
+
+&lt;p&gt;So we have &lt;code&gt;Event&lt;/code&gt; trait as a base trait for all possible events, &lt;code&gt;UpdateEvent&lt;/code&gt; - for events about update operations and several more specific traits and classes(in &lt;code&gt;Event.scala&lt;/code&gt;)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;/**
+  * The very basic trait to describe an event
+  */
+trait Event
+/**
+  * The marker trait for events for data updates
+  */
+trait UpdateEvent extends Event{
+  /** Id of the updated entity */
+  def entityId: UUID
+}
+/**
+  * The marker trait for events about wares
+  */
+trait WareEvent extends Event {
+  /**Id the ware which is a reason of the event */
+  def wareId: UUID
+}
+/**
+  * The marker trait for events about users
+  */
+trait UserEvent extends Event {
+  /** Email of the user who is a reason of the event */
+  def email: String
+}
+/*
+ * Specific events
+ */
+case class ChangeWarePriceEvent(wareId: UUID,
+                                oldPrice: BigDecimal,
+                                newPrice: BigDecimal) extends WareEvent with UpdateEvent {
+  override def entityId: UUID = wareId
+}
+
+case class ChangeUserPhoneEvent(userId: UUID, userEmail: String, oldPhone: String, newPhone: String) 
+    extends UserEvent 
+    with UpdateEvent 
+{
+  override def email: String = userEmail
+  /* Let&#39;s say that a user email is an unique identifier of a user */
+  override def entityId: UUID = userId
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next thing is handling events. And as it was said before we want to handle events in a generalised way which means next:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;We have a generalised event handler &lt;code&gt;ConsoleLogEventHandler&lt;/code&gt; - can handle all possible types of events&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;/**
+  * Logs all events to stdout using .toString
+  */
+class ConsoleLogEventHandler extends EventHandler[Event]{
+  override def handle(event: Event): Unit = {
+    println(s&amp;quot;logger - event has been received: [$event]&amp;quot;)
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;We have specialised handlers like &lt;code&gt;DiscountEventHandler&lt;/code&gt; or &lt;code&gt;CheckNumberEventHandler&lt;/code&gt; - can handle just one type &lt;code&gt;ChangeWarePriceEvent&lt;/code&gt; or &lt;code&gt;ChangeUserPhoneEvent&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;/**
+  * Notifies users about discounts (the new price of a ware is less than the old one)
+  */
+class DiscountEventHandler extends EventHandler[ChangeWarePriceEvent]{
+  override def handle(event: ChangeWarePriceEvent): Unit = {
+    if(event.oldPrice &amp;gt; event.newPrice) {
+      val discount = 1 - event.newPrice / event.oldPrice
+      println(s&amp;quot;there is a discount[${discount * 100} %] for the ware[id: ${event.wareId}]&amp;quot;)
+    }
+  }
+}
+/**
+  * Sends SMS to the new phone number if a user change it.
+  */
+class CheckNumberEventHandler extends EventHandler[ChangeUserPhoneEvent]{
+  override def handle(event: ChangeUserPhoneEvent): Unit = {
+    println(s&amp;quot;SMS has been sent to the phone:${event.newPhone}&amp;quot;)
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;We want to add several handlers for an event type and make it type-safely:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;// ok
+handlerRegister.addHandler(classOf[ChangeUserPhoneEvent], ConsoleLogEventHandler)
+handlerRegister.addHandler(classOf[ChangeWarePriceEvent], ConsoleLogEventHandler)
+handlerRegister.addHandler(classOf[ChangeUserPhoneEvent], CheckNumberEventHandler)
+handlerRegister.addHandler(classOf[ChangeWarePriceEvent], DiscountEventHandler)
+
+// generates compilation errors
+handlerRegister.addHandler(classOf[ChangeUserPhoneEvent], DiscountEventHandler)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In order to make it possible we should use a contravariant event handler:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;/**
+  * Basic trait for an event handler
+  */
+trait EventHandler[-T &amp;lt;: Event] {
+  /**
+    * Handle a particular event
+    * @param event an event to handle
+    */
+  def handle(event: T): Unit
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And define &lt;code&gt;addHandler(...)&lt;/code&gt; as:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;/**
+  * Adds a handler for a particular type of events
+  * @param eventType the class of events handled by the eventHandler
+  * @param eventHandler the event handler which should handle all events of the specific type(eventType)
+  * @tparam E type of the event we want to handle
+  * @tparam T intermediate type.
+  *           Means that we want to handle an event of type `E` as `T`.
+  *           And `T` should be between Event and `E` in the chain of inheritance.
+  *           If we have such types: `Event &amp;lt;- SubEventType &amp;lt;- SubSubEventType &amp;lt;- ... &amp;lt;- E`
+  *           then `T` can be one of these types
+  * @tparam H type of the handler which should handle all events of type `E`
+  */
+def addHandler[E &amp;lt;: Event, T &amp;gt;: E &amp;lt;: Event, H &amp;lt;: EventHandler[T]](eventType: Class[E], eventHandler: H): Unit
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is possible only if we use contravariance for EventHandler. If we define it like invariant(&lt;code&gt;EventHandler[T &amp;lt;: Event]&lt;/code&gt;) and use generalised handlers then we will have errors like that:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;Error:(12, 19) inferred type arguments [ChangeUserPhoneEvent, ChangeUserPhoneEvent, ConsoleLogEventHandler.type] do not conform to method addHandler&#39;s type parameter bounds [E &amp;lt;: Event, T &amp;gt;: E &amp;lt;: Event, H &amp;lt;: EventHandler[T]]
+  handlerRegister.addHandler(classOf[ChangeUserPhoneEvent], ConsoleLogEventHandler)
+  
+Error:(12, 37) type mismatch;
+ found   : Class[ChangeUserPhoneEvent](classOf[ChangeUserPhoneEvent])
+ required: Class[E]
+  handlerRegister.addHandler(classOf[ChangeUserPhoneEvent], ConsoleLogEventHandler)
+  
+Error:(12, 61) type mismatch;
+ found   : ConsoleLogEventHandler.type
+ required: H
+  handlerRegister.addHandler(classOf[ChangeUserPhoneEvent], ConsoleLogEventHandler)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And of course it is also impossible to use covariance in this case.&lt;/p&gt;
+
+&lt;h2 id=&#34;links&#34;&gt;Links&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://docs.scala-lang.org/tutorials/tour/variances.html&#34;&gt;Official tutorial for variance&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/coffius/koffio-examples/tree/master/src/main/scala/io/koff/examples/variance&#34;&gt;Examples for this article&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://twitter.github.io/scala_school/type-basics.html#variance&#34;&gt;About variance in Scala school from Twitter&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Pagination and Streams</title>
