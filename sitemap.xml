@@ -3,8 +3,13 @@
   
   <url>
     <loc>http://coffius.github.io/</loc>
-    <lastmod>2016-11-26T22:51:18+03:00</lastmod>
+    <lastmod>2016-12-04T18:00:00+03:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://coffius.github.io/posts/hll-in-cassandra</loc>
+    <lastmod>2016-12-04T18:00:00+03:00</lastmod>
   </url>
   
   <url>

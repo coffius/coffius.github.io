@@ -7,8 +7,220 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-EN</language>
     <copyright>(c) 2015</copyright>
-    <lastBuildDate>Sat, 26 Nov 2016 22:51:18 +0300</lastBuildDate>
+    <lastBuildDate>Sun, 04 Dec 2016 18:00:00 +0300</lastBuildDate>
     <atom:link href="http://coffius.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>HLL counters as Cassandra user defined aggregates</title>
+      <link>http://coffius.github.io/posts/hll-in-cassandra</link>
+      <pubDate>Sun, 04 Dec 2016 18:00:00 +0300</pubDate>
+      
+      <guid>http://coffius.github.io/posts/hll-in-cassandra</guid>
+      <description>
+
+&lt;p&gt;In &lt;a href=&#34;../comparison-of-hll&#34;&gt;the previous article&lt;/a&gt; we discussed usage of hll countes for finding the number of unique values in a collection. But in this article we will see how to use them in Cassandra db internally in order to provide such functionality using user defined functions(UDF) and aggregates(UDA).&lt;/p&gt;
+
+&lt;h2 id=&#34;important&#34;&gt;Important&lt;/h2&gt;
+
+&lt;p&gt;This approach can work &lt;strong&gt;only with Cassandra 2.2.x.&lt;/strong&gt; In Cassandra 3.x there are more restrictions for UDF so it is impossible to use external libraries inside user functions. In the future may be there will be the way to turn off the restrictions(see &lt;a href=&#34;https://issues.apache.org/jira/browse/CASSANDRA-9892&#34;&gt;CASSANDRA-9892&lt;/a&gt;) but now it is impossible as well.&lt;/p&gt;
+
+&lt;h2 id=&#34;software&#34;&gt;Software&lt;/h2&gt;
+
+&lt;p&gt;For this example I use:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;docker&lt;/li&gt;
+&lt;li&gt;docker-machine&lt;/li&gt;
+&lt;li&gt;docker-compose&lt;/li&gt;
+&lt;li&gt;cassandra:2.2.8&lt;/li&gt;
+&lt;li&gt;hll-library - &lt;a href=&#34;https://github.com/prasanthj/hyperloglog&#34;&gt;hyperloglog&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;sbt&lt;/li&gt;
+&lt;li&gt;Datastax DevCenter - for testing CQL queries. You can use &lt;code&gt;cqlsh&lt;/code&gt; if it is more convenient for you&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;steps&#34;&gt;Steps&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Install the necessary software&lt;/li&gt;
+&lt;li&gt;Check out code of the example from here: &lt;a href=&#34;https://github.com/coffius/koffio-uda-hll&#34;&gt;https://github.com/coffius/koffio-uda-hll&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sbt assembly&lt;/code&gt; - build the jar file the hll&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;docker build&lt;/code&gt; - build a docker image for Cassandra with our library inside&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;docker-compose up&lt;/code&gt; - start the created Cassandra container inside docker&lt;/li&gt;
+&lt;li&gt;Test hll counters - there are &lt;code&gt;hll_uda.cql&lt;/code&gt; and &lt;code&gt;test_data.cql&lt;/code&gt; with example queries for Cassandra&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;More information about how exactly it works you can find below.&lt;/p&gt;
+
+&lt;h2 id=&#34;simple-example-of-uda&#34;&gt;Simple example of UDA&lt;/h2&gt;
+
+&lt;p&gt;At first let&amp;rsquo;s take a look at how to define a very simple custom aggregate function:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;-- A simple example of creating functions for a user defined aggregate
+CREATE OR REPLACE FUNCTION udf.avg_state ( state tuple&amp;lt;int,bigint&amp;gt;, val int ) CALLED ON NULL INPUT RETURNS tuple&amp;lt;int,bigint&amp;gt; LANGUAGE java AS
+  &#39;if (val !=null) { state.setInt(0, state.getInt(0)+1); state.setLong(1, state.getLong(1)+val.intValue()); } return state;&#39;;
+
+CREATE OR REPLACE FUNCTION udf.avg_final ( state tuple&amp;lt;int,bigint&amp;gt; ) CALLED ON NULL INPUT RETURNS double LANGUAGE java AS
+  &#39;double r = 0; if (state.getInt(0) == 0) return null; r = state.getLong(1); r/= state.getInt(0); return Double.valueOf(r);&#39;;
+
+CREATE AGGREGATE IF NOT EXISTS udf.avg ( int )
+SFUNC avg_state STYPE tuple&amp;lt;int,bigint&amp;gt; FINALFUNC avg_final INITCOND (0,0);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For one aggregate we need two functions - a state function and a final function. The first accumulates the state and the second makes final calculation using the state from the first one.
+More information about it you can find &lt;a href=&#34;https://docs.datastax.com/en/cql/3.3/cql/cql_using/useCreateUDA.html&#34;&gt;here in official docs&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;prepare-hll-for-cassandra&#34;&gt;Prepare HLL for Cassandra&lt;/h2&gt;
+
+&lt;p&gt;The first thing that we have to do is to implement two functions that we can use in Cassandra aggregate. We cannot implement necessary logic directly in CQL-query like above because it would be too complex. For example, it is impossible to import classes right in CQL-code, so we need to use full names for classes like &lt;code&gt;io.koff.full.path.to.Clazz&lt;/code&gt;.
+So we do it using Java and then add the result jar into the Cassandra classpath in the docker container.&lt;/p&gt;
+
+&lt;p&gt;Example is here: &lt;a href=&#34;https://github.com/coffius/koffio-uda-hll/blob/master/src/main/java/io/koff/udf/HLL.java&#34;&gt;HLL.java&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;This is our state function:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;/**
+ * State function. Aggregates values to hll counter
+ * @param state byte buffer with serialized HLL counter
+ * @param value the value to add to counter
+ * @return hll counter with the new value
+ */
+public final static ByteBuffer stateFunc(ByteBuffer state, int value) {
+    int capacity = state.capacity();
+    // if it is the first call then state buffer should be empty
+    if(capacity == 0) {
+        HyperLogLog.HyperLogLogBuilder builder = new HyperLogLog.HyperLogLogBuilder();
+        HyperLogLog hll = builder.build();
+        hll.addInt(value);
+        return serialize(hll);
+    } else {
+        // if there is data in state buffer then we need to use it
+        HyperLogLog hll = deserialize(state);
+        hll.addInt(value);
+        return serialize(hll);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And this is our final function:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public final static long finalFunc(ByteBuffer state) {
+    HyperLogLog hll = deserialize(state);
+    return hll.count();
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Important note - both functions should depend only on their parameters(see &lt;a href=&#34;https://en.wikipedia.org/wiki/Pure_function&#34;&gt;pure functions&lt;/a&gt;)&lt;/p&gt;
+
+&lt;h2 id=&#34;deploy-code&#34;&gt;Deploy code&lt;/h2&gt;
+
+&lt;p&gt;Next thing we should do is to add our code to Cassandra and enable UDF in Cassandra cofnig in order to make possible to use aggregates.&lt;/p&gt;
+
+&lt;p&gt;At first we build a fat jar(jar with all dependencies) using &lt;a href=&#34;https://github.com/sbt/sbt-assembly&#34;&gt;sbt-assembly&lt;/a&gt; plugin.&lt;/p&gt;
+
+&lt;p&gt;in &lt;a href=&#34;https://github.com/coffius/koffio-uda-hll/blob/master/build.sbt&#34;&gt;build.sbt&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;assemblyJarName in assembly := &amp;quot;hll.jar&amp;quot;
+// we do not need test classes in the result jar
+test in assembly := {}
+// define an output name of the result jar in the root folder. A bit easier for docker to find it there
+target in assembly := new java.io.File(&amp;quot;.&amp;quot;)
+//we do not need the scala library in the result jar
+assemblyOption in assembly := (assemblyOption in assembly).value.copy(includeScala = false)
+// compile java code with compatibility with JDK 7 which is used for Cassandra inside Docker
+javacOptions ++= Seq(&amp;quot;-source&amp;quot;, &amp;quot;1.7&amp;quot;, &amp;quot;-target&amp;quot;, &amp;quot;1.7&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;in &lt;a href=&#34;https://github.com/coffius/koffio-uda-hll/blob/master/project/assembly.sbt&#34;&gt;project/assembly.sbt&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;// use sbt-assembly for building a fat jar
+addSbtPlugin(&amp;quot;com.eed3si9n&amp;quot; % &amp;quot;sbt-assembly&amp;quot; % &amp;quot;0.14.3&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then we add the jar file to the docker container along with &lt;a href=&#34;https://github.com/coffius/koffio-uda-hll/blob/master/cassandra.yaml#L879&#34;&gt;the patched Cassandra config&lt;/a&gt; where the flag &lt;code&gt;enable_user_defined_functions&lt;/code&gt; is set to true:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/coffius/koffio-uda-hll/blob/master/Dockerfile&#34;&gt;Dockerfile&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;FROM cassandra:2.2.8
+
+# copy the cassandra config with the permission for user defined functions
+COPY ./cassandra.yaml /etc/cassandra/cassandra.yaml
+
+# copy the jar with out implementation of hll functions
+COPY ./hll.jar /usr/share/cassandra/lib/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;create-uda-for-hll&#34;&gt;Create UDA for HLL&lt;/h2&gt;
+
+&lt;p&gt;The last step is to create UDA which will use our functions:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/coffius/koffio-uda-hll/blob/master/hll_uda.cql&#34;&gt;hll_uda.cql&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;-- Keyspace definition
+CREATE KEYSPACE IF NOT EXISTS udf
+WITH replication = {
+    &#39;class&#39; : &#39;SimpleStrategy&#39;,
+    &#39;replication_factor&#39; : 1
+};
+
+-- Functions for hll counters
+CREATE OR REPLACE FUNCTION udf.hll_state ( state blob, val int ) CALLED ON NULL INPUT RETURNS blob LANGUAGE java AS
+  &#39;return io.koff.udf.HLL.stateFunc(state, val);&#39;;
+
+CREATE OR REPLACE FUNCTION udf.hll_final ( state blob ) CALLED ON NULL INPUT RETURNS bigint LANGUAGE java AS
+  &#39;return io.koff.udf.HLL.finalFunc(state);&#39;;
+
+-- we need an empty ByteBuffer at the first step so we make it from the empty string
+CREATE AGGREGATE IF NOT EXISTS udf.hll ( int ) SFUNC hll_state STYPE blob FINALFUNC hll_final INITCOND textAsBlob(&#39;&#39;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We need to use full names for our functions.&lt;/p&gt;
+
+&lt;h2 id=&#34;test&#34;&gt;Test&lt;/h2&gt;
+
+&lt;p&gt;Now we are ready to test it :)&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s make a simple table where we will store events about user visits for different wares and add some data in it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;CREATE TABLE IF NOT EXISTS udf.ware_hits (
+    ware_id int,
+    date_time timestamp,
+    visitor_id int,
+    PRIMARY KEY (ware_id, date_time)
+);
+
+INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 1);
+INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 2);
+INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 3);
+INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 1);
+INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 2);
+INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 3);
+INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 4);
+INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 5);
+INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 6);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So now there are 9 events for ware[id: 1] with 6 unique users. We can get this numbers using these queries:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;SELECT count(visitor_id) as total_count FROM udf.ware_hits WHERE ware_id = 1; --total_count = 9
+SELECT udf.hll(visitor_id) as unique_users FROM udf.ware_hits WHERE ware_id = 1; --out aggregate returns unique_users = 6
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;afterword&#34;&gt;Afterword&lt;/h2&gt;
+
+&lt;p&gt;It was shown how to implement custom aggregates for Cassandra by the example of hll counters. But before use this idea you also need to understand how aggregates work in Cassandra in the distributed environment.
+This information you can find in the articles &lt;a href=&#34;http://www.doanduyhai.com/blog/?p=1876&#34; title=&#34;Cassandra UDF/UDA Technical Deep Dive&#34;&gt;here&lt;/a&gt; and &lt;a href=&#34;http://www.doanduyhai.com/blog/?p=2015&#34; title=&#34;Cassandra User Defined Aggregates in action: best practices and caveats&#34;&gt;here&lt;/a&gt;. Maybe Spark will be better choice in your case.&lt;/p&gt;
+
+&lt;h2 id=&#34;links&#34;&gt;Links&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/coffius/koffio-uda-hll&#34;&gt;Source code for this article&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/prasanthj/hyperloglog&#34;&gt;prasanthj/hyperloglog&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../comparison-of-hll&#34;&gt;Comparison of HLL implementations&lt;/a&gt; - if you are interested to know about other HLL implementations&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.doanduyhai.com/blog/?p=1876&#34;&gt;Cassandra UDF/UDA Technical Deep Dive&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.doanduyhai.com/blog/?p=2015&#34;&gt;Cassandra User Defined Aggregates in action: best practices and caveats&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Tips about variance in scala</title>

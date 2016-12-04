@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>HLL counters as Cassandra user defined aggregates  &middot; KOFF.io</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+<link rel="author" href="http://plus.google.com/+102671541320733671208">
+
+
+<meta property="og:title" content="HLL counters as Cassandra user defined aggregates  &middot; KOFF.io ">
+<meta property="og:site_name" content="KOFF.io"/>
+<meta property="og:url" content="http://coffius.github.io/posts/hll-in-cassandra" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="2016-12-04T18:00:00&#43;03:00" />
+<meta property="og:article:modified_time" content="2016-12-04T18:00:00&#43;03:00" />
+
+  
+
+  
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@coffius" />
+<meta name="twitter:creator" content="@coffius" />
+<meta name="twitter:title" content="HLL counters as Cassandra user defined aggregates" />
+<meta name="twitter:description" content="" />
+<meta name="twitter:url" content="http://coffius.github.io/posts/hll-in-cassandra" />
+<meta name="twitter:domain" content="http://coffius.github.io/">
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "HLL counters as Cassandra user defined aggregates",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+102671541320733671208?rel=author"
+    },
+    "datePublished": "2016-12-04",
+    "description": "",
+    "wordCount":  1204 
+  }
+</script>
+
+
+
+<link rel="canonical" href="http://coffius.github.io/posts/hll-in-cassandra" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://coffius.github.io/touch-icon-144-precomposed.png">
+<link href="http://coffius.github.io/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.14" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="http://coffius.github.io/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://coffius.github.io/css/style.css">
+<link rel="stylesheet" href="http://coffius.github.io/css/highlight/default.css">
+
+  
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="http://coffius.github.io/">
+  KOFF.io
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  where scala is beloved
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="http://coffius.github.io/">Home</a>
+
+
+  
+<a href="http://coffius.github.io/about">About</a>
+
+<a href="http://coffius.github.io/post" title="Show list of posts">Posts</a>
+
+<a href="http://coffius.github.io/tags" title="Show list of tags">Tags</a>
+
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+
+
+<a id="contact-link-github" class="contact_link" href="https://github.com/coffius">
+  <span class="fa fa-github-square"></span><span>github</span></a>
+
+
+
+
+
+
+
+<a id="contact-link-googleplus" class="contact_link" href="https://plus.google.com/u/0/+102671541320733671208">
+  <span class="fa fa-google-plus-square"></span><span>google+</span></a>
+
+
+
+
+
+<a id="contact-link-twitter" class="contact_link" href="https://twitter.com/coffius">
+  <span class="fa fa-twitter-square"></span><span>twitter</span></a>
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>HLL counters as Cassandra user defined aggregates
+</h1>
+
+  <div class="metas">
+<time datetime="2016-12-04">4 Dec, 2016</time>
+
+
+  
+  &middot; Read in about 6 min
+  &middot; (1204 Words)
+  <br>
+  
+
+
+</div>
+
+</header>
+
+  <div class="container content">
+  
+
+<p>In <a href="../comparison-of-hll">the previous article</a> we discussed usage of hll countes for finding the number of unique values in a collection. But in this article we will see how to use them in Cassandra db internally in order to provide such functionality using user defined functions(UDF) and aggregates(UDA).</p>
+
+<h2 id="important">Important</h2>
+
+<p>This approach can work <strong>only with Cassandra 2.2.x.</strong> In Cassandra 3.x there are more restrictions for UDF so it is impossible to use external libraries inside user functions. In the future may be there will be the way to turn off the restrictions(see <a href="https://issues.apache.org/jira/browse/CASSANDRA-9892">CASSANDRA-9892</a>) but now it is impossible as well.</p>
+
+<h2 id="software">Software</h2>
+
+<p>For this example I use:</p>
+
+<ul>
+<li>docker</li>
+<li>docker-machine</li>
+<li>docker-compose</li>
+<li>cassandra:2.2.8</li>
+<li>hll-library - <a href="https://github.com/prasanthj/hyperloglog">hyperloglog</a></li>
+<li>sbt</li>
+<li>Datastax DevCenter - for testing CQL queries. You can use <code>cqlsh</code> if it is more convenient for you</li>
+</ul>
+
+<h2 id="steps">Steps</h2>
+
+<ul>
+<li>Install the necessary software</li>
+<li>Check out code of the example from here: <a href="https://github.com/coffius/koffio-uda-hll">https://github.com/coffius/koffio-uda-hll</a></li>
+<li><code>sbt assembly</code> - build the jar file the hll</li>
+<li><code>docker build</code> - build a docker image for Cassandra with our library inside</li>
+<li><code>docker-compose up</code> - start the created Cassandra container inside docker</li>
+<li>Test hll counters - there are <code>hll_uda.cql</code> and <code>test_data.cql</code> with example queries for Cassandra</li>
+</ul>
+
+<p>More information about how exactly it works you can find below.</p>
+
+<h2 id="simple-example-of-uda">Simple example of UDA</h2>
+
+<p>At first let&rsquo;s take a look at how to define a very simple custom aggregate function:</p>
+
+<pre><code class="language-html">-- A simple example of creating functions for a user defined aggregate
+CREATE OR REPLACE FUNCTION udf.avg_state ( state tuple&lt;int,bigint&gt;, val int ) CALLED ON NULL INPUT RETURNS tuple&lt;int,bigint&gt; LANGUAGE java AS
+  'if (val !=null) { state.setInt(0, state.getInt(0)+1); state.setLong(1, state.getLong(1)+val.intValue()); } return state;';
+
+CREATE OR REPLACE FUNCTION udf.avg_final ( state tuple&lt;int,bigint&gt; ) CALLED ON NULL INPUT RETURNS double LANGUAGE java AS
+  'double r = 0; if (state.getInt(0) == 0) return null; r = state.getLong(1); r/= state.getInt(0); return Double.valueOf(r);';
+
+CREATE AGGREGATE IF NOT EXISTS udf.avg ( int )
+SFUNC avg_state STYPE tuple&lt;int,bigint&gt; FINALFUNC avg_final INITCOND (0,0);
+</code></pre>
+
+<p>For one aggregate we need two functions - a state function and a final function. The first accumulates the state and the second makes final calculation using the state from the first one.
+More information about it you can find <a href="https://docs.datastax.com/en/cql/3.3/cql/cql_using/useCreateUDA.html">here in official docs</a>.</p>
+
+<h2 id="prepare-hll-for-cassandra">Prepare HLL for Cassandra</h2>
+
+<p>The first thing that we have to do is to implement two functions that we can use in Cassandra aggregate. We cannot implement necessary logic directly in CQL-query like above because it would be too complex. For example, it is impossible to import classes right in CQL-code, so we need to use full names for classes like <code>io.koff.full.path.to.Clazz</code>.
+So we do it using Java and then add the result jar into the Cassandra classpath in the docker container.</p>
+
+<p>Example is here: <a href="https://github.com/coffius/koffio-uda-hll/blob/master/src/main/java/io/koff/udf/HLL.java">HLL.java</a></p>
+
+<p>This is our state function:</p>
+
+<pre><code class="language-java">/**
+ * State function. Aggregates values to hll counter
+ * @param state byte buffer with serialized HLL counter
+ * @param value the value to add to counter
+ * @return hll counter with the new value
+ */
+public final static ByteBuffer stateFunc(ByteBuffer state, int value) {
+    int capacity = state.capacity();
+    // if it is the first call then state buffer should be empty
+    if(capacity == 0) {
+        HyperLogLog.HyperLogLogBuilder builder = new HyperLogLog.HyperLogLogBuilder();
+        HyperLogLog hll = builder.build();
+        hll.addInt(value);
+        return serialize(hll);
+    } else {
+        // if there is data in state buffer then we need to use it
+        HyperLogLog hll = deserialize(state);
+        hll.addInt(value);
+        return serialize(hll);
+    }
+}
+</code></pre>
+
+<p>And this is our final function:</p>
+
+<pre><code class="language-java">public final static long finalFunc(ByteBuffer state) {
+    HyperLogLog hll = deserialize(state);
+    return hll.count();
+}
+</code></pre>
+
+<p>Important note - both functions should depend only on their parameters(see <a href="https://en.wikipedia.org/wiki/Pure_function">pure functions</a>)</p>
+
+<h2 id="deploy-code">Deploy code</h2>
+
+<p>Next thing we should do is to add our code to Cassandra and enable UDF in Cassandra cofnig in order to make possible to use aggregates.</p>
+
+<p>At first we build a fat jar(jar with all dependencies) using <a href="https://github.com/sbt/sbt-assembly">sbt-assembly</a> plugin.</p>
+
+<p>in <a href="https://github.com/coffius/koffio-uda-hll/blob/master/build.sbt">build.sbt</a>:</p>
+
+<pre><code class="language-scala">assemblyJarName in assembly := &quot;hll.jar&quot;
+// we do not need test classes in the result jar
+test in assembly := {}
+// define an output name of the result jar in the root folder. A bit easier for docker to find it there
+target in assembly := new java.io.File(&quot;.&quot;)
+//we do not need the scala library in the result jar
+assemblyOption in assembly := (assemblyOption in assembly).value.copy(includeScala = false)
+// compile java code with compatibility with JDK 7 which is used for Cassandra inside Docker
+javacOptions ++= Seq(&quot;-source&quot;, &quot;1.7&quot;, &quot;-target&quot;, &quot;1.7&quot;)
+</code></pre>
+
+<p>in <a href="https://github.com/coffius/koffio-uda-hll/blob/master/project/assembly.sbt">project/assembly.sbt</a>:</p>
+
+<pre><code class="language-scala">// use sbt-assembly for building a fat jar
+addSbtPlugin(&quot;com.eed3si9n&quot; % &quot;sbt-assembly&quot; % &quot;0.14.3&quot;)
+</code></pre>
+
+<p>Then we add the jar file to the docker container along with <a href="https://github.com/coffius/koffio-uda-hll/blob/master/cassandra.yaml#L879">the patched Cassandra config</a> where the flag <code>enable_user_defined_functions</code> is set to true:</p>
+
+<p><a href="https://github.com/coffius/koffio-uda-hll/blob/master/Dockerfile">Dockerfile</a></p>
+
+<pre><code class="language-html">FROM cassandra:2.2.8
+
+# copy the cassandra config with the permission for user defined functions
+COPY ./cassandra.yaml /etc/cassandra/cassandra.yaml
+
+# copy the jar with out implementation of hll functions
+COPY ./hll.jar /usr/share/cassandra/lib/
+</code></pre>
+
+<h2 id="create-uda-for-hll">Create UDA for HLL</h2>
+
+<p>The last step is to create UDA which will use our functions:</p>
+
+<p><a href="https://github.com/coffius/koffio-uda-hll/blob/master/hll_uda.cql">hll_uda.cql</a></p>
+
+<pre><code class="language-html">-- Keyspace definition
+CREATE KEYSPACE IF NOT EXISTS udf
+WITH replication = {
+    'class' : 'SimpleStrategy',
+    'replication_factor' : 1
+};
+
+-- Functions for hll counters
+CREATE OR REPLACE FUNCTION udf.hll_state ( state blob, val int ) CALLED ON NULL INPUT RETURNS blob LANGUAGE java AS
+  'return io.koff.udf.HLL.stateFunc(state, val);';
+
+CREATE OR REPLACE FUNCTION udf.hll_final ( state blob ) CALLED ON NULL INPUT RETURNS bigint LANGUAGE java AS
+  'return io.koff.udf.HLL.finalFunc(state);';
+
+-- we need an empty ByteBuffer at the first step so we make it from the empty string
+CREATE AGGREGATE IF NOT EXISTS udf.hll ( int ) SFUNC hll_state STYPE blob FINALFUNC hll_final INITCOND textAsBlob('');
+</code></pre>
+
+<p>We need to use full names for our functions.</p>
+
+<h2 id="test">Test</h2>
+
+<p>Now we are ready to test it :)</p>
+
+<p>Let&rsquo;s make a simple table where we will store events about user visits for different wares and add some data in it:</p>
+
+<pre><code class="language-html">CREATE TABLE IF NOT EXISTS udf.ware_hits (
+    ware_id int,
+    date_time timestamp,
+    visitor_id int,
+    PRIMARY KEY (ware_id, date_time)
+);
+
+INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 1);
+INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 2);
+INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 3);
+INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 1);
+INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 2);
+INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 3);
+INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 4);
+INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 5);
+INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 6);
+</code></pre>
+
+<p>So now there are 9 events for ware[id: 1] with 6 unique users. We can get this numbers using these queries:</p>
+
+<pre><code class="language-html">SELECT count(visitor_id) as total_count FROM udf.ware_hits WHERE ware_id = 1; --total_count = 9
+SELECT udf.hll(visitor_id) as unique_users FROM udf.ware_hits WHERE ware_id = 1; --out aggregate returns unique_users = 6
+</code></pre>
+
+<h2 id="afterword">Afterword</h2>
+
+<p>It was shown how to implement custom aggregates for Cassandra by the example of hll counters. But before use this idea you also need to understand how aggregates work in Cassandra in the distributed environment.
+This information you can find in the articles <a href="http://www.doanduyhai.com/blog/?p=1876" title="Cassandra UDF/UDA Technical Deep Dive">here</a> and <a href="http://www.doanduyhai.com/blog/?p=2015" title="Cassandra User Defined Aggregates in action: best practices and caveats">here</a>. Maybe Spark will be better choice in your case.</p>
+
+<h2 id="links">Links</h2>
+
+<ul>
+<li><a href="https://github.com/coffius/koffio-uda-hll">Source code for this article</a></li>
+<li><a href="https://github.com/prasanthj/hyperloglog">prasanthj/hyperloglog</a></li>
+<li><a href="../comparison-of-hll">Comparison of HLL implementations</a> - if you are interested to know about other HLL implementations</li>
+<li><a href="http://www.doanduyhai.com/blog/?p=1876">Cassandra UDF/UDA Technical Deep Dive</a></li>
+<li><a href="http://www.doanduyhai.com/blog/?p=2015">Cassandra User Defined Aggregates in action: best practices and caveats</a></li>
+</ul>
+
+</div>
+
+
+  <footer class="container">
+  <div class="container navigation no-print">
+  <h2>Navigation</h2>
+  
+  
+
+    
+    <a class="prev" href="http://coffius.github.io/posts/variance-tip-notes" title="Tips about variance in scala">
+      Previous
+    </a>
+    
+
+    
+
+  
+
+
+</div>
+
+  <div class="container comments">
+  <h2>Comments</h2>
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//koff-io.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div>
+
+</footer>
+
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+<a href="http://coffius.github.io/license">license</a>
+
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+  code with <i class='fa fa-heart'></i>
+
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  &copy; 2015
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//koff-io.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="http://coffius.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+<script>
+  var _gaq=[['_setAccount','102671541320733671208'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+
+    
+  </body>
+</html>
+
