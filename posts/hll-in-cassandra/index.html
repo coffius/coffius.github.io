@@ -21,7 +21,7 @@
 
 <meta property="og:title" content="HLL counters as Cassandra user defined aggregates  &middot; KOFF.io ">
 <meta property="og:site_name" content="KOFF.io"/>
-<meta property="og:url" content="http://coffius.github.io/posts/hll-in-cassandra" />
+<meta property="og:url" content="http://coffius.github.io/posts/hll-in-cassandra/" />
 <meta property="og:locale" content="en-EN">
 
 
@@ -38,7 +38,7 @@
 <meta name="twitter:creator" content="@coffius" />
 <meta name="twitter:title" content="HLL counters as Cassandra user defined aggregates" />
 <meta name="twitter:description" content="" />
-<meta name="twitter:url" content="http://coffius.github.io/posts/hll-in-cassandra" />
+<meta name="twitter:url" content="http://coffius.github.io/posts/hll-in-cassandra/" />
 <meta name="twitter:domain" content="http://coffius.github.io/">
   
 
@@ -53,20 +53,21 @@
     },
     "datePublished": "2016-12-04",
     "description": "",
-    "wordCount":  1204 
+    "wordCount": 1204
   }
 </script>
 
 
 
-<link rel="canonical" href="http://coffius.github.io/posts/hll-in-cassandra" />
+<link rel="canonical" href="http://coffius.github.io/posts/hll-in-cassandra/" />
 
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://coffius.github.io/touch-icon-144-precomposed.png">
 <link href="http://coffius.github.io/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.14" />
+<meta name="generator" content="Hugo 0.26" />
 
-  <!--[if lt IE 9]>
+  
+<!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
@@ -77,6 +78,18 @@
 <link rel="stylesheet" href="http://coffius.github.io/css/highlight/default.css">
 
   
+  
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-66345345-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
 </head>
 <body>
   <main id="main-wrapper" class="container main_wrapper has-sidebar">
@@ -146,6 +159,12 @@
 
 
 
+
+
+
+
+
+
 </div>
 
 
@@ -175,9 +194,9 @@
 </header>
 
   <div class="container content">
-  
+  <p>In <a href="../comparison-of-hll">the previous article</a> we discussed usage of hll countes for finding the number of unique values in a collection. But in this article we will see how to use them in Cassandra db internally in order to provide such functionality using user defined functions(UDF) and aggregates(UDA).</p>
 
-<p>In <a href="../comparison-of-hll">the previous article</a> we discussed usage of hll countes for finding the number of unique values in a collection. But in this article we will see how to use them in Cassandra db internally in order to provide such functionality using user defined functions(UDF) and aggregates(UDA).</p>
+<p></p>
 
 <h2 id="important">Important</h2>
 
@@ -244,27 +263,27 @@ So we do it using Java and then add the result jar into the Cassandra classpath 
  * @return hll counter with the new value
  */
 public final static ByteBuffer stateFunc(ByteBuffer state, int value) {
-    int capacity = state.capacity();
-    // if it is the first call then state buffer should be empty
-    if(capacity == 0) {
-        HyperLogLog.HyperLogLogBuilder builder = new HyperLogLog.HyperLogLogBuilder();
-        HyperLogLog hll = builder.build();
-        hll.addInt(value);
-        return serialize(hll);
-    } else {
-        // if there is data in state buffer then we need to use it
-        HyperLogLog hll = deserialize(state);
-        hll.addInt(value);
-        return serialize(hll);
-    }
+	int capacity = state.capacity();
+	// if it is the first call then state buffer should be empty
+	if(capacity == 0) {
+		HyperLogLog.HyperLogLogBuilder builder = new HyperLogLog.HyperLogLogBuilder();
+		HyperLogLog hll = builder.build();
+		hll.addInt(value);
+		return serialize(hll);
+	} else {
+		// if there is data in state buffer then we need to use it
+		HyperLogLog hll = deserialize(state);
+		hll.addInt(value);
+		return serialize(hll);
+	}
 }
 </code></pre>
 
 <p>And this is our final function:</p>
 
 <pre><code class="language-java">public final static long finalFunc(ByteBuffer state) {
-    HyperLogLog hll = deserialize(state);
-    return hll.count();
+	HyperLogLog hll = deserialize(state);
+	return hll.count();
 }
 </code></pre>
 
@@ -317,8 +336,8 @@ COPY ./hll.jar /usr/share/cassandra/lib/
 <pre><code class="language-html">-- Keyspace definition
 CREATE KEYSPACE IF NOT EXISTS udf
 WITH replication = {
-    'class' : 'SimpleStrategy',
-    'replication_factor' : 1
+	'class' : 'SimpleStrategy',
+	'replication_factor' : 1
 };
 
 -- Functions for hll counters
@@ -341,10 +360,10 @@ CREATE AGGREGATE IF NOT EXISTS udf.hll ( int ) SFUNC hll_state STYPE blob FINALF
 <p>Let&rsquo;s make a simple table where we will store events about user visits for different wares and add some data in it:</p>
 
 <pre><code class="language-html">CREATE TABLE IF NOT EXISTS udf.ware_hits (
-    ware_id int,
-    date_time timestamp,
-    visitor_id int,
-    PRIMARY KEY (ware_id, date_time)
+	ware_id int,
+	date_time timestamp,
+	visitor_id int,
+	PRIMARY KEY (ware_id, date_time)
 );
 
 INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 1);
@@ -378,7 +397,6 @@ This information you can find in the articles <a href="http://www.doanduyhai.com
 <li><a href="http://www.doanduyhai.com/blog/?p=1876">Cassandra UDF/UDA Technical Deep Dive</a></li>
 <li><a href="http://www.doanduyhai.com/blog/?p=2015">Cassandra User Defined Aggregates in action: best practices and caveats</a></li>
 </ul>
-
 </div>
 
 
@@ -389,11 +407,15 @@ This information you can find in the articles <a href="http://www.doanduyhai.com
   
 
     
-    <a class="prev" href="http://coffius.github.io/posts/variance-tip-notes" title="Tips about variance in scala">
+    <a class="prev" href="http://coffius.github.io/posts/variance-tip-notes/" title="Tips about variance in scala">
       Previous
     </a>
     
 
+    
+    <a class="next" href="http://coffius.github.io/posts/shapeless-sums/" title="Sum Data Types with Shapeless">
+      Next
+    </a>
     
 
   
@@ -479,15 +501,6 @@ This information you can find in the articles <a href="http://www.doanduyhai.com
 
 <script src="http://coffius.github.io/js/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-
-
-
-<script>
-  var _gaq=[['_setAccount','102671541320733671208'],['_trackPageview']];
-  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-  s.parentNode.insertBefore(g,s)}(document,'script'));
-</script>
 
 
     

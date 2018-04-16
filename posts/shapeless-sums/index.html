@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Sum Data Types with Shapeless  &middot; KOFF.io</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+<link rel="author" href="http://plus.google.com/+102671541320733671208">
+
+
+<meta property="og:title" content="Sum Data Types with Shapeless  &middot; KOFF.io ">
+<meta property="og:site_name" content="KOFF.io"/>
+<meta property="og:url" content="http://coffius.github.io/posts/shapeless-sums/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="2018-04-16T10:00:00&#43;03:00" />
+<meta property="og:article:modified_time" content="2018-04-16T10:00:00&#43;03:00" />
+
+  
+
+  
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@coffius" />
+<meta name="twitter:creator" content="@coffius" />
+<meta name="twitter:title" content="Sum Data Types with Shapeless" />
+<meta name="twitter:description" content="" />
+<meta name="twitter:url" content="http://coffius.github.io/posts/shapeless-sums/" />
+<meta name="twitter:domain" content="http://coffius.github.io/">
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "Sum Data Types with Shapeless",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+102671541320733671208?rel=author"
+    },
+    "datePublished": "2018-04-16",
+    "description": "",
+    "wordCount": 1316
+  }
+</script>
+
+
+
+<link rel="canonical" href="http://coffius.github.io/posts/shapeless-sums/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://coffius.github.io/touch-icon-144-precomposed.png">
+<link href="http://coffius.github.io/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.26" />
+
+  
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="http://coffius.github.io/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://coffius.github.io/css/style.css">
+<link rel="stylesheet" href="http://coffius.github.io/css/highlight/default.css">
+
+  
+  
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-66345345-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="http://coffius.github.io/">
+  KOFF.io
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  where scala is beloved
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="http://coffius.github.io/">Home</a>
+
+
+  
+<a href="http://coffius.github.io/about">About</a>
+
+<a href="http://coffius.github.io/post" title="Show list of posts">Posts</a>
+
+<a href="http://coffius.github.io/tags" title="Show list of tags">Tags</a>
+
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+
+
+<a id="contact-link-github" class="contact_link" href="https://github.com/coffius">
+  <span class="fa fa-github-square"></span><span>github</span></a>
+
+
+
+
+
+
+
+<a id="contact-link-googleplus" class="contact_link" href="https://plus.google.com/u/0/+102671541320733671208">
+  <span class="fa fa-google-plus-square"></span><span>google+</span></a>
+
+
+
+
+
+<a id="contact-link-twitter" class="contact_link" href="https://twitter.com/coffius">
+  <span class="fa fa-twitter-square"></span><span>twitter</span></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>Sum Data Types with Shapeless
+</h1>
+
+  <div class="metas">
+<time datetime="2018-04-16">16 Apr, 2018</time>
+
+
+  
+  &middot; Read in about 7 min
+  &middot; (1316 Words)
+  <br>
+  
+
+
+</div>
+
+</header>
+
+  <div class="container content">
+  <p>Scala has support of algebraic data types out of the box but often it is not enough for complex cases.
+In this article I will try to show its limits and how to bypass them using <code>shapeless</code> library by the example of <code>sum data types</code>.</p>
+
+<h2 id="contents">Contents</h2>
+
+<ul>
+<li><a href="/posts/shapeless-sums/#what-is-adt">What is ADT?</a></li>
+<li><a href="/posts/shapeless-sums/#sealed-trait-as-a-sum-type">Sealed trait as a sum type</a></li>
+<li><a href="/posts/shapeless-sums/#extending-adts-using-wrapper-evidence">Extending ADTs using Wrapper + Evidence</a></li>
+<li><a href="/posts/shapeless-sums/#coproduct-as-a-sum-type">Coproduct as a sum type</a></li>
+<li><a href="/posts/shapeless-sums/#poly1-as-pattern-matching">Poly1 as pattern matching</a></li>
+<li><a href="/posts/shapeless-sums/#merging-sum-types-with-shapeless">Merging sum types with Shapeless</a></li>
+</ul>
+
+<p></p>
+
+<h2 id="what-is-adt">What is ADT?</h2>
+
+<p>ADT - is acronym for <code>Algebraic Data Type</code> which is a type that is composed from other types by using operations like &laquo;sum&raquo; or &laquo;product&raquo;, where:</p>
+
+<ul>
+<li>&laquo;sum&raquo; is <a href="https://en.wikipedia.org/wiki/Tagged_union">the tagged union</a>. <code>sealed trait</code> is a common way to describe it in Scala:</li>
+</ul>
+
+<pre><code class="language-scala">sealed trait Option[T]
+case class  Some[T](value: T) extends Option[T]
+case object None extends Option[Nothing]
+</code></pre>
+
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Product_type">&laquo;product&raquo;</a> is a combination of types. In Scala it can be described using tuples or case classes:</li>
+</ul>
+
+<pre><code class="language-scala">type Product = (Int, String, Long, Seq[Int])
+case class Product(i: Int, s: String, l: Long, seq: Seq[Int])
+</code></pre>
+
+<h2 id="sealed-trait-as-a-sum-type">Sealed trait as a sum type</h2>
+
+<p>In scala a sum time can be represented as a sealed trait:</p>
+
+<pre><code class="language-scala">sealed trait Request
+case class CreateUser(name: String)                   extends Request
+case class ReadUserInfo(userId: Int)                  extends Request
+case class UpdateUserInfo(userId: Int, name: String)  extends Request
+case class DeleteUser(userId: Int)                    extends Request
+</code></pre>
+
+<p>This means that a value of <code>request: Request</code> can be equal only to an instance of one of classes mentioned above.
+And the compile can check exhaustiveness of pattern matching for such a type.</p>
+
+<pre><code class="language-scala">// the compiler throws a warning/error if there is no `case ... =&gt; ...` for all possible subtypes:
+// Error: match may not be exhaustive.
+def exhaustivePatternMatch(request: Request) = {
+  request match {
+    case CreateUser(name)         =&gt; ???
+    case ReadUserInfo(id)         =&gt; ???
+    case UpdateUserInfo(id, name) =&gt; ???
+    case DeleteUser(id)           =&gt; ???
+  }
+}
+</code></pre>
+
+<h2 id="extending-adts-using-wrapper-evidence">Extending ADTs using Wrapper + Evidence</h2>
+
+<p>This approach works fine for simple cases but it fails in case if it is necessary to extend a predefined type which we can&rsquo;t control.
+For example, <code>sealed trait Request</code> is defined in a library but we want to add new types of requests to the protocol:</p>
+
+<pre><code class="language-scala">sealed trait AdvancedRequest
+case object  GetAllUsers     extends AdvancedRequest
+case object  DeleteAllUsers  extends AdvancedRequest
+</code></pre>
+
+<p>In this case we have to introduce additional abstractions to make it possible:</p>
+
+<pre><code class="language-scala">case class Wrapper[T: Evidence](value: T)
+object Wrapper {
+  sealed trait Evidence[-T]
+  implicit object RequestEvidence extends Evidence[Request]
+  implicit object AdvancedRequestEvidence extends Evidence[AdvancedRequest]
+}
+
+// can be compiled without problems
+val withBasicRequest = Wrapper(CreateUser(&quot;test-user&quot;))
+val withAdvancedRequest = Wrapper(GetAllUsers)
+
+// throw an error:
+// Error: could not find implicit value for evidence parameter of type Evidence[DeletedUsers]
+val withInvalidValue = Wrapper(DeletedUsers(Seq(1, 2)))
+</code></pre>
+
+<p>Using Wrapper + Evidence we can&rsquo;t make a mistake and wrap a value of an invalid type - the compiler will find a problem and throw the error.
+But we can make a mistake in pattern matching and the compiler won&rsquo;t help us:</p>
+
+<pre><code class="language-scala">private def patternMatch[T](wrapper: Wrapper[T]) = {
+  // compiles with several matches missed - no warns or errors :(
+  wrapper.value match {
+    case CreateUser(name) =&gt; ???
+    case ReadUserInfo(id) =&gt; ???
+    //UpdateUserInfo, DeleteUser, GetAllUsers and DeleteAllUsers are missed here
+  }
+}
+</code></pre>
+
+<p>In order to deal with this problem we can use <code>Coproduct</code> types and <code>Poly1</code> functions from <code>shapeless</code> library.</p>
+
+<h2 id="coproduct-as-a-sum-type">Coproduct as a sum type</h2>
+
+<p><code>Coproduct</code> is a way of representing sum types in <code>shapeless</code> library. It can be used like this:</p>
+
+<pre><code class="language-scala">type Shape = Rectangle :+: Circle :+: Triangle :+: CNil
+</code></pre>
+
+<p>It means that <code>value: Shape</code> can be either <code>Rectangle</code> or <code>Circle</code> or <code>Triangle</code>.
+More information about how to work with Coproduct in <code>shapeless</code> is available <a href="https://github.com/milessabin/shapeless/wiki/Feature-overview:-shapeless-2.0.0#coproducts-and-discriminated-unions">here</a>.</p>
+
+<p><code>Coproduct</code> in contrast to <code>sealed trait</code> makes possible to combine an arbitrary set of predefined types in a sum type.
+For example, we can use it to recombine types from above like this:</p>
+
+<pre><code class="language-scala">type ReadRequests   = ReadUserInfo :+: GetAllUsers.type :+: CNil
+type WriteRequests  = CreateUser :+: UpdateUserInfo :+: DeleteUser :+: DeleteAllUsers.type :+: CNil
+</code></pre>
+
+<h2 id="poly1-as-pattern-matching">Poly1 as pattern matching</h2>
+
+<p>Having our sum types defined we can implement pattern matching for them. For that we will use <code>Poly1</code> function.</p>
+
+<pre><code class="language-scala">object read extends Poly1 {
+  implicit val readUserInfo = at[ReadUserInfo]    (_ =&gt; true)
+  implicit val getAllUsers  = at[GetAllUsers.type](_ =&gt; 1)
+}
+
+object write extends Poly1 {
+  implicit val createUser     = at[CreateUser]          (_ =&gt; true)
+  implicit val updateUserInfo = at[UpdateUserInfo]      (_ =&gt; 1)
+  implicit val deleteUser     = at[DeleteUser]          (_ =&gt; &quot;2&quot;)
+  implicit val deleteAllUsers = at[DeleteAllUsers.type] (_ =&gt; List(3))
+}
+</code></pre>
+
+<p><code>object function extends Poly1 {...}</code> is a definition of <a href="https://github.com/milessabin/shapeless/wiki/Feature-overview:-shapeless-2.0.0#polymorphic-function-values">a polymorphic function</a> - a function that is defined for an arbitrary set of types. There are a lot of use cases for such functions but we are interested in the fact that these functions can work as exhaustive pattern matching being applied to <code>Coproduct</code> values.</p>
+
+<p>In the example above we can see that <code>read</code> function is defined for <code>ReadUserInfo</code> and <code>GetAllUsers</code> requests, <code>write</code> - for <code>CreateUser</code>, <code>UpdateUserInfo</code>, <code>DeleteUser</code> and <code>DeleteAllUsers</code>. Inasmuch as <code>read</code> is defined for all types in <code>ReadRequests</code> and <code>write</code> for all types in <code>WriteRequests</code> we can use it for pattern matching of values of these types:</p>
+
+<pre><code class="language-scala">private def readPatternMatch(request: ReadRequests): Unit = {
+  val result = request.map(read)
+}
+
+private def writePatternMatch(request: WriteRequests): Unit = {
+  val result = request.map(write)
+}
+</code></pre>
+
+<p>Check of exhaustiveness of such functions during compilation is implemented in <code>shapeless</code>. The compiler will throw an error if a poly function does not have handlers for all types in <code>Coproduct</code>.</p>
+
+<pre><code class="language-scala">object read extends Poly1 {
+  implicit val readUserInfo = at[ReadUserInfo](_ =&gt; true)
+// Assume we forgot to add a handler for `GetAllUsers` request
+// implicit val getAllUsers  = at[GetAllUsers.type](_ =&gt; 1)
+}
+
+private def readPatternMatch(request: ReadRequests): Unit = {
+  val result = request.map(read)
+}
+</code></pre>
+
+<p>The code above will generate:</p>
+
+<pre><code class="language-text">Error: could not find implicit value for parameter mapper: shapeless.ops.coproduct.Mapper[io.koff.shapeless_algebraic.UsingPolys.read.type,io.koff.shapeless_algebraic.UsingPolys.ReadRequests]
+    val result = request.map(read)
+</code></pre>
+
+<p>Though this error does not provide information about a specific type that does not have a handler, it makes impossible to omit it without notice.</p>
+
+<h2 id="merging-sum-types-with-shapeless">Merging sum types with Shapeless</h2>
+
+<p>Using <code>shapeless</code> you get another cool feature - ability to join sum types together keeping compile time checks.</p>
+
+<pre><code class="language-scala">// joined coproducts
+val joined = Adjoin[WriteRequests :+: ReadRequests]
+type AllRequests = joined.Out
+</code></pre>
+
+<p>Such a definition of <code>AllRequests</code> is an equivalent to:</p>
+
+<pre><code class="language-scala">type AllRequests2 = CreateUser :+: UpdateUserInfo :+: DeleteUser :+: DeleteAllUsers.type :+: ReadUserInfo :+: GetAllUsers.type :+: CNil
+
+val value1: AllRequests2 = Coproduct[AllRequests] (GetAllUsers)
+val value2: AllRequests  = Coproduct[AllRequests2](DeleteAllUsers)
+</code></pre>
+
+<p>The next step is to join different sealed traits together. In order to do it we need <code>shapeless.Generic</code>.</p>
+
+<pre><code class="language-scala">/* It is possible to extract Coproducts from sealed traits */
+val genRequest    = Generic[Request]
+val genAdvRequest = Generic[AdvancedRequest]
+val joinedTraits  = Adjoin [genRequest.Repr :+: genAdvRequest.Repr]
+/* And join them together */
+type JoinedTraits = joinedTraits.Out
+</code></pre>
+
+<p>It is also possible to &laquo;merge&raquo; poly functions if they are defined as traits:</p>
+
+<pre><code class="language-scala">trait read { self: Poly1 =&gt;
+  implicit val readUserInfo = at[ReadUserInfo]    (_ =&gt; true)
+  implicit val getAllUsers  = at[GetAllUsers.type](_ =&gt; 1)
+}
+
+trait write { self: Poly1 =&gt;
+  implicit val createUser     = at[CreateUser]          (_ =&gt; 2.0F)
+  implicit val updateUserInfo = at[UpdateUserInfo]      (_ =&gt; 3.0D)
+  implicit val deleteUser     = at[DeleteUser]          (_ =&gt; &quot;4&quot;)
+  implicit val deleteAllUsers = at[DeleteAllUsers.type] (_ =&gt; List(5))
+}
+
+//Ad Hoc definition of a merged poly function
+object polyFunc extends Poly1 with read with write
+
+private def patternMatchForAllRequests(all: AllRequests) = {
+  all.map(polyFunc)
+}
+</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>So it is possible to use <code>shapeless.Coproduct</code> to define sum types on the analogy of sealed traits.
+But when to use what?</p>
+
+<p>Use sealed traits for:</p>
+
+<ol>
+<li>simple well-defined types like <code>Option[_]</code></li>
+<li>sum types you control</li>
+<li>defining basic pieces that might be composed later(using <code>Generic</code>)</li>
+</ol>
+
+<p>Use <code>shapeless</code> when you need:</p>
+
+<ol>
+<li>to create a sum type from arbitrary set of types - <code>Coproduct</code></li>
+<li>to compose and use sealed traits you don&rsquo;t control - <code>Generic</code></li>
+<li>to have compile time checks for exhaustiveness of pattern-matching for composed sum types - <code>Poly</code> functions</li>
+</ol>
+
+<h2 id="links">Links</h2>
+
+<ul>
+<li><a href="https://github.com/coffius/shapeless-algebraic">Code for this article</a></li>
+<li><a href="https://github.com/milessabin/shapeless/wiki/Feature-overview:-shapeless-2.0.0">Feature overview for shapeless</a></li>
+<li><a href="https://underscore.io/books/shapeless-guide/">The Type Astronaut’s Guide</a> - a free book about <code>shapeless</code></li>
+</ul>
+</div>
+
+
+  <footer class="container">
+  <div class="container navigation no-print">
+  <h2>Navigation</h2>
+  
+  
+
+    
+    <a class="prev" href="http://coffius.github.io/posts/hll-in-cassandra/" title="HLL counters as Cassandra user defined aggregates">
+      Previous
+    </a>
+    
+
+    
+
+  
+
+
+</div>
+
+  <div class="container comments">
+  <h2>Comments</h2>
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//koff-io.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div>
+
+</footer>
+
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+<a href="http://coffius.github.io/license">license</a>
+
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+  code with <i class='fa fa-heart'></i>
+
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  &copy; 2015
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//koff-io.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="http://coffius.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+    
+  </body>
+</html>
+
