@@ -1,157 +1,227 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-EN" lang="en-EN">
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>True fail-fast async error handling with Expression  &middot; KOFF.io</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+<script defer language="javascript" type="text/javascript" src="/js/bundle.min.a43a549406127e0715f68083c987d71d0c71054cd57edea77aa709ed9958af6e.js"></script>
+
+
+
+
+
+
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <link rel="icon" href=/favicon.png>
+
+    
+    
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+  
+
+
+<!-- Open Graph image and Twitter Card metadata -->
+
+<title itemprop="name">Koff.io - True fail-fast async error handling with Expression</title>
+<meta property="og:title" content=Koff.io&#32;-&#32;True&#32;fail-fast&#32;async&#32;error&#32;handling&#32;with&#32;Expression />
+<meta name="twitter:title" content=Koff.io&#32;-&#32;True&#32;fail-fast&#32;async&#32;error&#32;handling&#32;with&#32;Expression />
+<meta itemprop="name" content=Koff.io&#32;-&#32;True&#32;fail-fast&#32;async&#32;error&#32;handling&#32;with&#32;Expression />
+<meta name="application-name" content=Koff.io&#32;-&#32;True&#32;fail-fast&#32;async&#32;error&#32;handling&#32;with&#32;Expression />
+<meta property="og:site_name" content="KOFF.io" />
 
 
 <meta name="description" content="" />
+<meta itemprop="description" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:description" content="" />
 
-<meta name="keywords" content="">
 
-<link rel="author" href="http://plus.google.com/+102671541320733671208">
-
-
-<meta property="og:title" content="True fail-fast async error handling with Expression  &middot; KOFF.io ">
-<meta property="og:site_name" content="KOFF.io"/>
+<base href="http://coffius.github.io/posts/291279-true-fail-fast-with-expression-magic/" />
+<link rel="canonical" href="http://coffius.github.io/posts/291279-true-fail-fast-with-expression-magic/" itemprop="url" />
+<meta name="url" content="http://coffius.github.io/posts/291279-true-fail-fast-with-expression-magic/" />
+<meta name="twitter:url" content="http://coffius.github.io/posts/291279-true-fail-fast-with-expression-magic/" />
 <meta property="og:url" content="http://coffius.github.io/posts/291279-true-fail-fast-with-expression-magic/" />
-<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:updated_time" content=12009-12-10T91:13:15&#43;0300 />
+
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href='http://coffius.github.io/sitemap.xml' />
+
+<meta name="robots" content="index,follow" />
+<meta name="googlebot" content="index,follow" />
+
+
+<meta name="twitter:site" content="https://twitter.com/coffius" />
+<meta name="twitter:creator" content="https://twitter.com/coffius" />
+<meta property="fb:admins" content="" />
+
+
+<meta name="apple-mobile-web-app-title" content="KOFF.io" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+
+
+
+
+
 
 
 <meta property="og:type" content="article" />
-<meta property="og:description" content=""/>
-<meta property="og:article:published_time" content="2015-09-12T22:01:13&#43;03:00" />
-<meta property="og:article:modified_time" content="2015-09-12T22:01:13&#43;03:00" />
-
-  
-
-  
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@coffius" />
-<meta name="twitter:creator" content="@coffius" />
-<meta name="twitter:title" content="True fail-fast async error handling with Expression" />
-<meta name="twitter:description" content="" />
-<meta name="twitter:url" content="http://coffius.github.io/posts/291279-true-fail-fast-with-expression-magic/" />
-<meta name="twitter:domain" content="http://coffius.github.io/">
-  
-
-<script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "Article",
-    "headline": "True fail-fast async error handling with Expression",
-    "author": {
-      "@type": "Person",
-      "name": "http://profiles.google.com/+102671541320733671208?rel=author"
-    },
-    "datePublished": "2015-09-12",
-    "description": "",
-    "wordCount": 879
-  }
-</script>
+<meta property="article:publisher" content="" />
+<meta property="og:article:published_time" content=12009-12-10T91:13:15&#43;0300 />
+<meta property="article:published_time" content=12009-12-10T91:13:15&#43;0300 />
 
 
 
-<link rel="canonical" href="http://coffius.github.io/posts/291279-true-fail-fast-with-expression-magic/" />
 
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://coffius.github.io/touch-icon-144-precomposed.png">
-<link href="http://coffius.github.io/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.26" />
 
-  
-<!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
 
-<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="http://coffius.github.io/css/font-awesome.min.css">
-<link rel="stylesheet" href="http://coffius.github.io/css/style.css">
-<link rel="stylesheet" href="http://coffius.github.io/css/highlight/default.css">
 
-  
-  
-	<script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+<meta name="generator" content="Hugo 0.119.0">
 
-	  ga('create', 'UA-66345345-1', 'auto');
-	  ga('send', 'pageview');
 
-	</script>
+    
+    
+
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.8c227569d4bf422323072472267fbadf39d2c717cb88332a8413d08b0b2b17e8.css">
+
+
+    
+    <style>
+    body {
+        --sidebar-bg-color: #202020;
+        --sidebar-img-border-color: #515151;
+        --sidebar-p-color: #909090;
+        --sidebar-h1-color: #FFF;
+        --sidebar-a-color: #FFF;
+        --sidebar-socials-color: #FFF;
+        --text-color: #222;
+        --bkg-color: #FAF9F6;
+        --post-title-color: #303030;
+        --list-color: #5a5a5a;
+        --link-color: #268bd2;
+        --date-color: #515151;
+        --table-border-color: #E5E5E5;
+        --table-stripe-color: #F9F9F9;
+        --code-color: #000;
+        --code-background-color: #E5E5E5;
+        --code-block-color: #fff;
+        --code-block-background-color: #272822;
+        --moon-sun-color: #FFF;
+        --moon-sun-background-color: #515151;
+    }
+    body.dark-theme {
+        --text-color: #eee;
+        --bkg-color: #121212;
+        --post-title-color: #DBE2E9;
+        --list-color: #9d9d9d;
+        --link-color: #268bd2;
+        --date-color: #9a9a9a;
+        --table-border-color: #515151;
+        --table-stripe-color: #202020;
+        --code-color: #fff;
+        --code-background-color: #515151;
+        --code-block-color: #fff;
+        --code-block-background-color: #272822;
+    }
+    body {
+        background-color: var(--bkg-color);
+    }
+</style>
 
 </head>
-<body>
-  <main id="main-wrapper" class="container main_wrapper has-sidebar">
-    <header id="main-header" class="container main_header">
-  <div class="container brand">
-  <div class="container title h1-like">
-  <a class="baselink" href="http://coffius.github.io/">
-  KOFF.io
 
-</a>
-
+    <body class="dark-theme">
+        <div class="wrapper">
+            <aside class="sidebar">
+    <div class="container sidebar-sticky">
+        <div class="light-dark" align="right">
+    <button class="btn-light-dark" title="Toggle light/dark mode">
+        <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M6 .278a.768.768 0 0 1 .08.858a7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277c.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316a.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71C0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+        </svg>
+        <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M8 12a4 4 0 1 0 0-8a4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+        </svg>
+    </button>
 </div>
 
-  
-<div class="container topline">
-  
-  where scala is beloved
-
-
+        <div class="sidebar-about">
+    <h1 class="brand">
+        
+        
+            <a href="http://coffius.github.io/">
+                <h1>KOFF.io</h1>
+            </a>
+        
+    </h1>
+    <p class="lead">
+    where scala is beloved
+    </p>
 </div>
 
+        <nav>
+    <ul class="sidebar-nav">
 
-</div>
+        
+        
+        
 
-  <nav class="container nav primary no-print">
-  
-
-<a class="homelink" href="http://coffius.github.io/">Home</a>
-
-
-  
-<a href="http://coffius.github.io/about">About</a>
-
-<a href="http://coffius.github.io/post" title="Show list of posts">Posts</a>
-
-<a href="http://coffius.github.io/tags" title="Show list of tags">Tags</a>
-
-
+    </ul>
 </nav>
 
-<div class="container nav secondary no-print">
-  
-
-
-<a id="contact-link-github" class="contact_link" href="https://github.com/coffius">
-  <span class="fa fa-github-square"></span><span>github</span></a>
-
-
-
+        
+    <a target="_blank" class="social" title="GitHub" href="https://github.com/coffius">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="-2 -2 24 24">
+            <path fill="currentColor" d="M18.88 1.099C18.147.366 17.265 0 16.233 0H3.746C2.714 0 1.832.366 1.099 1.099C.366 1.832 0 2.714 0 3.746v12.487c0 1.032.366 1.914 1.099 2.647c.733.733 1.615 1.099 2.647 1.099H6.66c.19 0 .333-.007.429-.02a.504.504 0 0 0 .286-.169c.095-.1.143-.245.143-.435l-.007-.885c-.004-.564-.006-1.01-.006-1.34l-.3.052c-.19.035-.43.05-.721.046a5.555 5.555 0 0 1-.904-.091a2.026 2.026 0 0 1-.872-.39a1.651 1.651 0 0 1-.572-.8l-.13-.3a3.25 3.25 0 0 0-.41-.663c-.186-.243-.375-.407-.566-.494l-.09-.065a.956.956 0 0 1-.17-.156a.723.723 0 0 1-.117-.182c-.026-.061-.004-.111.065-.15c.07-.04.195-.059.378-.059l.26.04c.173.034.388.138.643.311a2.1 2.1 0 0 1 .631.677c.2.355.44.626.722.813c.282.186.566.28.852.28c.286 0 .533-.022.742-.065a2.59 2.59 0 0 0 .585-.196c.078-.58.29-1.028.637-1.34a8.907 8.907 0 0 1-1.333-.234a5.314 5.314 0 0 1-1.223-.507a3.5 3.5 0 0 1-1.047-.872c-.277-.347-.505-.802-.683-1.365c-.177-.564-.266-1.215-.266-1.952c0-1.049.342-1.942 1.027-2.68c-.32-.788-.29-1.673.091-2.652c.252-.079.625-.02 1.119.175c.494.195.856.362 1.086.5c.23.14.414.257.553.352a9.233 9.233 0 0 1 2.497-.338c.859 0 1.691.113 2.498.338l.494-.312a6.997 6.997 0 0 1 1.197-.572c.46-.174.81-.221 1.054-.143c.39.98.424 1.864.103 2.653c.685.737 1.028 1.63 1.028 2.68c0 .737-.089 1.39-.267 1.957c-.177.568-.407 1.023-.689 1.366a3.65 3.65 0 0 1-1.053.865c-.42.234-.828.403-1.223.507a8.9 8.9 0 0 1-1.333.235c.45.39.676 1.005.676 1.846v3.11c0 .147.021.266.065.357a.36.36 0 0 0 .208.189c.096.034.18.056.254.064c.074.01.18.013.318.013h2.914c1.032 0 1.914-.366 2.647-1.099c.732-.732 1.099-1.615 1.099-2.647V3.746c0-1.032-.367-1.914-1.1-2.647z"/>
+        </svg>
+    </a>
 
 
 
 
-<a id="contact-link-googleplus" class="contact_link" href="https://plus.google.com/u/0/+102671541320733671208">
-  <span class="fa fa-google-plus-square"></span><span>google+</span></a>
-
-
-
-
-
-<a id="contact-link-twitter" class="contact_link" href="https://twitter.com/coffius">
-  <span class="fa fa-twitter-square"></span><span>twitter</span></a>
+    <a target="_blank" class="social" title="Twitter" href="https://twitter.com/coffius">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M5.032 14.286c6.037 0 9.34-4.837 9.34-9.032c0-.137 0-.274-.01-.41A6.56 6.56 0 0 0 16 3.2c-.6.256-1.235.425-1.885.5a3.207 3.207 0 0 0 1.443-1.757c-.645.37-1.35.63-2.085.77a3.322 3.322 0 0 0-1.862-.958a3.384 3.384 0 0 0-2.082.334a3.223 3.223 0 0 0-1.442 1.49a3.08 3.08 0 0 0-.208 2.03a9.57 9.57 0 0 1-3.747-.963a9.269 9.269 0 0 1-3.018-2.354a3.086 3.086 0 0 0-.36 2.314c.189.787.68 1.475 1.376 1.924a3.344 3.344 0 0 1-1.49-.398v.04c0 .734.263 1.444.743 2.01a3.3 3.3 0 0 0 1.89 1.102c-.483.128-.99.146-1.482.055a3.19 3.19 0 0 0 1.168 1.577a3.36 3.36 0 0 0 1.9.627A6.732 6.732 0 0 1 0 12.86a9.527 9.527 0 0 0 5.032 1.423"/>
+        </svg>
+    </a>
 
 
 
@@ -165,337 +235,252 @@
 
 
 
+
+        <p class="footnote">
+powered by <a target="_blank" href="https://gohugo.io">Hugo</a> | themed with <a target="_blank" href="https://github.com/lukeorth/poison">poison</a>
+    <br>
+    &copy; 2023 coffius. All rights reserved.
+</p>
+
+  </div>
+</aside>
+
+            <main class="content container">
+                <div class="post">
+  <div class="info">
+    <h1 class="post-title">
+        <a href="http://coffius.github.io/posts/291279-true-fail-fast-with-expression-magic/">True fail-fast async error handling with Expression</a>
+    </h1>
+    
+        <time datetime="2015-09-12T22:01:13&#43;0300" class="post-date">
+            September 12, 2015
+        </time>
+    
+    
+    
+    
+    
+    
+    
 </div>
 
-
-  
-
-</header>
-
-
-<article id="main-content" class="container main_content single">
-  <header class="container hat">
-  <h1>True fail-fast async error handling with Expression
-</h1>
-
-  <div class="metas">
-<time datetime="2015-09-12">12 Sep, 2015</time>
-
-
-  
-  &middot; Read in about 5 min
-  &middot; (879 Words)
-  <br>
-  
-
-
-</div>
-
-</header>
-
-  <div class="container content">
-  <p>How it was said in the previous <a href="http://koff.io/posts/290071-make-async-with-scalaz-either-and-futures">article</a> there is no way to do truly fail-fast async error handling using only scala or scalaz.</p>
-
+  <p>How it was said in the previous <a href="http://koff.io/posts/290071-make-async-with-scalaz-either-and-futures" target="_blank">article</a> there is no way to do truly fail-fast async error handling using only scala or scalaz.</p>
 <p>Look at the example below:</p>
-
-<pre><code class="language-scala">val longFut = longFuture() // very long future
-val shortFut = shortFuture()
-val failedFut = failedFuture() // throw new IllegalStateException(&quot;future is failed&quot;)
-
-val result = for {
-  long &lt;- longFut
-  short &lt;- shortFut
-  failed &lt;- failedFut
-} yield {
-  long + &quot; | &quot; + short + &quot; | &quot; + failed
-}
-</code></pre>
-
-<p>In that example we will wait all the futures until we get <code>IllegalStateException</code> because <code>for-comprehension</code> always handle futures in the order which we define them since Scala translates the example above to this:</p>
-
-<pre><code class="language-scala">longFut.flatMap { long =&gt;
-  shortFut.flatMap { short =&gt;
-    failedFut.map { failed =&gt;
-      long + &quot; | &quot; + short + &quot; | &quot; + failed
-    }
-  }
-}
-</code></pre>
-
-<p>But it is possible to avoid this problem with Expression library(<a href="https://github.com/jedesah/computation-expressions" title="Computation-expressions">link</a>)</p>
-
-<p></p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">val</span> longFut <span style="color:#66d9ef">=</span> longFuture<span style="color:#f92672">()</span> <span style="color:#75715e">// very long future
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">val</span> shortFut <span style="color:#66d9ef">=</span> shortFuture<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">val</span> failedFut <span style="color:#66d9ef">=</span> failedFuture<span style="color:#f92672">()</span> <span style="color:#75715e">// throw new IllegalStateException(&#34;future is failed&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">val</span> result <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">for</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  long <span style="color:#66d9ef">&lt;-</span> longFut
+</span></span><span style="display:flex;"><span>  short <span style="color:#66d9ef">&lt;-</span> shortFut
+</span></span><span style="display:flex;"><span>  failed <span style="color:#66d9ef">&lt;-</span> failedFut
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span> <span style="color:#66d9ef">yield</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  long <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; | &#34;</span> <span style="color:#f92672">+</span> short <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; | &#34;</span> <span style="color:#f92672">+</span> failed
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>In that example we will wait all the futures until we get <code>IllegalStateException</code> because <code>for-comprehension</code> always handle futures in the order which we define them since Scala translates the example above to this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span>longFut<span style="color:#f92672">.</span>flatMap <span style="color:#f92672">{</span> long <span style="color:#66d9ef">=&gt;</span>
+</span></span><span style="display:flex;"><span>  shortFut<span style="color:#f92672">.</span>flatMap <span style="color:#f92672">{</span> short <span style="color:#66d9ef">=&gt;</span>
+</span></span><span style="display:flex;"><span>    failedFut<span style="color:#f92672">.</span>map <span style="color:#f92672">{</span> failed <span style="color:#66d9ef">=&gt;</span>
+</span></span><span style="display:flex;"><span>      long <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; | &#34;</span> <span style="color:#f92672">+</span> short <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; | &#34;</span> <span style="color:#f92672">+</span> failed
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>But it is possible to avoid this problem with Expression library(<a href="https://github.com/jedesah/computation-expressions" title="Computation-expressions" target="_blank">link</a>)</p>
 <h2 id="simple-example">Simple example</h2>
-
-<p>You can checkout a project with examples for this article <a href="https://github.com/coffius/koffio-expression-example" title="Sources for examples">here</a>
+<p>You can checkout a project with examples for this article <a href="https://github.com/coffius/koffio-expression-example" title="Sources for examples" target="_blank">here</a>
 Let&rsquo;s take a look at a simple example at first:</p>
-
-<pre><code class="language-scala">def future1(): Future[String] = Future.successful(&quot;future1&quot;)
-def future2(): Future[String] = Future.successful(&quot;future2&quot;)
-
-def resultCalc(str1: String, str2: String): String = str1 + &quot; | &quot; + str2
-
-def expression(): Future[String] = Expression[Future, String] {
-  val result1 = extract(future1())
-  val result2 = extract(future2())
-  resultCalc(result1, result2)
-}
-</code></pre>
-
-<p>In the example above we defined <code>Expression</code> block, executed our async methods inside it, used <code>extract(...)</code> method to get a result from a future and passed the future resuts as params to <code>resultCalc(...)</code>.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> future1<span style="color:#f92672">()</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Future</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Future</span><span style="color:#f92672">.</span>successful<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;future1&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> future2<span style="color:#f92672">()</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Future</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Future</span><span style="color:#f92672">.</span>successful<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;future2&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> resultCalc<span style="color:#f92672">(</span>str1<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> str2<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span> <span style="color:#f92672">=</span> str1 <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; | &#34;</span> <span style="color:#f92672">+</span> str2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> expression<span style="color:#f92672">()</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Future</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Expression</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Future</span>, <span style="color:#66d9ef">String</span><span style="color:#f92672">]</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">val</span> result1 <span style="color:#66d9ef">=</span> extract<span style="color:#f92672">(</span>future1<span style="color:#f92672">())</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">val</span> result2 <span style="color:#66d9ef">=</span> extract<span style="color:#f92672">(</span>future2<span style="color:#f92672">())</span>
+</span></span><span style="display:flex;"><span>  resultCalc<span style="color:#f92672">(</span>result1<span style="color:#f92672">,</span> result2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>In the example above we defined <code>Expression</code> block, executed our async methods inside it, used <code>extract(...)</code> method to get a result from a future and passed the future resuts as params to <code>resultCalc(...)</code>.
 <code>expression()</code> method will behave almost like this code:</p>
-
-<pre><code class="language-scala">def forComprehension(): Future[String] = {
-  val fut1 = future1()
-  val fut2 = future2()
-  for {
-    result1 &lt;- fut1
-    result2 &lt;- fut2
-  } yield {
-    resultCalc(result1, result2)
-  }
-}
-</code></pre>
-
-<p>except the case when the futures have finished with exceptions.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> forComprehension<span style="color:#f92672">()</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Future</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">val</span> fut1 <span style="color:#66d9ef">=</span> future1<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">val</span> fut2 <span style="color:#66d9ef">=</span> future2<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    result1 <span style="color:#66d9ef">&lt;-</span> fut1
+</span></span><span style="display:flex;"><span>    result2 <span style="color:#66d9ef">&lt;-</span> fut2
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span> <span style="color:#66d9ef">yield</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    resultCalc<span style="color:#f92672">(</span>result1<span style="color:#f92672">,</span> result2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>except the case when the futures have finished with exceptions.</p>
 <h2 id="async-fail-fast-error-handling">Async fail-fast error handling</h2>
-
 <p>In this case <code>Expression</code> block will be completed with an error as soon as any of the futures is finished with an failure.
 Take a look:</p>
-
-<pre><code class="language-scala">def expressionFailFast(): Unit = {
-  val startTime = System.currentTimeMillis()
-  val result = Expression[Future, String] {
-    //same order as in the for-comprehension example
-    val long = extract(longFuture())    //Thread.sleep(15000)
-    val short = extract(shortFuture())  //Thread.sleep(3000)
-    val failed = extract(failedFuture())//Thread.sleep(6000);throw new IllegalStateException()
-    short + &quot; | &quot; + long + &quot; | &quot; + failed
-  }
-  try {
-    Await.result(result, 30 seconds)
-  } catch {
-    case err: Throwable =&gt; println(&quot;error: &quot; + err.getMessage)
-  }
-
-  val duration = System.currentTimeMillis() - startTime
-  println(&quot;duration: &quot; + duration / 1000.0d)
-}
-</code></pre>
-
-<p>If you run this code you will see that the code will be completed during ~6 seconds instead of 15 seconds for <code>forComprehensionFailFast(...)</code> below:</p>
-
-<pre><code class="language-scala">def forComprehensionFailFast(): Unit = {  
-  val startTime = System.currentTimeMillis()
-
-  val longFut = longFuture()
-  val shortFut = shortFuture()
-  val failedFut = failedFuture()
-
-  val result = for {
-    long &lt;- longFut
-    short &lt;- shortFut
-    failed &lt;- failedFut
-  } yield {
-    long + &quot; | &quot; + short + &quot; | &quot; + failed
-  }
-
-  try {
-    Await.result(result, 30 seconds)
-  } catch {
-    case err: Throwable =&gt; println(&quot;error: &quot; + err.getMessage)
-  }
-
-  val duration = System.currentTimeMillis() - startTime
-  println(&quot;duration: &quot; + duration / 1000.0d)
-}
-</code></pre>
-
-<p>So now it is not nessesary to wait long operations if any other operation already completed with an error. It might be helpful for working with external services which can be very slow.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> expressionFailFast<span style="color:#f92672">()</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span> <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">val</span> startTime <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">System</span><span style="color:#f92672">.</span>currentTimeMillis<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">val</span> result <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Expression</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Future</span>, <span style="color:#66d9ef">String</span><span style="color:#f92672">]</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//same order as in the for-comprehension example
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> long <span style="color:#66d9ef">=</span> extract<span style="color:#f92672">(</span>longFuture<span style="color:#f92672">())</span>    <span style="color:#75715e">//Thread.sleep(15000)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> short <span style="color:#66d9ef">=</span> extract<span style="color:#f92672">(</span>shortFuture<span style="color:#f92672">())</span>  <span style="color:#75715e">//Thread.sleep(3000)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> failed <span style="color:#66d9ef">=</span> extract<span style="color:#f92672">(</span>failedFuture<span style="color:#f92672">())</span><span style="color:#75715e">//Thread.sleep(6000);throw new IllegalStateException()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    short <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; | &#34;</span> <span style="color:#f92672">+</span> long <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; | &#34;</span> <span style="color:#f92672">+</span> failed
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Await</span><span style="color:#f92672">.</span>result<span style="color:#f92672">(</span>result<span style="color:#f92672">,</span> <span style="color:#ae81ff">30</span> seconds<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> err<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Throwable</span> <span style="color:#f92672">=&gt;</span> println<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;error: &#34;</span> <span style="color:#f92672">+</span> err<span style="color:#f92672">.</span>getMessage<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">val</span> duration <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">System</span><span style="color:#f92672">.</span>currentTimeMillis<span style="color:#f92672">()</span> <span style="color:#f92672">-</span> startTime
+</span></span><span style="display:flex;"><span>  println<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;duration: &#34;</span> <span style="color:#f92672">+</span> duration <span style="color:#f92672">/</span> <span style="color:#ae81ff">1000.0d</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>If you run this code you will see that the code will be completed during ~6 seconds instead of 15 seconds for <code>forComprehensionFailFast(...)</code> below:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> forComprehensionFailFast<span style="color:#f92672">()</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span> <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">val</span> startTime <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">System</span><span style="color:#f92672">.</span>currentTimeMillis<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">val</span> longFut <span style="color:#66d9ef">=</span> longFuture<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">val</span> shortFut <span style="color:#66d9ef">=</span> shortFuture<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">val</span> failedFut <span style="color:#66d9ef">=</span> failedFuture<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">val</span> result <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">for</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    long <span style="color:#66d9ef">&lt;-</span> longFut
+</span></span><span style="display:flex;"><span>    short <span style="color:#66d9ef">&lt;-</span> shortFut
+</span></span><span style="display:flex;"><span>    failed <span style="color:#66d9ef">&lt;-</span> failedFut
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span> <span style="color:#66d9ef">yield</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    long <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; | &#34;</span> <span style="color:#f92672">+</span> short <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; | &#34;</span> <span style="color:#f92672">+</span> failed
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Await</span><span style="color:#f92672">.</span>result<span style="color:#f92672">(</span>result<span style="color:#f92672">,</span> <span style="color:#ae81ff">30</span> seconds<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> err<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Throwable</span> <span style="color:#f92672">=&gt;</span> println<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;error: &#34;</span> <span style="color:#f92672">+</span> err<span style="color:#f92672">.</span>getMessage<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">val</span> duration <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">System</span><span style="color:#f92672">.</span>currentTimeMillis<span style="color:#f92672">()</span> <span style="color:#f92672">-</span> startTime
+</span></span><span style="display:flex;"><span>  println<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;duration: &#34;</span> <span style="color:#f92672">+</span> duration <span style="color:#f92672">/</span> <span style="color:#ae81ff">1000.0d</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>So now it is not nessesary to wait long operations if any other operation already completed with an error. It might be helpful for working with external services which can be very slow.</p>
 <h2 id="futures-and-if-statements">Futures and If-Statements</h2>
-
 <p>One more thing. Sometimes you may need to use <code>if-statement</code> blocks along with async operations. In this case Expression library can also be useful. Let&rsquo;s imagine that we want to get and to check some information. After the checking we decide what we will do next. And all these operations should be asynchronous.
 If we use <code>for-comprehension</code> then a code will be like this:</p>
-
-<pre><code class="language-scala">def forComprehensionIf(): Future[String] = {
-  (for {
-    condition &lt;- trueFuture()
-  } yield {
-    if(condition) {
-      for{
-        normal &lt;- normalFuture()
-        long &lt;- longFuture()
-      } yield {
-        resultCalc(normal, long)
-      }
-    } else {
-      for{
-        failed &lt;- failedFuture()
-      } yield {
-        resultCalc(&quot;default&quot;, failed)
-      }
-    }
-  }).flatMap(identity)
-}
-</code></pre>
-
-<p>It&rsquo;s quite tricky, isn&rsquo;t it?
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> forComprehensionIf<span style="color:#f92672">()</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Future</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">(</span><span style="color:#66d9ef">for</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    condition <span style="color:#66d9ef">&lt;-</span> trueFuture<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span> <span style="color:#66d9ef">yield</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>condition<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">for</span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        normal <span style="color:#66d9ef">&lt;-</span> normalFuture<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>        long <span style="color:#66d9ef">&lt;-</span> longFuture<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">}</span> <span style="color:#66d9ef">yield</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        resultCalc<span style="color:#f92672">(</span>normal<span style="color:#f92672">,</span> long<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">for</span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        failed <span style="color:#66d9ef">&lt;-</span> failedFuture<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">}</span> <span style="color:#66d9ef">yield</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        resultCalc<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;default&#34;</span><span style="color:#f92672">,</span> failed<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}).</span>flatMap<span style="color:#f92672">(</span>identity<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>It&rsquo;s quite tricky, isn&rsquo;t it?
 But if we use <code>Expression</code> then we can rewrite it like this:</p>
-
-<pre><code class="language-scala">def expressionIf(): Future[String] = {
-  //we can use extract(trueFuture())
-  //or we can import Expression.auto.extract instead
-  import com.github.jedesah.Expression.auto.extract
-  Expression[Future, String] {
-    if(trueFuture()) {
-      //A-branch
-      resultCalc(normalFuture(), longFuture())
-    } else {
-      //B-branch
-      resultCalc(&quot;default&quot;, failedFuture())
-    }
-  }
-}
-</code></pre>
-
-<p>Much simpler :)</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> expressionIf<span style="color:#f92672">()</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Future</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">//we can use extract(trueFuture())
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">//or we can import Expression.auto.extract instead
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">import</span> com.github.jedesah.Expression.auto.extract
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">Expression</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Future</span>, <span style="color:#66d9ef">String</span><span style="color:#f92672">]</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>trueFuture<span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">//A-branch
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      resultCalc<span style="color:#f92672">(</span>normalFuture<span style="color:#f92672">(),</span> longFuture<span style="color:#f92672">())</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">//B-branch
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      resultCalc<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;default&#34;</span><span style="color:#f92672">,</span> failedFuture<span style="color:#f92672">())</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>Much simpler :)</p>
 <h2 id="git-as-maven-repo">Git as Maven Repo</h2>
-
-<p>And one more trick for github. Sometimes you can find useful projects or libs which you want to use it in your sbt project as a managed dependency but they are not published on any public repositories. In this case <a href="https://jitpack.io/" title="jitpack.io">jitpack.io</a> might help you.
-I&rsquo;ve used it in the example project for this article to add <a href="https://github.com/jedesah/computation-expressions" title="Computation-expressions">jedesah/computation-expressions</a> to <code>build.sbt</code></p>
-
-<pre><code class="language-scala">//add jitpack.io to resolvers
-resolvers += &quot;jitpack.io&quot; at &quot;https://jitpack.io&quot;
-
-//add github project as a dependency
-//https://github.com/jedesah -&gt; &quot;com.github.jedesah&quot; as a group id
-//project name &quot;computation-expressions&quot; as an artifact id
-//and commit id &quot;5ef11fc97c&quot; as a revision
-libraryDependencies += &quot;com.github.jedesah&quot; % &quot;computation-expressions&quot; % &quot;5ef11fc97c&quot;
-</code></pre>
-
-<p>That`s all. Now you can use any github projects as a sbt dependency.</p>
-
+<p>And one more trick for github. Sometimes you can find useful projects or libs which you want to use it in your sbt project as a managed dependency but they are not published on any public repositories. In this case <a href="https://jitpack.io/" title="jitpack.io" target="_blank">jitpack.io</a> might help you.
+I&rsquo;ve used it in the example project for this article to add <a href="https://github.com/jedesah/computation-expressions" title="Computation-expressions" target="_blank">jedesah/computation-expressions</a> to <code>build.sbt</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#75715e">//add jitpack.io to resolvers
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>resolvers <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#34;jitpack.io&#34;</span> at <span style="color:#e6db74">&#34;https://jitpack.io&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//add github project as a dependency
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//https://github.com/jedesah -&gt; &#34;com.github.jedesah&#34; as a group id
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//project name &#34;computation-expressions&#34; as an artifact id
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//and commit id &#34;5ef11fc97c&#34; as a revision
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>libraryDependencies <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#34;com.github.jedesah&#34;</span> <span style="color:#f92672">%</span> <span style="color:#e6db74">&#34;computation-expressions&#34;</span> <span style="color:#f92672">%</span> <span style="color:#e6db74">&#34;5ef11fc97c&#34;</span>
+</span></span></code></pre></div><p>That`s all. Now you can use any github projects as a sbt dependency.</p>
 <h2 id="links">Links</h2>
-
 <ul>
-<li><a href="https://github.com/coffius/koffio-expression-example" title="Sources for examples">Sources for examples</a> - sbt project with examples</li>
-<li><a href="https://github.com/jedesah/computation-expressions" title="Computation-expressions">jedesah/computation-expressions</a> - Expression project</li>
-<li><a href="https://jitpack.io/" title="jitpack.io">jitpack.io</a> - package repository for GitHub</li>
-<li><a href="https://youtu.be/tU4pU5vaddU" title="Lecture from creators of Expression library">Building a Better Future</a> - Jean-Remi Desjardins &amp; Eddie Carlson talk about how they have created Expression library</li>
-<li><a href="http://slides.com/jedesah/deck-1#/">Slides</a> - slides of a presentation. Can be useful.</li>
+<li><a href="https://github.com/coffius/koffio-expression-example" title="Sources for examples" target="_blank">Sources for examples</a> - sbt project with examples</li>
+<li><a href="https://github.com/jedesah/computation-expressions" title="Computation-expressions" target="_blank">jedesah/computation-expressions</a> - Expression project</li>
+<li><a href="https://jitpack.io/" title="jitpack.io" target="_blank">jitpack.io</a> - package repository for GitHub</li>
+<li><a href="https://youtu.be/tU4pU5vaddU" title="Lecture from creators of Expression library" target="_blank">Building a Better Future</a> - Jean-Remi Desjardins &amp; Eddie Carlson talk about how they have created Expression library</li>
+<li><a href="http://slides.com/jedesah/deck-1#/" target="_blank">Slides</a> - slides of a presentation. Can be useful.</li>
 </ul>
+  <hr>
+<div class="footer">
+    
+	    
+            <a class="previous-post" href="http://coffius.github.io/posts/290071-make-async-with-scalaz-either-and-futures/?ref=footer"><span style="font-weight:bold;">« Previous</span><br>Practical Scalaz: Make async operations with...</a>
+        
+	    
+            <div class="next-post">
+                <a href="http://coffius.github.io/posts/292173-lens-in-scala/?ref=footer"><span style="font-weight:bold;">Next »</span><br>Lens in scala</a>
+            </div>
+        
+    
 </div>
 
-
-  <footer class="container">
-  <div class="container navigation no-print">
-  <h2>Navigation</h2>
   
-  
-
+    <div class="comments">
     
-    <a class="prev" href="http://coffius.github.io/posts/290071-make-async-with-scalaz-either-and-futures/" title="Practical Scalaz: Make async operations with scalaz.Either and Futures">
-      Previous
-    </a>
-    
-
-    
-    <a class="next" href="http://coffius.github.io/posts/292173-lens-in-scala/" title="Lens in scala">
-      Next
-    </a>
-    
-
-  
-
-
-</div>
-
-  <div class="container comments">
-  <h2>Comments</h2>
-  
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-  (function() {
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
     
     
-    if (window.location.hostname == "localhost")
-      return;
-
-    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
-    dsq.src = '//koff-io.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "koff-io" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-
-</div>
-
-</footer>
-
-</article>
-      <footer id="main-footer" class="container main_footer">
-  
-
-  <div class="container nav foot no-print">
-  
-<a href="http://coffius.github.io/license">license</a>
-
-
-  <a class="toplink" href="#">back to top</a>
-
-</div>
-
-  <div class="container credits">
-  
-<div class="container footline">
-  
-  code with <i class='fa fa-heart'></i>
-
-
-</div>
-
-
-  
-<div class="container copyright">
-  
-  &copy; 2015
-
-
-</div>
-
-
-</div>
-
-</footer>
-
-    </main>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
-<script type="text/javascript">
-  (function() {
-    
-    
-    if (window.location.hostname == "localhost")
-      return;
+</div>
 
-    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
-    dsq.src = '//koff-io.disqus.com/count.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
-</script>
+  
+</div>
+            </main>
+            
+  
+    <div class="article-toc ">
+    <div class="toc-wrapper">
+      <h4 id="contents"></h4>
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#simple-example">Simple example</a></li>
+    <li><a href="#async-fail-fast-error-handling">Async fail-fast error handling</a></li>
+    <li><a href="#futures-and-if-statements">Futures and If-Statements</a></li>
+    <li><a href="#git-as-maven-repo">Git as Maven Repo</a></li>
+    <li><a href="#links">Links</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
 
+  
 
-
-<script src="http://coffius.github.io/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
-
-    
-  </body>
+        </div>
+    </body>
 </html>
-

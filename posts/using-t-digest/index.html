@@ -1,157 +1,227 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-EN" lang="en-EN">
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>Using T-Digest: Median calculation and anomaly detection  &middot; KOFF.io</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+<script defer language="javascript" type="text/javascript" src="/js/bundle.min.a43a549406127e0715f68083c987d71d0c71054cd57edea77aa709ed9958af6e.js"></script>
+
+
+
+
+
+
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <link rel="icon" href=/favicon.png>
+
+    
+    
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+  
+
+
+<!-- Open Graph image and Twitter Card metadata -->
+
+<title itemprop="name">Koff.io - Using T-Digest: Median calculation and anomaly detection</title>
+<meta property="og:title" content=Koff.io&#32;-&#32;Using&#32;T-Digest:&#32;Median&#32;calculation&#32;and&#32;anomaly&#32;detection />
+<meta name="twitter:title" content=Koff.io&#32;-&#32;Using&#32;T-Digest:&#32;Median&#32;calculation&#32;and&#32;anomaly&#32;detection />
+<meta itemprop="name" content=Koff.io&#32;-&#32;Using&#32;T-Digest:&#32;Median&#32;calculation&#32;and&#32;anomaly&#32;detection />
+<meta name="application-name" content=Koff.io&#32;-&#32;Using&#32;T-Digest:&#32;Median&#32;calculation&#32;and&#32;anomaly&#32;detection />
+<meta property="og:site_name" content="KOFF.io" />
 
 
 <meta name="description" content="" />
+<meta itemprop="description" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:description" content="" />
 
-<meta name="keywords" content="">
 
-<link rel="author" href="http://plus.google.com/+102671541320733671208">
-
-
-<meta property="og:title" content="Using T-Digest: Median calculation and anomaly detection  &middot; KOFF.io ">
-<meta property="og:site_name" content="KOFF.io"/>
+<base href="http://coffius.github.io/posts/using-t-digest/" />
+<link rel="canonical" href="http://coffius.github.io/posts/using-t-digest/" itemprop="url" />
+<meta name="url" content="http://coffius.github.io/posts/using-t-digest/" />
+<meta name="twitter:url" content="http://coffius.github.io/posts/using-t-digest/" />
 <meta property="og:url" content="http://coffius.github.io/posts/using-t-digest/" />
-<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:updated_time" content=13010-13-10T101:13:15&#43;0300 />
+
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href='http://coffius.github.io/sitemap.xml' />
+
+<meta name="robots" content="index,follow" />
+<meta name="googlebot" content="index,follow" />
+
+
+<meta name="twitter:site" content="https://twitter.com/coffius" />
+<meta name="twitter:creator" content="https://twitter.com/coffius" />
+<meta property="fb:admins" content="" />
+
+
+<meta name="apple-mobile-web-app-title" content="KOFF.io" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+
+
+
+
+
 
 
 <meta property="og:type" content="article" />
-<meta property="og:description" content=""/>
-<meta property="og:article:published_time" content="2015-10-13T22:01:13&#43;03:00" />
-<meta property="og:article:modified_time" content="2015-10-13T22:01:13&#43;03:00" />
-
-  
-
-  
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@coffius" />
-<meta name="twitter:creator" content="@coffius" />
-<meta name="twitter:title" content="Using T-Digest: Median calculation and anomaly detection" />
-<meta name="twitter:description" content="" />
-<meta name="twitter:url" content="http://coffius.github.io/posts/using-t-digest/" />
-<meta name="twitter:domain" content="http://coffius.github.io/">
-  
-
-<script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "Article",
-    "headline": "Using T-Digest: Median calculation and anomaly detection",
-    "author": {
-      "@type": "Person",
-      "name": "http://profiles.google.com/+102671541320733671208?rel=author"
-    },
-    "datePublished": "2015-10-13",
-    "description": "",
-    "wordCount": 1122
-  }
-</script>
+<meta property="article:publisher" content="" />
+<meta property="og:article:published_time" content=13010-13-10T101:13:15&#43;0300 />
+<meta property="article:published_time" content=13010-13-10T101:13:15&#43;0300 />
 
 
 
-<link rel="canonical" href="http://coffius.github.io/posts/using-t-digest/" />
 
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://coffius.github.io/touch-icon-144-precomposed.png">
-<link href="http://coffius.github.io/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.26" />
 
-  
-<!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
 
-<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="http://coffius.github.io/css/font-awesome.min.css">
-<link rel="stylesheet" href="http://coffius.github.io/css/style.css">
-<link rel="stylesheet" href="http://coffius.github.io/css/highlight/default.css">
 
-  
-  
-	<script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+<meta name="generator" content="Hugo 0.119.0">
 
-	  ga('create', 'UA-66345345-1', 'auto');
-	  ga('send', 'pageview');
 
-	</script>
+    
+    
+
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.8c227569d4bf422323072472267fbadf39d2c717cb88332a8413d08b0b2b17e8.css">
+
+
+    
+    <style>
+    body {
+        --sidebar-bg-color: #202020;
+        --sidebar-img-border-color: #515151;
+        --sidebar-p-color: #909090;
+        --sidebar-h1-color: #FFF;
+        --sidebar-a-color: #FFF;
+        --sidebar-socials-color: #FFF;
+        --text-color: #222;
+        --bkg-color: #FAF9F6;
+        --post-title-color: #303030;
+        --list-color: #5a5a5a;
+        --link-color: #268bd2;
+        --date-color: #515151;
+        --table-border-color: #E5E5E5;
+        --table-stripe-color: #F9F9F9;
+        --code-color: #000;
+        --code-background-color: #E5E5E5;
+        --code-block-color: #fff;
+        --code-block-background-color: #272822;
+        --moon-sun-color: #FFF;
+        --moon-sun-background-color: #515151;
+    }
+    body.dark-theme {
+        --text-color: #eee;
+        --bkg-color: #121212;
+        --post-title-color: #DBE2E9;
+        --list-color: #9d9d9d;
+        --link-color: #268bd2;
+        --date-color: #9a9a9a;
+        --table-border-color: #515151;
+        --table-stripe-color: #202020;
+        --code-color: #fff;
+        --code-background-color: #515151;
+        --code-block-color: #fff;
+        --code-block-background-color: #272822;
+    }
+    body {
+        background-color: var(--bkg-color);
+    }
+</style>
 
 </head>
-<body>
-  <main id="main-wrapper" class="container main_wrapper has-sidebar">
-    <header id="main-header" class="container main_header">
-  <div class="container brand">
-  <div class="container title h1-like">
-  <a class="baselink" href="http://coffius.github.io/">
-  KOFF.io
 
-</a>
-
+    <body class="dark-theme">
+        <div class="wrapper">
+            <aside class="sidebar">
+    <div class="container sidebar-sticky">
+        <div class="light-dark" align="right">
+    <button class="btn-light-dark" title="Toggle light/dark mode">
+        <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M6 .278a.768.768 0 0 1 .08.858a7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277c.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316a.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71C0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+        </svg>
+        <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M8 12a4 4 0 1 0 0-8a4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+        </svg>
+    </button>
 </div>
 
-  
-<div class="container topline">
-  
-  where scala is beloved
-
-
+        <div class="sidebar-about">
+    <h1 class="brand">
+        
+        
+            <a href="http://coffius.github.io/">
+                <h1>KOFF.io</h1>
+            </a>
+        
+    </h1>
+    <p class="lead">
+    where scala is beloved
+    </p>
 </div>
 
+        <nav>
+    <ul class="sidebar-nav">
 
-</div>
+        
+        
+        
 
-  <nav class="container nav primary no-print">
-  
-
-<a class="homelink" href="http://coffius.github.io/">Home</a>
-
-
-  
-<a href="http://coffius.github.io/about">About</a>
-
-<a href="http://coffius.github.io/post" title="Show list of posts">Posts</a>
-
-<a href="http://coffius.github.io/tags" title="Show list of tags">Tags</a>
-
-
+    </ul>
 </nav>
 
-<div class="container nav secondary no-print">
-  
-
-
-<a id="contact-link-github" class="contact_link" href="https://github.com/coffius">
-  <span class="fa fa-github-square"></span><span>github</span></a>
-
-
-
+        
+    <a target="_blank" class="social" title="GitHub" href="https://github.com/coffius">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="-2 -2 24 24">
+            <path fill="currentColor" d="M18.88 1.099C18.147.366 17.265 0 16.233 0H3.746C2.714 0 1.832.366 1.099 1.099C.366 1.832 0 2.714 0 3.746v12.487c0 1.032.366 1.914 1.099 2.647c.733.733 1.615 1.099 2.647 1.099H6.66c.19 0 .333-.007.429-.02a.504.504 0 0 0 .286-.169c.095-.1.143-.245.143-.435l-.007-.885c-.004-.564-.006-1.01-.006-1.34l-.3.052c-.19.035-.43.05-.721.046a5.555 5.555 0 0 1-.904-.091a2.026 2.026 0 0 1-.872-.39a1.651 1.651 0 0 1-.572-.8l-.13-.3a3.25 3.25 0 0 0-.41-.663c-.186-.243-.375-.407-.566-.494l-.09-.065a.956.956 0 0 1-.17-.156a.723.723 0 0 1-.117-.182c-.026-.061-.004-.111.065-.15c.07-.04.195-.059.378-.059l.26.04c.173.034.388.138.643.311a2.1 2.1 0 0 1 .631.677c.2.355.44.626.722.813c.282.186.566.28.852.28c.286 0 .533-.022.742-.065a2.59 2.59 0 0 0 .585-.196c.078-.58.29-1.028.637-1.34a8.907 8.907 0 0 1-1.333-.234a5.314 5.314 0 0 1-1.223-.507a3.5 3.5 0 0 1-1.047-.872c-.277-.347-.505-.802-.683-1.365c-.177-.564-.266-1.215-.266-1.952c0-1.049.342-1.942 1.027-2.68c-.32-.788-.29-1.673.091-2.652c.252-.079.625-.02 1.119.175c.494.195.856.362 1.086.5c.23.14.414.257.553.352a9.233 9.233 0 0 1 2.497-.338c.859 0 1.691.113 2.498.338l.494-.312a6.997 6.997 0 0 1 1.197-.572c.46-.174.81-.221 1.054-.143c.39.98.424 1.864.103 2.653c.685.737 1.028 1.63 1.028 2.68c0 .737-.089 1.39-.267 1.957c-.177.568-.407 1.023-.689 1.366a3.65 3.65 0 0 1-1.053.865c-.42.234-.828.403-1.223.507a8.9 8.9 0 0 1-1.333.235c.45.39.676 1.005.676 1.846v3.11c0 .147.021.266.065.357a.36.36 0 0 0 .208.189c.096.034.18.056.254.064c.074.01.18.013.318.013h2.914c1.032 0 1.914-.366 2.647-1.099c.732-.732 1.099-1.615 1.099-2.647V3.746c0-1.032-.367-1.914-1.1-2.647z"/>
+        </svg>
+    </a>
 
 
 
 
-<a id="contact-link-googleplus" class="contact_link" href="https://plus.google.com/u/0/+102671541320733671208">
-  <span class="fa fa-google-plus-square"></span><span>google+</span></a>
-
-
-
-
-
-<a id="contact-link-twitter" class="contact_link" href="https://twitter.com/coffius">
-  <span class="fa fa-twitter-square"></span><span>twitter</span></a>
+    <a target="_blank" class="social" title="Twitter" href="https://twitter.com/coffius">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M5.032 14.286c6.037 0 9.34-4.837 9.34-9.032c0-.137 0-.274-.01-.41A6.56 6.56 0 0 0 16 3.2c-.6.256-1.235.425-1.885.5a3.207 3.207 0 0 0 1.443-1.757c-.645.37-1.35.63-2.085.77a3.322 3.322 0 0 0-1.862-.958a3.384 3.384 0 0 0-2.082.334a3.223 3.223 0 0 0-1.442 1.49a3.08 3.08 0 0 0-.208 2.03a9.57 9.57 0 0 1-3.747-.963a9.269 9.269 0 0 1-3.018-2.354a3.086 3.086 0 0 0-.36 2.314c.189.787.68 1.475 1.376 1.924a3.344 3.344 0 0 1-1.49-.398v.04c0 .734.263 1.444.743 2.01a3.3 3.3 0 0 0 1.89 1.102c-.483.128-.99.146-1.482.055a3.19 3.19 0 0 0 1.168 1.577a3.36 3.36 0 0 0 1.9.627A6.732 6.732 0 0 1 0 12.86a9.527 9.527 0 0 0 5.032 1.423"/>
+        </svg>
+    </a>
 
 
 
@@ -165,181 +235,149 @@
 
 
 
+
+        <p class="footnote">
+powered by <a target="_blank" href="https://gohugo.io">Hugo</a> | themed with <a target="_blank" href="https://github.com/lukeorth/poison">poison</a>
+    <br>
+    &copy; 2023 coffius. All rights reserved.
+</p>
+
+  </div>
+</aside>
+
+            <main class="content container">
+                <div class="post">
+  <div class="info">
+    <h1 class="post-title">
+        <a href="http://coffius.github.io/posts/using-t-digest/">Using T-Digest: Median calculation and anomaly detection</a>
+    </h1>
+    
+        <time datetime="2015-10-13T22:01:13&#43;0300" class="post-date">
+            October 13, 2015
+        </time>
+    
+    
+    
+    
+    
+    
+    
 </div>
 
-
-  
-
-</header>
-
-
-<article id="main-content" class="container main_content single">
-  <header class="container hat">
-  <h1>Using T-Digest: Median calculation and anomaly detection
-</h1>
-
-  <div class="metas">
-<time datetime="2015-10-13">13 Oct, 2015</time>
-
-
-  
-  &middot; Read in about 6 min
-  &middot; (1122 Words)
-  <br>
-  
-
-
-</div>
-
-</header>
-
-  <div class="container content">
   <p>In this article you can find information about using <code>t-digest</code> library in order to measure average value of some quantity(average session time).
 There is also an answer for the question: What and why should you use to make such the measurement mean or median?
 Besides, list and comparison of different implementations is presented below in the article.</p>
-
 <h2 id="main-problem">Main problem</h2>
-
 <p>So in what cases we have need to calculate mean/median? For example we have a site and we want to understand how much time an average user spent on our site.
 In order to do it we should calculate an average duration of a user session.
 And there are at least two ways to do it - calculate an arithmetic mean(or just mean) or calculate a median.
 The calculation of mean is very simple. You need two fields: one for a sum of elements and another for their count. But it doesn`t work very well with anomalies in the data.
 I mean the case when one or several elements differ greatly from others.
 Lets assume that we have such values for our session durations(in milliseconds):</p>
-
-<pre><code>3000, 2000, 3000, 5000, 3000, 4000, 4500, 3200, 2700, 3380
-</code></pre>
-
-<p>mean = <code>(3000+2000+3000+5000+3000+4000+4500+3200+2700+3380) / 10 = 3378 msecs</code>. In this case all is ok.</p>
-
+<pre tabindex="0"><code>3000, 2000, 3000, 5000, 3000, 4000, 4500, 3200, 2700, 3380
+</code></pre><p>mean = <code>(3000+2000+3000+5000+3000+4000+4500+3200+2700+3380) / 10 = 3378 msecs</code>. In this case all is ok.</p>
 <p>But what if one of these users opens the site, forgets to close a browser tab and goes afk for an hour(3.600.000 msecs):</p>
-
-<pre><code>3000, 2000, 3000, 5000, 3000, 4000, 4500, 3200, 2700, 3600000
-</code></pre>
-
-<p>mean = <code>(3000+2000+3000+5000+3000+4000+4500+3200+2700+3600000) / 10 = 363040 msecs</code>. Just one of the users influences strongly on mean value.
+<pre tabindex="0"><code>3000, 2000, 3000, 5000, 3000, 4000, 4500, 3200, 2700, 3600000
+</code></pre><p>mean = <code>(3000+2000+3000+5000+3000+4000+4500+3200+2700+3600000) / 10 = 363040 msecs</code>. Just one of the users influences strongly on mean value.
 Generally speaking, the mean is only representative if the distribution of the data is symmetric, otherwise it may be heavily influenced by outlying measurements.
 In simple cases it is possible to use some kind of a filter.
 But often we just don&rsquo;t know what threshold we should use to filter values.
 Whereas the median value is the same in both cases and is equal to <code>3100</code>. So in the cases like this the median will be more useful then the mean.
 However the calculation of the median in general case needs a lot of memory - O(n)</p>
-
-<p></p>
-
 <h2 id="t-digest">T-digest</h2>
-
 <p>In order to deal with memory consumption <a href="http://www.cs.virginia.edu/~son/cs851/papers/ucsb.sensys04.pdf" title="Pdf: Medians and Beyond: New Aggregation Techniques
-for Sensor Networks"><code>Q-Digest</code> algorithm</a> has been developed and after that <code>T-digest</code> has been created as improvement of <code>Q-digest</code>.
+for Sensor Networks" target="_blank"><code>Q-Digest</code> algorithm</a> has been developed and after that <code>T-digest</code> has been created as improvement of <code>Q-digest</code>.
 The main idea of these algorithms is to sacrifice accuracy of calculation for decrease of required amount of memory.</p>
-
 <h2 id="list-of-implementations">List of implementations</h2>
-
 <p>I&rsquo;ve found these libs for median calculation:</p>
-
 <ul>
-<li><a href="https://github.com/tdunning/t-digest" title="GitHub: t-digest">tdunning/t-digest</a> - a java library with implementation of <code>t-digest</code> algorithm</li>
-<li><a href="https://github.com/addthis/stream-lib" title="GitHub: stream-lib">addthis/stream-lib</a> - we already saw it in <a href="/posts/comparison-of-hll">previous article</a>. It&rsquo;s a library of streaming algorithms written in Java.</li>
-<li><a href="http://commons.apache.org/proper/commons-math/" title="Commons Math: The Apache Commons Mathematics Library">apache/commons-math</a> - it&rsquo;s a library of different mathematics and statistics components from apache.</li>
+<li><a href="https://github.com/tdunning/t-digest" title="GitHub: t-digest" target="_blank">tdunning/t-digest</a> - a java library with implementation of <code>t-digest</code> algorithm</li>
+<li><a href="https://github.com/addthis/stream-lib" title="GitHub: stream-lib" target="_blank">addthis/stream-lib</a> - we already saw it in <a href="/posts/comparison-of-hll">previous article</a>. It&rsquo;s a library of streaming algorithms written in Java.</li>
+<li><a href="http://commons.apache.org/proper/commons-math/" title="Commons Math: The Apache Commons Mathematics Library" target="_blank">apache/commons-math</a> - it&rsquo;s a library of different mathematics and statistics components from apache.</li>
 </ul>
-
 <p><code>apache/commons-math</code> implements a regular algorithm for median calculation. It is used for the estimation of calculation accuracy of viewed <code>t-digest</code> implementations.</p>
-
-<h2 id="tdunning-t-digest-simple-example">tdunning/t-digest: simple example</h2>
-
+<h2 id="tdunningt-digest-simple-example">tdunning/t-digest: simple example</h2>
 <p>A short description from github page:</p>
-
-<pre><code class="language-text">A new data structure for accurate on-line accumulation of rank-based statistics such as quantiles and trimmed means. The t-digest algorithm is also very parallel friendly making it useful in map-reduce and parallel streaming applications.
-</code></pre>
-
-<p>Friendliness for a parallel calculation shows itself by support of a merging operation. You can see it in the example below.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>A new data structure for accurate on-line accumulation of rank-based statistics such as quantiles and trimmed means. The t-digest algorithm is also very parallel friendly making it useful in map-reduce and parallel streaming applications.
+</span></span></code></pre></div><p>Friendliness for a parallel calculation shows itself by support of a merging operation. You can see it in the example below.</p>
 <p>Example of the code for t-digest:</p>
-
-<pre><code class="language-scala">object TDigestExample {
-  import com.madhukaraphatak.sizeof.SizeEstimator
-  import com.tdunning.math.stats.TDigest
-
-  def main(args: Array[String]) {
-    //define constants for experiments
-    val oneSecond = 1000
-    val twoMinutes = 2 * 60 * 1000
-    val tenMinutes = 10 * 60 * 1000
-    val twoHours = 2 * 60 * 60 * 1000
-
-    val mainValues = 10000000
-    val badValues = 100000
-
-    //generate 10.000.000 pseudo-random values for normal user session durations
-    val mainData = Generator.generate(count = mainValues, from = oneSecond, to = twoMinutes)
-
-    //generate 100.000(1%) pseudo-random values for invalid user session durations
-    val badData = Generator.generate(count = badValues, from = tenMinutes, to = twoHours)
-
-    //generate one united collection. For further details see below
-    val totalData = {
-      Generator.generate(count = mainValues, from = oneSecond, to = twoMinutes) ++
-        Generator.generate(count = badValues, from = tenMinutes, to = twoHours)
-    }
-
-    // Experiment #1
-    // All data in one digest object
-    // all values from one collection(totalData) are added to one digest object
-
-    // recommend default value of compression = 100
-    val totalDigest = TDigest.createArrayDigest(100)
-
-    //the timing of the median calculation
-    val startTime = System.currentTimeMillis()
-    totalData.foreach(value =&gt; totalDigest.add(value))
-    val median = totalDigest.quantile(0.5d)               //the median is a 0.5 quantile
-    val calcTime = System.currentTimeMillis() - startTime
-    println(&quot;calcTime: &quot; + calcTime)
-
-    // Experiment #2
-    // Separate objects for normal(mainData) and bad data(badData) to check accuracy of t-digest merging
-    val mainDigest = TDigest.createArrayDigest(100)
-    mainData.foreach(value =&gt; mainDigest.add(value))
-
-    val badDigest = TDigest.createArrayDigest(100)
-    badData.foreach(value =&gt; badDigest.add(value))
-
-    //to check accuracy of merging several digests
-    val mergedDigest = TDigest.createArrayDigest(100)
-    mergedDigest.add(mainDigest)
-    mergedDigest.add(badDigest)
-
-    val mergedMedian = mergedDigest.quantile(0.5d)
-    println(&quot;median:       &quot; + median)
-    println(&quot;mergedMedian: &quot; + mergedMedian)
-
-    //how many bytes is needed to serialize t-digest object
-    println(&quot;byte size:    &quot; + totalDigest.byteSize())
-
-    //how much memory is needed for totalDigest object
-    val sizeInMem = SizeEstimator.estimate(totalDigest)
-    println(s&quot;size in mem:  $sizeInMem bytes&quot;)
-  }
-}
-</code></pre>
-
-<h2 id="addthis-stream-lib">addthis/stream-lib</h2>
-
-<p>In general there is no much difference in the interface between <code>tdunning/t-digest</code> and <code>addthis/stream-lib</code>. The example for <code>addthis/stream-lib</code> you can find in <a href="https://github.com/coffius/koffio-t-digest/blob/master/src/main/scala/io/koff/t_digest/StreamLibExample.scala"><code>StreamLibExample.scala</code> file</a>.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">object</span> <span style="color:#a6e22e">TDigestExample</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">import</span> com.madhukaraphatak.sizeof.SizeEstimator
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">import</span> com.tdunning.math.stats.TDigest
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> main<span style="color:#f92672">(</span>args<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Array</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">])</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//define constants for experiments
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> oneSecond <span style="color:#66d9ef">=</span> <span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> twoMinutes <span style="color:#66d9ef">=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">60</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> tenMinutes <span style="color:#66d9ef">=</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">60</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> twoHours <span style="color:#66d9ef">=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">60</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">60</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> mainValues <span style="color:#66d9ef">=</span> <span style="color:#ae81ff">10000000</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> badValues <span style="color:#66d9ef">=</span> <span style="color:#ae81ff">100000</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//generate 10.000.000 pseudo-random values for normal user session durations
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> mainData <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Generator</span><span style="color:#f92672">.</span>generate<span style="color:#f92672">(</span>count <span style="color:#66d9ef">=</span> mainValues<span style="color:#f92672">,</span> from <span style="color:#66d9ef">=</span> oneSecond<span style="color:#f92672">,</span> to <span style="color:#66d9ef">=</span> twoMinutes<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//generate 100.000(1%) pseudo-random values for invalid user session durations
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> badData <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Generator</span><span style="color:#f92672">.</span>generate<span style="color:#f92672">(</span>count <span style="color:#66d9ef">=</span> badValues<span style="color:#f92672">,</span> from <span style="color:#66d9ef">=</span> tenMinutes<span style="color:#f92672">,</span> to <span style="color:#66d9ef">=</span> twoHours<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//generate one united collection. For further details see below
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> totalData <span style="color:#66d9ef">=</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">Generator</span><span style="color:#f92672">.</span>generate<span style="color:#f92672">(</span>count <span style="color:#66d9ef">=</span> mainValues<span style="color:#f92672">,</span> from <span style="color:#66d9ef">=</span> oneSecond<span style="color:#f92672">,</span> to <span style="color:#66d9ef">=</span> twoMinutes<span style="color:#f92672">)</span> <span style="color:#f92672">++</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Generator</span><span style="color:#f92672">.</span>generate<span style="color:#f92672">(</span>count <span style="color:#66d9ef">=</span> badValues<span style="color:#f92672">,</span> from <span style="color:#66d9ef">=</span> tenMinutes<span style="color:#f92672">,</span> to <span style="color:#66d9ef">=</span> twoHours<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Experiment #1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// All data in one digest object
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// all values from one collection(totalData) are added to one digest object
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// recommend default value of compression = 100
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> totalDigest <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">TDigest</span><span style="color:#f92672">.</span>createArrayDigest<span style="color:#f92672">(</span><span style="color:#ae81ff">100</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//the timing of the median calculation
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> startTime <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">System</span><span style="color:#f92672">.</span>currentTimeMillis<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>    totalData<span style="color:#f92672">.</span>foreach<span style="color:#f92672">(</span>value <span style="color:#66d9ef">=&gt;</span> totalDigest<span style="color:#f92672">.</span>add<span style="color:#f92672">(</span>value<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> median <span style="color:#66d9ef">=</span> totalDigest<span style="color:#f92672">.</span>quantile<span style="color:#f92672">(</span><span style="color:#ae81ff">0.5d</span><span style="color:#f92672">)</span>               <span style="color:#75715e">//the median is a 0.5 quantile
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> calcTime <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">System</span><span style="color:#f92672">.</span>currentTimeMillis<span style="color:#f92672">()</span> <span style="color:#f92672">-</span> startTime
+</span></span><span style="display:flex;"><span>    println<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;calcTime: &#34;</span> <span style="color:#f92672">+</span> calcTime<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Experiment #2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// Separate objects for normal(mainData) and bad data(badData) to check accuracy of t-digest merging
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> mainDigest <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">TDigest</span><span style="color:#f92672">.</span>createArrayDigest<span style="color:#f92672">(</span><span style="color:#ae81ff">100</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    mainData<span style="color:#f92672">.</span>foreach<span style="color:#f92672">(</span>value <span style="color:#66d9ef">=&gt;</span> mainDigest<span style="color:#f92672">.</span>add<span style="color:#f92672">(</span>value<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> badDigest <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">TDigest</span><span style="color:#f92672">.</span>createArrayDigest<span style="color:#f92672">(</span><span style="color:#ae81ff">100</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    badData<span style="color:#f92672">.</span>foreach<span style="color:#f92672">(</span>value <span style="color:#66d9ef">=&gt;</span> badDigest<span style="color:#f92672">.</span>add<span style="color:#f92672">(</span>value<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//to check accuracy of merging several digests
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> mergedDigest <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">TDigest</span><span style="color:#f92672">.</span>createArrayDigest<span style="color:#f92672">(</span><span style="color:#ae81ff">100</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    mergedDigest<span style="color:#f92672">.</span>add<span style="color:#f92672">(</span>mainDigest<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    mergedDigest<span style="color:#f92672">.</span>add<span style="color:#f92672">(</span>badDigest<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> mergedMedian <span style="color:#66d9ef">=</span> mergedDigest<span style="color:#f92672">.</span>quantile<span style="color:#f92672">(</span><span style="color:#ae81ff">0.5d</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    println<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;median:       &#34;</span> <span style="color:#f92672">+</span> median<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    println<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;mergedMedian: &#34;</span> <span style="color:#f92672">+</span> mergedMedian<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//how many bytes is needed to serialize t-digest object
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    println<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;byte size:    &#34;</span> <span style="color:#f92672">+</span> totalDigest<span style="color:#f92672">.</span>byteSize<span style="color:#f92672">())</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//how much memory is needed for totalDigest object
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> sizeInMem <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">SizeEstimator</span><span style="color:#f92672">.</span>estimate<span style="color:#f92672">(</span>totalDigest<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    println<span style="color:#f92672">(</span><span style="color:#e6db74">s&#34;size in mem:  </span><span style="color:#e6db74">$sizeInMem</span><span style="color:#e6db74"> bytes&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h2 id="addthisstream-lib">addthis/stream-lib</h2>
+<p>In general there is no much difference in the interface between <code>tdunning/t-digest</code> and <code>addthis/stream-lib</code>. The example for <code>addthis/stream-lib</code> you can find in <a href="https://github.com/coffius/koffio-t-digest/blob/master/src/main/scala/io/koff/t_digest/StreamLibExample.scala" target="_blank"><code>StreamLibExample.scala</code> file</a>.
 However <code>tdunning/t-digest</code> has more accuracy and less calculation time. More details about lib comparison are below.</p>
-
 <h2 id="comparison">Comparison</h2>
-
 <p>Now lets compare our libraries. The libraries are compared by:</p>
-
 <ul>
 <li>Time of calculation</li>
 <li>Calculation accuracy</li>
 <li>Serialization size</li>
 <li>Needed memory</li>
 </ul>
-
 <p><strong>Results:</strong></p>
-
 <table>
 <thead>
 <tr>
@@ -348,10 +386,9 @@ However <code>tdunning/t-digest</code> has more accuracy and less calculation ti
 <th>Calc.Time(msec)</th>
 <th>Calc. Acc.(%)</th>
 <th>Serial. size(bytes)</th>
-<th align="right">Memory(bytes)</th>
+<th style="text-align:right">Memory(bytes)</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td><strong>commons-math</strong></td>
@@ -359,183 +396,133 @@ However <code>tdunning/t-digest</code> has more accuracy and less calculation ti
 <td>5.922</td>
 <td>100,000000</td>
 <td>not-supported</td>
-<td align="right">134.218.824</td>
+<td style="text-align:right">134.218.824</td>
 </tr>
-
 <tr>
 <td><strong>t-digest</strong></td>
 <td>61084,6668</td>
 <td>8.234</td>
 <td>100,001090</td>
 <td>15740</td>
-<td align="right">29.688</td>
+<td style="text-align:right">29.688</td>
 </tr>
-
 <tr>
 <td><strong>stream-lib</strong></td>
 <td>60763,2110</td>
 <td>20.142</td>
 <td>99,474839</td>
 <td>24820</td>
-<td align="right">231.784</td>
+<td style="text-align:right">231.784</td>
 </tr>
 </tbody>
 </table>
-
 <h2 id="anomaly-detection">Anomaly detection</h2>
-
 <p>One more interesting application of the median is anomaly detection. In order to find anomalies in your data sequence threshold should be calculated.
 For this you need to get 99.9%-quantile which means that we expect ~0.1% of anomalies in the data sequence. Look below to see how to do it using <code>tdunning/t-digest</code>.</p>
-
-<pre><code class="language-scala">/**
- * Example of anomaly detection
- */
-object AnomalyDetectionExample {
-  import com.tdunning.math.stats.TDigest
-  def main(args: Array[String]) {
-    //define constants for experiments
-    val oneSecond = 1000
-    val twoMinutes = 2 * 60 * 1000
-    val tenMinutes = 10 * 60 * 1000
-    val twoHours = 2 * 60 * 60 * 1000
-
-    val mainValues = 10000000
-    val badValues = 10000
-
-    //generate 10.000.000 pseudo-random values for normal user session durations
-    val mainData = Generator.generate(count = mainValues, from = oneSecond, to = twoMinutes)
-
-    //generate 100.000(1%) pseudo-random values for invalid user session durations
-    val badData = Generator.generate(count = badValues, from = tenMinutes, to = twoHours)
-
-    val totalData = mainData ++ badData
-
-    val totalDigest = TDigest.createArrayDigest(100)
-
-    totalData.foreach(value =&gt; totalDigest.add(value))
-    //this threshold means that we expect ~0.1% of data is anomalies
-    val threshold = totalDigest.quantile(0.999d).toInt
-
-    println(s&quot;threshold: $threshold msec&quot;)
-  }
-}
-</code></pre>
-
-<h2 id="links">Links</h2>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Example of anomaly detection
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">object</span> <span style="color:#a6e22e">AnomalyDetectionExample</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">import</span> com.tdunning.math.stats.TDigest
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> main<span style="color:#f92672">(</span>args<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Array</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">])</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//define constants for experiments
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> oneSecond <span style="color:#66d9ef">=</span> <span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> twoMinutes <span style="color:#66d9ef">=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">60</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> tenMinutes <span style="color:#66d9ef">=</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">60</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> twoHours <span style="color:#66d9ef">=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">60</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">60</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> mainValues <span style="color:#66d9ef">=</span> <span style="color:#ae81ff">10000000</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> badValues <span style="color:#66d9ef">=</span> <span style="color:#ae81ff">10000</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//generate 10.000.000 pseudo-random values for normal user session durations
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> mainData <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Generator</span><span style="color:#f92672">.</span>generate<span style="color:#f92672">(</span>count <span style="color:#66d9ef">=</span> mainValues<span style="color:#f92672">,</span> from <span style="color:#66d9ef">=</span> oneSecond<span style="color:#f92672">,</span> to <span style="color:#66d9ef">=</span> twoMinutes<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//generate 100.000(1%) pseudo-random values for invalid user session durations
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> badData <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Generator</span><span style="color:#f92672">.</span>generate<span style="color:#f92672">(</span>count <span style="color:#66d9ef">=</span> badValues<span style="color:#f92672">,</span> from <span style="color:#66d9ef">=</span> tenMinutes<span style="color:#f92672">,</span> to <span style="color:#66d9ef">=</span> twoHours<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> totalData <span style="color:#66d9ef">=</span> mainData <span style="color:#f92672">++</span> badData
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> totalDigest <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">TDigest</span><span style="color:#f92672">.</span>createArrayDigest<span style="color:#f92672">(</span><span style="color:#ae81ff">100</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    totalData<span style="color:#f92672">.</span>foreach<span style="color:#f92672">(</span>value <span style="color:#66d9ef">=&gt;</span> totalDigest<span style="color:#f92672">.</span>add<span style="color:#f92672">(</span>value<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//this threshold means that we expect ~0.1% of data is anomalies
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> threshold <span style="color:#66d9ef">=</span> totalDigest<span style="color:#f92672">.</span>quantile<span style="color:#f92672">(</span><span style="color:#ae81ff">0.999d</span><span style="color:#f92672">).</span>toInt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    println<span style="color:#f92672">(</span><span style="color:#e6db74">s&#34;threshold: </span><span style="color:#e6db74">$threshold</span><span style="color:#e6db74"> msec&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h2 id="links">Links</h2>
 <ul>
-<li><a href="https://github.com/coffius/koffio-t-digest" title="GitHub: Example project">Example project</a> - sources for this article</li>
-<li><a href="https://github.com/tdunning/t-digest" title="GitHub: t-digest">tdunning/t-digest</a> - github page of <code>t-digest</code></li>
-<li><a href="https://github.com/addthis/stream-lib" title="GitHub: stream-lib">addthis/stream-lib</a></li>
-<li><a href="https://commons.apache.org/proper/commons-math/">apache/math</a> - the apache commons mathematics library</li>
+<li><a href="https://github.com/coffius/koffio-t-digest" title="GitHub: Example project" target="_blank">Example project</a> - sources for this article</li>
+<li><a href="https://github.com/tdunning/t-digest" title="GitHub: t-digest" target="_blank">tdunning/t-digest</a> - github page of <code>t-digest</code></li>
+<li><a href="https://github.com/addthis/stream-lib" title="GitHub: stream-lib" target="_blank">addthis/stream-lib</a></li>
+<li><a href="https://commons.apache.org/proper/commons-math/" target="_blank">apache/math</a> - the apache commons mathematics library</li>
 </ul>
+  <hr>
+<div class="footer">
+    
+	    
+            <a class="previous-post" href="http://coffius.github.io/posts/comparison-of-hll/?ref=footer"><span style="font-weight:bold;">« Previous</span><br>Comparison of HLL implementations</a>
+        
+	    
+            <div class="next-post">
+                <a href="http://coffius.github.io/posts/292173-validation-in-scala/?ref=footer"><span style="font-weight:bold;">Next »</span><br>Validation in scala</a>
+            </div>
+        
+    
 </div>
 
-
-  <footer class="container">
-  <div class="container navigation no-print">
-  <h2>Navigation</h2>
   
-  
-
+    <div class="comments">
     
-    <a class="prev" href="http://coffius.github.io/posts/comparison-of-hll/" title="Comparison of HLL implementations">
-      Previous
-    </a>
-    
-
-    
-    <a class="next" href="http://coffius.github.io/posts/292173-validation-in-scala/" title="Validation in scala">
-      Next
-    </a>
-    
-
-  
-
-
-</div>
-
-  <div class="container comments">
-  <h2>Comments</h2>
-  
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-  (function() {
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
     
     
-    if (window.location.hostname == "localhost")
-      return;
-
-    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
-    dsq.src = '//koff-io.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "koff-io" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-
-</div>
-
-</footer>
-
-</article>
-      <footer id="main-footer" class="container main_footer">
-  
-
-  <div class="container nav foot no-print">
-  
-<a href="http://coffius.github.io/license">license</a>
-
-
-  <a class="toplink" href="#">back to top</a>
-
-</div>
-
-  <div class="container credits">
-  
-<div class="container footline">
-  
-  code with <i class='fa fa-heart'></i>
-
-
-</div>
-
-
-  
-<div class="container copyright">
-  
-  &copy; 2015
-
-
-</div>
-
-
-</div>
-
-</footer>
-
-    </main>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
-<script type="text/javascript">
-  (function() {
-    
-    
-    if (window.location.hostname == "localhost")
-      return;
+</div>
 
-    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
-    dsq.src = '//koff-io.disqus.com/count.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
-</script>
+  
+</div>
+            </main>
+            
+  
+    <div class="article-toc ">
+    <div class="toc-wrapper">
+      <h4 id="contents"></h4>
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#main-problem">Main problem</a></li>
+    <li><a href="#t-digest">T-digest</a></li>
+    <li><a href="#list-of-implementations">List of implementations</a></li>
+    <li><a href="#tdunningt-digest-simple-example">tdunning/t-digest: simple example</a></li>
+    <li><a href="#addthisstream-lib">addthis/stream-lib</a></li>
+    <li><a href="#comparison">Comparison</a></li>
+    <li><a href="#anomaly-detection">Anomaly detection</a></li>
+    <li><a href="#links">Links</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
 
+  
 
-
-<script src="http://coffius.github.io/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
-
-    
-  </body>
+        </div>
+    </body>
 </html>
-

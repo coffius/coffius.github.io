@@ -1,157 +1,227 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-EN" lang="en-EN">
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>Sum Data Types with Shapeless  &middot; KOFF.io</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+<script defer language="javascript" type="text/javascript" src="/js/bundle.min.a43a549406127e0715f68083c987d71d0c71054cd57edea77aa709ed9958af6e.js"></script>
+
+
+
+
+
+
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <link rel="icon" href=/favicon.png>
+
+    
+    
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+  
+
+
+<!-- Open Graph image and Twitter Card metadata -->
+
+<title itemprop="name">Koff.io - Sum Data Types with Shapeless</title>
+<meta property="og:title" content=Koff.io&#32;-&#32;Sum&#32;Data&#32;Types&#32;with&#32;Shapeless />
+<meta name="twitter:title" content=Koff.io&#32;-&#32;Sum&#32;Data&#32;Types&#32;with&#32;Shapeless />
+<meta itemprop="name" content=Koff.io&#32;-&#32;Sum&#32;Data&#32;Types&#32;with&#32;Shapeless />
+<meta name="application-name" content=Koff.io&#32;-&#32;Sum&#32;Data&#32;Types&#32;with&#32;Shapeless />
+<meta property="og:site_name" content="KOFF.io" />
 
 
 <meta name="description" content="" />
+<meta itemprop="description" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:description" content="" />
 
-<meta name="keywords" content="">
 
-<link rel="author" href="http://plus.google.com/+102671541320733671208">
-
-
-<meta property="og:title" content="Sum Data Types with Shapeless  &middot; KOFF.io ">
-<meta property="og:site_name" content="KOFF.io"/>
+<base href="http://coffius.github.io/posts/shapeless-sums/" />
+<link rel="canonical" href="http://coffius.github.io/posts/shapeless-sums/" itemprop="url" />
+<meta name="url" content="http://coffius.github.io/posts/shapeless-sums/" />
+<meta name="twitter:url" content="http://coffius.github.io/posts/shapeless-sums/" />
 <meta property="og:url" content="http://coffius.github.io/posts/shapeless-sums/" />
-<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:updated_time" content=16004-16-10T40:00:18&#43;0300 />
+
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href='http://coffius.github.io/sitemap.xml' />
+
+<meta name="robots" content="index,follow" />
+<meta name="googlebot" content="index,follow" />
+
+
+<meta name="twitter:site" content="https://twitter.com/coffius" />
+<meta name="twitter:creator" content="https://twitter.com/coffius" />
+<meta property="fb:admins" content="" />
+
+
+<meta name="apple-mobile-web-app-title" content="KOFF.io" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+
+
+
+
+
 
 
 <meta property="og:type" content="article" />
-<meta property="og:description" content=""/>
-<meta property="og:article:published_time" content="2018-04-16T10:00:00&#43;03:00" />
-<meta property="og:article:modified_time" content="2018-04-16T10:00:00&#43;03:00" />
-
-  
-
-  
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@coffius" />
-<meta name="twitter:creator" content="@coffius" />
-<meta name="twitter:title" content="Sum Data Types with Shapeless" />
-<meta name="twitter:description" content="" />
-<meta name="twitter:url" content="http://coffius.github.io/posts/shapeless-sums/" />
-<meta name="twitter:domain" content="http://coffius.github.io/">
-  
-
-<script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "Article",
-    "headline": "Sum Data Types with Shapeless",
-    "author": {
-      "@type": "Person",
-      "name": "http://profiles.google.com/+102671541320733671208?rel=author"
-    },
-    "datePublished": "2018-04-16",
-    "description": "",
-    "wordCount": 1316
-  }
-</script>
+<meta property="article:publisher" content="" />
+<meta property="og:article:published_time" content=16004-16-10T40:00:18&#43;0300 />
+<meta property="article:published_time" content=16004-16-10T40:00:18&#43;0300 />
 
 
 
-<link rel="canonical" href="http://coffius.github.io/posts/shapeless-sums/" />
 
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://coffius.github.io/touch-icon-144-precomposed.png">
-<link href="http://coffius.github.io/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.26" />
 
-  
-<!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
 
-<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="http://coffius.github.io/css/font-awesome.min.css">
-<link rel="stylesheet" href="http://coffius.github.io/css/style.css">
-<link rel="stylesheet" href="http://coffius.github.io/css/highlight/default.css">
 
-  
-  
-	<script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+<meta name="generator" content="Hugo 0.119.0">
 
-	  ga('create', 'UA-66345345-1', 'auto');
-	  ga('send', 'pageview');
 
-	</script>
+    
+    
+
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.8c227569d4bf422323072472267fbadf39d2c717cb88332a8413d08b0b2b17e8.css">
+
+
+    
+    <style>
+    body {
+        --sidebar-bg-color: #202020;
+        --sidebar-img-border-color: #515151;
+        --sidebar-p-color: #909090;
+        --sidebar-h1-color: #FFF;
+        --sidebar-a-color: #FFF;
+        --sidebar-socials-color: #FFF;
+        --text-color: #222;
+        --bkg-color: #FAF9F6;
+        --post-title-color: #303030;
+        --list-color: #5a5a5a;
+        --link-color: #268bd2;
+        --date-color: #515151;
+        --table-border-color: #E5E5E5;
+        --table-stripe-color: #F9F9F9;
+        --code-color: #000;
+        --code-background-color: #E5E5E5;
+        --code-block-color: #fff;
+        --code-block-background-color: #272822;
+        --moon-sun-color: #FFF;
+        --moon-sun-background-color: #515151;
+    }
+    body.dark-theme {
+        --text-color: #eee;
+        --bkg-color: #121212;
+        --post-title-color: #DBE2E9;
+        --list-color: #9d9d9d;
+        --link-color: #268bd2;
+        --date-color: #9a9a9a;
+        --table-border-color: #515151;
+        --table-stripe-color: #202020;
+        --code-color: #fff;
+        --code-background-color: #515151;
+        --code-block-color: #fff;
+        --code-block-background-color: #272822;
+    }
+    body {
+        background-color: var(--bkg-color);
+    }
+</style>
 
 </head>
-<body>
-  <main id="main-wrapper" class="container main_wrapper has-sidebar">
-    <header id="main-header" class="container main_header">
-  <div class="container brand">
-  <div class="container title h1-like">
-  <a class="baselink" href="http://coffius.github.io/">
-  KOFF.io
 
-</a>
-
+    <body class="dark-theme">
+        <div class="wrapper">
+            <aside class="sidebar">
+    <div class="container sidebar-sticky">
+        <div class="light-dark" align="right">
+    <button class="btn-light-dark" title="Toggle light/dark mode">
+        <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M6 .278a.768.768 0 0 1 .08.858a7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277c.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316a.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71C0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+        </svg>
+        <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M8 12a4 4 0 1 0 0-8a4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+        </svg>
+    </button>
 </div>
 
-  
-<div class="container topline">
-  
-  where scala is beloved
-
-
+        <div class="sidebar-about">
+    <h1 class="brand">
+        
+        
+            <a href="http://coffius.github.io/">
+                <h1>KOFF.io</h1>
+            </a>
+        
+    </h1>
+    <p class="lead">
+    where scala is beloved
+    </p>
 </div>
 
+        <nav>
+    <ul class="sidebar-nav">
 
-</div>
+        
+        
+        
 
-  <nav class="container nav primary no-print">
-  
-
-<a class="homelink" href="http://coffius.github.io/">Home</a>
-
-
-  
-<a href="http://coffius.github.io/about">About</a>
-
-<a href="http://coffius.github.io/post" title="Show list of posts">Posts</a>
-
-<a href="http://coffius.github.io/tags" title="Show list of tags">Tags</a>
-
-
+    </ul>
 </nav>
 
-<div class="container nav secondary no-print">
-  
-
-
-<a id="contact-link-github" class="contact_link" href="https://github.com/coffius">
-  <span class="fa fa-github-square"></span><span>github</span></a>
-
-
-
+        
+    <a target="_blank" class="social" title="GitHub" href="https://github.com/coffius">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="-2 -2 24 24">
+            <path fill="currentColor" d="M18.88 1.099C18.147.366 17.265 0 16.233 0H3.746C2.714 0 1.832.366 1.099 1.099C.366 1.832 0 2.714 0 3.746v12.487c0 1.032.366 1.914 1.099 2.647c.733.733 1.615 1.099 2.647 1.099H6.66c.19 0 .333-.007.429-.02a.504.504 0 0 0 .286-.169c.095-.1.143-.245.143-.435l-.007-.885c-.004-.564-.006-1.01-.006-1.34l-.3.052c-.19.035-.43.05-.721.046a5.555 5.555 0 0 1-.904-.091a2.026 2.026 0 0 1-.872-.39a1.651 1.651 0 0 1-.572-.8l-.13-.3a3.25 3.25 0 0 0-.41-.663c-.186-.243-.375-.407-.566-.494l-.09-.065a.956.956 0 0 1-.17-.156a.723.723 0 0 1-.117-.182c-.026-.061-.004-.111.065-.15c.07-.04.195-.059.378-.059l.26.04c.173.034.388.138.643.311a2.1 2.1 0 0 1 .631.677c.2.355.44.626.722.813c.282.186.566.28.852.28c.286 0 .533-.022.742-.065a2.59 2.59 0 0 0 .585-.196c.078-.58.29-1.028.637-1.34a8.907 8.907 0 0 1-1.333-.234a5.314 5.314 0 0 1-1.223-.507a3.5 3.5 0 0 1-1.047-.872c-.277-.347-.505-.802-.683-1.365c-.177-.564-.266-1.215-.266-1.952c0-1.049.342-1.942 1.027-2.68c-.32-.788-.29-1.673.091-2.652c.252-.079.625-.02 1.119.175c.494.195.856.362 1.086.5c.23.14.414.257.553.352a9.233 9.233 0 0 1 2.497-.338c.859 0 1.691.113 2.498.338l.494-.312a6.997 6.997 0 0 1 1.197-.572c.46-.174.81-.221 1.054-.143c.39.98.424 1.864.103 2.653c.685.737 1.028 1.63 1.028 2.68c0 .737-.089 1.39-.267 1.957c-.177.568-.407 1.023-.689 1.366a3.65 3.65 0 0 1-1.053.865c-.42.234-.828.403-1.223.507a8.9 8.9 0 0 1-1.333.235c.45.39.676 1.005.676 1.846v3.11c0 .147.021.266.065.357a.36.36 0 0 0 .208.189c.096.034.18.056.254.064c.074.01.18.013.318.013h2.914c1.032 0 1.914-.366 2.647-1.099c.732-.732 1.099-1.615 1.099-2.647V3.746c0-1.032-.367-1.914-1.1-2.647z"/>
+        </svg>
+    </a>
 
 
 
 
-<a id="contact-link-googleplus" class="contact_link" href="https://plus.google.com/u/0/+102671541320733671208">
-  <span class="fa fa-google-plus-square"></span><span>google+</span></a>
-
-
-
-
-
-<a id="contact-link-twitter" class="contact_link" href="https://twitter.com/coffius">
-  <span class="fa fa-twitter-square"></span><span>twitter</span></a>
+    <a target="_blank" class="social" title="Twitter" href="https://twitter.com/coffius">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M5.032 14.286c6.037 0 9.34-4.837 9.34-9.032c0-.137 0-.274-.01-.41A6.56 6.56 0 0 0 16 3.2c-.6.256-1.235.425-1.885.5a3.207 3.207 0 0 0 1.443-1.757c-.645.37-1.35.63-2.085.77a3.322 3.322 0 0 0-1.862-.958a3.384 3.384 0 0 0-2.082.334a3.223 3.223 0 0 0-1.442 1.49a3.08 3.08 0 0 0-.208 2.03a9.57 9.57 0 0 1-3.747-.963a9.269 9.269 0 0 1-3.018-2.354a3.086 3.086 0 0 0-.36 2.314c.189.787.68 1.475 1.376 1.924a3.344 3.344 0 0 1-1.49-.398v.04c0 .734.263 1.444.743 2.01a3.3 3.3 0 0 0 1.89 1.102c-.483.128-.99.146-1.482.055a3.19 3.19 0 0 0 1.168 1.577a3.36 3.36 0 0 0 1.9.627A6.732 6.732 0 0 1 0 12.86a9.527 9.527 0 0 0 5.032 1.423"/>
+        </svg>
+    </a>
 
 
 
@@ -165,40 +235,38 @@
 
 
 
+
+        <p class="footnote">
+powered by <a target="_blank" href="https://gohugo.io">Hugo</a> | themed with <a target="_blank" href="https://github.com/lukeorth/poison">poison</a>
+    <br>
+    &copy; 2023 coffius. All rights reserved.
+</p>
+
+  </div>
+</aside>
+
+            <main class="content container">
+                <div class="post">
+  <div class="info">
+    <h1 class="post-title">
+        <a href="http://coffius.github.io/posts/shapeless-sums/">Sum Data Types with Shapeless</a>
+    </h1>
+    
+        <time datetime="2018-04-16T10:00:00&#43;0300" class="post-date">
+            April 16, 2018
+        </time>
+    
+    
+    
+    
+    
+    
+    
 </div>
 
-
-  
-
-</header>
-
-
-<article id="main-content" class="container main_content single">
-  <header class="container hat">
-  <h1>Sum Data Types with Shapeless
-</h1>
-
-  <div class="metas">
-<time datetime="2018-04-16">16 Apr, 2018</time>
-
-
-  
-  &middot; Read in about 7 min
-  &middot; (1316 Words)
-  <br>
-  
-
-
-</div>
-
-</header>
-
-  <div class="container content">
   <p>Scala has support of algebraic data types out of the box but often it is not enough for complex cases.
 In this article I will try to show its limits and how to bypass them using <code>shapeless</code> library by the example of <code>sum data types</code>.</p>
-
 <h2 id="contents">Contents</h2>
-
 <ul>
 <li><a href="/posts/shapeless-sums/#what-is-adt">What is ADT?</a></li>
 <li><a href="/posts/shapeless-sums/#sealed-trait-as-a-sum-type">Sealed trait as a sum type</a></li>
@@ -207,347 +275,238 @@ In this article I will try to show its limits and how to bypass them using <code
 <li><a href="/posts/shapeless-sums/#poly1-as-pattern-matching">Poly1 as pattern matching</a></li>
 <li><a href="/posts/shapeless-sums/#merging-sum-types-with-shapeless">Merging sum types with Shapeless</a></li>
 </ul>
-
-<p></p>
-
 <h2 id="what-is-adt">What is ADT?</h2>
-
-<p>ADT - is acronym for <code>Algebraic Data Type</code> which is a type that is composed from other types by using operations like &laquo;sum&raquo; or &laquo;product&raquo;, where:</p>
-
+<p>ADT - is acronym for <code>Algebraic Data Type</code> which is a type that is composed from other types by using operations like &ldquo;sum&rdquo; or &ldquo;product&rdquo;, where:</p>
 <ul>
-<li>&laquo;sum&raquo; is <a href="https://en.wikipedia.org/wiki/Tagged_union">the tagged union</a>. <code>sealed trait</code> is a common way to describe it in Scala:</li>
+<li>&ldquo;sum&rdquo; is <a href="https://en.wikipedia.org/wiki/Tagged_union" target="_blank">the tagged union</a>. <code>sealed trait</code> is a common way to describe it in Scala:</li>
 </ul>
-
-<pre><code class="language-scala">sealed trait Option[T]
-case class  Some[T](value: T) extends Option[T]
-case object None extends Option[Nothing]
-</code></pre>
-
-<ul>
-<li><a href="https://en.wikipedia.org/wiki/Product_type">&laquo;product&raquo;</a> is a combination of types. In Scala it can be described using tuples or case classes:</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">Option</span><span style="color:#f92672">[</span><span style="color:#66d9ef">T</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">case</span> <span style="color:#66d9ef">class</span>  <span style="color:#a6e22e">Some</span><span style="color:#f92672">[</span><span style="color:#66d9ef">T</span><span style="color:#f92672">](</span>value<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">T</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Option</span><span style="color:#f92672">[</span><span style="color:#66d9ef">T</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">case</span> <span style="color:#66d9ef">object</span> <span style="color:#a6e22e">None</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Option</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Nothing</span><span style="color:#f92672">]</span>
+</span></span></code></pre></div><ul>
+<li><a href="https://en.wikipedia.org/wiki/Product_type" target="_blank">&ldquo;product&rdquo;</a> is a combination of types. In Scala it can be described using tuples or case classes:</li>
 </ul>
-
-<pre><code class="language-scala">type Product = (Int, String, Long, Seq[Int])
-case class Product(i: Int, s: String, l: Long, seq: Seq[Int])
-</code></pre>
-
-<h2 id="sealed-trait-as-a-sum-type">Sealed trait as a sum type</h2>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#66d9ef">Product</span> <span style="color:#f92672">=</span> <span style="color:#f92672">(</span><span style="color:#a6e22e">Int</span><span style="color:#f92672">,</span> <span style="color:#a6e22e">String</span><span style="color:#f92672">,</span> <span style="color:#a6e22e">Long</span><span style="color:#f92672">,</span> <span style="color:#a6e22e">Seq</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Int</span><span style="color:#f92672">])</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Product</span><span style="color:#f92672">(</span>i<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">,</span> s<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> l<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Long</span><span style="color:#f92672">,</span> seq<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Seq</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Int</span><span style="color:#f92672">])</span>
+</span></span></code></pre></div><h2 id="sealed-trait-as-a-sum-type">Sealed trait as a sum type</h2>
 <p>In scala a sum time can be represented as a sealed trait:</p>
-
-<pre><code class="language-scala">sealed trait Request
-case class CreateUser(name: String)                   extends Request
-case class ReadUserInfo(userId: Int)                  extends Request
-case class UpdateUserInfo(userId: Int, name: String)  extends Request
-case class DeleteUser(userId: Int)                    extends Request
-</code></pre>
-
-<p>This means that a value of <code>request: Request</code> can be equal only to an instance of one of classes mentioned above.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">Request</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CreateUser</span><span style="color:#f92672">(</span>name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span>                   <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Request</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ReadUserInfo</span><span style="color:#f92672">(</span>userId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">)</span>                  <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Request</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UpdateUserInfo</span><span style="color:#f92672">(</span>userId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">,</span> name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span>  <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Request</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DeleteUser</span><span style="color:#f92672">(</span>userId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">)</span>                    <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Request</span>
+</span></span></code></pre></div><p>This means that a value of <code>request: Request</code> can be equal only to an instance of one of classes mentioned above.
 And the compile can check exhaustiveness of pattern matching for such a type.</p>
-
-<pre><code class="language-scala">// the compiler throws a warning/error if there is no `case ... =&gt; ...` for all possible subtypes:
-// Error: match may not be exhaustive.
-def exhaustivePatternMatch(request: Request) = {
-  request match {
-    case CreateUser(name)         =&gt; ???
-    case ReadUserInfo(id)         =&gt; ???
-    case UpdateUserInfo(id, name) =&gt; ???
-    case DeleteUser(id)           =&gt; ???
-  }
-}
-</code></pre>
-
-<h2 id="extending-adts-using-wrapper-evidence">Extending ADTs using Wrapper + Evidence</h2>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#75715e">// the compiler throws a warning/error if there is no `case ... =&gt; ...` for all possible subtypes:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Error: match may not be exhaustive.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">def</span> exhaustivePatternMatch<span style="color:#f92672">(</span>request<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Request</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  request <span style="color:#66d9ef">match</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">CreateUser</span><span style="color:#f92672">(</span>name<span style="color:#f92672">)</span>         <span style="color:#66d9ef">=&gt;</span> <span style="color:#f92672">???</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">ReadUserInfo</span><span style="color:#f92672">(</span>id<span style="color:#f92672">)</span>         <span style="color:#66d9ef">=&gt;</span> <span style="color:#f92672">???</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">UpdateUserInfo</span><span style="color:#f92672">(</span>id<span style="color:#f92672">,</span> name<span style="color:#f92672">)</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#f92672">???</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">DeleteUser</span><span style="color:#f92672">(</span>id<span style="color:#f92672">)</span>           <span style="color:#66d9ef">=&gt;</span> <span style="color:#f92672">???</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h2 id="extending-adts-using-wrapper--evidence">Extending ADTs using Wrapper + Evidence</h2>
 <p>This approach works fine for simple cases but it fails in case if it is necessary to extend a predefined type which we can&rsquo;t control.
 For example, <code>sealed trait Request</code> is defined in a library but we want to add new types of requests to the protocol:</p>
-
-<pre><code class="language-scala">sealed trait AdvancedRequest
-case object  GetAllUsers     extends AdvancedRequest
-case object  DeleteAllUsers  extends AdvancedRequest
-</code></pre>
-
-<p>In this case we have to introduce additional abstractions to make it possible:</p>
-
-<pre><code class="language-scala">case class Wrapper[T: Evidence](value: T)
-object Wrapper {
-  sealed trait Evidence[-T]
-  implicit object RequestEvidence extends Evidence[Request]
-  implicit object AdvancedRequestEvidence extends Evidence[AdvancedRequest]
-}
-
-// can be compiled without problems
-val withBasicRequest = Wrapper(CreateUser(&quot;test-user&quot;))
-val withAdvancedRequest = Wrapper(GetAllUsers)
-
-// throw an error:
-// Error: could not find implicit value for evidence parameter of type Evidence[DeletedUsers]
-val withInvalidValue = Wrapper(DeletedUsers(Seq(1, 2)))
-</code></pre>
-
-<p>Using Wrapper + Evidence we can&rsquo;t make a mistake and wrap a value of an invalid type - the compiler will find a problem and throw the error.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">AdvancedRequest</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">case</span> <span style="color:#66d9ef">object</span>  <span style="color:#a6e22e">GetAllUsers</span>     <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">AdvancedRequest</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">case</span> <span style="color:#66d9ef">object</span>  <span style="color:#a6e22e">DeleteAllUsers</span>  <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">AdvancedRequest</span>
+</span></span></code></pre></div><p>In this case we have to introduce additional abstractions to make it possible:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Wrapper</span><span style="color:#f92672">[</span><span style="color:#66d9ef">T:</span> <span style="color:#66d9ef">Evidence</span><span style="color:#f92672">](</span>value<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">T</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">object</span> <span style="color:#a6e22e">Wrapper</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">Evidence</span><span style="color:#f92672">[</span><span style="color:#66d9ef">-T</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">implicit</span> <span style="color:#66d9ef">object</span> <span style="color:#a6e22e">RequestEvidence</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Evidence</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Request</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">object</span> <span style="color:#a6e22e">AdvancedRequestEvidence</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Evidence</span><span style="color:#f92672">[</span><span style="color:#66d9ef">AdvancedRequest</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// can be compiled without problems
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">val</span> withBasicRequest <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Wrapper</span><span style="color:#f92672">(</span><span style="color:#a6e22e">CreateUser</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;test-user&#34;</span><span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">val</span> withAdvancedRequest <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Wrapper</span><span style="color:#f92672">(</span><span style="color:#a6e22e">GetAllUsers</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// throw an error:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Error: could not find implicit value for evidence parameter of type Evidence[DeletedUsers]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">val</span> withInvalidValue <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Wrapper</span><span style="color:#f92672">(</span><span style="color:#a6e22e">DeletedUsers</span><span style="color:#f92672">(</span><span style="color:#a6e22e">Seq</span><span style="color:#f92672">(</span><span style="color:#ae81ff">1</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">)))</span>
+</span></span></code></pre></div><p>Using Wrapper + Evidence we can&rsquo;t make a mistake and wrap a value of an invalid type - the compiler will find a problem and throw the error.
 But we can make a mistake in pattern matching and the compiler won&rsquo;t help us:</p>
-
-<pre><code class="language-scala">private def patternMatch[T](wrapper: Wrapper[T]) = {
-  // compiles with several matches missed - no warns or errors :(
-  wrapper.value match {
-    case CreateUser(name) =&gt; ???
-    case ReadUserInfo(id) =&gt; ???
-    //UpdateUserInfo, DeleteUser, GetAllUsers and DeleteAllUsers are missed here
-  }
-}
-</code></pre>
-
-<p>In order to deal with this problem we can use <code>Coproduct</code> types and <code>Poly1</code> functions from <code>shapeless</code> library.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">def</span> patternMatch<span style="color:#f92672">[</span><span style="color:#66d9ef">T</span><span style="color:#f92672">](</span>wrapper<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Wrapper</span><span style="color:#f92672">[</span><span style="color:#66d9ef">T</span><span style="color:#f92672">])</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// compiles with several matches missed - no warns or errors :(
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  wrapper<span style="color:#f92672">.</span>value <span style="color:#66d9ef">match</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">CreateUser</span><span style="color:#f92672">(</span>name<span style="color:#f92672">)</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#f92672">???</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">ReadUserInfo</span><span style="color:#f92672">(</span>id<span style="color:#f92672">)</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#f92672">???</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//UpdateUserInfo, DeleteUser, GetAllUsers and DeleteAllUsers are missed here
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>In order to deal with this problem we can use <code>Coproduct</code> types and <code>Poly1</code> functions from <code>shapeless</code> library.</p>
 <h2 id="coproduct-as-a-sum-type">Coproduct as a sum type</h2>
-
 <p><code>Coproduct</code> is a way of representing sum types in <code>shapeless</code> library. It can be used like this:</p>
-
-<pre><code class="language-scala">type Shape = Rectangle :+: Circle :+: Triangle :+: CNil
-</code></pre>
-
-<p>It means that <code>value: Shape</code> can be either <code>Rectangle</code> or <code>Circle</code> or <code>Triangle</code>.
-More information about how to work with Coproduct in <code>shapeless</code> is available <a href="https://github.com/milessabin/shapeless/wiki/Feature-overview:-shapeless-2.0.0#coproducts-and-discriminated-unions">here</a>.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#66d9ef">Shape</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Rectangle</span> <span style="color:#66d9ef">:</span><span style="color:#66d9ef">+:</span> <span style="color:#66d9ef">Circle</span> <span style="color:#66d9ef">:+:</span> <span style="color:#66d9ef">Triangle</span> <span style="color:#66d9ef">:+:</span> <span style="color:#66d9ef">CNil</span>
+</span></span></code></pre></div><p>It means that <code>value: Shape</code> can be either <code>Rectangle</code> or <code>Circle</code> or <code>Triangle</code>.
+More information about how to work with Coproduct in <code>shapeless</code> is available <a href="https://github.com/milessabin/shapeless/wiki/Feature-overview:-shapeless-2.0.0#coproducts-and-discriminated-unions" target="_blank">here</a>.</p>
 <p><code>Coproduct</code> in contrast to <code>sealed trait</code> makes possible to combine an arbitrary set of predefined types in a sum type.
 For example, we can use it to recombine types from above like this:</p>
-
-<pre><code class="language-scala">type ReadRequests   = ReadUserInfo :+: GetAllUsers.type :+: CNil
-type WriteRequests  = CreateUser :+: UpdateUserInfo :+: DeleteUser :+: DeleteAllUsers.type :+: CNil
-</code></pre>
-
-<h2 id="poly1-as-pattern-matching">Poly1 as pattern matching</h2>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#66d9ef">ReadRequests</span>   <span style="color:#f92672">=</span> <span style="color:#a6e22e">ReadUserInfo</span> <span style="color:#66d9ef">:</span><span style="color:#66d9ef">+:</span> <span style="color:#66d9ef">GetAllUsers.</span><span style="color:#66d9ef">type</span> <span style="color:#66d9ef">:+:</span> <span style="color:#66d9ef">CNil</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#66d9ef">WriteRequests</span>  <span style="color:#f92672">=</span> <span style="color:#a6e22e">CreateUser</span> <span style="color:#66d9ef">:</span><span style="color:#66d9ef">+:</span> <span style="color:#66d9ef">UpdateUserInfo</span> <span style="color:#66d9ef">:+:</span> <span style="color:#66d9ef">DeleteUser</span> <span style="color:#66d9ef">:+:</span> <span style="color:#66d9ef">DeleteAllUsers.</span><span style="color:#66d9ef">type</span> <span style="color:#66d9ef">:+:</span> <span style="color:#66d9ef">CNil</span>
+</span></span></code></pre></div><h2 id="poly1-as-pattern-matching">Poly1 as pattern matching</h2>
 <p>Having our sum types defined we can implement pattern matching for them. For that we will use <code>Poly1</code> function.</p>
-
-<pre><code class="language-scala">object read extends Poly1 {
-  implicit val readUserInfo = at[ReadUserInfo]    (_ =&gt; true)
-  implicit val getAllUsers  = at[GetAllUsers.type](_ =&gt; 1)
-}
-
-object write extends Poly1 {
-  implicit val createUser     = at[CreateUser]          (_ =&gt; true)
-  implicit val updateUserInfo = at[UpdateUserInfo]      (_ =&gt; 1)
-  implicit val deleteUser     = at[DeleteUser]          (_ =&gt; &quot;2&quot;)
-  implicit val deleteAllUsers = at[DeleteAllUsers.type] (_ =&gt; List(3))
-}
-</code></pre>
-
-<p><code>object function extends Poly1 {...}</code> is a definition of <a href="https://github.com/milessabin/shapeless/wiki/Feature-overview:-shapeless-2.0.0#polymorphic-function-values">a polymorphic function</a> - a function that is defined for an arbitrary set of types. There are a lot of use cases for such functions but we are interested in the fact that these functions can work as exhaustive pattern matching being applied to <code>Coproduct</code> values.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">object</span> <span style="color:#a6e22e">read</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Poly1</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> readUserInfo <span style="color:#66d9ef">=</span> at<span style="color:#f92672">[</span><span style="color:#66d9ef">ReadUserInfo</span><span style="color:#f92672">]</span>    <span style="color:#f92672">(</span><span style="color:#66d9ef">_</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> getAllUsers  <span style="color:#66d9ef">=</span> at<span style="color:#f92672">[</span><span style="color:#66d9ef">GetAllUsers.</span><span style="color:#66d9ef">type</span><span style="color:#f92672">](</span><span style="color:#66d9ef">_</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">object</span> <span style="color:#a6e22e">write</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Poly1</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> createUser     <span style="color:#66d9ef">=</span> at<span style="color:#f92672">[</span><span style="color:#66d9ef">CreateUser</span><span style="color:#f92672">]</span>          <span style="color:#f92672">(</span><span style="color:#66d9ef">_</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> updateUserInfo <span style="color:#66d9ef">=</span> at<span style="color:#f92672">[</span><span style="color:#66d9ef">UpdateUserInfo</span><span style="color:#f92672">]</span>      <span style="color:#f92672">(</span><span style="color:#66d9ef">_</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> deleteUser     <span style="color:#66d9ef">=</span> at<span style="color:#f92672">[</span><span style="color:#66d9ef">DeleteUser</span><span style="color:#f92672">]</span>          <span style="color:#f92672">(</span><span style="color:#66d9ef">_</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#e6db74">&#34;2&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> deleteAllUsers <span style="color:#66d9ef">=</span> at<span style="color:#f92672">[</span><span style="color:#66d9ef">DeleteAllUsers.</span><span style="color:#66d9ef">type</span><span style="color:#f92672">]</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">_</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">List</span><span style="color:#f92672">(</span><span style="color:#ae81ff">3</span><span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p><code>object function extends Poly1 {...}</code> is a definition of <a href="https://github.com/milessabin/shapeless/wiki/Feature-overview:-shapeless-2.0.0#polymorphic-function-values" target="_blank">a polymorphic function</a> - a function that is defined for an arbitrary set of types. There are a lot of use cases for such functions but we are interested in the fact that these functions can work as exhaustive pattern matching being applied to <code>Coproduct</code> values.</p>
 <p>In the example above we can see that <code>read</code> function is defined for <code>ReadUserInfo</code> and <code>GetAllUsers</code> requests, <code>write</code> - for <code>CreateUser</code>, <code>UpdateUserInfo</code>, <code>DeleteUser</code> and <code>DeleteAllUsers</code>. Inasmuch as <code>read</code> is defined for all types in <code>ReadRequests</code> and <code>write</code> for all types in <code>WriteRequests</code> we can use it for pattern matching of values of these types:</p>
-
-<pre><code class="language-scala">private def readPatternMatch(request: ReadRequests): Unit = {
-  val result = request.map(read)
-}
-
-private def writePatternMatch(request: WriteRequests): Unit = {
-  val result = request.map(write)
-}
-</code></pre>
-
-<p>Check of exhaustiveness of such functions during compilation is implemented in <code>shapeless</code>. The compiler will throw an error if a poly function does not have handlers for all types in <code>Coproduct</code>.</p>
-
-<pre><code class="language-scala">object read extends Poly1 {
-  implicit val readUserInfo = at[ReadUserInfo](_ =&gt; true)
-// Assume we forgot to add a handler for `GetAllUsers` request
-// implicit val getAllUsers  = at[GetAllUsers.type](_ =&gt; 1)
-}
-
-private def readPatternMatch(request: ReadRequests): Unit = {
-  val result = request.map(read)
-}
-</code></pre>
-
-<p>The code above will generate:</p>
-
-<pre><code class="language-text">Error: could not find implicit value for parameter mapper: shapeless.ops.coproduct.Mapper[io.koff.shapeless_algebraic.UsingPolys.read.type,io.koff.shapeless_algebraic.UsingPolys.ReadRequests]
-    val result = request.map(read)
-</code></pre>
-
-<p>Though this error does not provide information about a specific type that does not have a handler, it makes impossible to omit it without notice.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">def</span> readPatternMatch<span style="color:#f92672">(</span>request<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">ReadRequests</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span> <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">val</span> result <span style="color:#66d9ef">=</span> request<span style="color:#f92672">.</span>map<span style="color:#f92672">(</span>read<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">def</span> writePatternMatch<span style="color:#f92672">(</span>request<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">WriteRequests</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span> <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">val</span> result <span style="color:#66d9ef">=</span> request<span style="color:#f92672">.</span>map<span style="color:#f92672">(</span>write<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>Check of exhaustiveness of such functions during compilation is implemented in <code>shapeless</code>. The compiler will throw an error if a poly function does not have handlers for all types in <code>Coproduct</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">object</span> <span style="color:#a6e22e">read</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Poly1</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> readUserInfo <span style="color:#66d9ef">=</span> at<span style="color:#f92672">[</span><span style="color:#66d9ef">ReadUserInfo</span><span style="color:#f92672">](</span><span style="color:#66d9ef">_</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Assume we forgot to add a handler for `GetAllUsers` request
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// implicit val getAllUsers  = at[GetAllUsers.type](_ =&gt; 1)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">def</span> readPatternMatch<span style="color:#f92672">(</span>request<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">ReadRequests</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span> <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">val</span> result <span style="color:#66d9ef">=</span> request<span style="color:#f92672">.</span>map<span style="color:#f92672">(</span>read<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>The code above will generate:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Error: could not find implicit value for parameter mapper: shapeless.ops.coproduct.Mapper[io.koff.shapeless_algebraic.UsingPolys.read.type,io.koff.shapeless_algebraic.UsingPolys.ReadRequests]
+</span></span><span style="display:flex;"><span>    val result = request.map(read)
+</span></span></code></pre></div><p>Though this error does not provide information about a specific type that does not have a handler, it makes impossible to omit it without notice.</p>
 <h2 id="merging-sum-types-with-shapeless">Merging sum types with Shapeless</h2>
-
 <p>Using <code>shapeless</code> you get another cool feature - ability to join sum types together keeping compile time checks.</p>
-
-<pre><code class="language-scala">// joined coproducts
-val joined = Adjoin[WriteRequests :+: ReadRequests]
-type AllRequests = joined.Out
-</code></pre>
-
-<p>Such a definition of <code>AllRequests</code> is an equivalent to:</p>
-
-<pre><code class="language-scala">type AllRequests2 = CreateUser :+: UpdateUserInfo :+: DeleteUser :+: DeleteAllUsers.type :+: ReadUserInfo :+: GetAllUsers.type :+: CNil
-
-val value1: AllRequests2 = Coproduct[AllRequests] (GetAllUsers)
-val value2: AllRequests  = Coproduct[AllRequests2](DeleteAllUsers)
-</code></pre>
-
-<p>The next step is to join different sealed traits together. In order to do it we need <code>shapeless.Generic</code>.</p>
-
-<pre><code class="language-scala">/* It is possible to extract Coproducts from sealed traits */
-val genRequest    = Generic[Request]
-val genAdvRequest = Generic[AdvancedRequest]
-val joinedTraits  = Adjoin [genRequest.Repr :+: genAdvRequest.Repr]
-/* And join them together */
-type JoinedTraits = joinedTraits.Out
-</code></pre>
-
-<p>It is also possible to &laquo;merge&raquo; poly functions if they are defined as traits:</p>
-
-<pre><code class="language-scala">trait read { self: Poly1 =&gt;
-  implicit val readUserInfo = at[ReadUserInfo]    (_ =&gt; true)
-  implicit val getAllUsers  = at[GetAllUsers.type](_ =&gt; 1)
-}
-
-trait write { self: Poly1 =&gt;
-  implicit val createUser     = at[CreateUser]          (_ =&gt; 2.0F)
-  implicit val updateUserInfo = at[UpdateUserInfo]      (_ =&gt; 3.0D)
-  implicit val deleteUser     = at[DeleteUser]          (_ =&gt; &quot;4&quot;)
-  implicit val deleteAllUsers = at[DeleteAllUsers.type] (_ =&gt; List(5))
-}
-
-//Ad Hoc definition of a merged poly function
-object polyFunc extends Poly1 with read with write
-
-private def patternMatchForAllRequests(all: AllRequests) = {
-  all.map(polyFunc)
-}
-</code></pre>
-
-<h2 id="conclusion">Conclusion</h2>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#75715e">// joined coproducts
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">val</span> joined <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Adjoin</span><span style="color:#f92672">[</span><span style="color:#66d9ef">WriteRequests</span> <span style="color:#66d9ef">:+:</span> <span style="color:#66d9ef">ReadRequests</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#66d9ef">AllRequests</span> <span style="color:#f92672">=</span> joined<span style="color:#f92672">.</span><span style="color:#a6e22e">Out</span>
+</span></span></code></pre></div><p>Such a definition of <code>AllRequests</code> is an equivalent to:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#66d9ef">AllRequests2</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">CreateUser</span> <span style="color:#66d9ef">:</span><span style="color:#66d9ef">+:</span> <span style="color:#66d9ef">UpdateUserInfo</span> <span style="color:#66d9ef">:+:</span> <span style="color:#66d9ef">DeleteUser</span> <span style="color:#66d9ef">:+:</span> <span style="color:#66d9ef">DeleteAllUsers.</span><span style="color:#66d9ef">type</span> <span style="color:#66d9ef">:+:</span> <span style="color:#66d9ef">ReadUserInfo</span> <span style="color:#66d9ef">:+:</span> <span style="color:#66d9ef">GetAllUsers.</span><span style="color:#66d9ef">type</span> <span style="color:#66d9ef">:+:</span> <span style="color:#66d9ef">CNil</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">val</span> value1<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">AllRequests2</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Coproduct</span><span style="color:#f92672">[</span><span style="color:#66d9ef">AllRequests</span><span style="color:#f92672">]</span> <span style="color:#f92672">(</span><span style="color:#a6e22e">GetAllUsers</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">val</span> value2<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">AllRequests</span>  <span style="color:#f92672">=</span> <span style="color:#a6e22e">Coproduct</span><span style="color:#f92672">[</span><span style="color:#66d9ef">AllRequests2</span><span style="color:#f92672">](</span><span style="color:#a6e22e">DeleteAllUsers</span><span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>The next step is to join different sealed traits together. In order to do it we need <code>shapeless.Generic</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#75715e">/* It is possible to extract Coproducts from sealed traits */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">val</span> genRequest    <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Generic</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Request</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">val</span> genAdvRequest <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Generic</span><span style="color:#f92672">[</span><span style="color:#66d9ef">AdvancedRequest</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">val</span> joinedTraits  <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Adjoin</span> <span style="color:#f92672">[</span><span style="color:#66d9ef">genRequest.Repr</span> <span style="color:#66d9ef">:+:</span> <span style="color:#66d9ef">genAdvRequest.Repr</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/* And join them together */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#66d9ef">JoinedTraits</span> <span style="color:#f92672">=</span> joinedTraits<span style="color:#f92672">.</span><span style="color:#a6e22e">Out</span>
+</span></span></code></pre></div><p>It is also possible to &ldquo;merge&rdquo; poly functions if they are defined as traits:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">read</span> <span style="color:#f92672">{</span> self<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Poly1</span> <span style="color:#f92672">=&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> readUserInfo <span style="color:#66d9ef">=</span> at<span style="color:#f92672">[</span><span style="color:#66d9ef">ReadUserInfo</span><span style="color:#f92672">]</span>    <span style="color:#f92672">(</span><span style="color:#66d9ef">_</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> getAllUsers  <span style="color:#66d9ef">=</span> at<span style="color:#f92672">[</span><span style="color:#66d9ef">GetAllUsers.</span><span style="color:#66d9ef">type</span><span style="color:#f92672">](</span><span style="color:#66d9ef">_</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">write</span> <span style="color:#f92672">{</span> self<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Poly1</span> <span style="color:#f92672">=&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> createUser     <span style="color:#66d9ef">=</span> at<span style="color:#f92672">[</span><span style="color:#66d9ef">CreateUser</span><span style="color:#f92672">]</span>          <span style="color:#f92672">(</span><span style="color:#66d9ef">_</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#ae81ff">2.0F</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> updateUserInfo <span style="color:#66d9ef">=</span> at<span style="color:#f92672">[</span><span style="color:#66d9ef">UpdateUserInfo</span><span style="color:#f92672">]</span>      <span style="color:#f92672">(</span><span style="color:#66d9ef">_</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#ae81ff">3.0D</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> deleteUser     <span style="color:#66d9ef">=</span> at<span style="color:#f92672">[</span><span style="color:#66d9ef">DeleteUser</span><span style="color:#f92672">]</span>          <span style="color:#f92672">(</span><span style="color:#66d9ef">_</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#e6db74">&#34;4&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> deleteAllUsers <span style="color:#66d9ef">=</span> at<span style="color:#f92672">[</span><span style="color:#66d9ef">DeleteAllUsers.</span><span style="color:#66d9ef">type</span><span style="color:#f92672">]</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">_</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">List</span><span style="color:#f92672">(</span><span style="color:#ae81ff">5</span><span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//Ad Hoc definition of a merged poly function
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">object</span> <span style="color:#a6e22e">polyFunc</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Poly1</span> <span style="color:#66d9ef">with</span> read <span style="color:#66d9ef">with</span> write
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">def</span> patternMatchForAllRequests<span style="color:#f92672">(</span>all<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">AllRequests</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  all<span style="color:#f92672">.</span>map<span style="color:#f92672">(</span>polyFunc<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h2 id="conclusion">Conclusion</h2>
 <p>So it is possible to use <code>shapeless.Coproduct</code> to define sum types on the analogy of sealed traits.
 But when to use what?</p>
-
 <p>Use sealed traits for:</p>
-
 <ol>
 <li>simple well-defined types like <code>Option[_]</code></li>
 <li>sum types you control</li>
 <li>defining basic pieces that might be composed later(using <code>Generic</code>)</li>
 </ol>
-
 <p>Use <code>shapeless</code> when you need:</p>
-
 <ol>
 <li>to create a sum type from arbitrary set of types - <code>Coproduct</code></li>
 <li>to compose and use sealed traits you don&rsquo;t control - <code>Generic</code></li>
 <li>to have compile time checks for exhaustiveness of pattern-matching for composed sum types - <code>Poly</code> functions</li>
 </ol>
-
 <h2 id="links">Links</h2>
-
 <ul>
-<li><a href="https://github.com/coffius/shapeless-algebraic">Code for this article</a></li>
-<li><a href="https://github.com/milessabin/shapeless/wiki/Feature-overview:-shapeless-2.0.0">Feature overview for shapeless</a></li>
-<li><a href="https://underscore.io/books/shapeless-guide/">The Type Astronaut’s Guide</a> - a free book about <code>shapeless</code></li>
+<li><a href="https://github.com/coffius/shapeless-algebraic" target="_blank">Code for this article</a></li>
+<li><a href="https://github.com/milessabin/shapeless/wiki/Feature-overview:-shapeless-2.0.0" target="_blank">Feature overview for shapeless</a></li>
+<li><a href="https://underscore.io/books/shapeless-guide/" target="_blank">The Type Astronaut’s Guide</a> - a free book about <code>shapeless</code></li>
 </ul>
+  <hr>
+<div class="footer">
+    
+	    
+            <a class="previous-post" href="http://coffius.github.io/posts/hll-in-cassandra/?ref=footer"><span style="font-weight:bold;">« Previous</span><br>HLL counters as Cassandra user defined aggregates</a>
+        
+	    
+            <div class="next-post">
+                <a href="http://coffius.github.io/posts/tf-context-passing/?ref=footer"><span style="font-weight:bold;">Next »</span><br>Context Passing in Tagless Final</a>
+            </div>
+        
+    
 </div>
 
-
-  <footer class="container">
-  <div class="container navigation no-print">
-  <h2>Navigation</h2>
   
-  
-
+    <div class="comments">
     
-    <a class="prev" href="http://coffius.github.io/posts/hll-in-cassandra/" title="HLL counters as Cassandra user defined aggregates">
-      Previous
-    </a>
-    
-
-    
-
-  
-
-
-</div>
-
-  <div class="container comments">
-  <h2>Comments</h2>
-  
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-  (function() {
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
     
     
-    if (window.location.hostname == "localhost")
-      return;
-
-    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
-    dsq.src = '//koff-io.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "koff-io" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-
-</div>
-
-</footer>
-
-</article>
-      <footer id="main-footer" class="container main_footer">
-  
-
-  <div class="container nav foot no-print">
-  
-<a href="http://coffius.github.io/license">license</a>
-
-
-  <a class="toplink" href="#">back to top</a>
-
-</div>
-
-  <div class="container credits">
-  
-<div class="container footline">
-  
-  code with <i class='fa fa-heart'></i>
-
-
-</div>
-
-
-  
-<div class="container copyright">
-  
-  &copy; 2015
-
-
-</div>
-
-
-</div>
-
-</footer>
-
-    </main>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
-<script type="text/javascript">
-  (function() {
-    
-    
-    if (window.location.hostname == "localhost")
-      return;
+</div>
 
-    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
-    dsq.src = '//koff-io.disqus.com/count.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
-</script>
+  
+</div>
+            </main>
+            
+  
+    <div class="article-toc ">
+    <div class="toc-wrapper">
+      <h4 id="contents"></h4>
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#contents">Contents</a></li>
+    <li><a href="#what-is-adt">What is ADT?</a></li>
+    <li><a href="#sealed-trait-as-a-sum-type">Sealed trait as a sum type</a></li>
+    <li><a href="#extending-adts-using-wrapper--evidence">Extending ADTs using Wrapper + Evidence</a></li>
+    <li><a href="#coproduct-as-a-sum-type">Coproduct as a sum type</a></li>
+    <li><a href="#poly1-as-pattern-matching">Poly1 as pattern matching</a></li>
+    <li><a href="#merging-sum-types-with-shapeless">Merging sum types with Shapeless</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+    <li><a href="#links">Links</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
 
+  
 
-
-<script src="http://coffius.github.io/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
-
-    
-  </body>
+        </div>
+    </body>
 </html>
-

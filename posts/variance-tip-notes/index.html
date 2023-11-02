@@ -1,157 +1,227 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-EN" lang="en-EN">
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>Tips about variance in scala  &middot; KOFF.io</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+<script defer language="javascript" type="text/javascript" src="/js/bundle.min.a43a549406127e0715f68083c987d71d0c71054cd57edea77aa709ed9958af6e.js"></script>
+
+
+
+
+
+
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <link rel="icon" href=/favicon.png>
+
+    
+    
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+  
+
+
+<!-- Open Graph image and Twitter Card metadata -->
+
+<title itemprop="name">Koff.io - Tips about variance in scala</title>
+<meta property="og:title" content=Koff.io&#32;-&#32;Tips&#32;about&#32;variance&#32;in&#32;scala />
+<meta name="twitter:title" content=Koff.io&#32;-&#32;Tips&#32;about&#32;variance&#32;in&#32;scala />
+<meta itemprop="name" content=Koff.io&#32;-&#32;Tips&#32;about&#32;variance&#32;in&#32;scala />
+<meta name="application-name" content=Koff.io&#32;-&#32;Tips&#32;about&#32;variance&#32;in&#32;scala />
+<meta property="og:site_name" content="KOFF.io" />
 
 
 <meta name="description" content="" />
+<meta itemprop="description" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:description" content="" />
 
-<meta name="keywords" content="">
 
-<link rel="author" href="http://plus.google.com/+102671541320733671208">
-
-
-<meta property="og:title" content="Tips about variance in scala  &middot; KOFF.io ">
-<meta property="og:site_name" content="KOFF.io"/>
+<base href="http://coffius.github.io/posts/variance-tip-notes/" />
+<link rel="canonical" href="http://coffius.github.io/posts/variance-tip-notes/" itemprop="url" />
+<meta name="url" content="http://coffius.github.io/posts/variance-tip-notes/" />
+<meta name="twitter:url" content="http://coffius.github.io/posts/variance-tip-notes/" />
 <meta property="og:url" content="http://coffius.github.io/posts/variance-tip-notes/" />
-<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:updated_time" content=26011-26-10T1151:18:16&#43;0300 />
+
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href='http://coffius.github.io/sitemap.xml' />
+
+<meta name="robots" content="index,follow" />
+<meta name="googlebot" content="index,follow" />
+
+
+<meta name="twitter:site" content="https://twitter.com/coffius" />
+<meta name="twitter:creator" content="https://twitter.com/coffius" />
+<meta property="fb:admins" content="" />
+
+
+<meta name="apple-mobile-web-app-title" content="KOFF.io" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+
+
+
+
+
 
 
 <meta property="og:type" content="article" />
-<meta property="og:description" content=""/>
-<meta property="og:article:published_time" content="2016-11-26T22:51:18&#43;03:00" />
-<meta property="og:article:modified_time" content="2016-11-26T22:51:18&#43;03:00" />
-
-  
-
-  
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@coffius" />
-<meta name="twitter:creator" content="@coffius" />
-<meta name="twitter:title" content="Tips about variance in scala" />
-<meta name="twitter:description" content="" />
-<meta name="twitter:url" content="http://coffius.github.io/posts/variance-tip-notes/" />
-<meta name="twitter:domain" content="http://coffius.github.io/">
-  
-
-<script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "Article",
-    "headline": "Tips about variance in scala",
-    "author": {
-      "@type": "Person",
-      "name": "http://profiles.google.com/+102671541320733671208?rel=author"
-    },
-    "datePublished": "2016-11-26",
-    "description": "",
-    "wordCount": 1285
-  }
-</script>
+<meta property="article:publisher" content="" />
+<meta property="og:article:published_time" content=26011-26-10T1151:18:16&#43;0300 />
+<meta property="article:published_time" content=26011-26-10T1151:18:16&#43;0300 />
 
 
 
-<link rel="canonical" href="http://coffius.github.io/posts/variance-tip-notes/" />
 
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://coffius.github.io/touch-icon-144-precomposed.png">
-<link href="http://coffius.github.io/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.26" />
 
-  
-<!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
 
-<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="http://coffius.github.io/css/font-awesome.min.css">
-<link rel="stylesheet" href="http://coffius.github.io/css/style.css">
-<link rel="stylesheet" href="http://coffius.github.io/css/highlight/default.css">
 
-  
-  
-	<script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+<meta name="generator" content="Hugo 0.119.0">
 
-	  ga('create', 'UA-66345345-1', 'auto');
-	  ga('send', 'pageview');
 
-	</script>
+    
+    
+
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.8c227569d4bf422323072472267fbadf39d2c717cb88332a8413d08b0b2b17e8.css">
+
+
+    
+    <style>
+    body {
+        --sidebar-bg-color: #202020;
+        --sidebar-img-border-color: #515151;
+        --sidebar-p-color: #909090;
+        --sidebar-h1-color: #FFF;
+        --sidebar-a-color: #FFF;
+        --sidebar-socials-color: #FFF;
+        --text-color: #222;
+        --bkg-color: #FAF9F6;
+        --post-title-color: #303030;
+        --list-color: #5a5a5a;
+        --link-color: #268bd2;
+        --date-color: #515151;
+        --table-border-color: #E5E5E5;
+        --table-stripe-color: #F9F9F9;
+        --code-color: #000;
+        --code-background-color: #E5E5E5;
+        --code-block-color: #fff;
+        --code-block-background-color: #272822;
+        --moon-sun-color: #FFF;
+        --moon-sun-background-color: #515151;
+    }
+    body.dark-theme {
+        --text-color: #eee;
+        --bkg-color: #121212;
+        --post-title-color: #DBE2E9;
+        --list-color: #9d9d9d;
+        --link-color: #268bd2;
+        --date-color: #9a9a9a;
+        --table-border-color: #515151;
+        --table-stripe-color: #202020;
+        --code-color: #fff;
+        --code-background-color: #515151;
+        --code-block-color: #fff;
+        --code-block-background-color: #272822;
+    }
+    body {
+        background-color: var(--bkg-color);
+    }
+</style>
 
 </head>
-<body>
-  <main id="main-wrapper" class="container main_wrapper has-sidebar">
-    <header id="main-header" class="container main_header">
-  <div class="container brand">
-  <div class="container title h1-like">
-  <a class="baselink" href="http://coffius.github.io/">
-  KOFF.io
 
-</a>
-
+    <body class="dark-theme">
+        <div class="wrapper">
+            <aside class="sidebar">
+    <div class="container sidebar-sticky">
+        <div class="light-dark" align="right">
+    <button class="btn-light-dark" title="Toggle light/dark mode">
+        <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M6 .278a.768.768 0 0 1 .08.858a7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277c.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316a.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71C0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+        </svg>
+        <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M8 12a4 4 0 1 0 0-8a4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+        </svg>
+    </button>
 </div>
 
-  
-<div class="container topline">
-  
-  where scala is beloved
-
-
+        <div class="sidebar-about">
+    <h1 class="brand">
+        
+        
+            <a href="http://coffius.github.io/">
+                <h1>KOFF.io</h1>
+            </a>
+        
+    </h1>
+    <p class="lead">
+    where scala is beloved
+    </p>
 </div>
 
+        <nav>
+    <ul class="sidebar-nav">
 
-</div>
+        
+        
+        
 
-  <nav class="container nav primary no-print">
-  
-
-<a class="homelink" href="http://coffius.github.io/">Home</a>
-
-
-  
-<a href="http://coffius.github.io/about">About</a>
-
-<a href="http://coffius.github.io/post" title="Show list of posts">Posts</a>
-
-<a href="http://coffius.github.io/tags" title="Show list of tags">Tags</a>
-
-
+    </ul>
 </nav>
 
-<div class="container nav secondary no-print">
-  
-
-
-<a id="contact-link-github" class="contact_link" href="https://github.com/coffius">
-  <span class="fa fa-github-square"></span><span>github</span></a>
-
-
-
+        
+    <a target="_blank" class="social" title="GitHub" href="https://github.com/coffius">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="-2 -2 24 24">
+            <path fill="currentColor" d="M18.88 1.099C18.147.366 17.265 0 16.233 0H3.746C2.714 0 1.832.366 1.099 1.099C.366 1.832 0 2.714 0 3.746v12.487c0 1.032.366 1.914 1.099 2.647c.733.733 1.615 1.099 2.647 1.099H6.66c.19 0 .333-.007.429-.02a.504.504 0 0 0 .286-.169c.095-.1.143-.245.143-.435l-.007-.885c-.004-.564-.006-1.01-.006-1.34l-.3.052c-.19.035-.43.05-.721.046a5.555 5.555 0 0 1-.904-.091a2.026 2.026 0 0 1-.872-.39a1.651 1.651 0 0 1-.572-.8l-.13-.3a3.25 3.25 0 0 0-.41-.663c-.186-.243-.375-.407-.566-.494l-.09-.065a.956.956 0 0 1-.17-.156a.723.723 0 0 1-.117-.182c-.026-.061-.004-.111.065-.15c.07-.04.195-.059.378-.059l.26.04c.173.034.388.138.643.311a2.1 2.1 0 0 1 .631.677c.2.355.44.626.722.813c.282.186.566.28.852.28c.286 0 .533-.022.742-.065a2.59 2.59 0 0 0 .585-.196c.078-.58.29-1.028.637-1.34a8.907 8.907 0 0 1-1.333-.234a5.314 5.314 0 0 1-1.223-.507a3.5 3.5 0 0 1-1.047-.872c-.277-.347-.505-.802-.683-1.365c-.177-.564-.266-1.215-.266-1.952c0-1.049.342-1.942 1.027-2.68c-.32-.788-.29-1.673.091-2.652c.252-.079.625-.02 1.119.175c.494.195.856.362 1.086.5c.23.14.414.257.553.352a9.233 9.233 0 0 1 2.497-.338c.859 0 1.691.113 2.498.338l.494-.312a6.997 6.997 0 0 1 1.197-.572c.46-.174.81-.221 1.054-.143c.39.98.424 1.864.103 2.653c.685.737 1.028 1.63 1.028 2.68c0 .737-.089 1.39-.267 1.957c-.177.568-.407 1.023-.689 1.366a3.65 3.65 0 0 1-1.053.865c-.42.234-.828.403-1.223.507a8.9 8.9 0 0 1-1.333.235c.45.39.676 1.005.676 1.846v3.11c0 .147.021.266.065.357a.36.36 0 0 0 .208.189c.096.034.18.056.254.064c.074.01.18.013.318.013h2.914c1.032 0 1.914-.366 2.647-1.099c.732-.732 1.099-1.615 1.099-2.647V3.746c0-1.032-.367-1.914-1.1-2.647z"/>
+        </svg>
+    </a>
 
 
 
 
-<a id="contact-link-googleplus" class="contact_link" href="https://plus.google.com/u/0/+102671541320733671208">
-  <span class="fa fa-google-plus-square"></span><span>google+</span></a>
-
-
-
-
-
-<a id="contact-link-twitter" class="contact_link" href="https://twitter.com/coffius">
-  <span class="fa fa-twitter-square"></span><span>twitter</span></a>
+    <a target="_blank" class="social" title="Twitter" href="https://twitter.com/coffius">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M5.032 14.286c6.037 0 9.34-4.837 9.34-9.032c0-.137 0-.274-.01-.41A6.56 6.56 0 0 0 16 3.2c-.6.256-1.235.425-1.885.5a3.207 3.207 0 0 0 1.443-1.757c-.645.37-1.35.63-2.085.77a3.322 3.322 0 0 0-1.862-.958a3.384 3.384 0 0 0-2.082.334a3.223 3.223 0 0 0-1.442 1.49a3.08 3.08 0 0 0-.208 2.03a9.57 9.57 0 0 1-3.747-.963a9.269 9.269 0 0 1-3.018-2.354a3.086 3.086 0 0 0-.36 2.314c.189.787.68 1.475 1.376 1.924a3.344 3.344 0 0 1-1.49-.398v.04c0 .734.263 1.444.743 2.01a3.3 3.3 0 0 0 1.89 1.102c-.483.128-.99.146-1.482.055a3.19 3.19 0 0 0 1.168 1.577a3.36 3.36 0 0 0 1.9.627A6.732 6.732 0 0 1 0 12.86a9.527 9.527 0 0 0 5.032 1.423"/>
+        </svg>
+    </a>
 
 
 
@@ -165,422 +235,316 @@
 
 
 
+
+        <p class="footnote">
+powered by <a target="_blank" href="https://gohugo.io">Hugo</a> | themed with <a target="_blank" href="https://github.com/lukeorth/poison">poison</a>
+    <br>
+    &copy; 2023 coffius. All rights reserved.
+</p>
+
+  </div>
+</aside>
+
+            <main class="content container">
+                <div class="post">
+  <div class="info">
+    <h1 class="post-title">
+        <a href="http://coffius.github.io/posts/variance-tip-notes/">Tips about variance in scala</a>
+    </h1>
+    
+        <time datetime="2016-11-26T22:51:18&#43;0300" class="post-date">
+            November 26, 2016
+        </time>
+    
+    
+    
+    
+    
+    
+    
 </div>
 
-
-  
-
-</header>
-
-
-<article id="main-content" class="container main_content single">
-  <header class="container hat">
-  <h1>Tips about variance in scala
-</h1>
-
-  <div class="metas">
-<time datetime="2016-11-26">26 Nov, 2016</time>
-
-
-  
-  &middot; Read in about 7 min
-  &middot; (1285 Words)
-  <br>
-  
-
-
-</div>
-
-</header>
-
-  <div class="container content">
   <p>Type variance in scala is quite a tricky topic especially if you do not use it often - details might slip out of mind easily in this case. So below you can find very short tips about it which purpose is to remind how it works.</p>
-
-<p>
-All code for examples below can be found <a href="https://github.com/coffius/koffio-examples/tree/master/src/main/scala/io/koff/examples/variance">here</a>.</p>
-
+<p>All code for examples below can be found <a href="https://github.com/coffius/koffio-examples/tree/master/src/main/scala/io/koff/examples/variance" target="_blank">here</a>.</p>
 <h2 id="java-problem">Java problem</h2>
-
 <p>In Java all generic types are covariant and because of it we can write this non-working code:</p>
-
-<p><a href="https://github.com/coffius/koffio-examples/blob/master/src/main/scala/io/koff/examples/variance/CovarianceProblem.java">CovarianceProblem.java</a></p>
-
-<pre><code class="language-scala">/**
- * Example of a problem with covariant types in Java
- */
-public class CovarianceProblem {
-    public static void main(String[] args) {
-        String[] strArray = { &quot;str#1&quot;, &quot;str#2&quot; };
-        Object[] objArray = strArray;
-        objArray[0] = 1; //throws ArrayStoreException: java.lang.Integer
-    }
-}
-</code></pre>
-
-<h2 id="why-do-we-need-it">Why do we need it?</h2>
-
+<p><a href="https://github.com/coffius/koffio-examples/blob/master/src/main/scala/io/koff/examples/variance/CovarianceProblem.java" target="_blank">CovarianceProblem.java</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Example of a problem with covariant types in Java
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span>public <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CovarianceProblem</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    public static void main<span style="color:#f92672">(</span><span style="color:#a6e22e">String</span><span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">String</span><span style="color:#f92672">[]</span> strArray <span style="color:#66d9ef">=</span> <span style="color:#f92672">{</span> <span style="color:#e6db74">&#34;str#1&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;str#2&#34;</span> <span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Object</span><span style="color:#f92672">[]</span> objArray <span style="color:#66d9ef">=</span> strArray<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        objArray<span style="color:#f92672">[</span><span style="color:#960050;background-color:#1e0010">0</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">;</span> <span style="color:#75715e">//throws ArrayStoreException: java.lang.Integer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h2 id="why-do-we-need-it">Why do we need it?</h2>
 <p>In order to deal with the problem above we need type variance to define and distinguish different relations between generic classes which specific types have inherited relationships between them.</p>
-
 <p>There are three possible options:</p>
-
 <ul>
 <li>Invariant</li>
 <li>Covariant</li>
 <li>Contravariant</li>
 </ul>
-
 <h2 id="examples">Examples</h2>
-
-<p>Let&rsquo;s use this simple class tree for examples(in <a href="https://github.com/coffius/koffio-examples/blob/master/src/main/scala/io/koff/examples/variance/Variance.scala">Variance.scala</a>):</p>
-
-<pre><code class="language-scala">class GrandParent
-class Parent extends GrandParent
-class Child1 extends Parent
-class Child2 extends Parent
-</code></pre>
-
-<h3 id="invariant">Invariant</h3>
-
+<p>Let&rsquo;s use this simple class tree for examples(in <a href="https://github.com/coffius/koffio-examples/blob/master/src/main/scala/io/koff/examples/variance/Variance.scala" target="_blank">Variance.scala</a>):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GrandParent</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Parent</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">GrandParent</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Child1</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Parent</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Child2</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Parent</span>
+</span></span></code></pre></div><h3 id="invariant">Invariant</h3>
 <p>Invariant means that there is no relation between <code>InVariant[Parent]</code> and <code>InVariant[Child1]</code> or <code>InVariant[Child2]</code></p>
-
-<pre><code class="language-scala">val parentInvariant = new InVariant[Parent]
-// Next lines cannot be compiled because of invariant
-//val child1Invariant: InVariant[Child1] = parentInvariant
-//val child2Invariant: InVariant[Child2] = parentInvariant
-</code></pre>
-
-<h3 id="covariant">Covariant</h3>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">val</span> parentInvariant <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">InVariant</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Parent</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Next lines cannot be compiled because of invariant
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//val child1Invariant: InVariant[Child1] = parentInvariant
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//val child2Invariant: InVariant[Child2] = parentInvariant
+</span></span></span></code></pre></div><h3 id="covariant">Covariant</h3>
 <p>Covariant means that <code>CoVariant[Child1]</code> and <code>CoVariant[Child2]</code> are subclasses of <code>CoVariant[Parent]</code></p>
-
-<pre><code class="language-scala">val child1Covariant = new CoVariant[Child1]
-val child2Covariant = new CoVariant[Child2]
-//We can use values of CoVariant[Child1|Child2] as CoVariant[Parent]
-val parentCovariant1: CoVariant[Parent] = child1Covariant
-val parentCovariant2: CoVariant[Parent] = child2Covariant
-</code></pre>
-
-<p>Example of correct usage:</p>
-
-<pre><code class="language-scala">//we can use a covariant type as
-class Producer[+A](val value: A) {          // a type for immutable values
-  private[this] var variable: A = ???       // a type for private mutable variables
-  def simpleProduce(): A = ???              // a type for method outputs
-  def complexProduce[B &gt;: A](b: B): A = ??? // a lower type bound
-}
-</code></pre>
-
-<p>Example of incorrect usage:</p>
-
-<pre><code class="language-scala">//code below cannot be compiled
-//we can not use a covariant type as
-class Producer[+A](var variable: A) { // a type for public mutable variables
-  def consume(a: A): Unit = ???       // a type for method parameters
-}
-</code></pre>
-
-<h3 id="contravariant">Contravariant</h3>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">val</span> child1Covariant <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">CoVariant</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Child1</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">val</span> child2Covariant <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">CoVariant</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Child2</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//We can use values of CoVariant[Child1|Child2] as CoVariant[Parent]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">val</span> parentCovariant1<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">CoVariant</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Parent</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> child1Covariant
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">val</span> parentCovariant2<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">CoVariant</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Parent</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> child2Covariant
+</span></span></code></pre></div><p>Example of correct usage:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#75715e">//we can use a covariant type as
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Producer</span><span style="color:#f92672">[</span><span style="color:#66d9ef">+A</span><span style="color:#f92672">](</span><span style="color:#66d9ef">val</span> value<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">A</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>          <span style="color:#75715e">// a type for immutable values
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">private</span><span style="color:#f92672">[</span><span style="color:#66d9ef">this</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">var</span> variable<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">A</span> <span style="color:#f92672">=</span> <span style="color:#f92672">???</span>       <span style="color:#75715e">// a type for private mutable variables
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">def</span> simpleProduce<span style="color:#f92672">()</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">A</span> <span style="color:#f92672">=</span> <span style="color:#f92672">???</span>              <span style="color:#75715e">// a type for method outputs
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">def</span> complexProduce<span style="color:#f92672">[</span><span style="color:#66d9ef">B</span> <span style="color:#66d9ef">&gt;:</span> <span style="color:#66d9ef">A</span><span style="color:#f92672">](</span>b<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">B</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">A</span> <span style="color:#f92672">=</span> <span style="color:#f92672">???</span> <span style="color:#75715e">// a lower type bound
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>Example of incorrect usage:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#75715e">//code below cannot be compiled
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//we can not use a covariant type as
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Producer</span><span style="color:#f92672">[</span><span style="color:#66d9ef">+A</span><span style="color:#f92672">](</span><span style="color:#66d9ef">var</span> variable<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">A</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span> <span style="color:#75715e">// a type for public mutable variables
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">def</span> consume<span style="color:#f92672">(</span>a<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">A</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span> <span style="color:#f92672">=</span> <span style="color:#f92672">???</span>       <span style="color:#75715e">// a type for method parameters
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h3 id="contravariant">Contravariant</h3>
 <p>Contravariant means that <code>ContraVariant[Parent]</code> is a subclass of <code>ContraVariant[Child2]</code> and <code>ContraVariant[Child2]</code></p>
-
-<pre><code class="language-scala">val parentContravariant = new ContraVariant[Parent]
-//Looks awkward but it is totally legit :)
-val child1Contravariant: ContraVariant[Child1] = parentContravariant
-val child2Contravariant: ContraVariant[Child2] = parentContravariant
-</code></pre>
-
-<p>Example of correct usage:</p>
-
-<pre><code class="language-scala">//we can use a contravariant type as
-class Consumer[-A]() {
-  private[this] var variable: A = ???   // a type for private mutable variables
-  def consume(a: A): Unit = ???         // a type for method parameters
-  def complex[B &lt;: A](b: B): Unit = ??? // a upper type bound
-}
-</code></pre>
-
-<p>Example of incorrect usage:</p>
-
-<pre><code class="language-scala">//code below cannot be compiled
-//we can not use a contravariant type as
-class Producer[-A](val value: A, var variable: A) { // a type for public immutable values and publis mutable variables
-  def produce(): A = ???                            // a type for for method outputs
-  def complexProduce[B &gt;: A](b: B): A = ???         // a lower type bound
-}
-</code></pre>
-
-<h3 id="how-to-use-contravariance">How to use Contravariance</h3>
-
-<p>Code for this part is <a href="https://github.com/coffius/koffio-examples/blob/master/src/main/scala/io/koff/examples/variance/example/HandlingEventsExample.scala">here</a>.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">val</span> parentContravariant <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ContraVariant</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Parent</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//Looks awkward but it is totally legit :)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">val</span> child1Contravariant<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">ContraVariant</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Child1</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> parentContravariant
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">val</span> child2Contravariant<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">ContraVariant</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Child2</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> parentContravariant
+</span></span></code></pre></div><p>Example of correct usage:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#75715e">//we can use a contravariant type as
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Consumer</span><span style="color:#f92672">[</span><span style="color:#66d9ef">-A</span><span style="color:#f92672">]()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span><span style="color:#f92672">[</span><span style="color:#66d9ef">this</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">var</span> variable<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">A</span> <span style="color:#f92672">=</span> <span style="color:#f92672">???</span>   <span style="color:#75715e">// a type for private mutable variables
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">def</span> consume<span style="color:#f92672">(</span>a<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">A</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span> <span style="color:#f92672">=</span> <span style="color:#f92672">???</span>         <span style="color:#75715e">// a type for method parameters
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">def</span> complex<span style="color:#f92672">[</span><span style="color:#66d9ef">B</span> <span style="color:#66d9ef">&lt;:</span> <span style="color:#66d9ef">A</span><span style="color:#f92672">](</span>b<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">B</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span> <span style="color:#f92672">=</span> <span style="color:#f92672">???</span> <span style="color:#75715e">// a upper type bound
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>Example of incorrect usage:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#75715e">//code below cannot be compiled
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//we can not use a contravariant type as
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Producer</span><span style="color:#f92672">[</span><span style="color:#66d9ef">-A</span><span style="color:#f92672">](</span><span style="color:#66d9ef">val</span> value<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">A</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">var</span> variable<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">A</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span> <span style="color:#75715e">// a type for public immutable values and publis mutable variables
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">def</span> produce<span style="color:#f92672">()</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">A</span> <span style="color:#f92672">=</span> <span style="color:#f92672">???</span>                            <span style="color:#75715e">// a type for for method outputs
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">def</span> complexProduce<span style="color:#f92672">[</span><span style="color:#66d9ef">B</span> <span style="color:#66d9ef">&gt;:</span> <span style="color:#66d9ef">A</span><span style="color:#f92672">](</span>b<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">B</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">A</span> <span style="color:#f92672">=</span> <span style="color:#f92672">???</span>         <span style="color:#75715e">// a lower type bound
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h3 id="how-to-use-contravariance">How to use Contravariance</h3>
+<p>Code for this part is <a href="https://github.com/coffius/koffio-examples/blob/master/src/main/scala/io/koff/examples/variance/example/HandlingEventsExample.scala" target="_blank">here</a>.</p>
 <p>Contravariance probably is a bit counterintuitive thing but the next example should help to understand when it is possible to use it.
 Let&rsquo;s imagine that we want to implement our own type-safe event system with a handler register and event handlers.
 The classic thing but with one requirement - we want to be able to handle events in a generalised way. More details below.</p>
-
 <p>So we have <code>Event</code> trait as a base trait for all possible events, <code>UpdateEvent</code> - for events about update operations and several more specific traits and classes(in <code>Event.scala</code>)</p>
-
-<pre><code class="language-scala">/**
-  * The very basic trait to describe an event
-  */
-trait Event
-/**
-  * The marker trait for events for data updates
-  */
-trait UpdateEvent extends Event{
-  /** Id of the updated entity */
-  def entityId: UUID
-}
-/**
-  * The marker trait for events about wares
-  */
-trait WareEvent extends Event {
-  /**Id the ware which is a reason of the event */
-  def wareId: UUID
-}
-/**
-  * The marker trait for events about users
-  */
-trait UserEvent extends Event {
-  /** Email of the user who is a reason of the event */
-  def email: String
-}
-/*
- * Specific events
- */
-case class ChangeWarePriceEvent(wareId: UUID,
-                                oldPrice: BigDecimal,
-                                newPrice: BigDecimal) extends WareEvent with UpdateEvent {
-  override def entityId: UUID = wareId
-}
-
-case class ChangeUserPhoneEvent(userId: UUID, userEmail: String, oldPhone: String, newPhone: String) 
-	extends UserEvent 
-	with UpdateEvent 
-{
-  override def email: String = userEmail
-  /* Let's say that a user email is an unique identifier of a user */
-  override def entityId: UUID = userId
-}
-</code></pre>
-
-<p>Next thing is handling events. And as it was said before we want to handle events in a generalised way which means next:</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  * The very basic trait to describe an event
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">Event</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  * The marker trait for events for data updates
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">UpdateEvent</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Event</span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/** Id of the updated entity */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> entityId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">UUID</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  * The marker trait for events about wares
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">WareEvent</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Event</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/**Id the ware which is a reason of the event */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> wareId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">UUID</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  * The marker trait for events about users
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">UserEvent</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Event</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/** Email of the user who is a reason of the event */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> email<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Specific events
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ChangeWarePriceEvent</span><span style="color:#f92672">(</span>wareId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">UUID</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>                                oldPrice<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">BigDecimal</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>                                newPrice<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">BigDecimal</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">WareEvent</span> <span style="color:#66d9ef">with</span> <span style="color:#a6e22e">UpdateEvent</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">def</span> entityId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">UUID</span> <span style="color:#f92672">=</span> wareId
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ChangeUserPhoneEvent</span><span style="color:#f92672">(</span>userId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">UUID</span><span style="color:#f92672">,</span> userEmail<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> oldPhone<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> newPhone<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span> 
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">UserEvent</span> 
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">with</span> <span style="color:#a6e22e">UpdateEvent</span> 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">def</span> email<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span> <span style="color:#f92672">=</span> userEmail
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/* Let&#39;s say that a user email is an unique identifier of a user */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">def</span> entityId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">UUID</span> <span style="color:#f92672">=</span> userId
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>Next thing is handling events. And as it was said before we want to handle events in a generalised way which means next:</p>
 <ul>
 <li>We have a generalised event handler <code>ConsoleLogEventHandler</code> - can handle all possible types of events</li>
 </ul>
-
-<pre><code class="language-scala">/**
-  * Logs all events to stdout using .toString
-  */
-class ConsoleLogEventHandler extends EventHandler[Event]{
-  override def handle(event: Event): Unit = {
-    println(s&quot;logger - event has been received: [$event]&quot;)
-  }
-}
-</code></pre>
-
-<ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  * Logs all events to stdout using .toString
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ConsoleLogEventHandler</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">EventHandler</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Event</span><span style="color:#f92672">]{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">def</span> handle<span style="color:#f92672">(</span>event<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Event</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span> <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    println<span style="color:#f92672">(</span><span style="color:#e6db74">s&#34;logger - event has been received: [</span><span style="color:#e6db74">$event</span><span style="color:#e6db74">]&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><ul>
 <li>We have specialised handlers like <code>DiscountEventHandler</code> or <code>CheckNumberEventHandler</code> - can handle just one type <code>ChangeWarePriceEvent</code> or <code>ChangeUserPhoneEvent</code></li>
 </ul>
-
-<pre><code class="language-scala">/**
-  * Notifies users about discounts (the new price of a ware is less than the old one)
-  */
-class DiscountEventHandler extends EventHandler[ChangeWarePriceEvent]{
-  override def handle(event: ChangeWarePriceEvent): Unit = {
-    if(event.oldPrice &gt; event.newPrice) {
-      val discount = 1 - event.newPrice / event.oldPrice
-      println(s&quot;there is a discount[${discount * 100} %] for the ware[id: ${event.wareId}]&quot;)
-    }
-  }
-}
-/**
-  * Sends SMS to the new phone number if a user change it.
-  */
-class CheckNumberEventHandler extends EventHandler[ChangeUserPhoneEvent]{
-  override def handle(event: ChangeUserPhoneEvent): Unit = {
-    println(s&quot;SMS has been sent to the phone:${event.newPhone}&quot;)
-  }
-}
-</code></pre>
-
-<ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  * Notifies users about discounts (the new price of a ware is less than the old one)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DiscountEventHandler</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">EventHandler</span><span style="color:#f92672">[</span><span style="color:#66d9ef">ChangeWarePriceEvent</span><span style="color:#f92672">]{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">def</span> handle<span style="color:#f92672">(</span>event<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">ChangeWarePriceEvent</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span> <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>event<span style="color:#f92672">.</span>oldPrice <span style="color:#f92672">&gt;</span> event<span style="color:#f92672">.</span>newPrice<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">val</span> discount <span style="color:#66d9ef">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> event<span style="color:#f92672">.</span>newPrice <span style="color:#f92672">/</span> event<span style="color:#f92672">.</span>oldPrice
+</span></span><span style="display:flex;"><span>      println<span style="color:#f92672">(</span><span style="color:#e6db74">s&#34;there is a discount[</span><span style="color:#e6db74">${</span>discount <span style="color:#f92672">*</span> <span style="color:#ae81ff">100</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> %] for the ware[id: </span><span style="color:#e6db74">${</span>event<span style="color:#f92672">.</span>wareId<span style="color:#e6db74">}</span><span style="color:#e6db74">]&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  * Sends SMS to the new phone number if a user change it.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CheckNumberEventHandler</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">EventHandler</span><span style="color:#f92672">[</span><span style="color:#66d9ef">ChangeUserPhoneEvent</span><span style="color:#f92672">]{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">def</span> handle<span style="color:#f92672">(</span>event<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">ChangeUserPhoneEvent</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span> <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    println<span style="color:#f92672">(</span><span style="color:#e6db74">s&#34;SMS has been sent to the phone:</span><span style="color:#e6db74">${</span>event<span style="color:#f92672">.</span>newPhone<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><ul>
 <li>We want to add several handlers for an event type and make it type-safely:</li>
 </ul>
-
-<pre><code class="language-scala">// ok
-handlerRegister.addHandler(classOf[ChangeUserPhoneEvent], ConsoleLogEventHandler)
-handlerRegister.addHandler(classOf[ChangeWarePriceEvent], ConsoleLogEventHandler)
-handlerRegister.addHandler(classOf[ChangeUserPhoneEvent], CheckNumberEventHandler)
-handlerRegister.addHandler(classOf[ChangeWarePriceEvent], DiscountEventHandler)
-
-// generates compilation errors
-handlerRegister.addHandler(classOf[ChangeUserPhoneEvent], DiscountEventHandler)
-</code></pre>
-
-<p>In order to make it possible we should use a contravariant event handler:</p>
-
-<pre><code class="language-scala">/**
-  * Basic trait for an event handler
-  */
-trait EventHandler[-T &lt;: Event] {
-  /**
-    * Handle a particular event
-    * @param event an event to handle
-    */
-  def handle(event: T): Unit
-}
-</code></pre>
-
-<p>And define <code>addHandler(...)</code> as:</p>
-
-<pre><code class="language-scala">/**
-  * Adds a handler for a particular type of events
-  * @param eventType the class of events handled by the eventHandler
-  * @param eventHandler the event handler which should handle all events of the specific type(eventType)
-  * @tparam E type of the event we want to handle
-  * @tparam T intermediate type.
-  *           Means that we want to handle an event of type `E` as `T`.
-  *           And `T` should be between Event and `E` in the chain of inheritance.
-  *           If we have such types: `Event &lt;- SubEventType &lt;- SubSubEventType &lt;- ... &lt;- E`
-  *           then `T` can be one of these types
-  * @tparam H type of the handler which should handle all events of type `E`
-  */
-def addHandler[E &lt;: Event, T &gt;: E &lt;: Event, H &lt;: EventHandler[T]](eventType: Class[E], eventHandler: H): Unit
-</code></pre>
-
-<p>This is possible only if we use contravariance for EventHandler. If we define it like invariant(<code>EventHandler[T &lt;: Event]</code>) and use generalised handlers then we will have errors like that:</p>
-
-<pre><code class="language-scala">Error:(12, 19) inferred type arguments [ChangeUserPhoneEvent, ChangeUserPhoneEvent, ConsoleLogEventHandler.type] do not conform to method addHandler's type parameter bounds [E &lt;: Event, T &gt;: E &lt;: Event, H &lt;: EventHandler[T]]
-  handlerRegister.addHandler(classOf[ChangeUserPhoneEvent], ConsoleLogEventHandler)
-  
-Error:(12, 37) type mismatch;
- found   : Class[ChangeUserPhoneEvent](classOf[ChangeUserPhoneEvent])
- required: Class[E]
-  handlerRegister.addHandler(classOf[ChangeUserPhoneEvent], ConsoleLogEventHandler)
-  
-Error:(12, 61) type mismatch;
- found   : ConsoleLogEventHandler.type
- required: H
-  handlerRegister.addHandler(classOf[ChangeUserPhoneEvent], ConsoleLogEventHandler)
-</code></pre>
-
-<p>And of course it is also impossible to use covariance in this case.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#75715e">// ok
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>handlerRegister<span style="color:#f92672">.</span>addHandler<span style="color:#f92672">(</span>classOf<span style="color:#f92672">[</span><span style="color:#66d9ef">ChangeUserPhoneEvent</span><span style="color:#f92672">],</span> <span style="color:#a6e22e">ConsoleLogEventHandler</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>handlerRegister<span style="color:#f92672">.</span>addHandler<span style="color:#f92672">(</span>classOf<span style="color:#f92672">[</span><span style="color:#66d9ef">ChangeWarePriceEvent</span><span style="color:#f92672">],</span> <span style="color:#a6e22e">ConsoleLogEventHandler</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>handlerRegister<span style="color:#f92672">.</span>addHandler<span style="color:#f92672">(</span>classOf<span style="color:#f92672">[</span><span style="color:#66d9ef">ChangeUserPhoneEvent</span><span style="color:#f92672">],</span> <span style="color:#a6e22e">CheckNumberEventHandler</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>handlerRegister<span style="color:#f92672">.</span>addHandler<span style="color:#f92672">(</span>classOf<span style="color:#f92672">[</span><span style="color:#66d9ef">ChangeWarePriceEvent</span><span style="color:#f92672">],</span> <span style="color:#a6e22e">DiscountEventHandler</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// generates compilation errors
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>handlerRegister<span style="color:#f92672">.</span>addHandler<span style="color:#f92672">(</span>classOf<span style="color:#f92672">[</span><span style="color:#66d9ef">ChangeUserPhoneEvent</span><span style="color:#f92672">],</span> <span style="color:#a6e22e">DiscountEventHandler</span><span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>In order to make it possible we should use a contravariant event handler:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  * Basic trait for an event handler
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">EventHandler</span><span style="color:#f92672">[</span><span style="color:#66d9ef">-T</span> <span style="color:#66d9ef">&lt;:</span> <span style="color:#66d9ef">Event</span><span style="color:#f92672">]</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    * Handle a particular event
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    * @param event an event to handle
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> handle<span style="color:#f92672">(</span>event<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">T</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>And define <code>addHandler(...)</code> as:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  * Adds a handler for a particular type of events
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  * @param eventType the class of events handled by the eventHandler
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  * @param eventHandler the event handler which should handle all events of the specific type(eventType)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  * @tparam E type of the event we want to handle
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  * @tparam T intermediate type.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  *           Means that we want to handle an event of type `E` as `T`.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  *           And `T` should be between Event and `E` in the chain of inheritance.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  *           If we have such types: `Event &lt;- SubEventType &lt;- SubSubEventType &lt;- ... &lt;- E`
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  *           then `T` can be one of these types
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  * @tparam H type of the handler which should handle all events of type `E`
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> addHandler<span style="color:#f92672">[</span><span style="color:#66d9ef">E</span> <span style="color:#66d9ef">&lt;:</span> <span style="color:#66d9ef">Event</span>, <span style="color:#66d9ef">T</span> <span style="color:#66d9ef">&gt;:</span> <span style="color:#66d9ef">E</span> <span style="color:#66d9ef">&lt;:</span> <span style="color:#66d9ef">Event</span>, <span style="color:#66d9ef">H</span> <span style="color:#66d9ef">&lt;:</span> <span style="color:#66d9ef">EventHandler</span><span style="color:#f92672">[</span><span style="color:#66d9ef">T</span><span style="color:#f92672">]](</span>eventType<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Class</span><span style="color:#f92672">[</span><span style="color:#66d9ef">E</span><span style="color:#f92672">],</span> eventHandler<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">H</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span>
+</span></span></code></pre></div><p>This is possible only if we use contravariance for EventHandler. If we define it like invariant(<code>EventHandler[T &lt;: Event]</code>) and use generalised handlers then we will have errors like that:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#a6e22e">Error</span><span style="color:#66d9ef">:</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">12</span><span style="color:#f92672">,</span> <span style="color:#960050;background-color:#1e0010">19</span><span style="color:#f92672">)</span> inferred <span style="color:#66d9ef">type</span> <span style="color:#66d9ef">arguments</span> <span style="color:#f92672">[</span><span style="color:#66d9ef">ChangeUserPhoneEvent</span>, <span style="color:#66d9ef">ChangeUserPhoneEvent</span>, <span style="color:#66d9ef">ConsoleLogEventHandler.</span><span style="color:#66d9ef">type</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">do</span> not conform to method addHandler&#39;s <span style="color:#66d9ef">type</span> <span style="color:#66d9ef">parameter</span> <span style="color:#66d9ef">bounds</span> <span style="color:#f92672">[</span><span style="color:#66d9ef">E</span> <span style="color:#66d9ef">&lt;:</span> <span style="color:#66d9ef">Event</span>, <span style="color:#66d9ef">T</span> <span style="color:#66d9ef">&gt;:</span> <span style="color:#66d9ef">E</span> <span style="color:#66d9ef">&lt;:</span> <span style="color:#66d9ef">Event</span>, <span style="color:#66d9ef">H</span> <span style="color:#66d9ef">&lt;:</span> <span style="color:#66d9ef">EventHandler</span><span style="color:#f92672">[</span><span style="color:#66d9ef">T</span><span style="color:#f92672">]]</span>
+</span></span><span style="display:flex;"><span>  handlerRegister<span style="color:#f92672">.</span>addHandler<span style="color:#f92672">(</span>classOf<span style="color:#f92672">[</span><span style="color:#66d9ef">ChangeUserPhoneEvent</span><span style="color:#f92672">],</span> <span style="color:#a6e22e">ConsoleLogEventHandler</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Error</span><span style="color:#66d9ef">:</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">12</span><span style="color:#f92672">,</span> <span style="color:#960050;background-color:#1e0010">37</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">type</span> <span style="color:#66d9ef">mismatch</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span> found   <span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Class</span><span style="color:#f92672">[</span><span style="color:#66d9ef">ChangeUserPhoneEvent</span><span style="color:#f92672">](</span>classOf<span style="color:#f92672">[</span><span style="color:#66d9ef">ChangeUserPhoneEvent</span><span style="color:#f92672">])</span>
+</span></span><span style="display:flex;"><span> required<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Class</span><span style="color:#f92672">[</span><span style="color:#66d9ef">E</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>  handlerRegister<span style="color:#f92672">.</span>addHandler<span style="color:#f92672">(</span>classOf<span style="color:#f92672">[</span><span style="color:#66d9ef">ChangeUserPhoneEvent</span><span style="color:#f92672">],</span> <span style="color:#a6e22e">ConsoleLogEventHandler</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Error</span><span style="color:#66d9ef">:</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">12</span><span style="color:#f92672">,</span> <span style="color:#960050;background-color:#1e0010">61</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">type</span> <span style="color:#66d9ef">mismatch</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span> found   <span style="color:#66d9ef">:</span> <span style="color:#66d9ef">ConsoleLogEventHandler.type</span>
+</span></span><span style="display:flex;"><span> required<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">H</span>
+</span></span><span style="display:flex;"><span>  handlerRegister<span style="color:#f92672">.</span>addHandler<span style="color:#f92672">(</span>classOf<span style="color:#f92672">[</span><span style="color:#66d9ef">ChangeUserPhoneEvent</span><span style="color:#f92672">],</span> <span style="color:#a6e22e">ConsoleLogEventHandler</span><span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>And of course it is also impossible to use covariance in this case.</p>
 <h2 id="links">Links</h2>
-
 <ul>
-<li><a href="http://docs.scala-lang.org/tutorials/tour/variances.html">Official tutorial for variance</a></li>
-<li><a href="https://github.com/coffius/koffio-examples/tree/master/src/main/scala/io/koff/examples/variance">Examples for this article</a></li>
-<li><a href="https://twitter.github.io/scala_school/type-basics.html#variance">About variance in Scala school from Twitter</a></li>
+<li><a href="http://docs.scala-lang.org/tutorials/tour/variances.html" target="_blank">Official tutorial for variance</a></li>
+<li><a href="https://github.com/coffius/koffio-examples/tree/master/src/main/scala/io/koff/examples/variance" target="_blank">Examples for this article</a></li>
+<li><a href="https://twitter.github.io/scala_school/type-basics.html#variance" target="_blank">About variance in Scala school from Twitter</a></li>
 </ul>
+  <hr>
+<div class="footer">
+    
+	    
+            <a class="previous-post" href="http://coffius.github.io/posts/pagination-and-streams/?ref=footer"><span style="font-weight:bold;">« Previous</span><br>Pagination and Streams</a>
+        
+	    
+            <div class="next-post">
+                <a href="http://coffius.github.io/posts/hll-in-cassandra/?ref=footer"><span style="font-weight:bold;">Next »</span><br>HLL counters as Cassandra user defined aggregates</a>
+            </div>
+        
+    
 </div>
 
-
-  <footer class="container">
-  <div class="container navigation no-print">
-  <h2>Navigation</h2>
   
-  
-
+    <div class="comments">
     
-    <a class="prev" href="http://coffius.github.io/posts/pagination-and-streams/" title="Pagination and Streams">
-      Previous
-    </a>
-    
-
-    
-    <a class="next" href="http://coffius.github.io/posts/hll-in-cassandra/" title="HLL counters as Cassandra user defined aggregates">
-      Next
-    </a>
-    
-
-  
-
-
-</div>
-
-  <div class="container comments">
-  <h2>Comments</h2>
-  
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-  (function() {
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
     
     
-    if (window.location.hostname == "localhost")
-      return;
-
-    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
-    dsq.src = '//koff-io.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "koff-io" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-
-</div>
-
-</footer>
-
-</article>
-      <footer id="main-footer" class="container main_footer">
-  
-
-  <div class="container nav foot no-print">
-  
-<a href="http://coffius.github.io/license">license</a>
-
-
-  <a class="toplink" href="#">back to top</a>
-
-</div>
-
-  <div class="container credits">
-  
-<div class="container footline">
-  
-  code with <i class='fa fa-heart'></i>
-
-
-</div>
-
-
-  
-<div class="container copyright">
-  
-  &copy; 2015
-
-
-</div>
-
-
-</div>
-
-</footer>
-
-    </main>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
-<script type="text/javascript">
-  (function() {
-    
-    
-    if (window.location.hostname == "localhost")
-      return;
+</div>
 
-    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
-    dsq.src = '//koff-io.disqus.com/count.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
-</script>
+  
+</div>
+            </main>
+            
+  
+    <div class="article-toc ">
+    <div class="toc-wrapper">
+      <h4 id="contents"></h4>
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#java-problem">Java problem</a></li>
+    <li><a href="#why-do-we-need-it">Why do we need it?</a></li>
+    <li><a href="#examples">Examples</a>
+      <ul>
+        <li><a href="#invariant">Invariant</a></li>
+        <li><a href="#covariant">Covariant</a></li>
+        <li><a href="#contravariant">Contravariant</a></li>
+        <li><a href="#how-to-use-contravariance">How to use Contravariance</a></li>
+      </ul>
+    </li>
+    <li><a href="#links">Links</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
 
+  
 
-
-<script src="http://coffius.github.io/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
-
-    
-  </body>
+        </div>
+    </body>
 </html>
-

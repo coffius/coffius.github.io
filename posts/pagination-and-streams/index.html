@@ -1,157 +1,227 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-EN" lang="en-EN">
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>Pagination and Streams  &middot; KOFF.io</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+<script defer language="javascript" type="text/javascript" src="/js/bundle.min.a43a549406127e0715f68083c987d71d0c71054cd57edea77aa709ed9958af6e.js"></script>
+
+
+
+
+
+
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <link rel="icon" href=/favicon.png>
+
+    
+    
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+  
+
+
+<!-- Open Graph image and Twitter Card metadata -->
+
+<title itemprop="name">Koff.io - Pagination and Streams</title>
+<meta property="og:title" content=Koff.io&#32;-&#32;Pagination&#32;and&#32;Streams />
+<meta name="twitter:title" content=Koff.io&#32;-&#32;Pagination&#32;and&#32;Streams />
+<meta itemprop="name" content=Koff.io&#32;-&#32;Pagination&#32;and&#32;Streams />
+<meta name="application-name" content=Koff.io&#32;-&#32;Pagination&#32;and&#32;Streams />
+<meta property="og:site_name" content="KOFF.io" />
 
 
 <meta name="description" content="" />
+<meta itemprop="description" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:description" content="" />
 
-<meta name="keywords" content="">
 
-<link rel="author" href="http://plus.google.com/+102671541320733671208">
-
-
-<meta property="og:title" content="Pagination and Streams  &middot; KOFF.io ">
-<meta property="og:site_name" content="KOFF.io"/>
+<base href="http://coffius.github.io/posts/pagination-and-streams/" />
+<link rel="canonical" href="http://coffius.github.io/posts/pagination-and-streams/" itemprop="url" />
+<meta name="url" content="http://coffius.github.io/posts/pagination-and-streams/" />
+<meta name="twitter:url" content="http://coffius.github.io/posts/pagination-and-streams/" />
 <meta property="og:url" content="http://coffius.github.io/posts/pagination-and-streams/" />
-<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:updated_time" content=10004-10-12T420:00:16&#43;0300 />
+
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href='http://coffius.github.io/sitemap.xml' />
+
+<meta name="robots" content="index,follow" />
+<meta name="googlebot" content="index,follow" />
+
+
+<meta name="twitter:site" content="https://twitter.com/coffius" />
+<meta name="twitter:creator" content="https://twitter.com/coffius" />
+<meta property="fb:admins" content="" />
+
+
+<meta name="apple-mobile-web-app-title" content="KOFF.io" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+
+
+
+
+
 
 
 <meta property="og:type" content="article" />
-<meta property="og:description" content=""/>
-<meta property="og:article:published_time" content="2016-04-10T00:20:00&#43;03:00" />
-<meta property="og:article:modified_time" content="2016-04-10T00:20:00&#43;03:00" />
-
-  
-
-  
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@coffius" />
-<meta name="twitter:creator" content="@coffius" />
-<meta name="twitter:title" content="Pagination and Streams" />
-<meta name="twitter:description" content="" />
-<meta name="twitter:url" content="http://coffius.github.io/posts/pagination-and-streams/" />
-<meta name="twitter:domain" content="http://coffius.github.io/">
-  
-
-<script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "Article",
-    "headline": "Pagination and Streams",
-    "author": {
-      "@type": "Person",
-      "name": "http://profiles.google.com/+102671541320733671208?rel=author"
-    },
-    "datePublished": "2016-04-10",
-    "description": "",
-    "wordCount": 1182
-  }
-</script>
+<meta property="article:publisher" content="" />
+<meta property="og:article:published_time" content=10004-10-12T420:00:16&#43;0300 />
+<meta property="article:published_time" content=10004-10-12T420:00:16&#43;0300 />
 
 
 
-<link rel="canonical" href="http://coffius.github.io/posts/pagination-and-streams/" />
 
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://coffius.github.io/touch-icon-144-precomposed.png">
-<link href="http://coffius.github.io/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.26" />
 
-  
-<!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
 
-<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="http://coffius.github.io/css/font-awesome.min.css">
-<link rel="stylesheet" href="http://coffius.github.io/css/style.css">
-<link rel="stylesheet" href="http://coffius.github.io/css/highlight/default.css">
 
-  
-  
-	<script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+<meta name="generator" content="Hugo 0.119.0">
 
-	  ga('create', 'UA-66345345-1', 'auto');
-	  ga('send', 'pageview');
 
-	</script>
+    
+    
+
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.8c227569d4bf422323072472267fbadf39d2c717cb88332a8413d08b0b2b17e8.css">
+
+
+    
+    <style>
+    body {
+        --sidebar-bg-color: #202020;
+        --sidebar-img-border-color: #515151;
+        --sidebar-p-color: #909090;
+        --sidebar-h1-color: #FFF;
+        --sidebar-a-color: #FFF;
+        --sidebar-socials-color: #FFF;
+        --text-color: #222;
+        --bkg-color: #FAF9F6;
+        --post-title-color: #303030;
+        --list-color: #5a5a5a;
+        --link-color: #268bd2;
+        --date-color: #515151;
+        --table-border-color: #E5E5E5;
+        --table-stripe-color: #F9F9F9;
+        --code-color: #000;
+        --code-background-color: #E5E5E5;
+        --code-block-color: #fff;
+        --code-block-background-color: #272822;
+        --moon-sun-color: #FFF;
+        --moon-sun-background-color: #515151;
+    }
+    body.dark-theme {
+        --text-color: #eee;
+        --bkg-color: #121212;
+        --post-title-color: #DBE2E9;
+        --list-color: #9d9d9d;
+        --link-color: #268bd2;
+        --date-color: #9a9a9a;
+        --table-border-color: #515151;
+        --table-stripe-color: #202020;
+        --code-color: #fff;
+        --code-background-color: #515151;
+        --code-block-color: #fff;
+        --code-block-background-color: #272822;
+    }
+    body {
+        background-color: var(--bkg-color);
+    }
+</style>
 
 </head>
-<body>
-  <main id="main-wrapper" class="container main_wrapper has-sidebar">
-    <header id="main-header" class="container main_header">
-  <div class="container brand">
-  <div class="container title h1-like">
-  <a class="baselink" href="http://coffius.github.io/">
-  KOFF.io
 
-</a>
-
+    <body class="dark-theme">
+        <div class="wrapper">
+            <aside class="sidebar">
+    <div class="container sidebar-sticky">
+        <div class="light-dark" align="right">
+    <button class="btn-light-dark" title="Toggle light/dark mode">
+        <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M6 .278a.768.768 0 0 1 .08.858a7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277c.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316a.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71C0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+        </svg>
+        <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M8 12a4 4 0 1 0 0-8a4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+        </svg>
+    </button>
 </div>
 
-  
-<div class="container topline">
-  
-  where scala is beloved
-
-
+        <div class="sidebar-about">
+    <h1 class="brand">
+        
+        
+            <a href="http://coffius.github.io/">
+                <h1>KOFF.io</h1>
+            </a>
+        
+    </h1>
+    <p class="lead">
+    where scala is beloved
+    </p>
 </div>
 
+        <nav>
+    <ul class="sidebar-nav">
 
-</div>
+        
+        
+        
 
-  <nav class="container nav primary no-print">
-  
-
-<a class="homelink" href="http://coffius.github.io/">Home</a>
-
-
-  
-<a href="http://coffius.github.io/about">About</a>
-
-<a href="http://coffius.github.io/post" title="Show list of posts">Posts</a>
-
-<a href="http://coffius.github.io/tags" title="Show list of tags">Tags</a>
-
-
+    </ul>
 </nav>
 
-<div class="container nav secondary no-print">
-  
-
-
-<a id="contact-link-github" class="contact_link" href="https://github.com/coffius">
-  <span class="fa fa-github-square"></span><span>github</span></a>
-
-
-
+        
+    <a target="_blank" class="social" title="GitHub" href="https://github.com/coffius">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="-2 -2 24 24">
+            <path fill="currentColor" d="M18.88 1.099C18.147.366 17.265 0 16.233 0H3.746C2.714 0 1.832.366 1.099 1.099C.366 1.832 0 2.714 0 3.746v12.487c0 1.032.366 1.914 1.099 2.647c.733.733 1.615 1.099 2.647 1.099H6.66c.19 0 .333-.007.429-.02a.504.504 0 0 0 .286-.169c.095-.1.143-.245.143-.435l-.007-.885c-.004-.564-.006-1.01-.006-1.34l-.3.052c-.19.035-.43.05-.721.046a5.555 5.555 0 0 1-.904-.091a2.026 2.026 0 0 1-.872-.39a1.651 1.651 0 0 1-.572-.8l-.13-.3a3.25 3.25 0 0 0-.41-.663c-.186-.243-.375-.407-.566-.494l-.09-.065a.956.956 0 0 1-.17-.156a.723.723 0 0 1-.117-.182c-.026-.061-.004-.111.065-.15c.07-.04.195-.059.378-.059l.26.04c.173.034.388.138.643.311a2.1 2.1 0 0 1 .631.677c.2.355.44.626.722.813c.282.186.566.28.852.28c.286 0 .533-.022.742-.065a2.59 2.59 0 0 0 .585-.196c.078-.58.29-1.028.637-1.34a8.907 8.907 0 0 1-1.333-.234a5.314 5.314 0 0 1-1.223-.507a3.5 3.5 0 0 1-1.047-.872c-.277-.347-.505-.802-.683-1.365c-.177-.564-.266-1.215-.266-1.952c0-1.049.342-1.942 1.027-2.68c-.32-.788-.29-1.673.091-2.652c.252-.079.625-.02 1.119.175c.494.195.856.362 1.086.5c.23.14.414.257.553.352a9.233 9.233 0 0 1 2.497-.338c.859 0 1.691.113 2.498.338l.494-.312a6.997 6.997 0 0 1 1.197-.572c.46-.174.81-.221 1.054-.143c.39.98.424 1.864.103 2.653c.685.737 1.028 1.63 1.028 2.68c0 .737-.089 1.39-.267 1.957c-.177.568-.407 1.023-.689 1.366a3.65 3.65 0 0 1-1.053.865c-.42.234-.828.403-1.223.507a8.9 8.9 0 0 1-1.333.235c.45.39.676 1.005.676 1.846v3.11c0 .147.021.266.065.357a.36.36 0 0 0 .208.189c.096.034.18.056.254.064c.074.01.18.013.318.013h2.914c1.032 0 1.914-.366 2.647-1.099c.732-.732 1.099-1.615 1.099-2.647V3.746c0-1.032-.367-1.914-1.1-2.647z"/>
+        </svg>
+    </a>
 
 
 
 
-<a id="contact-link-googleplus" class="contact_link" href="https://plus.google.com/u/0/+102671541320733671208">
-  <span class="fa fa-google-plus-square"></span><span>google+</span></a>
-
-
-
-
-
-<a id="contact-link-twitter" class="contact_link" href="https://twitter.com/coffius">
-  <span class="fa fa-twitter-square"></span><span>twitter</span></a>
+    <a target="_blank" class="social" title="Twitter" href="https://twitter.com/coffius">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M5.032 14.286c6.037 0 9.34-4.837 9.34-9.032c0-.137 0-.274-.01-.41A6.56 6.56 0 0 0 16 3.2c-.6.256-1.235.425-1.885.5a3.207 3.207 0 0 0 1.443-1.757c-.645.37-1.35.63-2.085.77a3.322 3.322 0 0 0-1.862-.958a3.384 3.384 0 0 0-2.082.334a3.223 3.223 0 0 0-1.442 1.49a3.08 3.08 0 0 0-.208 2.03a9.57 9.57 0 0 1-3.747-.963a9.269 9.269 0 0 1-3.018-2.354a3.086 3.086 0 0 0-.36 2.314c.189.787.68 1.475 1.376 1.924a3.344 3.344 0 0 1-1.49-.398v.04c0 .734.263 1.444.743 2.01a3.3 3.3 0 0 0 1.89 1.102c-.483.128-.99.146-1.482.055a3.19 3.19 0 0 0 1.168 1.577a3.36 3.36 0 0 0 1.9.627A6.732 6.732 0 0 1 0 12.86a9.527 9.527 0 0 0 5.032 1.423"/>
+        </svg>
+    </a>
 
 
 
@@ -165,414 +235,347 @@
 
 
 
+
+        <p class="footnote">
+powered by <a target="_blank" href="https://gohugo.io">Hugo</a> | themed with <a target="_blank" href="https://github.com/lukeorth/poison">poison</a>
+    <br>
+    &copy; 2023 coffius. All rights reserved.
+</p>
+
+  </div>
+</aside>
+
+            <main class="content container">
+                <div class="post">
+  <div class="info">
+    <h1 class="post-title">
+        <a href="http://coffius.github.io/posts/pagination-and-streams/">Pagination and Streams</a>
+    </h1>
+    
+        <time datetime="2016-04-10T00:20:00&#43;0300" class="post-date">
+            April 10, 2016
+        </time>
+    
+    
+    
+    
+    
+    
+    
 </div>
 
-
-  
-
-</header>
-
-
-<article id="main-content" class="container main_content single">
-  <header class="container hat">
-  <h1>Pagination and Streams
-</h1>
-
-  <div class="metas">
-<time datetime="2016-04-10">10 Apr, 2016</time>
-
-
-  
-  &middot; Read in about 6 min
-  &middot; (1182 Words)
-  <br>
-  
-
-
-</div>
-
-</header>
-
-  <div class="container content">
   <p>In this article we will see how to use different streams(like akka-stream) for pagination and when it can be useful.
 The main idea of pagination is partition of a big sequence of objects into several parts(or pages) in order to make possible its processing page by page.
 For example, you have a 1.000.000 users in the database and you need to send an email to all of them.
 You could try to load all user records in a big list and process it at once but it would not be memory-efficient approach.
 Instead you can partition the list of users into pages by 100 users per page, load one page, send emails to users in this page, load next page and so on.
 This will be a much more efficient way to deal with big collections of records.</p>
-
 <p>So lets try to implement this approach but for a more complex case.</p>
-
-<p></p>
-
 <p>Lets say that we have the big collection of users and each user has the big collection of products and we need to send emails to each user about each his product.
 In this case we can not load all users and/or all user&rsquo;s products in memory at once. So we have to use pagination for users and for user&rsquo;s products.</p>
-
 <h2 id="possible-solutions">Possible solutions</h2>
-
 <p>To solve that issue I tried to use:</p>
-
 <ul>
 <li>Recursion</li>
 <li>Akka-stream</li>
 <li>Twitter AsyncStream</li>
 </ul>
-
-<p>All examples can be found <a href="https://github.com/coffius/koffio-pagination" title="GitHub: Example project">here</a></p>
-
+<p>All examples can be found <a href="https://github.com/coffius/koffio-pagination" title="GitHub: Example project" target="_blank">here</a></p>
 <h2 id="using-recursion">Using recursion</h2>
-
 <p>The main idea is to use the recursive helper method <code>forEachPage(...)</code> which executes page functions <code>forUserPage(...)</code> and <code>forWarePage(...)</code> until they return false.
 It is a simple approach but it requires plenty of code.</p>
-
-<pre><code class="language-scala">import io.koff.pagination.domain.User
-import io.koff.pagination.repo.Repository
-import scala.concurrent.duration._
-
-import scala.concurrent.{Await, ExecutionContext, Future}
-import scala.language.postfixOps
-
-/**
- * Example of recursive approach
- */
-object RecursiveMain {
-  import scala.concurrent.ExecutionContext.Implicits.global
-  private val WaitTime  = 10 seconds
-
-  val repo = new Repository
-  val emailService = new EmailService
-
-  def main(args: Array[String]) {
-    val result = forEachPage()(forUserPage)
-    Await.result(result, WaitTime)
-  }
-
-  /**
-   * Execute this function for each page of user wares
-   */
-  private def forWarePage(user: User, page: PageRequest): Future[Boolean] = {
-    for {
-      //get page of user wares
-      wares &lt;- repo.getPageOfWares(user, page)
-      //send email
-      futSeq = wares.map { ware =&gt; emailService.sendEmail(user, ware) }
-      _ &lt;- Future.sequence(futSeq)
-    } yield {
-      wares.nonEmpty
-    }
-  }
-
-  /**
-   * Execute this function for each page of users
-   */
-  private def forUserPage(page: PageRequest): Future[Boolean] = {
-    for{
-      //get a page of users
-      users &lt;- repo.getPageOfUsers(page)
-      //traverse though user wares for each user
-      futSeq = users.map(user =&gt; forEachPage()(forWarePage(user, _)))
-      _ &lt;- Future.sequence(futSeq)
-    } yield {
-      users.nonEmpty
-    }
-  }
-
-  /**
-   * Recursive function for traverse through a collection page by page using `func`
-   * @param currPage current page
-   * @param func function which is called on each step of recursion
-   * @param ctx execution context
-   * @return result future
-   */
-  private def forEachPage(currPage: PageRequest = PageRequest.FirstPage)
-                         (func: PageRequest =&gt; Future[Boolean])
-                         (implicit ctx: ExecutionContext): Future[_] = {
-    func(currPage).flatMap {
-      case true =&gt;
-        forEachPage(currPage.next)(func)
-      case false =&gt;
-        Future.successful(())
-    }
-  }
-}
-</code></pre>
-
-<h2 id="using-akka-streams">Using akka-streams</h2>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> io.koff.pagination.domain.User
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> io.koff.pagination.repo.Repository
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> scala.concurrent.duration._
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> scala.concurrent.<span style="color:#f92672">{</span><span style="color:#a6e22e">Await</span><span style="color:#f92672">,</span> <span style="color:#a6e22e">ExecutionContext</span><span style="color:#f92672">,</span> <span style="color:#a6e22e">Future</span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> scala.language.postfixOps
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Example of recursive approach
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">object</span> <span style="color:#a6e22e">RecursiveMain</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">import</span> scala.concurrent.ExecutionContext.Implicits.global
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> <span style="color:#a6e22e">WaitTime</span>  <span style="color:#66d9ef">=</span> <span style="color:#ae81ff">10</span> seconds
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">val</span> repo <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Repository</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">val</span> emailService <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">EmailService</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> main<span style="color:#f92672">(</span>args<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Array</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">])</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> result <span style="color:#66d9ef">=</span> forEachPage<span style="color:#f92672">()(</span>forUserPage<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Await</span><span style="color:#f92672">.</span>result<span style="color:#f92672">(</span>result<span style="color:#f92672">,</span> <span style="color:#a6e22e">WaitTime</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * Execute this function for each page of user wares
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">def</span> forWarePage<span style="color:#f92672">(</span>user<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">User</span><span style="color:#f92672">,</span> page<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">PageRequest</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Future</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Boolean</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">//get page of user wares
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      wares <span style="color:#66d9ef">&lt;-</span> repo<span style="color:#f92672">.</span>getPageOfWares<span style="color:#f92672">(</span>user<span style="color:#f92672">,</span> page<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">//send email
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      futSeq <span style="color:#66d9ef">=</span> wares<span style="color:#f92672">.</span>map <span style="color:#f92672">{</span> ware <span style="color:#66d9ef">=&gt;</span> emailService<span style="color:#f92672">.</span>sendEmail<span style="color:#f92672">(</span>user<span style="color:#f92672">,</span> ware<span style="color:#f92672">)</span> <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">_</span> <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">Future</span><span style="color:#f92672">.</span>sequence<span style="color:#f92672">(</span>futSeq<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span> <span style="color:#66d9ef">yield</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>      wares<span style="color:#f92672">.</span>nonEmpty
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * Execute this function for each page of users
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">def</span> forUserPage<span style="color:#f92672">(</span>page<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">PageRequest</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Future</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Boolean</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">//get a page of users
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      users <span style="color:#66d9ef">&lt;-</span> repo<span style="color:#f92672">.</span>getPageOfUsers<span style="color:#f92672">(</span>page<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">//traverse though user wares for each user
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      futSeq <span style="color:#66d9ef">=</span> users<span style="color:#f92672">.</span>map<span style="color:#f92672">(</span>user <span style="color:#66d9ef">=&gt;</span> forEachPage<span style="color:#f92672">()(</span>forWarePage<span style="color:#f92672">(</span>user<span style="color:#f92672">,</span> <span style="color:#66d9ef">_</span><span style="color:#f92672">)))</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">_</span> <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">Future</span><span style="color:#f92672">.</span>sequence<span style="color:#f92672">(</span>futSeq<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span> <span style="color:#66d9ef">yield</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>      users<span style="color:#f92672">.</span>nonEmpty
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * Recursive function for traverse through a collection page by page using `func`
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * @param currPage current page
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * @param func function which is called on each step of recursion
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * @param ctx execution context
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * @return result future
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">def</span> forEachPage<span style="color:#f92672">(</span>currPage<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">PageRequest</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">PageRequest</span><span style="color:#f92672">.</span><span style="color:#a6e22e">FirstPage</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>                         <span style="color:#f92672">(</span>func<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">PageRequest</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">Future</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Boolean</span><span style="color:#f92672">])</span>
+</span></span><span style="display:flex;"><span>                         <span style="color:#f92672">(</span><span style="color:#66d9ef">implicit</span> ctx<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">ExecutionContext</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Future</span><span style="color:#f92672">[</span><span style="color:#66d9ef">_</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    func<span style="color:#f92672">(</span>currPage<span style="color:#f92672">).</span>flatMap <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">true</span> <span style="color:#66d9ef">=&gt;</span>
+</span></span><span style="display:flex;"><span>        forEachPage<span style="color:#f92672">(</span>currPage<span style="color:#f92672">.</span>next<span style="color:#f92672">)(</span>func<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">false</span> <span style="color:#66d9ef">=&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Future</span><span style="color:#f92672">.</span>successful<span style="color:#f92672">(())</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h2 id="using-akka-streams">Using akka-streams</h2>
 <p>It is easy to implement the same logic using the method <code>Source.unfoldAsync(...)</code> from akka-stream. But it is necessary to have ActorSystem in order to use akka streams.</p>
-
-<pre><code class="language-scala">import akka.actor.ActorSystem
-import akka.stream.ActorMaterializer
-import akka.stream.scaladsl.Source
-import io.koff.pagination.repo.Repository
-
-import scala.concurrent.duration._
-import scala.concurrent.{Await, Future}
-import scala.language.postfixOps
-
-/**
- * Pagination using akka-streams
- */
-object ReactiveMain {
-  import scala.concurrent.ExecutionContext.Implicits.global
-  private val WaitTime  = 10 seconds
-  private val repo = new Repository
-  private val emailService = new EmailService 
-  implicit val system = ActorSystem(&quot;reactive-pagination&quot;)
-  implicit val materializer = ActorMaterializer()
-  def main(args: Array[String]): Unit = {
-    //Define the computation stream
-    val source =
-      //get users page by page
-      asyncPageToSource(repo.getPageOfUsers)
-      .flatMapConcat {
-        //for each user get wares page by page
-        user =&gt; asyncPageToSource(repo.getPageOfWares(user, _)).map((user, _))
-      }.takeWhile{
-        //it is possible to check errors here to stop processing after the first error
-        case (user, _) =&gt; user.name != &quot;user#5&quot;
-      }.mapAsync(1){
-        //send email for each (user, ware) pair
-        (emailService.sendEmail _).tupled
-      }
-
-    //Execute computations
-    //Because all computations are executed inside the stream
-    //We don't need to do anything here
-    val result = source.runForeach(value =&gt; value)
-    //Wait the result
-    Await.result(result, WaitTime)
-    //Shutdown the actor system
-    system.terminate()
-  }
-
-  /**
-   * Converts page function to Source of pages
-   * @param pageFunc function which receives PageRequest as a parameter and returns an async result
-   * @return [[Source]] of pages
-   */
-  private def asyncPageToPageSource[T](pageFunc: PageRequest =&gt; Future[Seq[T]]): Source[Seq[T], Unit] = {
-    Source.unfoldAsync(PageRequest.FirstPage){ page =&gt;
-      val pageData = pageFunc(page)
-      pageData.map(data =&gt; if (data.isEmpty){ None } else { Some(page.next, data) })
-    }
-  }
-
-  /**
-   * Converts page function to Source of elements of T
-   * @param pageFunc function which receives PageRequest as a parameter and returns an async result
-   * @return [[Source]] of pages
-   */
-  private def asyncPageToSource[T](pageFunc: PageRequest =&gt; Future[Seq[T]]): Source[T, Unit] = {
-    asyncPageToPageSource(pageFunc).mapConcat{ seq =&gt; seq.toList }
-  }
-}
-</code></pre>
-
-<h2 id="using-twitter-asyncstream">Using twitter AsyncStream</h2>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> akka.actor.ActorSystem
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> akka.stream.ActorMaterializer
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> akka.stream.scaladsl.Source
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> io.koff.pagination.repo.Repository
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> scala.concurrent.duration._
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> scala.concurrent.<span style="color:#f92672">{</span><span style="color:#a6e22e">Await</span><span style="color:#f92672">,</span> <span style="color:#a6e22e">Future</span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> scala.language.postfixOps
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Pagination using akka-streams
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">object</span> <span style="color:#a6e22e">ReactiveMain</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">import</span> scala.concurrent.ExecutionContext.Implicits.global
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> <span style="color:#a6e22e">WaitTime</span>  <span style="color:#66d9ef">=</span> <span style="color:#ae81ff">10</span> seconds
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> repo <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Repository</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> emailService <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">EmailService</span> 
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> system <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">ActorSystem</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;reactive-pagination&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> materializer <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">ActorMaterializer</span><span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> main<span style="color:#f92672">(</span>args<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Array</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">])</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span> <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//Define the computation stream
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> source <span style="color:#66d9ef">=</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">//get users page by page
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      asyncPageToSource<span style="color:#f92672">(</span>repo<span style="color:#f92672">.</span>getPageOfUsers<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">.</span>flatMapConcat <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//for each user get wares page by page
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        user <span style="color:#66d9ef">=&gt;</span> asyncPageToSource<span style="color:#f92672">(</span>repo<span style="color:#f92672">.</span>getPageOfWares<span style="color:#f92672">(</span>user<span style="color:#f92672">,</span> <span style="color:#66d9ef">_</span><span style="color:#f92672">)).</span>map<span style="color:#f92672">((</span>user<span style="color:#f92672">,</span> <span style="color:#66d9ef">_</span><span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">}.</span>takeWhile<span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//it is possible to check errors here to stop processing after the first error
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">case</span> <span style="color:#f92672">(</span>user<span style="color:#f92672">,</span> <span style="color:#66d9ef">_</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">=&gt;</span> user<span style="color:#f92672">.</span>name <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;user#5&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">}.</span>mapAsync<span style="color:#f92672">(</span><span style="color:#ae81ff">1</span><span style="color:#f92672">){</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//send email for each (user, ware) pair
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#f92672">(</span>emailService<span style="color:#f92672">.</span>sendEmail <span style="color:#66d9ef">_</span><span style="color:#f92672">).</span>tupled
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//Execute computations
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">//Because all computations are executed inside the stream
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">//We don&#39;t need to do anything here
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> result <span style="color:#66d9ef">=</span> source<span style="color:#f92672">.</span>runForeach<span style="color:#f92672">(</span>value <span style="color:#66d9ef">=&gt;</span> value<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//Wait the result
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">Await</span><span style="color:#f92672">.</span>result<span style="color:#f92672">(</span>result<span style="color:#f92672">,</span> <span style="color:#a6e22e">WaitTime</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//Shutdown the actor system
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    system<span style="color:#f92672">.</span>terminate<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * Converts page function to Source of pages
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * @param pageFunc function which receives PageRequest as a parameter and returns an async result
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * @return [[Source]] of pages
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">def</span> asyncPageToPageSource<span style="color:#f92672">[</span><span style="color:#66d9ef">T</span><span style="color:#f92672">](</span>pageFunc<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">PageRequest</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">Future</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Seq</span><span style="color:#f92672">[</span><span style="color:#66d9ef">T</span><span style="color:#f92672">]])</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Source</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Seq</span><span style="color:#f92672">[</span><span style="color:#66d9ef">T</span><span style="color:#f92672">]</span>, <span style="color:#66d9ef">Unit</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Source</span><span style="color:#f92672">.</span>unfoldAsync<span style="color:#f92672">(</span><span style="color:#a6e22e">PageRequest</span><span style="color:#f92672">.</span><span style="color:#a6e22e">FirstPage</span><span style="color:#f92672">){</span> page <span style="color:#66d9ef">=&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">val</span> pageData <span style="color:#66d9ef">=</span> pageFunc<span style="color:#f92672">(</span>page<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      pageData<span style="color:#f92672">.</span>map<span style="color:#f92672">(</span>data <span style="color:#66d9ef">=&gt;</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>data<span style="color:#f92672">.</span>isEmpty<span style="color:#f92672">){</span> <span style="color:#a6e22e">None</span> <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span> <span style="color:#a6e22e">Some</span><span style="color:#f92672">(</span>page<span style="color:#f92672">.</span>next<span style="color:#f92672">,</span> data<span style="color:#f92672">)</span> <span style="color:#f92672">})</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * Converts page function to Source of elements of T
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * @param pageFunc function which receives PageRequest as a parameter and returns an async result
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * @return [[Source]] of pages
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">def</span> asyncPageToSource<span style="color:#f92672">[</span><span style="color:#66d9ef">T</span><span style="color:#f92672">](</span>pageFunc<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">PageRequest</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">Future</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Seq</span><span style="color:#f92672">[</span><span style="color:#66d9ef">T</span><span style="color:#f92672">]])</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Source</span><span style="color:#f92672">[</span><span style="color:#66d9ef">T</span>, <span style="color:#66d9ef">Unit</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    asyncPageToPageSource<span style="color:#f92672">(</span>pageFunc<span style="color:#f92672">).</span>mapConcat<span style="color:#f92672">{</span> seq <span style="color:#66d9ef">=&gt;</span> seq<span style="color:#f92672">.</span>toList <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h2 id="using-twitter-asyncstream">Using twitter AsyncStream</h2>
 <p>It is possible to implement pagination using twitter AsyncStream in almost the same manner as it is made using akka-stream but with one note. AsyncStream does not have <code>unfoldAsync(...)</code> so we need to implement it: <code>unfold2(...)</code>.</p>
-
-<pre><code class="language-scala">import com.twitter.concurrent.exp.AsyncStream
-import com.twitter.util.{Await, Future}
-import io.koff.pagination.repo.Repository
-import io.koff.pagination.utils.TwitterScalaFuture._
-
-/**
- * Example for twitter AsyncStream
- */
-object TwitterMain {
-  import scala.concurrent.ExecutionContext.Implicits.global
-
-  private val repo = new Repository
-  private val emailService = new EmailService
-
-  def main(args: Array[String]) {
-    //Define the computation stream
-    val stream =
-      //get users page by page
-      //also convert scala future to twitter using '.toTwitter'
-      //see implicit class TwitterScalaFuture.ScalaToTwitter for details
-      asyncPageToStream(repo.getPageOfUsers(_).toTwitter)
-      .flatMap{
-        //for each user get wares page by page
-        user =&gt; asyncPageToStream(repo.getPageOfWares(user, _).toTwitter).map((user, _))
-      }.takeWhile {
-        //it is possible to check errors here to stop processing after the first error
-        case (user, _) =&gt; user.name != &quot;user#5&quot;
-      }.mapF {
-        //send email for each (user, ware) pair
-        case (user, ware) =&gt; emailService.sendEmail(user, ware).toTwitter
-      }
-
-    //Execute computations
-    //Because all computations are executed inside the stream
-    //We don't need to do anything here
-    val res = stream.foreach { value =&gt; value }
-
-    //Wait the result
-    Await.ready(res)
-  }
-
-  /**
-   * Almost the same as akka-stream Source.unfoldAsync(...)
-   * This function unfolds a value to a sequence of elements
-   */
-  def unfold2[T, K](value: T)(func: (T) =&gt; Future[Option[(T, K)]]): AsyncStream[K] = {
-    val result = func(value)
-    val stream = AsyncStream.fromFuture(result)
-    stream.flatMap{
-      case Some((t,k)) =&gt; stream ++ unfold(t)(func)
-      case None =&gt; AsyncStream.empty
-    }.map(_.get._2)
-  }
-
-  def unfold[T, K](zero: T)(value: (T) =&gt; Future[Option[(T, K)]]): AsyncStream[Option[(T, K)]] = {
-    val result = value(zero)
-    val stream = AsyncStream.fromFuture(result)
-    stream.flatMap {
-      case Some((t,_)) =&gt; stream ++ unfold(t)(value)
-      case None =&gt; AsyncStream.empty
-    }
-  }
-
-  /**
-   * Converts page function to Source of pages
-   * @param pageFunc function which receives PageRequest as a parameter and returns an async result
-   * @return [[AsyncStream]] of pages
-   */
-  def asyncPageToPageStream[T](pageFunc: PageRequest =&gt; Future[Seq[T]]): AsyncStream[Seq[T]] = {
-    unfold2[PageRequest, Seq[T]](PageRequest.FirstPage){ page =&gt;
-      val pageData = pageFunc(page)
-      pageData.map { data =&gt; if (data.isEmpty) { None } else { Some(page.next, data) } }
-    }
-  }
-
-  /**
-   * Converts page function to Source of elements of T
-   * @param pageFunc function which receives PageRequest as a parameter and returns an async result
-   * @return [[AsyncStream]] of pages
-   */
-  def asyncPageToStream[T](pageFunc: PageRequest =&gt; Future[Seq[T]]): AsyncStream[T] = {
-    asyncPageToPageStream(pageFunc).flatMap(AsyncStream.fromSeq)
-  }
-}
-</code></pre>
-
-<h2 id="links">Links</h2>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> com.twitter.concurrent.exp.AsyncStream
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> com.twitter.util.<span style="color:#f92672">{</span><span style="color:#a6e22e">Await</span><span style="color:#f92672">,</span> <span style="color:#a6e22e">Future</span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> io.koff.pagination.repo.Repository
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> io.koff.pagination.utils.TwitterScalaFuture._
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Example for twitter AsyncStream
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">object</span> <span style="color:#a6e22e">TwitterMain</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">import</span> scala.concurrent.ExecutionContext.Implicits.global
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> repo <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Repository</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> emailService <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">EmailService</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> main<span style="color:#f92672">(</span>args<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Array</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">])</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//Define the computation stream
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> stream <span style="color:#66d9ef">=</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">//get users page by page
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#75715e">//also convert scala future to twitter using &#39;.toTwitter&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#75715e">//see implicit class TwitterScalaFuture.ScalaToTwitter for details
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      asyncPageToStream<span style="color:#f92672">(</span>repo<span style="color:#f92672">.</span>getPageOfUsers<span style="color:#f92672">(</span><span style="color:#66d9ef">_</span><span style="color:#f92672">).</span>toTwitter<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">.</span>flatMap<span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//for each user get wares page by page
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        user <span style="color:#66d9ef">=&gt;</span> asyncPageToStream<span style="color:#f92672">(</span>repo<span style="color:#f92672">.</span>getPageOfWares<span style="color:#f92672">(</span>user<span style="color:#f92672">,</span> <span style="color:#66d9ef">_</span><span style="color:#f92672">).</span>toTwitter<span style="color:#f92672">).</span>map<span style="color:#f92672">((</span>user<span style="color:#f92672">,</span> <span style="color:#66d9ef">_</span><span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">}.</span>takeWhile <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//it is possible to check errors here to stop processing after the first error
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">case</span> <span style="color:#f92672">(</span>user<span style="color:#f92672">,</span> <span style="color:#66d9ef">_</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">=&gt;</span> user<span style="color:#f92672">.</span>name <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;user#5&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">}.</span>mapF <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//send email for each (user, ware) pair
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">case</span> <span style="color:#f92672">(</span>user<span style="color:#f92672">,</span> ware<span style="color:#f92672">)</span> <span style="color:#66d9ef">=&gt;</span> emailService<span style="color:#f92672">.</span>sendEmail<span style="color:#f92672">(</span>user<span style="color:#f92672">,</span> ware<span style="color:#f92672">).</span>toTwitter
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//Execute computations
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">//Because all computations are executed inside the stream
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">//We don&#39;t need to do anything here
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> res <span style="color:#66d9ef">=</span> stream<span style="color:#f92672">.</span>foreach <span style="color:#f92672">{</span> value <span style="color:#66d9ef">=&gt;</span> value <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//Wait the result
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">Await</span><span style="color:#f92672">.</span>ready<span style="color:#f92672">(</span>res<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * Almost the same as akka-stream Source.unfoldAsync(...)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * This function unfolds a value to a sequence of elements
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> unfold2<span style="color:#f92672">[</span><span style="color:#66d9ef">T</span>, <span style="color:#66d9ef">K</span><span style="color:#f92672">](</span>value<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">T</span><span style="color:#f92672">)(</span>func<span style="color:#66d9ef">:</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">T</span><span style="color:#f92672">)</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">Future</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Option</span><span style="color:#f92672">[(</span><span style="color:#66d9ef">T</span>, <span style="color:#66d9ef">K</span><span style="color:#f92672">)]])</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">AsyncStream</span><span style="color:#f92672">[</span><span style="color:#66d9ef">K</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> result <span style="color:#66d9ef">=</span> func<span style="color:#f92672">(</span>value<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> stream <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">AsyncStream</span><span style="color:#f92672">.</span>fromFuture<span style="color:#f92672">(</span>result<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    stream<span style="color:#f92672">.</span>flatMap<span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">Some</span><span style="color:#f92672">((</span>t<span style="color:#f92672">,</span>k<span style="color:#f92672">))</span> <span style="color:#66d9ef">=&gt;</span> stream <span style="color:#f92672">++</span> unfold<span style="color:#f92672">(</span>t<span style="color:#f92672">)(</span>func<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">None</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">AsyncStream</span><span style="color:#f92672">.</span>empty
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}.</span>map<span style="color:#f92672">(</span><span style="color:#66d9ef">_</span><span style="color:#f92672">.</span>get<span style="color:#f92672">.</span>_2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> unfold<span style="color:#f92672">[</span><span style="color:#66d9ef">T</span>, <span style="color:#66d9ef">K</span><span style="color:#f92672">](</span>zero<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">T</span><span style="color:#f92672">)(</span>value<span style="color:#66d9ef">:</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">T</span><span style="color:#f92672">)</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">Future</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Option</span><span style="color:#f92672">[(</span><span style="color:#66d9ef">T</span>, <span style="color:#66d9ef">K</span><span style="color:#f92672">)]])</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">AsyncStream</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Option</span><span style="color:#f92672">[(</span><span style="color:#66d9ef">T</span>, <span style="color:#66d9ef">K</span><span style="color:#f92672">)]]</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> result <span style="color:#66d9ef">=</span> value<span style="color:#f92672">(</span>zero<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> stream <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">AsyncStream</span><span style="color:#f92672">.</span>fromFuture<span style="color:#f92672">(</span>result<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    stream<span style="color:#f92672">.</span>flatMap <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">Some</span><span style="color:#f92672">((</span>t<span style="color:#f92672">,</span><span style="color:#66d9ef">_</span><span style="color:#f92672">))</span> <span style="color:#66d9ef">=&gt;</span> stream <span style="color:#f92672">++</span> unfold<span style="color:#f92672">(</span>t<span style="color:#f92672">)(</span>value<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">None</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">AsyncStream</span><span style="color:#f92672">.</span>empty
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * Converts page function to Source of pages
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * @param pageFunc function which receives PageRequest as a parameter and returns an async result
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * @return [[AsyncStream]] of pages
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> asyncPageToPageStream<span style="color:#f92672">[</span><span style="color:#66d9ef">T</span><span style="color:#f92672">](</span>pageFunc<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">PageRequest</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">Future</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Seq</span><span style="color:#f92672">[</span><span style="color:#66d9ef">T</span><span style="color:#f92672">]])</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">AsyncStream</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Seq</span><span style="color:#f92672">[</span><span style="color:#66d9ef">T</span><span style="color:#f92672">]]</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    unfold2<span style="color:#f92672">[</span><span style="color:#66d9ef">PageRequest</span>, <span style="color:#66d9ef">Seq</span><span style="color:#f92672">[</span><span style="color:#66d9ef">T</span><span style="color:#f92672">]](</span><span style="color:#a6e22e">PageRequest</span><span style="color:#f92672">.</span><span style="color:#a6e22e">FirstPage</span><span style="color:#f92672">){</span> page <span style="color:#66d9ef">=&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">val</span> pageData <span style="color:#66d9ef">=</span> pageFunc<span style="color:#f92672">(</span>page<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      pageData<span style="color:#f92672">.</span>map <span style="color:#f92672">{</span> data <span style="color:#66d9ef">=&gt;</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>data<span style="color:#f92672">.</span>isEmpty<span style="color:#f92672">)</span> <span style="color:#f92672">{</span> <span style="color:#a6e22e">None</span> <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span> <span style="color:#a6e22e">Some</span><span style="color:#f92672">(</span>page<span style="color:#f92672">.</span>next<span style="color:#f92672">,</span> data<span style="color:#f92672">)</span> <span style="color:#f92672">}</span> <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * Converts page function to Source of elements of T
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * @param pageFunc function which receives PageRequest as a parameter and returns an async result
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * @return [[AsyncStream]] of pages
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> asyncPageToStream<span style="color:#f92672">[</span><span style="color:#66d9ef">T</span><span style="color:#f92672">](</span>pageFunc<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">PageRequest</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">Future</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Seq</span><span style="color:#f92672">[</span><span style="color:#66d9ef">T</span><span style="color:#f92672">]])</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">AsyncStream</span><span style="color:#f92672">[</span><span style="color:#66d9ef">T</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    asyncPageToPageStream<span style="color:#f92672">(</span>pageFunc<span style="color:#f92672">).</span>flatMap<span style="color:#f92672">(</span><span style="color:#a6e22e">AsyncStream</span><span style="color:#f92672">.</span>fromSeq<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h2 id="links">Links</h2>
 <ul>
-<li><a href="https://github.com/coffius/koffio-pagination" title="GitHub: Example project">Example project</a> - sources for this article</li>
-<li><a href="http://doc.akka.io/docs/akka/2.4.3/scala/stream/stream-introduction.html" title="Akka docs">Akka Stream</a> - documentation for akka-stream</li>
-<li><a href="https://finagle.github.io/blog/2016/02/15/asyncstream" title="Hello AsyncStream!">Twitter AsyncStream</a> - an article about AsyncStream</li>
+<li><a href="https://github.com/coffius/koffio-pagination" title="GitHub: Example project" target="_blank">Example project</a> - sources for this article</li>
+<li><a href="http://doc.akka.io/docs/akka/2.4.3/scala/stream/stream-introduction.html" title="Akka docs" target="_blank">Akka Stream</a> - documentation for akka-stream</li>
+<li><a href="https://finagle.github.io/blog/2016/02/15/asyncstream" title="Hello AsyncStream!" target="_blank">Twitter AsyncStream</a> - an article about AsyncStream</li>
 </ul>
+  <hr>
+<div class="footer">
+    
+	    
+            <a class="previous-post" href="http://coffius.github.io/posts/292173-validation-in-scala/?ref=footer"><span style="font-weight:bold;">« Previous</span><br>Validation in scala</a>
+        
+	    
+            <div class="next-post">
+                <a href="http://coffius.github.io/posts/variance-tip-notes/?ref=footer"><span style="font-weight:bold;">Next »</span><br>Tips about variance in scala</a>
+            </div>
+        
+    
 </div>
 
-
-  <footer class="container">
-  <div class="container navigation no-print">
-  <h2>Navigation</h2>
   
-  
-
+    <div class="comments">
     
-    <a class="prev" href="http://coffius.github.io/posts/292173-validation-in-scala/" title="Validation in scala">
-      Previous
-    </a>
-    
-
-    
-    <a class="next" href="http://coffius.github.io/posts/variance-tip-notes/" title="Tips about variance in scala">
-      Next
-    </a>
-    
-
-  
-
-
-</div>
-
-  <div class="container comments">
-  <h2>Comments</h2>
-  
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-  (function() {
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
     
     
-    if (window.location.hostname == "localhost")
-      return;
-
-    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
-    dsq.src = '//koff-io.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "koff-io" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-
-</div>
-
-</footer>
-
-</article>
-      <footer id="main-footer" class="container main_footer">
-  
-
-  <div class="container nav foot no-print">
-  
-<a href="http://coffius.github.io/license">license</a>
-
-
-  <a class="toplink" href="#">back to top</a>
-
-</div>
-
-  <div class="container credits">
-  
-<div class="container footline">
-  
-  code with <i class='fa fa-heart'></i>
-
-
-</div>
-
-
-  
-<div class="container copyright">
-  
-  &copy; 2015
-
-
-</div>
-
-
-</div>
-
-</footer>
-
-    </main>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
-<script type="text/javascript">
-  (function() {
-    
-    
-    if (window.location.hostname == "localhost")
-      return;
+</div>
 
-    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
-    dsq.src = '//koff-io.disqus.com/count.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
-</script>
+  
+</div>
+            </main>
+            
+  
+    <div class="article-toc ">
+    <div class="toc-wrapper">
+      <h4 id="contents"></h4>
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#possible-solutions">Possible solutions</a></li>
+    <li><a href="#using-recursion">Using recursion</a></li>
+    <li><a href="#using-akka-streams">Using akka-streams</a></li>
+    <li><a href="#using-twitter-asyncstream">Using twitter AsyncStream</a></li>
+    <li><a href="#links">Links</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
 
+  
 
-
-<script src="http://coffius.github.io/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
-
-    
-  </body>
+        </div>
+    </body>
 </html>
-

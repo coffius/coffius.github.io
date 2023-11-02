@@ -1,157 +1,227 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-EN" lang="en-EN">
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>HLL counters as Cassandra user defined aggregates  &middot; KOFF.io</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+<script defer language="javascript" type="text/javascript" src="/js/bundle.min.a43a549406127e0715f68083c987d71d0c71054cd57edea77aa709ed9958af6e.js"></script>
+
+
+
+
+
+
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <link rel="icon" href=/favicon.png>
+
+    
+    
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+  
+
+
+<!-- Open Graph image and Twitter Card metadata -->
+
+<title itemprop="name">Koff.io - HLL counters as Cassandra user defined aggregates</title>
+<meta property="og:title" content=Koff.io&#32;-&#32;HLL&#32;counters&#32;as&#32;Cassandra&#32;user&#32;defined&#32;aggregates />
+<meta name="twitter:title" content=Koff.io&#32;-&#32;HLL&#32;counters&#32;as&#32;Cassandra&#32;user&#32;defined&#32;aggregates />
+<meta itemprop="name" content=Koff.io&#32;-&#32;HLL&#32;counters&#32;as&#32;Cassandra&#32;user&#32;defined&#32;aggregates />
+<meta name="application-name" content=Koff.io&#32;-&#32;HLL&#32;counters&#32;as&#32;Cassandra&#32;user&#32;defined&#32;aggregates />
+<meta property="og:site_name" content="KOFF.io" />
 
 
 <meta name="description" content="" />
+<meta itemprop="description" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:description" content="" />
 
-<meta name="keywords" content="">
 
-<link rel="author" href="http://plus.google.com/+102671541320733671208">
-
-
-<meta property="og:title" content="HLL counters as Cassandra user defined aggregates  &middot; KOFF.io ">
-<meta property="og:site_name" content="KOFF.io"/>
+<base href="http://coffius.github.io/posts/hll-in-cassandra/" />
+<link rel="canonical" href="http://coffius.github.io/posts/hll-in-cassandra/" itemprop="url" />
+<meta name="url" content="http://coffius.github.io/posts/hll-in-cassandra/" />
+<meta name="twitter:url" content="http://coffius.github.io/posts/hll-in-cassandra/" />
 <meta property="og:url" content="http://coffius.github.io/posts/hll-in-cassandra/" />
-<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:updated_time" content=4012-04-06T120:00:16&#43;0300 />
+
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href='http://coffius.github.io/sitemap.xml' />
+
+<meta name="robots" content="index,follow" />
+<meta name="googlebot" content="index,follow" />
+
+
+<meta name="twitter:site" content="https://twitter.com/coffius" />
+<meta name="twitter:creator" content="https://twitter.com/coffius" />
+<meta property="fb:admins" content="" />
+
+
+<meta name="apple-mobile-web-app-title" content="KOFF.io" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+
+
+
+
+
 
 
 <meta property="og:type" content="article" />
-<meta property="og:description" content=""/>
-<meta property="og:article:published_time" content="2016-12-04T18:00:00&#43;03:00" />
-<meta property="og:article:modified_time" content="2016-12-04T18:00:00&#43;03:00" />
-
-  
-
-  
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@coffius" />
-<meta name="twitter:creator" content="@coffius" />
-<meta name="twitter:title" content="HLL counters as Cassandra user defined aggregates" />
-<meta name="twitter:description" content="" />
-<meta name="twitter:url" content="http://coffius.github.io/posts/hll-in-cassandra/" />
-<meta name="twitter:domain" content="http://coffius.github.io/">
-  
-
-<script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "Article",
-    "headline": "HLL counters as Cassandra user defined aggregates",
-    "author": {
-      "@type": "Person",
-      "name": "http://profiles.google.com/+102671541320733671208?rel=author"
-    },
-    "datePublished": "2016-12-04",
-    "description": "",
-    "wordCount": 1204
-  }
-</script>
+<meta property="article:publisher" content="" />
+<meta property="og:article:published_time" content=4012-04-06T120:00:16&#43;0300 />
+<meta property="article:published_time" content=4012-04-06T120:00:16&#43;0300 />
 
 
 
-<link rel="canonical" href="http://coffius.github.io/posts/hll-in-cassandra/" />
 
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://coffius.github.io/touch-icon-144-precomposed.png">
-<link href="http://coffius.github.io/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.26" />
 
-  
-<!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
 
-<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="http://coffius.github.io/css/font-awesome.min.css">
-<link rel="stylesheet" href="http://coffius.github.io/css/style.css">
-<link rel="stylesheet" href="http://coffius.github.io/css/highlight/default.css">
 
-  
-  
-	<script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+<meta name="generator" content="Hugo 0.119.0">
 
-	  ga('create', 'UA-66345345-1', 'auto');
-	  ga('send', 'pageview');
 
-	</script>
+    
+    
+
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.8c227569d4bf422323072472267fbadf39d2c717cb88332a8413d08b0b2b17e8.css">
+
+
+    
+    <style>
+    body {
+        --sidebar-bg-color: #202020;
+        --sidebar-img-border-color: #515151;
+        --sidebar-p-color: #909090;
+        --sidebar-h1-color: #FFF;
+        --sidebar-a-color: #FFF;
+        --sidebar-socials-color: #FFF;
+        --text-color: #222;
+        --bkg-color: #FAF9F6;
+        --post-title-color: #303030;
+        --list-color: #5a5a5a;
+        --link-color: #268bd2;
+        --date-color: #515151;
+        --table-border-color: #E5E5E5;
+        --table-stripe-color: #F9F9F9;
+        --code-color: #000;
+        --code-background-color: #E5E5E5;
+        --code-block-color: #fff;
+        --code-block-background-color: #272822;
+        --moon-sun-color: #FFF;
+        --moon-sun-background-color: #515151;
+    }
+    body.dark-theme {
+        --text-color: #eee;
+        --bkg-color: #121212;
+        --post-title-color: #DBE2E9;
+        --list-color: #9d9d9d;
+        --link-color: #268bd2;
+        --date-color: #9a9a9a;
+        --table-border-color: #515151;
+        --table-stripe-color: #202020;
+        --code-color: #fff;
+        --code-background-color: #515151;
+        --code-block-color: #fff;
+        --code-block-background-color: #272822;
+    }
+    body {
+        background-color: var(--bkg-color);
+    }
+</style>
 
 </head>
-<body>
-  <main id="main-wrapper" class="container main_wrapper has-sidebar">
-    <header id="main-header" class="container main_header">
-  <div class="container brand">
-  <div class="container title h1-like">
-  <a class="baselink" href="http://coffius.github.io/">
-  KOFF.io
 
-</a>
-
+    <body class="dark-theme">
+        <div class="wrapper">
+            <aside class="sidebar">
+    <div class="container sidebar-sticky">
+        <div class="light-dark" align="right">
+    <button class="btn-light-dark" title="Toggle light/dark mode">
+        <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M6 .278a.768.768 0 0 1 .08.858a7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277c.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316a.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71C0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+        </svg>
+        <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M8 12a4 4 0 1 0 0-8a4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+        </svg>
+    </button>
 </div>
 
-  
-<div class="container topline">
-  
-  where scala is beloved
-
-
+        <div class="sidebar-about">
+    <h1 class="brand">
+        
+        
+            <a href="http://coffius.github.io/">
+                <h1>KOFF.io</h1>
+            </a>
+        
+    </h1>
+    <p class="lead">
+    where scala is beloved
+    </p>
 </div>
 
+        <nav>
+    <ul class="sidebar-nav">
 
-</div>
+        
+        
+        
 
-  <nav class="container nav primary no-print">
-  
-
-<a class="homelink" href="http://coffius.github.io/">Home</a>
-
-
-  
-<a href="http://coffius.github.io/about">About</a>
-
-<a href="http://coffius.github.io/post" title="Show list of posts">Posts</a>
-
-<a href="http://coffius.github.io/tags" title="Show list of tags">Tags</a>
-
-
+    </ul>
 </nav>
 
-<div class="container nav secondary no-print">
-  
-
-
-<a id="contact-link-github" class="contact_link" href="https://github.com/coffius">
-  <span class="fa fa-github-square"></span><span>github</span></a>
-
-
-
+        
+    <a target="_blank" class="social" title="GitHub" href="https://github.com/coffius">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="-2 -2 24 24">
+            <path fill="currentColor" d="M18.88 1.099C18.147.366 17.265 0 16.233 0H3.746C2.714 0 1.832.366 1.099 1.099C.366 1.832 0 2.714 0 3.746v12.487c0 1.032.366 1.914 1.099 2.647c.733.733 1.615 1.099 2.647 1.099H6.66c.19 0 .333-.007.429-.02a.504.504 0 0 0 .286-.169c.095-.1.143-.245.143-.435l-.007-.885c-.004-.564-.006-1.01-.006-1.34l-.3.052c-.19.035-.43.05-.721.046a5.555 5.555 0 0 1-.904-.091a2.026 2.026 0 0 1-.872-.39a1.651 1.651 0 0 1-.572-.8l-.13-.3a3.25 3.25 0 0 0-.41-.663c-.186-.243-.375-.407-.566-.494l-.09-.065a.956.956 0 0 1-.17-.156a.723.723 0 0 1-.117-.182c-.026-.061-.004-.111.065-.15c.07-.04.195-.059.378-.059l.26.04c.173.034.388.138.643.311a2.1 2.1 0 0 1 .631.677c.2.355.44.626.722.813c.282.186.566.28.852.28c.286 0 .533-.022.742-.065a2.59 2.59 0 0 0 .585-.196c.078-.58.29-1.028.637-1.34a8.907 8.907 0 0 1-1.333-.234a5.314 5.314 0 0 1-1.223-.507a3.5 3.5 0 0 1-1.047-.872c-.277-.347-.505-.802-.683-1.365c-.177-.564-.266-1.215-.266-1.952c0-1.049.342-1.942 1.027-2.68c-.32-.788-.29-1.673.091-2.652c.252-.079.625-.02 1.119.175c.494.195.856.362 1.086.5c.23.14.414.257.553.352a9.233 9.233 0 0 1 2.497-.338c.859 0 1.691.113 2.498.338l.494-.312a6.997 6.997 0 0 1 1.197-.572c.46-.174.81-.221 1.054-.143c.39.98.424 1.864.103 2.653c.685.737 1.028 1.63 1.028 2.68c0 .737-.089 1.39-.267 1.957c-.177.568-.407 1.023-.689 1.366a3.65 3.65 0 0 1-1.053.865c-.42.234-.828.403-1.223.507a8.9 8.9 0 0 1-1.333.235c.45.39.676 1.005.676 1.846v3.11c0 .147.021.266.065.357a.36.36 0 0 0 .208.189c.096.034.18.056.254.064c.074.01.18.013.318.013h2.914c1.032 0 1.914-.366 2.647-1.099c.732-.732 1.099-1.615 1.099-2.647V3.746c0-1.032-.367-1.914-1.1-2.647z"/>
+        </svg>
+    </a>
 
 
 
 
-<a id="contact-link-googleplus" class="contact_link" href="https://plus.google.com/u/0/+102671541320733671208">
-  <span class="fa fa-google-plus-square"></span><span>google+</span></a>
-
-
-
-
-
-<a id="contact-link-twitter" class="contact_link" href="https://twitter.com/coffius">
-  <span class="fa fa-twitter-square"></span><span>twitter</span></a>
+    <a target="_blank" class="social" title="Twitter" href="https://twitter.com/coffius">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M5.032 14.286c6.037 0 9.34-4.837 9.34-9.032c0-.137 0-.274-.01-.41A6.56 6.56 0 0 0 16 3.2c-.6.256-1.235.425-1.885.5a3.207 3.207 0 0 0 1.443-1.757c-.645.37-1.35.63-2.085.77a3.322 3.322 0 0 0-1.862-.958a3.384 3.384 0 0 0-2.082.334a3.223 3.223 0 0 0-1.442 1.49a3.08 3.08 0 0 0-.208 2.03a9.57 9.57 0 0 1-3.747-.963a9.269 9.269 0 0 1-3.018-2.354a3.086 3.086 0 0 0-.36 2.314c.189.787.68 1.475 1.376 1.924a3.344 3.344 0 0 1-1.49-.398v.04c0 .734.263 1.444.743 2.01a3.3 3.3 0 0 0 1.89 1.102c-.483.128-.99.146-1.482.055a3.19 3.19 0 0 0 1.168 1.577a3.36 3.36 0 0 0 1.9.627A6.732 6.732 0 0 1 0 12.86a9.527 9.527 0 0 0 5.032 1.423"/>
+        </svg>
+    </a>
 
 
 
@@ -165,345 +235,249 @@
 
 
 
+
+        <p class="footnote">
+powered by <a target="_blank" href="https://gohugo.io">Hugo</a> | themed with <a target="_blank" href="https://github.com/lukeorth/poison">poison</a>
+    <br>
+    &copy; 2023 coffius. All rights reserved.
+</p>
+
+  </div>
+</aside>
+
+            <main class="content container">
+                <div class="post">
+  <div class="info">
+    <h1 class="post-title">
+        <a href="http://coffius.github.io/posts/hll-in-cassandra/">HLL counters as Cassandra user defined aggregates</a>
+    </h1>
+    
+        <time datetime="2016-12-04T18:00:00&#43;0300" class="post-date">
+            December 4, 2016
+        </time>
+    
+    
+    
+    
+    
+    
+    
 </div>
 
-
-  
-
-</header>
-
-
-<article id="main-content" class="container main_content single">
-  <header class="container hat">
-  <h1>HLL counters as Cassandra user defined aggregates
-</h1>
-
-  <div class="metas">
-<time datetime="2016-12-04">4 Dec, 2016</time>
-
-
-  
-  &middot; Read in about 6 min
-  &middot; (1204 Words)
-  <br>
-  
-
-
-</div>
-
-</header>
-
-  <div class="container content">
   <p>In <a href="../comparison-of-hll">the previous article</a> we discussed usage of hll countes for finding the number of unique values in a collection. But in this article we will see how to use them in Cassandra db internally in order to provide such functionality using user defined functions(UDF) and aggregates(UDA).</p>
-
-<p></p>
-
 <h2 id="important">Important</h2>
-
-<p>This approach can work <strong>only with Cassandra 2.2.x.</strong> In Cassandra 3.x there are more restrictions for UDF so it is impossible to use external libraries inside user functions. In the future may be there will be the way to turn off the restrictions(see <a href="https://issues.apache.org/jira/browse/CASSANDRA-9892">CASSANDRA-9892</a>) but now it is impossible as well.</p>
-
+<p>This approach can work <strong>only with Cassandra 2.2.x.</strong> In Cassandra 3.x there are more restrictions for UDF so it is impossible to use external libraries inside user functions. In the future may be there will be the way to turn off the restrictions(see <a href="https://issues.apache.org/jira/browse/CASSANDRA-9892" target="_blank">CASSANDRA-9892</a>) but now it is impossible as well.</p>
 <h2 id="software">Software</h2>
-
 <p>For this example I use:</p>
-
 <ul>
 <li>docker</li>
 <li>docker-machine</li>
 <li>docker-compose</li>
 <li>cassandra:2.2.8</li>
-<li>hll-library - <a href="https://github.com/prasanthj/hyperloglog">hyperloglog</a></li>
+<li>hll-library - <a href="https://github.com/prasanthj/hyperloglog" target="_blank">hyperloglog</a></li>
 <li>sbt</li>
 <li>Datastax DevCenter - for testing CQL queries. You can use <code>cqlsh</code> if it is more convenient for you</li>
 </ul>
-
 <h2 id="steps">Steps</h2>
-
 <ul>
 <li>Install the necessary software</li>
-<li>Check out code of the example from here: <a href="https://github.com/coffius/koffio-uda-hll">https://github.com/coffius/koffio-uda-hll</a></li>
+<li>Check out code of the example from here: <a href="https://github.com/coffius/koffio-uda-hll" target="_blank">https://github.com/coffius/koffio-uda-hll</a></li>
 <li><code>sbt assembly</code> - build the jar file the hll</li>
 <li><code>docker build</code> - build a docker image for Cassandra with our library inside</li>
 <li><code>docker-compose up</code> - start the created Cassandra container inside docker</li>
 <li>Test hll counters - there are <code>hll_uda.cql</code> and <code>test_data.cql</code> with example queries for Cassandra</li>
 </ul>
-
 <p>More information about how exactly it works you can find below.</p>
-
 <h2 id="simple-example-of-uda">Simple example of UDA</h2>
-
 <p>At first let&rsquo;s take a look at how to define a very simple custom aggregate function:</p>
-
-<pre><code class="language-html">-- A simple example of creating functions for a user defined aggregate
-CREATE OR REPLACE FUNCTION udf.avg_state ( state tuple&lt;int,bigint&gt;, val int ) CALLED ON NULL INPUT RETURNS tuple&lt;int,bigint&gt; LANGUAGE java AS
-  'if (val !=null) { state.setInt(0, state.getInt(0)+1); state.setLong(1, state.getLong(1)+val.intValue()); } return state;';
-
-CREATE OR REPLACE FUNCTION udf.avg_final ( state tuple&lt;int,bigint&gt; ) CALLED ON NULL INPUT RETURNS double LANGUAGE java AS
-  'double r = 0; if (state.getInt(0) == 0) return null; r = state.getLong(1); r/= state.getInt(0); return Double.valueOf(r);';
-
-CREATE AGGREGATE IF NOT EXISTS udf.avg ( int )
-SFUNC avg_state STYPE tuple&lt;int,bigint&gt; FINALFUNC avg_final INITCOND (0,0);
-</code></pre>
-
-<p>For one aggregate we need two functions - a state function and a final function. The first accumulates the state and the second makes final calculation using the state from the first one.
-More information about it you can find <a href="https://docs.datastax.com/en/cql/3.3/cql/cql_using/useCreateUDA.html">here in official docs</a>.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>-- A simple example of creating functions for a user defined aggregate
+</span></span><span style="display:flex;"><span>CREATE OR REPLACE FUNCTION udf.avg_state ( state tuple&lt;<span style="color:#f92672">int</span><span style="color:#960050;background-color:#1e0010">,</span><span style="color:#a6e22e">bigint</span>&gt;, val int ) CALLED ON NULL INPUT RETURNS tuple&lt;<span style="color:#f92672">int</span><span style="color:#960050;background-color:#1e0010">,</span><span style="color:#a6e22e">bigint</span>&gt; LANGUAGE java AS
+</span></span><span style="display:flex;"><span>  &#39;if (val !=null) { state.setInt(0, state.getInt(0)+1); state.setLong(1, state.getLong(1)+val.intValue()); } return state;&#39;;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>CREATE OR REPLACE FUNCTION udf.avg_final ( state tuple&lt;<span style="color:#f92672">int</span><span style="color:#960050;background-color:#1e0010">,</span><span style="color:#a6e22e">bigint</span>&gt; ) CALLED ON NULL INPUT RETURNS double LANGUAGE java AS
+</span></span><span style="display:flex;"><span>  &#39;double r = 0; if (state.getInt(0) == 0) return null; r = state.getLong(1); r/= state.getInt(0); return Double.valueOf(r);&#39;;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>CREATE AGGREGATE IF NOT EXISTS udf.avg ( int )
+</span></span><span style="display:flex;"><span>SFUNC avg_state STYPE tuple&lt;<span style="color:#f92672">int</span><span style="color:#960050;background-color:#1e0010">,</span><span style="color:#a6e22e">bigint</span>&gt; FINALFUNC avg_final INITCOND (0,0);
+</span></span></code></pre></div><p>For one aggregate we need two functions - a state function and a final function. The first accumulates the state and the second makes final calculation using the state from the first one.
+More information about it you can find <a href="https://docs.datastax.com/en/cql/3.3/cql/cql_using/useCreateUDA.html" target="_blank">here in official docs</a>.</p>
 <h2 id="prepare-hll-for-cassandra">Prepare HLL for Cassandra</h2>
-
 <p>The first thing that we have to do is to implement two functions that we can use in Cassandra aggregate. We cannot implement necessary logic directly in CQL-query like above because it would be too complex. For example, it is impossible to import classes right in CQL-code, so we need to use full names for classes like <code>io.koff.full.path.to.Clazz</code>.
 So we do it using Java and then add the result jar into the Cassandra classpath in the docker container.</p>
-
-<p>Example is here: <a href="https://github.com/coffius/koffio-uda-hll/blob/master/src/main/java/io/koff/udf/HLL.java">HLL.java</a></p>
-
+<p>Example is here: <a href="https://github.com/coffius/koffio-uda-hll/blob/master/src/main/java/io/koff/udf/HLL.java" target="_blank">HLL.java</a></p>
 <p>This is our state function:</p>
-
-<pre><code class="language-java">/**
- * State function. Aggregates values to hll counter
- * @param state byte buffer with serialized HLL counter
- * @param value the value to add to counter
- * @return hll counter with the new value
- */
-public final static ByteBuffer stateFunc(ByteBuffer state, int value) {
-	int capacity = state.capacity();
-	// if it is the first call then state buffer should be empty
-	if(capacity == 0) {
-		HyperLogLog.HyperLogLogBuilder builder = new HyperLogLog.HyperLogLogBuilder();
-		HyperLogLog hll = builder.build();
-		hll.addInt(value);
-		return serialize(hll);
-	} else {
-		// if there is data in state buffer then we need to use it
-		HyperLogLog hll = deserialize(state);
-		hll.addInt(value);
-		return serialize(hll);
-	}
-}
-</code></pre>
-
-<p>And this is our final function:</p>
-
-<pre><code class="language-java">public final static long finalFunc(ByteBuffer state) {
-	HyperLogLog hll = deserialize(state);
-	return hll.count();
-}
-</code></pre>
-
-<p>Important note - both functions should depend only on their parameters(see <a href="https://en.wikipedia.org/wiki/Pure_function">pure functions</a>)</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * State function. Aggregates values to hll counter
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * @param state byte buffer with serialized HLL counter
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * @param value the value to add to counter
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * @return hll counter with the new value
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">static</span> ByteBuffer <span style="color:#a6e22e">stateFunc</span><span style="color:#f92672">(</span>ByteBuffer state<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> value<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> capacity <span style="color:#f92672">=</span> state<span style="color:#f92672">.</span><span style="color:#a6e22e">capacity</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// if it is the first call then state buffer should be empty
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>capacity <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>		HyperLogLog<span style="color:#f92672">.</span><span style="color:#a6e22e">HyperLogLogBuilder</span> builder <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HyperLogLog<span style="color:#f92672">.</span><span style="color:#a6e22e">HyperLogLogBuilder</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>		HyperLogLog hll <span style="color:#f92672">=</span> builder<span style="color:#f92672">.</span><span style="color:#a6e22e">build</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>		hll<span style="color:#f92672">.</span><span style="color:#a6e22e">addInt</span><span style="color:#f92672">(</span>value<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> serialize<span style="color:#f92672">(</span>hll<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// if there is data in state buffer then we need to use it
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>		HyperLogLog hll <span style="color:#f92672">=</span> deserialize<span style="color:#f92672">(</span>state<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>		hll<span style="color:#f92672">.</span><span style="color:#a6e22e">addInt</span><span style="color:#f92672">(</span>value<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> serialize<span style="color:#f92672">(</span>hll<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>And this is our final function:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">finalFunc</span><span style="color:#f92672">(</span>ByteBuffer state<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>	HyperLogLog hll <span style="color:#f92672">=</span> deserialize<span style="color:#f92672">(</span>state<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> hll<span style="color:#f92672">.</span><span style="color:#a6e22e">count</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>Important note - both functions should depend only on their parameters(see <a href="https://en.wikipedia.org/wiki/Pure_function" target="_blank">pure functions</a>)</p>
 <h2 id="deploy-code">Deploy code</h2>
-
 <p>Next thing we should do is to add our code to Cassandra and enable UDF in Cassandra cofnig in order to make possible to use aggregates.</p>
-
-<p>At first we build a fat jar(jar with all dependencies) using <a href="https://github.com/sbt/sbt-assembly">sbt-assembly</a> plugin.</p>
-
-<p>in <a href="https://github.com/coffius/koffio-uda-hll/blob/master/build.sbt">build.sbt</a>:</p>
-
-<pre><code class="language-scala">assemblyJarName in assembly := &quot;hll.jar&quot;
-// we do not need test classes in the result jar
-test in assembly := {}
-// define an output name of the result jar in the root folder. A bit easier for docker to find it there
-target in assembly := new java.io.File(&quot;.&quot;)
-//we do not need the scala library in the result jar
-assemblyOption in assembly := (assemblyOption in assembly).value.copy(includeScala = false)
-// compile java code with compatibility with JDK 7 which is used for Cassandra inside Docker
-javacOptions ++= Seq(&quot;-source&quot;, &quot;1.7&quot;, &quot;-target&quot;, &quot;1.7&quot;)
-</code></pre>
-
-<p>in <a href="https://github.com/coffius/koffio-uda-hll/blob/master/project/assembly.sbt">project/assembly.sbt</a>:</p>
-
-<pre><code class="language-scala">// use sbt-assembly for building a fat jar
-addSbtPlugin(&quot;com.eed3si9n&quot; % &quot;sbt-assembly&quot; % &quot;0.14.3&quot;)
-</code></pre>
-
-<p>Then we add the jar file to the docker container along with <a href="https://github.com/coffius/koffio-uda-hll/blob/master/cassandra.yaml#L879">the patched Cassandra config</a> where the flag <code>enable_user_defined_functions</code> is set to true:</p>
-
-<p><a href="https://github.com/coffius/koffio-uda-hll/blob/master/Dockerfile">Dockerfile</a></p>
-
-<pre><code class="language-html">FROM cassandra:2.2.8
-
-# copy the cassandra config with the permission for user defined functions
-COPY ./cassandra.yaml /etc/cassandra/cassandra.yaml
-
-# copy the jar with out implementation of hll functions
-COPY ./hll.jar /usr/share/cassandra/lib/
-</code></pre>
-
-<h2 id="create-uda-for-hll">Create UDA for HLL</h2>
-
+<p>At first we build a fat jar(jar with all dependencies) using <a href="https://github.com/sbt/sbt-assembly" target="_blank">sbt-assembly</a> plugin.</p>
+<p>in <a href="https://github.com/coffius/koffio-uda-hll/blob/master/build.sbt" target="_blank">build.sbt</a>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span>assemblyJarName in assembly <span style="color:#66d9ef">:</span><span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hll.jar&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// we do not need test classes in the result jar
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>test in assembly <span style="color:#66d9ef">:</span><span style="color:#f92672">=</span> <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// define an output name of the result jar in the root folder. A bit easier for docker to find it there
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>target in assembly <span style="color:#66d9ef">:</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> java<span style="color:#f92672">.</span>io<span style="color:#f92672">.</span><span style="color:#a6e22e">File</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;.&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//we do not need the scala library in the result jar
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>assemblyOption in assembly <span style="color:#66d9ef">:</span><span style="color:#f92672">=</span> <span style="color:#f92672">(</span>assemblyOption in assembly<span style="color:#f92672">).</span>value<span style="color:#f92672">.</span>copy<span style="color:#f92672">(</span>includeScala <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// compile java code with compatibility with JDK 7 which is used for Cassandra inside Docker
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>javacOptions <span style="color:#f92672">++=</span> <span style="color:#a6e22e">Seq</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;-source&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;1.7&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;-target&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;1.7&#34;</span><span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>in <a href="https://github.com/coffius/koffio-uda-hll/blob/master/project/assembly.sbt" target="_blank">project/assembly.sbt</a>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#75715e">// use sbt-assembly for building a fat jar
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>addSbtPlugin<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;com.eed3si9n&#34;</span> <span style="color:#f92672">%</span> <span style="color:#e6db74">&#34;sbt-assembly&#34;</span> <span style="color:#f92672">%</span> <span style="color:#e6db74">&#34;0.14.3&#34;</span><span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>Then we add the jar file to the docker container along with <a href="https://github.com/coffius/koffio-uda-hll/blob/master/cassandra.yaml#L879" target="_blank">the patched Cassandra config</a> where the flag <code>enable_user_defined_functions</code> is set to true:</p>
+<p><a href="https://github.com/coffius/koffio-uda-hll/blob/master/Dockerfile" target="_blank">Dockerfile</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>FROM cassandra:2.2.8
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># copy the cassandra config with the permission for user defined functions
+</span></span><span style="display:flex;"><span>COPY ./cassandra.yaml /etc/cassandra/cassandra.yaml
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># copy the jar with out implementation of hll functions
+</span></span><span style="display:flex;"><span>COPY ./hll.jar /usr/share/cassandra/lib/
+</span></span></code></pre></div><h2 id="create-uda-for-hll">Create UDA for HLL</h2>
 <p>The last step is to create UDA which will use our functions:</p>
-
-<p><a href="https://github.com/coffius/koffio-uda-hll/blob/master/hll_uda.cql">hll_uda.cql</a></p>
-
-<pre><code class="language-html">-- Keyspace definition
-CREATE KEYSPACE IF NOT EXISTS udf
-WITH replication = {
-	'class' : 'SimpleStrategy',
-	'replication_factor' : 1
-};
-
--- Functions for hll counters
-CREATE OR REPLACE FUNCTION udf.hll_state ( state blob, val int ) CALLED ON NULL INPUT RETURNS blob LANGUAGE java AS
-  'return io.koff.udf.HLL.stateFunc(state, val);';
-
-CREATE OR REPLACE FUNCTION udf.hll_final ( state blob ) CALLED ON NULL INPUT RETURNS bigint LANGUAGE java AS
-  'return io.koff.udf.HLL.finalFunc(state);';
-
--- we need an empty ByteBuffer at the first step so we make it from the empty string
-CREATE AGGREGATE IF NOT EXISTS udf.hll ( int ) SFUNC hll_state STYPE blob FINALFUNC hll_final INITCOND textAsBlob('');
-</code></pre>
-
-<p>We need to use full names for our functions.</p>
-
+<p><a href="https://github.com/coffius/koffio-uda-hll/blob/master/hll_uda.cql" target="_blank">hll_uda.cql</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>-- Keyspace definition
+</span></span><span style="display:flex;"><span>CREATE KEYSPACE IF NOT EXISTS udf
+</span></span><span style="display:flex;"><span>WITH replication = {
+</span></span><span style="display:flex;"><span>	&#39;class&#39; : &#39;SimpleStrategy&#39;,
+</span></span><span style="display:flex;"><span>	&#39;replication_factor&#39; : 1
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>-- Functions for hll counters
+</span></span><span style="display:flex;"><span>CREATE OR REPLACE FUNCTION udf.hll_state ( state blob, val int ) CALLED ON NULL INPUT RETURNS blob LANGUAGE java AS
+</span></span><span style="display:flex;"><span>  &#39;return io.koff.udf.HLL.stateFunc(state, val);&#39;;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>CREATE OR REPLACE FUNCTION udf.hll_final ( state blob ) CALLED ON NULL INPUT RETURNS bigint LANGUAGE java AS
+</span></span><span style="display:flex;"><span>  &#39;return io.koff.udf.HLL.finalFunc(state);&#39;;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>-- we need an empty ByteBuffer at the first step so we make it from the empty string
+</span></span><span style="display:flex;"><span>CREATE AGGREGATE IF NOT EXISTS udf.hll ( int ) SFUNC hll_state STYPE blob FINALFUNC hll_final INITCOND textAsBlob(&#39;&#39;);
+</span></span></code></pre></div><p>We need to use full names for our functions.</p>
 <h2 id="test">Test</h2>
-
 <p>Now we are ready to test it :)</p>
-
 <p>Let&rsquo;s make a simple table where we will store events about user visits for different wares and add some data in it:</p>
-
-<pre><code class="language-html">CREATE TABLE IF NOT EXISTS udf.ware_hits (
-	ware_id int,
-	date_time timestamp,
-	visitor_id int,
-	PRIMARY KEY (ware_id, date_time)
-);
-
-INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 1);
-INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 2);
-INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 3);
-INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 1);
-INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 2);
-INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 3);
-INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 4);
-INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 5);
-INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 6);
-</code></pre>
-
-<p>So now there are 9 events for ware[id: 1] with 6 unique users. We can get this numbers using these queries:</p>
-
-<pre><code class="language-html">SELECT count(visitor_id) as total_count FROM udf.ware_hits WHERE ware_id = 1; --total_count = 9
-SELECT udf.hll(visitor_id) as unique_users FROM udf.ware_hits WHERE ware_id = 1; --out aggregate returns unique_users = 6
-</code></pre>
-
-<h2 id="afterword">Afterword</h2>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>CREATE TABLE IF NOT EXISTS udf.ware_hits (
+</span></span><span style="display:flex;"><span>	ware_id int,
+</span></span><span style="display:flex;"><span>	date_time timestamp,
+</span></span><span style="display:flex;"><span>	visitor_id int,
+</span></span><span style="display:flex;"><span>	PRIMARY KEY (ware_id, date_time)
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 1);
+</span></span><span style="display:flex;"><span>INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 2);
+</span></span><span style="display:flex;"><span>INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 3);
+</span></span><span style="display:flex;"><span>INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 1);
+</span></span><span style="display:flex;"><span>INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 2);
+</span></span><span style="display:flex;"><span>INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 3);
+</span></span><span style="display:flex;"><span>INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 4);
+</span></span><span style="display:flex;"><span>INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 5);
+</span></span><span style="display:flex;"><span>INSERT INTO udf.ware_hits (ware_id, date_time, visitor_id) VALUES (1, toTimestamp(now()), 6);
+</span></span></code></pre></div><p>So now there are 9 events for ware[id: 1] with 6 unique users. We can get this numbers using these queries:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>SELECT count(visitor_id) as total_count FROM udf.ware_hits WHERE ware_id = 1; --total_count = 9
+</span></span><span style="display:flex;"><span>SELECT udf.hll(visitor_id) as unique_users FROM udf.ware_hits WHERE ware_id = 1; --out aggregate returns unique_users = 6
+</span></span></code></pre></div><h2 id="afterword">Afterword</h2>
 <p>It was shown how to implement custom aggregates for Cassandra by the example of hll counters. But before use this idea you also need to understand how aggregates work in Cassandra in the distributed environment.
-This information you can find in the articles <a href="http://www.doanduyhai.com/blog/?p=1876" title="Cassandra UDF/UDA Technical Deep Dive">here</a> and <a href="http://www.doanduyhai.com/blog/?p=2015" title="Cassandra User Defined Aggregates in action: best practices and caveats">here</a>. Maybe Spark will be better choice in your case.</p>
-
+This information you can find in the articles <a href="http://www.doanduyhai.com/blog/?p=1876" title="Cassandra UDF/UDA Technical Deep Dive" target="_blank">here</a> and <a href="http://www.doanduyhai.com/blog/?p=2015" title="Cassandra User Defined Aggregates in action: best practices and caveats" target="_blank">here</a>. Maybe Spark will be better choice in your case.</p>
 <h2 id="links">Links</h2>
-
 <ul>
-<li><a href="https://github.com/coffius/koffio-uda-hll">Source code for this article</a></li>
-<li><a href="https://github.com/prasanthj/hyperloglog">prasanthj/hyperloglog</a></li>
+<li><a href="https://github.com/coffius/koffio-uda-hll" target="_blank">Source code for this article</a></li>
+<li><a href="https://github.com/prasanthj/hyperloglog" target="_blank">prasanthj/hyperloglog</a></li>
 <li><a href="../comparison-of-hll">Comparison of HLL implementations</a> - if you are interested to know about other HLL implementations</li>
-<li><a href="http://www.doanduyhai.com/blog/?p=1876">Cassandra UDF/UDA Technical Deep Dive</a></li>
-<li><a href="http://www.doanduyhai.com/blog/?p=2015">Cassandra User Defined Aggregates in action: best practices and caveats</a></li>
+<li><a href="http://www.doanduyhai.com/blog/?p=1876" target="_blank">Cassandra UDF/UDA Technical Deep Dive</a></li>
+<li><a href="http://www.doanduyhai.com/blog/?p=2015" target="_blank">Cassandra User Defined Aggregates in action: best practices and caveats</a></li>
 </ul>
+  <hr>
+<div class="footer">
+    
+	    
+            <a class="previous-post" href="http://coffius.github.io/posts/variance-tip-notes/?ref=footer"><span style="font-weight:bold;">« Previous</span><br>Tips about variance in scala</a>
+        
+	    
+            <div class="next-post">
+                <a href="http://coffius.github.io/posts/shapeless-sums/?ref=footer"><span style="font-weight:bold;">Next »</span><br>Sum Data Types with Shapeless</a>
+            </div>
+        
+    
 </div>
 
-
-  <footer class="container">
-  <div class="container navigation no-print">
-  <h2>Navigation</h2>
   
-  
-
+    <div class="comments">
     
-    <a class="prev" href="http://coffius.github.io/posts/variance-tip-notes/" title="Tips about variance in scala">
-      Previous
-    </a>
-    
-
-    
-    <a class="next" href="http://coffius.github.io/posts/shapeless-sums/" title="Sum Data Types with Shapeless">
-      Next
-    </a>
-    
-
-  
-
-
-</div>
-
-  <div class="container comments">
-  <h2>Comments</h2>
-  
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-  (function() {
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
     
     
-    if (window.location.hostname == "localhost")
-      return;
-
-    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
-    dsq.src = '//koff-io.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "koff-io" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-
-</div>
-
-</footer>
-
-</article>
-      <footer id="main-footer" class="container main_footer">
-  
-
-  <div class="container nav foot no-print">
-  
-<a href="http://coffius.github.io/license">license</a>
-
-
-  <a class="toplink" href="#">back to top</a>
-
-</div>
-
-  <div class="container credits">
-  
-<div class="container footline">
-  
-  code with <i class='fa fa-heart'></i>
-
-
-</div>
-
-
-  
-<div class="container copyright">
-  
-  &copy; 2015
-
-
-</div>
-
-
-</div>
-
-</footer>
-
-    </main>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
-<script type="text/javascript">
-  (function() {
-    
-    
-    if (window.location.hostname == "localhost")
-      return;
+</div>
 
-    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
-    dsq.src = '//koff-io.disqus.com/count.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
-</script>
+  
+</div>
+            </main>
+            
+  
+    <div class="article-toc ">
+    <div class="toc-wrapper">
+      <h4 id="contents"></h4>
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#important">Important</a></li>
+    <li><a href="#software">Software</a></li>
+    <li><a href="#steps">Steps</a></li>
+    <li><a href="#simple-example-of-uda">Simple example of UDA</a></li>
+    <li><a href="#prepare-hll-for-cassandra">Prepare HLL for Cassandra</a></li>
+    <li><a href="#deploy-code">Deploy code</a></li>
+    <li><a href="#create-uda-for-hll">Create UDA for HLL</a></li>
+    <li><a href="#test">Test</a></li>
+    <li><a href="#afterword">Afterword</a></li>
+    <li><a href="#links">Links</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
 
+  
 
-
-<script src="http://coffius.github.io/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
-
-    
-  </body>
+        </div>
+    </body>
 </html>
-

@@ -1,157 +1,227 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-EN" lang="en-EN">
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>Comparison of HLL implementations  &middot; KOFF.io</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+<script defer language="javascript" type="text/javascript" src="/js/bundle.min.a43a549406127e0715f68083c987d71d0c71054cd57edea77aa709ed9958af6e.js"></script>
+
+
+
+
+
+
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <link rel="icon" href=/favicon.png>
+
+    
+    
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+  
+
+
+<!-- Open Graph image and Twitter Card metadata -->
+
+<title itemprop="name">Koff.io - Comparison of HLL implementations</title>
+<meta property="og:title" content=Koff.io&#32;-&#32;Comparison&#32;of&#32;HLL&#32;implementations />
+<meta name="twitter:title" content=Koff.io&#32;-&#32;Comparison&#32;of&#32;HLL&#32;implementations />
+<meta itemprop="name" content=Koff.io&#32;-&#32;Comparison&#32;of&#32;HLL&#32;implementations />
+<meta name="application-name" content=Koff.io&#32;-&#32;Comparison&#32;of&#32;HLL&#32;implementations />
+<meta property="og:site_name" content="KOFF.io" />
 
 
 <meta name="description" content="" />
+<meta itemprop="description" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:description" content="" />
 
-<meta name="keywords" content="">
 
-<link rel="author" href="http://plus.google.com/+102671541320733671208">
-
-
-<meta property="og:title" content="Comparison of HLL implementations  &middot; KOFF.io ">
-<meta property="og:site_name" content="KOFF.io"/>
+<base href="http://coffius.github.io/posts/comparison-of-hll/" />
+<link rel="canonical" href="http://coffius.github.io/posts/comparison-of-hll/" itemprop="url" />
+<meta name="url" content="http://coffius.github.io/posts/comparison-of-hll/" />
+<meta name="twitter:url" content="http://coffius.github.io/posts/comparison-of-hll/" />
 <meta property="og:url" content="http://coffius.github.io/posts/comparison-of-hll/" />
-<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:updated_time" content=22009-22-10T91:13:15&#43;0300 />
+
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href='http://coffius.github.io/sitemap.xml' />
+
+<meta name="robots" content="index,follow" />
+<meta name="googlebot" content="index,follow" />
+
+
+<meta name="twitter:site" content="https://twitter.com/coffius" />
+<meta name="twitter:creator" content="https://twitter.com/coffius" />
+<meta property="fb:admins" content="" />
+
+
+<meta name="apple-mobile-web-app-title" content="KOFF.io" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+
+
+
+
+
 
 
 <meta property="og:type" content="article" />
-<meta property="og:description" content=""/>
-<meta property="og:article:published_time" content="2015-09-22T22:01:13&#43;03:00" />
-<meta property="og:article:modified_time" content="2015-09-22T22:01:13&#43;03:00" />
-
-  
-
-  
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@coffius" />
-<meta name="twitter:creator" content="@coffius" />
-<meta name="twitter:title" content="Comparison of HLL implementations" />
-<meta name="twitter:description" content="" />
-<meta name="twitter:url" content="http://coffius.github.io/posts/comparison-of-hll/" />
-<meta name="twitter:domain" content="http://coffius.github.io/">
-  
-
-<script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "Article",
-    "headline": "Comparison of HLL implementations",
-    "author": {
-      "@type": "Person",
-      "name": "http://profiles.google.com/+102671541320733671208?rel=author"
-    },
-    "datePublished": "2015-09-22",
-    "description": "",
-    "wordCount": 1442
-  }
-</script>
+<meta property="article:publisher" content="" />
+<meta property="og:article:published_time" content=22009-22-10T91:13:15&#43;0300 />
+<meta property="article:published_time" content=22009-22-10T91:13:15&#43;0300 />
 
 
 
-<link rel="canonical" href="http://coffius.github.io/posts/comparison-of-hll/" />
 
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://coffius.github.io/touch-icon-144-precomposed.png">
-<link href="http://coffius.github.io/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.26" />
 
-  
-<!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
 
-<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="http://coffius.github.io/css/font-awesome.min.css">
-<link rel="stylesheet" href="http://coffius.github.io/css/style.css">
-<link rel="stylesheet" href="http://coffius.github.io/css/highlight/default.css">
 
-  
-  
-	<script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+<meta name="generator" content="Hugo 0.119.0">
 
-	  ga('create', 'UA-66345345-1', 'auto');
-	  ga('send', 'pageview');
 
-	</script>
+    
+    
+
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.8c227569d4bf422323072472267fbadf39d2c717cb88332a8413d08b0b2b17e8.css">
+
+
+    
+    <style>
+    body {
+        --sidebar-bg-color: #202020;
+        --sidebar-img-border-color: #515151;
+        --sidebar-p-color: #909090;
+        --sidebar-h1-color: #FFF;
+        --sidebar-a-color: #FFF;
+        --sidebar-socials-color: #FFF;
+        --text-color: #222;
+        --bkg-color: #FAF9F6;
+        --post-title-color: #303030;
+        --list-color: #5a5a5a;
+        --link-color: #268bd2;
+        --date-color: #515151;
+        --table-border-color: #E5E5E5;
+        --table-stripe-color: #F9F9F9;
+        --code-color: #000;
+        --code-background-color: #E5E5E5;
+        --code-block-color: #fff;
+        --code-block-background-color: #272822;
+        --moon-sun-color: #FFF;
+        --moon-sun-background-color: #515151;
+    }
+    body.dark-theme {
+        --text-color: #eee;
+        --bkg-color: #121212;
+        --post-title-color: #DBE2E9;
+        --list-color: #9d9d9d;
+        --link-color: #268bd2;
+        --date-color: #9a9a9a;
+        --table-border-color: #515151;
+        --table-stripe-color: #202020;
+        --code-color: #fff;
+        --code-background-color: #515151;
+        --code-block-color: #fff;
+        --code-block-background-color: #272822;
+    }
+    body {
+        background-color: var(--bkg-color);
+    }
+</style>
 
 </head>
-<body>
-  <main id="main-wrapper" class="container main_wrapper has-sidebar">
-    <header id="main-header" class="container main_header">
-  <div class="container brand">
-  <div class="container title h1-like">
-  <a class="baselink" href="http://coffius.github.io/">
-  KOFF.io
 
-</a>
-
+    <body class="dark-theme">
+        <div class="wrapper">
+            <aside class="sidebar">
+    <div class="container sidebar-sticky">
+        <div class="light-dark" align="right">
+    <button class="btn-light-dark" title="Toggle light/dark mode">
+        <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M6 .278a.768.768 0 0 1 .08.858a7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277c.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316a.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71C0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+        </svg>
+        <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M8 12a4 4 0 1 0 0-8a4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+        </svg>
+    </button>
 </div>
 
-  
-<div class="container topline">
-  
-  where scala is beloved
-
-
+        <div class="sidebar-about">
+    <h1 class="brand">
+        
+        
+            <a href="http://coffius.github.io/">
+                <h1>KOFF.io</h1>
+            </a>
+        
+    </h1>
+    <p class="lead">
+    where scala is beloved
+    </p>
 </div>
 
+        <nav>
+    <ul class="sidebar-nav">
 
-</div>
+        
+        
+        
 
-  <nav class="container nav primary no-print">
-  
-
-<a class="homelink" href="http://coffius.github.io/">Home</a>
-
-
-  
-<a href="http://coffius.github.io/about">About</a>
-
-<a href="http://coffius.github.io/post" title="Show list of posts">Posts</a>
-
-<a href="http://coffius.github.io/tags" title="Show list of tags">Tags</a>
-
-
+    </ul>
 </nav>
 
-<div class="container nav secondary no-print">
-  
-
-
-<a id="contact-link-github" class="contact_link" href="https://github.com/coffius">
-  <span class="fa fa-github-square"></span><span>github</span></a>
-
-
-
+        
+    <a target="_blank" class="social" title="GitHub" href="https://github.com/coffius">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="-2 -2 24 24">
+            <path fill="currentColor" d="M18.88 1.099C18.147.366 17.265 0 16.233 0H3.746C2.714 0 1.832.366 1.099 1.099C.366 1.832 0 2.714 0 3.746v12.487c0 1.032.366 1.914 1.099 2.647c.733.733 1.615 1.099 2.647 1.099H6.66c.19 0 .333-.007.429-.02a.504.504 0 0 0 .286-.169c.095-.1.143-.245.143-.435l-.007-.885c-.004-.564-.006-1.01-.006-1.34l-.3.052c-.19.035-.43.05-.721.046a5.555 5.555 0 0 1-.904-.091a2.026 2.026 0 0 1-.872-.39a1.651 1.651 0 0 1-.572-.8l-.13-.3a3.25 3.25 0 0 0-.41-.663c-.186-.243-.375-.407-.566-.494l-.09-.065a.956.956 0 0 1-.17-.156a.723.723 0 0 1-.117-.182c-.026-.061-.004-.111.065-.15c.07-.04.195-.059.378-.059l.26.04c.173.034.388.138.643.311a2.1 2.1 0 0 1 .631.677c.2.355.44.626.722.813c.282.186.566.28.852.28c.286 0 .533-.022.742-.065a2.59 2.59 0 0 0 .585-.196c.078-.58.29-1.028.637-1.34a8.907 8.907 0 0 1-1.333-.234a5.314 5.314 0 0 1-1.223-.507a3.5 3.5 0 0 1-1.047-.872c-.277-.347-.505-.802-.683-1.365c-.177-.564-.266-1.215-.266-1.952c0-1.049.342-1.942 1.027-2.68c-.32-.788-.29-1.673.091-2.652c.252-.079.625-.02 1.119.175c.494.195.856.362 1.086.5c.23.14.414.257.553.352a9.233 9.233 0 0 1 2.497-.338c.859 0 1.691.113 2.498.338l.494-.312a6.997 6.997 0 0 1 1.197-.572c.46-.174.81-.221 1.054-.143c.39.98.424 1.864.103 2.653c.685.737 1.028 1.63 1.028 2.68c0 .737-.089 1.39-.267 1.957c-.177.568-.407 1.023-.689 1.366a3.65 3.65 0 0 1-1.053.865c-.42.234-.828.403-1.223.507a8.9 8.9 0 0 1-1.333.235c.45.39.676 1.005.676 1.846v3.11c0 .147.021.266.065.357a.36.36 0 0 0 .208.189c.096.034.18.056.254.064c.074.01.18.013.318.013h2.914c1.032 0 1.914-.366 2.647-1.099c.732-.732 1.099-1.615 1.099-2.647V3.746c0-1.032-.367-1.914-1.1-2.647z"/>
+        </svg>
+    </a>
 
 
 
 
-<a id="contact-link-googleplus" class="contact_link" href="https://plus.google.com/u/0/+102671541320733671208">
-  <span class="fa fa-google-plus-square"></span><span>google+</span></a>
-
-
-
-
-
-<a id="contact-link-twitter" class="contact_link" href="https://twitter.com/coffius">
-  <span class="fa fa-twitter-square"></span><span>twitter</span></a>
+    <a target="_blank" class="social" title="Twitter" href="https://twitter.com/coffius">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M5.032 14.286c6.037 0 9.34-4.837 9.34-9.032c0-.137 0-.274-.01-.41A6.56 6.56 0 0 0 16 3.2c-.6.256-1.235.425-1.885.5a3.207 3.207 0 0 0 1.443-1.757c-.645.37-1.35.63-2.085.77a3.322 3.322 0 0 0-1.862-.958a3.384 3.384 0 0 0-2.082.334a3.223 3.223 0 0 0-1.442 1.49a3.08 3.08 0 0 0-.208 2.03a9.57 9.57 0 0 1-3.747-.963a9.269 9.269 0 0 1-3.018-2.354a3.086 3.086 0 0 0-.36 2.314c.189.787.68 1.475 1.376 1.924a3.344 3.344 0 0 1-1.49-.398v.04c0 .734.263 1.444.743 2.01a3.3 3.3 0 0 0 1.89 1.102c-.483.128-.99.146-1.482.055a3.19 3.19 0 0 0 1.168 1.577a3.36 3.36 0 0 0 1.9.627A6.732 6.732 0 0 1 0 12.86a9.527 9.527 0 0 0 5.032 1.423"/>
+        </svg>
+    </a>
 
 
 
@@ -165,72 +235,57 @@
 
 
 
+
+        <p class="footnote">
+powered by <a target="_blank" href="https://gohugo.io">Hugo</a> | themed with <a target="_blank" href="https://github.com/lukeorth/poison">poison</a>
+    <br>
+    &copy; 2023 coffius. All rights reserved.
+</p>
+
+  </div>
+</aside>
+
+            <main class="content container">
+                <div class="post">
+  <div class="info">
+    <h1 class="post-title">
+        <a href="http://coffius.github.io/posts/comparison-of-hll/">Comparison of HLL implementations</a>
+    </h1>
+    
+        <time datetime="2015-09-22T22:01:13&#43;0300" class="post-date">
+            September 22, 2015
+        </time>
+    
+    
+    
+    
+    
+    
+    
 </div>
 
-
-  
-
-</header>
-
-
-<article id="main-content" class="container main_content single">
-  <header class="container hat">
-  <h1>Comparison of HLL implementations
-</h1>
-
-  <div class="metas">
-<time datetime="2015-09-22">22 Sep, 2015</time>
-
-
-  
-  &middot; Read in about 7 min
-  &middot; (1442 Words)
-  <br>
-  
-
-
-</div>
-
-</header>
-
-  <div class="container content">
   <p>In this article we will look at HLL algorithm and different implementations of it.</p>
-
 <h2 id="general-info">General Info</h2>
-
 <p>HLL is a propabalistic algorithm which is used for a estimation of unique values.
-More details about HLL you can get <a href="https://en.wikipedia.org/wiki/HyperLogLog" title="Wikipedia:HyperLogLog">here</a>.
+More details about HLL you can get <a href="https://en.wikipedia.org/wiki/HyperLogLog" title="Wikipedia:HyperLogLog" target="_blank">here</a>.
 The main reason to use HLL is necessity to estimate uniques in very big amount of data in case if it is possible to sacrifice accuracy of an unique counter.</p>
-
 <h2 id="list-of-implementations">List of implementations</h2>
-
 <p>You can find several implementations of HLL:</p>
-
 <ul>
-<li><a href="https://github.com/twitter/algebird" title="twitter/algebird">twitter/algebird</a> - a scala library from twitter which contains lots of different algorithms including HLL</li>
-<li><a href="https://github.com/prasanthj/hyperloglog" title="prasanthj/hyperloglog">prasanthj/hyperloglog</a> - a detached java library for HLL</li>
-<li><a href="https://github.com/addthis/stream-lib" title="addthis/stream-lib">addthis/stream-lib</a> - another java lib which have an implementation of HLL.</li>
-<li><a href="https://github.com/aggregateknowledge/java-hll" title="java-hll">aggregateknowledge/java-hll</a> - a low-level java implementation of HLL</li>
+<li><a href="https://github.com/twitter/algebird" title="twitter/algebird" target="_blank">twitter/algebird</a> - a scala library from twitter which contains lots of different algorithms including HLL</li>
+<li><a href="https://github.com/prasanthj/hyperloglog" title="prasanthj/hyperloglog" target="_blank">prasanthj/hyperloglog</a> - a detached java library for HLL</li>
+<li><a href="https://github.com/addthis/stream-lib" title="addthis/stream-lib" target="_blank">addthis/stream-lib</a> - another java lib which have an implementation of HLL.</li>
+<li><a href="https://github.com/aggregateknowledge/java-hll" title="java-hll" target="_blank">aggregateknowledge/java-hll</a> - a low-level java implementation of HLL</li>
 </ul>
-
-<p>Next in this article we will take a close look at all these libs and answer the question: &laquo;Why should we use HLL?&raquo;.</p>
-
-<p></p>
-
+<p>Next in this article we will take a close look at all these libs and answer the question: &ldquo;Why should we use HLL?&rdquo;.</p>
 <h2 id="example-of-use">Example of use</h2>
-
 <p>So why should we might use HLL in our programs? The main reason is reducing of data which we have to store.</p>
-
 <p>For example you need to count the number of unique visitors for every page on a site. You can use a structure like this:</p>
-
-<pre><code class="language-scala">case class PageVisitors(pageUrl: String, visitors: Set[UUID])
-</code></pre>
-
-<p>And it will work until you have a lot of pages and very many visitors on each page.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PageVisitors</span><span style="color:#f92672">(</span>pageUrl<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> visitors<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Set</span><span style="color:#f92672">[</span><span style="color:#66d9ef">UUID</span><span style="color:#f92672">])</span>
+</span></span></code></pre></div><p>And it will work until you have a lot of pages and very many visitors on each page.
 For instance let`s assume that we have an analytic system which work with visit statistic of different sites. Suppose we have 1000 pretty popular sites and because sites are popular each site have about 100000 unique visitors per day.
 We also want to save statistic of unique visitors per day for each site at least one year. We mark visitors using UUID - 128 bits identifier.</p>
-
-<pre><code>one UUID = 128 bits = 16 bytes per unique visitor
+<pre tabindex="0"><code>one UUID = 128 bits = 16 bytes per unique visitor
 
 # for one site per day
 100000 unique visitors * 16 bytes = 1600000 bytes ~= 1.52 Mbyte of data 
@@ -240,344 +295,258 @@ We also want to save statistic of unique visitors per day for each site at least
 
 # total amount of data for 1000 sites
 556 Mbyte * 1000 = 556 Gbyte of total data
-</code></pre>
-
-<p>But if we are ready to sacrifice accuracy a little bit we will considerably reduce amount of stored data.
+</code></pre><p>But if we are ready to sacrifice accuracy a little bit we will considerably reduce amount of stored data.
 For example if we use <code>prasanthj/hyperloglog</code> to store unique counter <code>16Kbytes</code> will be enough to store <code>10.000.000</code> unique values only with <code>~0.52%</code> of error.</p>
-
-<pre><code>16Kbyte per site * 365 days * 1000 sites = 5.5Gbyte of total data
-</code></pre>
-
-<p>We will reduce the needed size of data a hundredfold if we agree with 0.52% of error.</p>
-
-<h2 id="twitter-algebird">twitter/algebird</h2>
-
-<p>This library contains various algorithms like <code>HyperLogLog</code>, <code>CountMinSketch</code> and others. The full list you can find <a href="https://github.com/twitter/algebird/wiki" title="Algebird docs">here</a>.</p>
-
+<pre tabindex="0"><code>16Kbyte per site * 365 days * 1000 sites = 5.5Gbyte of total data
+</code></pre><p>We will reduce the needed size of data a hundredfold if we agree with 0.52% of error.</p>
+<h2 id="twitteralgebird">twitter/algebird</h2>
+<p>This library contains various algorithms like <code>HyperLogLog</code>, <code>CountMinSketch</code> and others. The full list you can find <a href="https://github.com/twitter/algebird/wiki" title="Algebird docs" target="_blank">here</a>.</p>
 <p>Below is an example of using <code>algebird.HyperLogLogMonoid</code>:</p>
-
-<pre><code class="language-scala">object SimpleAlgebirdExample {
-  import com.twitter.algebird.HyperLogLogMonoid
-
-  def main(args: Array[String]) {
-    //define test data
-    val data = Seq(&quot;aaa&quot;, &quot;bbb&quot;, &quot;ccc&quot;)
-    //create algebird HLL
-    val hll = new HyperLogLogMonoid(bits = 10)
-    //convert data elements to a seq of hlls
-    val hlls = data.map { str =&gt;
-      val bytes = str.getBytes(&quot;utf-8&quot;)
-      hll.create(bytes)
-    }
-
-    //merge seq of hlls in one hll object
-    val merged = hll.sum(hlls)
-
-    //WARN: don`t use merged.size - it is a different thing
-    //get the estimate count from merged hll
-    println(&quot;estimate count: &quot; + hll.sizeOf(merged).estimate)
-    //or
-    println(&quot;estimate count: &quot; + merged.approximateSize.estimate)
-  }
-}
-</code></pre>
-
-<h2 id="prasanthj-hyperloglog">prasanthj/hyperloglog</h2>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">object</span> <span style="color:#a6e22e">SimpleAlgebirdExample</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">import</span> com.twitter.algebird.HyperLogLogMonoid
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> main<span style="color:#f92672">(</span>args<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Array</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">])</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//define test data
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> data <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Seq</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;aaa&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;bbb&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;ccc&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//create algebird HLL
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> hll <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">HyperLogLogMonoid</span><span style="color:#f92672">(</span>bits <span style="color:#66d9ef">=</span> <span style="color:#ae81ff">10</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//convert data elements to a seq of hlls
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> hlls <span style="color:#66d9ef">=</span> data<span style="color:#f92672">.</span>map <span style="color:#f92672">{</span> str <span style="color:#66d9ef">=&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">val</span> bytes <span style="color:#66d9ef">=</span> str<span style="color:#f92672">.</span>getBytes<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;utf-8&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      hll<span style="color:#f92672">.</span>create<span style="color:#f92672">(</span>bytes<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//merge seq of hlls in one hll object
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> merged <span style="color:#66d9ef">=</span> hll<span style="color:#f92672">.</span>sum<span style="color:#f92672">(</span>hlls<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//WARN: don`t use merged.size - it is a different thing
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">//get the estimate count from merged hll
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    println<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;estimate count: &#34;</span> <span style="color:#f92672">+</span> hll<span style="color:#f92672">.</span>sizeOf<span style="color:#f92672">(</span>merged<span style="color:#f92672">).</span>estimate<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//or
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    println<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;estimate count: &#34;</span> <span style="color:#f92672">+</span> merged<span style="color:#f92672">.</span>approximateSize<span style="color:#f92672">.</span>estimate<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h2 id="prasanthjhyperloglog">prasanthj/hyperloglog</h2>
 <p>It is a java library containing only an implementation of <code>HyperLogLog</code>.
-There is no a maven artefact for this library, so you can build it manually or use <a href="https://jitpack.io/" title="jitpack.io">jitpack.io</a> as it was described at the end of <a href="http://koff.io/posts/291279-true-fail-fast-with-expression-magic">this article</a>.</p>
-
+There is no a maven artefact for this library, so you can build it manually or use <a href="https://jitpack.io/" title="jitpack.io" target="_blank">jitpack.io</a> as it was described at the end of <a href="http://koff.io/posts/291279-true-fail-fast-with-expression-magic" target="_blank">this article</a>.</p>
 <p>Also it contains a command line test tool which can help to choose settings for HLL and to see how accurate estimation will be. In order to use it you should build  the library locally using <code>maven</code> and execute <code>hll</code> script.</p>
-
-<pre><code class="language-bash"># clone repo
-git clone https://github.com/prasanthj/hyperloglog.git hyperloglog
-cd hyperloglog
-
-# build the library
-mvn package -DskipTests
-
-# execute tests
-./hll -n 10000000 -s -o ./out.hll
-</code></pre>
-
-<p>You should see something like that:</p>
-
-<pre><code>Actual count: 10000000
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># clone repo</span>
+</span></span><span style="display:flex;"><span>git clone https://github.com/prasanthj/hyperloglog.git hyperloglog
+</span></span><span style="display:flex;"><span>cd hyperloglog
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># build the library</span>
+</span></span><span style="display:flex;"><span>mvn package -DskipTests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># execute tests</span>
+</span></span><span style="display:flex;"><span>./hll -n <span style="color:#ae81ff">10000000</span> -s -o ./out.hll
+</span></span></code></pre></div><p>You should see something like that:</p>
+<pre tabindex="0"><code>Actual count: 10000000
 Encoding: DENSE, p : 14, chosenHashBits: 128, estimatedCardinality: 10052011
 Relative error: -0.52011013%
 Serialized hyperloglog to ./out.hll
 Serialized size: 10248 bytes
 Serialization time: 13 ms
-</code></pre>
-
-<p>You can find out more details about params of <code>hll</code> on the <a href="https://github.com/prasanthj/hyperloglog" title="prasanthj/hyperloglog">github page</a> of the library.</p>
-
+</code></pre><p>You can find out more details about params of <code>hll</code> on the <a href="https://github.com/prasanthj/hyperloglog" title="prasanthj/hyperloglog" target="_blank">github page</a> of the library.</p>
 <p>The example of how to use it is below:</p>
-
-<pre><code class="language-scala">object SimplePrasanthjHllExample {
-  import hyperloglog.HyperLogLog.HyperLogLogBuilder
-  def main(args: Array[String]) {
-    //define test data
-    val data = Seq(&quot;aaa&quot;, &quot;bbb&quot;, &quot;ccc&quot;)
-
-    //create a builder for HLL.
-    val hllBuilder = new HyperLogLogBuilder()
-    // You can set different parameters for it using
-    // hllBuilder.setEncoding(...)
-    // hllBuilder.setNumHashBits(...)
-    // hllBuilder.setNumRegisterIndexBits(...)
-    // hllBuilder.enableBitPacking(...)
-    // hllBuilder.enableNoBias(...)
-
-    //create hll object in which we will merge our data
-    val mergedHll = hllBuilder.build()
-
-    //merge data
-    data.foreach { elem =&gt;
-      //explicitly set using encoding
-      val bytes = elem.getBytes(&quot;utf-8&quot;)
-      mergedHll.addBytes(bytes)
-    }
-
-    //print the estimation of count
-    println(&quot;estimate count: &quot; + mergedHll.count())
-  }
-}
-</code></pre>
-
-<h2 id="addthis-stream-lib">addthis/stream-lib</h2>
-
-<p>It is another java library where you can find lots of algorithms. But I have not found any documentation for it. So it can be a problem. If you have a question how to use this library you can try to ask it in the mailing list <a href="http://groups.google.com/group/stream-lib-user">here</a></p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">object</span> <span style="color:#a6e22e">SimplePrasanthjHllExample</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">import</span> hyperloglog.HyperLogLog.HyperLogLogBuilder
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> main<span style="color:#f92672">(</span>args<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Array</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">])</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//define test data
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> data <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Seq</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;aaa&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;bbb&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;ccc&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//create a builder for HLL.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> hllBuilder <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">HyperLogLogBuilder</span><span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// You can set different parameters for it using
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// hllBuilder.setEncoding(...)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// hllBuilder.setNumHashBits(...)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// hllBuilder.setNumRegisterIndexBits(...)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// hllBuilder.enableBitPacking(...)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// hllBuilder.enableNoBias(...)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//create hll object in which we will merge our data
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> mergedHll <span style="color:#66d9ef">=</span> hllBuilder<span style="color:#f92672">.</span>build<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//merge data
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    data<span style="color:#f92672">.</span>foreach <span style="color:#f92672">{</span> elem <span style="color:#66d9ef">=&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">//explicitly set using encoding
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#66d9ef">val</span> bytes <span style="color:#66d9ef">=</span> elem<span style="color:#f92672">.</span>getBytes<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;utf-8&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      mergedHll<span style="color:#f92672">.</span>addBytes<span style="color:#f92672">(</span>bytes<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//print the estimation of count
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    println<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;estimate count: &#34;</span> <span style="color:#f92672">+</span> mergedHll<span style="color:#f92672">.</span>count<span style="color:#f92672">())</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h2 id="addthisstream-lib">addthis/stream-lib</h2>
+<p>It is another java library where you can find lots of algorithms. But I have not found any documentation for it. So it can be a problem. If you have a question how to use this library you can try to ask it in the mailing list <a href="http://groups.google.com/group/stream-lib-user" target="_blank">here</a></p>
 <p>The simple example is here:</p>
-
-<pre><code class="language-scala">object SimpleStreamExample {
-  import com.clearspring.analytics.stream.cardinality.HyperLogLogPlus
-  def main(args: Array[String]) {
-    //define test data
-    val data = Seq(&quot;aaa&quot;, &quot;bbb&quot;, &quot;ccc&quot;)
-
-    //create HLL object in which we will add our data.
-    // You can set parameters here in a constructor
-    val merged = new HyperLogLogPlus(5, 25)
-
-    //adding data in hll
-    data.foreach{ elem =&gt;
-      //in order to control string encoding during string conversion to bytes we explicitly set using encoding
-      val bytes = elem.getBytes(&quot;utf-8&quot;)
-      merged.offer(bytes)
-    }
-
-    //print the estimation
-    println(&quot;estimate count: &quot; + merged.cardinality())
-  }
-}
-</code></pre>
-
-<h2 id="aggregateknowledge-java-hll">aggregateknowledge/java-hll</h2>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">object</span> <span style="color:#a6e22e">SimpleStreamExample</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">import</span> com.clearspring.analytics.stream.cardinality.HyperLogLogPlus
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> main<span style="color:#f92672">(</span>args<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Array</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">])</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//define test data
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> data <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Seq</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;aaa&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;bbb&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;ccc&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//create HLL object in which we will add our data.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// You can set parameters here in a constructor
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> merged <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">HyperLogLogPlus</span><span style="color:#f92672">(</span><span style="color:#ae81ff">5</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">25</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//adding data in hll
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    data<span style="color:#f92672">.</span>foreach<span style="color:#f92672">{</span> elem <span style="color:#66d9ef">=&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">//in order to control string encoding during string conversion to bytes we explicitly set using encoding
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#66d9ef">val</span> bytes <span style="color:#66d9ef">=</span> elem<span style="color:#f92672">.</span>getBytes<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;utf-8&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      merged<span style="color:#f92672">.</span>offer<span style="color:#f92672">(</span>bytes<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//print the estimation
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    println<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;estimate count: &#34;</span> <span style="color:#f92672">+</span> merged<span style="color:#f92672">.</span>cardinality<span style="color:#f92672">())</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h2 id="aggregateknowledgejava-hll">aggregateknowledge/java-hll</h2>
 <p>This is a low-level java implementation of a hll counter. The main principle is the same but you have to define and to use your own hash function(<code>murmur3_128</code> in the example below)</p>
-
 <p>Simple example:</p>
-
-<pre><code class="language-scala">object SimpleAgknHllExample {
-  import net.agkn.hll.HLL
-  import com.google.common.hash.Hashing
-
-  private val seed = 123456
-  /** use murmur3 hash function from `com.google.common.hash`*/
-  private val hash = Hashing.murmur3_128(seed)
-
-  def main(args: Array[String]) {
-    //define test data
-    val data = Seq(&quot;aaa&quot;, &quot;bbb&quot;, &quot;ccc&quot;)
-
-    //create hll object in which we will merge our data with default values of params
-    val hll = new HLL(13, 5)
-
-    //add data to the hll counter
-    data.foreach(str =&gt; hll.addRaw(toHash(str)))
-
-    println(&quot;estimate count: &quot; + hll.cardinality())
-  }
-
-  def toHash(str: String): Long = {
-    val hasher = hash.newHasher()
-    //As always we set encoding explicitly
-    hasher.putBytes(str.getBytes(&quot;utf-8&quot;))
-    hasher.hash().asLong()
-  }
-}
-</code></pre>
-
-<h2 id="bonus-intersection-of-hlls">Bonus: Intersection of HLLs</h2>
-
-<p>It is possible to make intersections of HLL counters in order to find the number of common elements in them. Such logic is implemented in <code>twitter/algebird</code> <a href="https://github.com/twitter/algebird/blob/develop/algebird-core/src/main/scala/com/twitter/algebird/HyperLogLog.scala#L601">here</a>.
-The main underlying principle in this algorithm is <a href="https://en.wikipedia.org/wiki/Inclusion%E2%80%93exclusion_principle">&laquo;Inclusion–exclusion principle&raquo;</a>.
-But you should be aware about how intersection affect an estimation error. I have found <a href="http://research.neustar.biz/2012/12/17/hll-intersections-2/" title="HLL Intersections">this article</a> which helps to understand possible issues.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">object</span> <span style="color:#a6e22e">SimpleAgknHllExample</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">import</span> net.agkn.hll.HLL
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">import</span> com.google.common.hash.Hashing
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> seed <span style="color:#66d9ef">=</span> <span style="color:#ae81ff">123456</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/** use murmur3 hash function from `com.google.common.hash`*/</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> hash <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Hashing</span><span style="color:#f92672">.</span>murmur3_128<span style="color:#f92672">(</span>seed<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> main<span style="color:#f92672">(</span>args<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Array</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">])</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//define test data
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> data <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Seq</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;aaa&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;bbb&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;ccc&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//create hll object in which we will merge our data with default values of params
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> hll <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">HLL</span><span style="color:#f92672">(</span><span style="color:#ae81ff">13</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">5</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//add data to the hll counter
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    data<span style="color:#f92672">.</span>foreach<span style="color:#f92672">(</span>str <span style="color:#66d9ef">=&gt;</span> hll<span style="color:#f92672">.</span>addRaw<span style="color:#f92672">(</span>toHash<span style="color:#f92672">(</span>str<span style="color:#f92672">)))</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    println<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;estimate count: &#34;</span> <span style="color:#f92672">+</span> hll<span style="color:#f92672">.</span>cardinality<span style="color:#f92672">())</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> toHash<span style="color:#f92672">(</span>str<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Long</span> <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> hasher <span style="color:#66d9ef">=</span> hash<span style="color:#f92672">.</span>newHasher<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//As always we set encoding explicitly
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    hasher<span style="color:#f92672">.</span>putBytes<span style="color:#f92672">(</span>str<span style="color:#f92672">.</span>getBytes<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;utf-8&#34;</span><span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>    hasher<span style="color:#f92672">.</span>hash<span style="color:#f92672">().</span>asLong<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h2 id="bonus-intersection-of-hlls">Bonus: Intersection of HLLs</h2>
+<p>It is possible to make intersections of HLL counters in order to find the number of common elements in them. Such logic is implemented in <code>twitter/algebird</code> <a href="https://github.com/twitter/algebird/blob/develop/algebird-core/src/main/scala/com/twitter/algebird/HyperLogLog.scala#L601" target="_blank">here</a>.
+The main underlying principle in this algorithm is <a href="https://en.wikipedia.org/wiki/Inclusion%E2%80%93exclusion_principle" target="_blank">&ldquo;Inclusion–exclusion principle&rdquo;</a>.
+But you should be aware about how intersection affect an estimation error. I have found <a href="http://research.neustar.biz/2012/12/17/hll-intersections-2/" title="HLL Intersections" target="_blank">this article</a> which helps to understand possible issues.</p>
 <p>In order to make possible computation of intersection for other libs I have also created small facade which can be found in the package <code>io.koff.hll.facade</code>.
 And below you can see the example of how to use it in order to find intersection of four hlls:</p>
-
-<pre><code class="language-scala">package io.koff.hll
-
-/**
- * A common algorithm to find intersection of several HLL counters
- */
-object Intersection {
-  import io.koff.hll.facade._
-  import io.koff.hll.facade.impl.algebird._
-  def main(args: Array[String]) {
-    //&quot;444&quot;, &quot;555&quot; and &quot;666&quot; are common elements
-    def set1 = Seq(&quot;111&quot;, &quot;222&quot;, &quot;333&quot;, &quot;444&quot;, &quot;555&quot;, &quot;666&quot;).toHLL
-    def set2 = Seq(&quot;222&quot;, &quot;333&quot;, &quot;444&quot;, &quot;555&quot;, &quot;666&quot;, &quot;777&quot;).toHLL
-    def set3 = Seq(&quot;333&quot;, &quot;444&quot;, &quot;555&quot;, &quot;666&quot;, &quot;777&quot;, &quot;888&quot;).toHLL
-    def set4 = Seq(&quot;444&quot;, &quot;555&quot;, &quot;666&quot;, &quot;777&quot;, &quot;888&quot;, &quot;999&quot;).toHLL
-
-    val intersectionCount = HLLUtils.intersection(set1, set2, set3, set4)
-    println(&quot;intersection: &quot; + intersectionCount) //will print &quot;intersection: 3&quot;
-  }
-}
-
-</code></pre>
-
-<h2 id="comparison-results">Comparison Results</h2>
-
-<p>I have also written a little test which compares described libraries. You can find it <a href="https://github.com/coffius/koffio-hll/blob/master/src/main/scala/io/koff/hll/Comparison.scala" title="GitHub: source code">here</a>.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">package</span> io.koff.hll
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * A common algorithm to find intersection of several HLL counters
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">object</span> <span style="color:#a6e22e">Intersection</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">import</span> io.koff.hll.facade._
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">import</span> io.koff.hll.facade.impl.algebird._
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> main<span style="color:#f92672">(</span>args<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Array</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">])</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//&#34;444&#34;, &#34;555&#34; and &#34;666&#34; are common elements
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">def</span> set1 <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Seq</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;111&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;222&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;333&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;444&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;555&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;666&#34;</span><span style="color:#f92672">).</span>toHLL
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> set2 <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Seq</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;222&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;333&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;444&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;555&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;666&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;777&#34;</span><span style="color:#f92672">).</span>toHLL
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> set3 <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Seq</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;333&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;444&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;555&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;666&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;777&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;888&#34;</span><span style="color:#f92672">).</span>toHLL
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> set4 <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Seq</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;444&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;555&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;666&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;777&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;888&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;999&#34;</span><span style="color:#f92672">).</span>toHLL
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> intersectionCount <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">HLLUtils</span><span style="color:#f92672">.</span>intersection<span style="color:#f92672">(</span>set1<span style="color:#f92672">,</span> set2<span style="color:#f92672">,</span> set3<span style="color:#f92672">,</span> set4<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    println<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;intersection: &#34;</span> <span style="color:#f92672">+</span> intersectionCount<span style="color:#f92672">)</span> <span style="color:#75715e">//will print &#34;intersection: 3&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h2 id="comparison-results">Comparison Results</h2>
+<p>I have also written a little test which compares described libraries. You can find it <a href="https://github.com/coffius/koffio-hll/blob/master/src/main/scala/io/koff/hll/Comparison.scala" title="GitHub: source code" target="_blank">here</a>.
 Results you can see below:</p>
-
-<pre><code>algebird	[error: 0,000758%,  calcTime: 8547 msecs, estimateCount: 999243,  dataSize: 65536 bytes]
+<pre tabindex="0"><code>algebird	[error: 0,000758%,  calcTime: 8547 msecs, estimateCount: 999243,  dataSize: 65536 bytes]
 prasanthj	[error: -0,003540%, calcTime: 643 msecs,  estimateCount: 1003541, dataSize: 10247 bytes]
 stream		[error: -0,001181%, calcTime: 294 msecs,  estimateCount: 1001182, dataSize: 43702 bytes]
 agkn-hll	[error: 0,003895%,  calcTime: 508 msecs,  estimateCount: 996106,  dataSize: 40963 bytes]
-</code></pre>
-
-<p>So as you can see:</p>
-
+</code></pre><p>So as you can see:</p>
 <ul>
 <li><code>twitter/algebird</code> has showed itself as quite a slow library. It can be a problem if you work with big data.</li>
 <li><code>prasanthj/hyperloglog</code> always needs minimal space to store serialized data of HLL counter.</li>
 <li><code>addthis/stream-lib</code> is the fastest library in those that we have looked at.</li>
 <li><code>aggregateknowledge/java-hll</code>(last row) is average. Not too slow, but also not super-fast, average data size.</li>
 </ul>
-
 <h2 id="links">Links</h2>
-
 <ul>
-<li><a href="https://github.com/coffius/koffio-hll" title="GitHub: coffius/koffio-hll">Example sources</a> - an example project can be found here</li>
-<li><a href="https://github.com/twitter/algebird" title="twitter/algebird">twitter/algebird</a> - a scala library from twitter which contains lots of different algorithms including HLL</li>
-<li><a href="https://github.com/prasanthj/hyperloglog" title="prasanthj/hyperloglog">prasanthj/hyperloglog</a> - a detached java library for HLL</li>
-<li><a href="https://github.com/addthis/stream-lib" title="addthis/stream-lib">addthis/stream-lib</a> - another java lib which have an implementation of HLL.</li>
-<li><a href="https://github.com/aggregateknowledge/java-hll" title="aggregateknowledge/java-hll">aggregateknowledge/java-hll</a> - a low-level java implementation of HLL</li>
-<li><a href="http://research.neustar.biz/2012/12/17/hll-intersections-2/">HLL Intersections</a> - an article about accuracy of the HLL`s intersections.</li>
+<li><a href="https://github.com/coffius/koffio-hll" title="GitHub: coffius/koffio-hll" target="_blank">Example sources</a> - an example project can be found here</li>
+<li><a href="https://github.com/twitter/algebird" title="twitter/algebird" target="_blank">twitter/algebird</a> - a scala library from twitter which contains lots of different algorithms including HLL</li>
+<li><a href="https://github.com/prasanthj/hyperloglog" title="prasanthj/hyperloglog" target="_blank">prasanthj/hyperloglog</a> - a detached java library for HLL</li>
+<li><a href="https://github.com/addthis/stream-lib" title="addthis/stream-lib" target="_blank">addthis/stream-lib</a> - another java lib which have an implementation of HLL.</li>
+<li><a href="https://github.com/aggregateknowledge/java-hll" title="aggregateknowledge/java-hll" target="_blank">aggregateknowledge/java-hll</a> - a low-level java implementation of HLL</li>
+<li><a href="http://research.neustar.biz/2012/12/17/hll-intersections-2/" target="_blank">HLL Intersections</a> - an article about accuracy of the HLL`s intersections.</li>
 </ul>
+  <hr>
+<div class="footer">
+    
+	    
+            <a class="previous-post" href="http://coffius.github.io/posts/292173-lens-in-scala/?ref=footer"><span style="font-weight:bold;">« Previous</span><br>Lens in scala</a>
+        
+	    
+            <div class="next-post">
+                <a href="http://coffius.github.io/posts/using-t-digest/?ref=footer"><span style="font-weight:bold;">Next »</span><br>Using T-Digest: Median calculation and anomaly...</a>
+            </div>
+        
+    
 </div>
 
-
-  <footer class="container">
-  <div class="container navigation no-print">
-  <h2>Navigation</h2>
   
-  
-
+    <div class="comments">
     
-    <a class="prev" href="http://coffius.github.io/posts/292173-lens-in-scala/" title="Lens in scala">
-      Previous
-    </a>
-    
-
-    
-    <a class="next" href="http://coffius.github.io/posts/using-t-digest/" title="Using T-Digest: Median calculation and anomaly detection">
-      Next
-    </a>
-    
-
-  
-
-
-</div>
-
-  <div class="container comments">
-  <h2>Comments</h2>
-  
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-  (function() {
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
     
     
-    if (window.location.hostname == "localhost")
-      return;
-
-    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
-    dsq.src = '//koff-io.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "koff-io" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-
-</div>
-
-</footer>
-
-</article>
-      <footer id="main-footer" class="container main_footer">
-  
-
-  <div class="container nav foot no-print">
-  
-<a href="http://coffius.github.io/license">license</a>
-
-
-  <a class="toplink" href="#">back to top</a>
-
-</div>
-
-  <div class="container credits">
-  
-<div class="container footline">
-  
-  code with <i class='fa fa-heart'></i>
-
-
-</div>
-
-
-  
-<div class="container copyright">
-  
-  &copy; 2015
-
-
-</div>
-
-
-</div>
-
-</footer>
-
-    </main>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
-<script type="text/javascript">
-  (function() {
-    
-    
-    if (window.location.hostname == "localhost")
-      return;
+</div>
 
-    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
-    dsq.src = '//koff-io.disqus.com/count.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
-</script>
+  
+</div>
+            </main>
+            
+  
+    <div class="article-toc ">
+    <div class="toc-wrapper">
+      <h4 id="contents"></h4>
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#general-info">General Info</a></li>
+    <li><a href="#list-of-implementations">List of implementations</a></li>
+    <li><a href="#example-of-use">Example of use</a></li>
+    <li><a href="#twitteralgebird">twitter/algebird</a></li>
+    <li><a href="#prasanthjhyperloglog">prasanthj/hyperloglog</a></li>
+    <li><a href="#addthisstream-lib">addthis/stream-lib</a></li>
+    <li><a href="#aggregateknowledgejava-hll">aggregateknowledge/java-hll</a></li>
+    <li><a href="#bonus-intersection-of-hlls">Bonus: Intersection of HLLs</a></li>
+    <li><a href="#comparison-results">Comparison Results</a></li>
+    <li><a href="#links">Links</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
 
+  
 
-
-<script src="http://coffius.github.io/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
-
-    
-  </body>
+        </div>
+    </body>
 </html>
-

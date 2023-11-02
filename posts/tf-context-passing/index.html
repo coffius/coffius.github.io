@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-EN" lang="en-EN">
+<head>
+    
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+<script defer language="javascript" type="text/javascript" src="/js/bundle.min.a43a549406127e0715f68083c987d71d0c71054cd57edea77aa709ed9958af6e.js"></script>
+
+
+
+
+
+
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <link rel="icon" href=/favicon.png>
+
+    
+    
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+  
+
+
+<!-- Open Graph image and Twitter Card metadata -->
+
+<title itemprop="name">Koff.io - Context Passing in Tagless Final</title>
+<meta property="og:title" content=Koff.io&#32;-&#32;Context&#32;Passing&#32;in&#32;Tagless&#32;Final />
+<meta name="twitter:title" content=Koff.io&#32;-&#32;Context&#32;Passing&#32;in&#32;Tagless&#32;Final />
+<meta itemprop="name" content=Koff.io&#32;-&#32;Context&#32;Passing&#32;in&#32;Tagless&#32;Final />
+<meta name="application-name" content=Koff.io&#32;-&#32;Context&#32;Passing&#32;in&#32;Tagless&#32;Final />
+<meta property="og:site_name" content="KOFF.io" />
+
+
+<meta name="description" content="" />
+<meta itemprop="description" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:description" content="" />
+
+
+<base href="http://coffius.github.io/posts/tf-context-passing/" />
+<link rel="canonical" href="http://coffius.github.io/posts/tf-context-passing/" itemprop="url" />
+<meta name="url" content="http://coffius.github.io/posts/tf-context-passing/" />
+<meta name="twitter:url" content="http://coffius.github.io/posts/tf-context-passing/" />
+<meta property="og:url" content="http://coffius.github.io/posts/tf-context-passing/" />
+
+
+<meta property="og:updated_time" content=30008-30-10T80:00:23&#43;0300 />
+
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href='http://coffius.github.io/sitemap.xml' />
+
+<meta name="robots" content="index,follow" />
+<meta name="googlebot" content="index,follow" />
+
+
+<meta name="twitter:site" content="https://twitter.com/coffius" />
+<meta name="twitter:creator" content="https://twitter.com/coffius" />
+<meta property="fb:admins" content="" />
+
+
+<meta name="apple-mobile-web-app-title" content="KOFF.io" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+
+
+
+
+
+
+
+<meta property="og:type" content="article" />
+<meta property="article:publisher" content="" />
+<meta property="og:article:published_time" content=30008-30-10T80:00:23&#43;0300 />
+<meta property="article:published_time" content=30008-30-10T80:00:23&#43;0300 />
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.119.0">
+
+
+    
+    
+
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.8c227569d4bf422323072472267fbadf39d2c717cb88332a8413d08b0b2b17e8.css">
+
+
+    
+    <style>
+    body {
+        --sidebar-bg-color: #202020;
+        --sidebar-img-border-color: #515151;
+        --sidebar-p-color: #909090;
+        --sidebar-h1-color: #FFF;
+        --sidebar-a-color: #FFF;
+        --sidebar-socials-color: #FFF;
+        --text-color: #222;
+        --bkg-color: #FAF9F6;
+        --post-title-color: #303030;
+        --list-color: #5a5a5a;
+        --link-color: #268bd2;
+        --date-color: #515151;
+        --table-border-color: #E5E5E5;
+        --table-stripe-color: #F9F9F9;
+        --code-color: #000;
+        --code-background-color: #E5E5E5;
+        --code-block-color: #fff;
+        --code-block-background-color: #272822;
+        --moon-sun-color: #FFF;
+        --moon-sun-background-color: #515151;
+    }
+    body.dark-theme {
+        --text-color: #eee;
+        --bkg-color: #121212;
+        --post-title-color: #DBE2E9;
+        --list-color: #9d9d9d;
+        --link-color: #268bd2;
+        --date-color: #9a9a9a;
+        --table-border-color: #515151;
+        --table-stripe-color: #202020;
+        --code-color: #fff;
+        --code-background-color: #515151;
+        --code-block-color: #fff;
+        --code-block-background-color: #272822;
+    }
+    body {
+        background-color: var(--bkg-color);
+    }
+</style>
+
+</head>
+
+    <body class="dark-theme">
+        <div class="wrapper">
+            <aside class="sidebar">
+    <div class="container sidebar-sticky">
+        <div class="light-dark" align="right">
+    <button class="btn-light-dark" title="Toggle light/dark mode">
+        <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M6 .278a.768.768 0 0 1 .08.858a7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277c.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316a.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71C0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+        </svg>
+        <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M8 12a4 4 0 1 0 0-8a4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+        </svg>
+    </button>
+</div>
+
+        <div class="sidebar-about">
+    <h1 class="brand">
+        
+        
+            <a href="http://coffius.github.io/">
+                <h1>KOFF.io</h1>
+            </a>
+        
+    </h1>
+    <p class="lead">
+    where scala is beloved
+    </p>
+</div>
+
+        <nav>
+    <ul class="sidebar-nav">
+
+        
+        
+        
+
+    </ul>
+</nav>
+
+        
+    <a target="_blank" class="social" title="GitHub" href="https://github.com/coffius">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="-2 -2 24 24">
+            <path fill="currentColor" d="M18.88 1.099C18.147.366 17.265 0 16.233 0H3.746C2.714 0 1.832.366 1.099 1.099C.366 1.832 0 2.714 0 3.746v12.487c0 1.032.366 1.914 1.099 2.647c.733.733 1.615 1.099 2.647 1.099H6.66c.19 0 .333-.007.429-.02a.504.504 0 0 0 .286-.169c.095-.1.143-.245.143-.435l-.007-.885c-.004-.564-.006-1.01-.006-1.34l-.3.052c-.19.035-.43.05-.721.046a5.555 5.555 0 0 1-.904-.091a2.026 2.026 0 0 1-.872-.39a1.651 1.651 0 0 1-.572-.8l-.13-.3a3.25 3.25 0 0 0-.41-.663c-.186-.243-.375-.407-.566-.494l-.09-.065a.956.956 0 0 1-.17-.156a.723.723 0 0 1-.117-.182c-.026-.061-.004-.111.065-.15c.07-.04.195-.059.378-.059l.26.04c.173.034.388.138.643.311a2.1 2.1 0 0 1 .631.677c.2.355.44.626.722.813c.282.186.566.28.852.28c.286 0 .533-.022.742-.065a2.59 2.59 0 0 0 .585-.196c.078-.58.29-1.028.637-1.34a8.907 8.907 0 0 1-1.333-.234a5.314 5.314 0 0 1-1.223-.507a3.5 3.5 0 0 1-1.047-.872c-.277-.347-.505-.802-.683-1.365c-.177-.564-.266-1.215-.266-1.952c0-1.049.342-1.942 1.027-2.68c-.32-.788-.29-1.673.091-2.652c.252-.079.625-.02 1.119.175c.494.195.856.362 1.086.5c.23.14.414.257.553.352a9.233 9.233 0 0 1 2.497-.338c.859 0 1.691.113 2.498.338l.494-.312a6.997 6.997 0 0 1 1.197-.572c.46-.174.81-.221 1.054-.143c.39.98.424 1.864.103 2.653c.685.737 1.028 1.63 1.028 2.68c0 .737-.089 1.39-.267 1.957c-.177.568-.407 1.023-.689 1.366a3.65 3.65 0 0 1-1.053.865c-.42.234-.828.403-1.223.507a8.9 8.9 0 0 1-1.333.235c.45.39.676 1.005.676 1.846v3.11c0 .147.021.266.065.357a.36.36 0 0 0 .208.189c.096.034.18.056.254.064c.074.01.18.013.318.013h2.914c1.032 0 1.914-.366 2.647-1.099c.732-.732 1.099-1.615 1.099-2.647V3.746c0-1.032-.367-1.914-1.1-2.647z"/>
+        </svg>
+    </a>
+
+
+
+
+    <a target="_blank" class="social" title="Twitter" href="https://twitter.com/coffius">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M5.032 14.286c6.037 0 9.34-4.837 9.34-9.032c0-.137 0-.274-.01-.41A6.56 6.56 0 0 0 16 3.2c-.6.256-1.235.425-1.885.5a3.207 3.207 0 0 0 1.443-1.757c-.645.37-1.35.63-2.085.77a3.322 3.322 0 0 0-1.862-.958a3.384 3.384 0 0 0-2.082.334a3.223 3.223 0 0 0-1.442 1.49a3.08 3.08 0 0 0-.208 2.03a9.57 9.57 0 0 1-3.747-.963a9.269 9.269 0 0 1-3.018-2.354a3.086 3.086 0 0 0-.36 2.314c.189.787.68 1.475 1.376 1.924a3.344 3.344 0 0 1-1.49-.398v.04c0 .734.263 1.444.743 2.01a3.3 3.3 0 0 0 1.89 1.102c-.483.128-.99.146-1.482.055a3.19 3.19 0 0 0 1.168 1.577a3.36 3.36 0 0 0 1.9.627A6.732 6.732 0 0 1 0 12.86a9.527 9.527 0 0 0 5.032 1.423"/>
+        </svg>
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <p class="footnote">
+powered by <a target="_blank" href="https://gohugo.io">Hugo</a> | themed with <a target="_blank" href="https://github.com/lukeorth/poison">poison</a>
+    <br>
+    &copy; 2023 coffius. All rights reserved.
+</p>
+
+  </div>
+</aside>
+
+            <main class="content container">
+                <div class="post">
+  <div class="info">
+    <h1 class="post-title">
+        <a href="http://coffius.github.io/posts/tf-context-passing/">Context Passing in Tagless Final</a>
+    </h1>
+    
+        <time datetime="2023-08-30T10:00:00&#43;0300" class="post-date">
+            August 30, 2023
+        </time>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+  <p>Context passing is the thing that all programmers face regardless of a programming language they use.
+In this article I&rsquo;d like to discuss show the ways how this can be solved in Scala using Cats Effect, ZIO, cats-mtl and the tagless final encoding.</p>
+<h2 id="context-and-its-way-through">Context and its way through</h2>
+<p>Before going further with coding we should answer a few questions - <em>What is a context?</em> and <em>Why do we need to pass it?</em>.</p>
+<h3 id="what-is-a-context">What is a context?</h3>
+<p>In this article I would use <code>context</code> in the meaning of preloaded structured immutable information about <em>something</em> we need across a stack of calls made in our business logic(function).</p>
+<p>Context should have the next properties:</p>
+<ul>
+<li>Info should be loaded to memory - in case if a part of the context is stored in external memory, this info should be loaded from it in advance <strong>BEFORE</strong> executing the logic.<br>
+Opposite would be requesting the info from the external memory only when it is needed in the business logic.</li>
+<li>Info should be extracted/parsed/validated - info should be parsed into a domain specific data structure and validated.<br>
+Opposite would be having this context info represented as a string or JSON or any other low-level data representation.</li>
+<li>Info should be immutable during execution of an operation - data structure and info in it is immutable after it is prepared. It does not represent the latest changes that could be made in the external memory during execution of the operation.</li>
+<li>The operation itself is considered as short-lived</li>
+</ul>
+<h3 id="why-do-we-need-to-pass-it">Why do we need to pass it?</h3>
+<p>Here are some practical examples of a context:</p>
+<ul>
+<li>Information about a user account that is used for a http request - like its id for tracking user actions in the system.</li>
+<li>Session information of the account like access roles assigned to it - for checking if certain actions are allowed across the business logic.</li>
+<li>Information about the http request itself - a request id, a request&rsquo;s timestamp and other info useful for logging and tracing.</li>
+</ul>
+<h2 id="explicit-context-passing">Explicit context passing</h2>
+<p>In functional Scala we have quite a lot of different tools to be used. But let&rsquo;s start with the simplest one we have - <strong>an explicit argument</strong>.
+We pass a context as an argument of a function or a constructor parameter in this case.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">object</span> <span style="color:#a6e22e">Example</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> passContext1<span style="color:#f92672">(</span>arg1<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Arg1</span><span style="color:#f92672">,</span> arg2<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Arg2</span><span style="color:#f92672">,</span> context<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Context</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Result</span> <span style="color:#f92672">=</span> <span style="color:#f92672">???</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> passContext2<span style="color:#f92672">(</span>arg1<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Arg1</span><span style="color:#f92672">,</span> arg2<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Arg2</span><span style="color:#f92672">)(</span>using context<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Context</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Result</span> <span style="color:#f92672">=</span> <span style="color:#f92672">???</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PassContext3</span><span style="color:#f92672">(</span>arg1<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Arg1</span><span style="color:#f92672">,</span> arg2<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Arg2</span><span style="color:#f92672">,</span> context<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Context</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> doSomething<span style="color:#f92672">()</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Result</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PassContext4</span><span style="color:#f92672">(</span>arg1<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Arg1</span><span style="color:#f92672">,</span> arg2<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Arg2</span><span style="color:#f92672">)(</span>using <span style="color:#a6e22e">Context</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> doSomething<span style="color:#f92672">()</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Result</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h2 id="threadlocal">ThreadLocal</h2>
+<p>Another way is the old way of Java - <code>ThreadLocal</code>(or <code>InheritableThreadLocal</code>).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">object</span> <span style="color:#a6e22e">ContextHolder</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> context <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ThreadLocal</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Context</span><span style="color:#f92672">]()</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> setContext<span style="color:#f92672">(</span>in<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Context</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span> <span style="color:#f92672">=</span> context<span style="color:#f92672">.</span>set<span style="color:#f92672">(</span>in<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> getContext<span style="color:#f92672">()</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Context</span> <span style="color:#f92672">=</span> context<span style="color:#f92672">.</span>get<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> dropContext<span style="color:#f92672">()</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span> <span style="color:#f92672">=</span> context<span style="color:#f92672">.</span>remove<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Controller</span><span style="color:#f92672">(</span>service<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Service</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span> 
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Here is happy-path logic only
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">def</span> doSomething<span style="color:#f92672">(</span>args<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Args</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Result</span> <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> context <span style="color:#66d9ef">=</span> <span style="color:#f92672">???</span> <span style="color:#75715e">// get context from somewhere
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">ContextHolder</span><span style="color:#f92672">.</span>setContext<span style="color:#f92672">(</span>context<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    service<span style="color:#f92672">.</span>doSomethingElse<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ContextHolder</span><span style="color:#f92672">.</span>dropContext<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Service</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> doSomethingElse<span style="color:#f92672">()</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Result</span> <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> context <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">ContextHolder</span><span style="color:#f92672">.</span>getContext<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//... context dependent logic is here
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">???</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>I can&rsquo;t recommend to use it in Scala code nowadays as it is way too unsafe in terms of null values and <a href="https://stackoverflow.com/a/17975255" target="_blank">memory leaks</a>. Also it is necessary to be mindful about releasing/replacing the old context value with the new one. Another thing is understanding how the logic is mapped on threads. For example, in <strong>cats-effect</strong> it might be quite diffecult to understand what particular thread is used for executing one or another line of logic. The reason is that different parts of a program can be run on different threads in an execution context.</p>
+<h2 id="cats-iolocal">Cats&rsquo; IOLocal</h2>
+<p><code>IOLocal</code> is an alternative for <code>ThreadLocal</code> made specifically for cats-effect. The idea behind it is the same as for <code>ThreadLocal</code> but it can work properly around cat&rsquo;s <code>Fiber</code>-s.
+For more details check <a href="https://typelevel.org/cats-effect/docs/core/io-local#example-traceid-propagation" target="_blank">this example</a>.</p>
+<h2 id="zios-fiberref">ZIO&rsquo;s FiberRef</h2>
+<p>Zio also has its own implementation of a fiber local values - <code>FiberRef</code>.
+More information about it and how to use it for passing a context around can be found <a href="https://zio.dev/reference/state-management/fiberref/" target="_blank">here</a>.</p>
+<h2 id="context-passing-in-tagless-final">Context passing in Tagless Final</h2>
+<p>But there is, I think, the better way of doing what we are doing with our context - use type classes and the Tagless Final approach 😎</p>
+<h3 id="services">Services</h3>
+<p>First of all, let&rsquo;s define our types that we are going to use in this example.</p>
+<ul>
+<li><code>Context</code> - is a representation of the context we are going to pass across our calls&rsquo; stack.</li>
+<li><code>Input</code> - is a type for input params. For simplicity let&rsquo;s use this one type for all inputs.</li>
+<li><code>Output</code> - is the same but for outputs of our functions.</li>
+</ul>
+<p>Then we need to bring a type class from cats-mtl - <code>Ask[F[_], Ctx]</code>. It makes possible of getting a value of <code>Ctx</code> out from <code>F[_]</code>. To improve readability we can define such a type alias that we can use later a single argument type class.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span>  <span style="color:#66d9ef">type</span> <span style="color:#66d9ef">Context</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">type</span> <span style="color:#66d9ef">Input</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">type</span> <span style="color:#66d9ef">Output</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">Layer1</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">_</span><span style="color:#f92672">]]</span><span style="color:#a6e22e">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> operation1<span style="color:#f92672">(</span>in<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Input</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Output</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">Layer2</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">_</span><span style="color:#f92672">]]</span><span style="color:#a6e22e">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> operation2<span style="color:#f92672">(</span>in<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Input</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Output</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">Layer3</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">_</span><span style="color:#f92672">]]</span><span style="color:#a6e22e">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> operation3<span style="color:#f92672">(</span>in<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Input</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Output</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">Layer4</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">_</span><span style="color:#f92672">]]</span><span style="color:#a6e22e">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> operation4<span style="color:#f92672">(</span>in<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Input</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Output</span><span style="color:#f92672">]</span>
+</span></span></code></pre></div><p>Now we need to bring a type class from cats-mtl - <code>Ask[F[_], Ctx]</code>. It makes possible of getting a value of <code>Ctx</code> out from <code>F[_]</code>. To improve readability we can define such a type alias that we can use later a single argument type class.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span>  <span style="color:#66d9ef">import</span> cats.mtl.Ask
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">type</span> <span style="color:#66d9ef">AskCtx</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">_</span><span style="color:#f92672">]]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Ask</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span>, <span style="color:#66d9ef">Context</span><span style="color:#f92672">]</span>
+</span></span></code></pre></div><p>Next step is to implement these layers. Our goal here is to pass the context value between all layers but use it only in <code>Layer2</code> and <code>Layer4</code>.</p>
+<p><code>Impl1</code> does nothing but calls the next layer. It does not use the context.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Impl1</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">_</span><span style="color:#f92672">]](</span>layer2<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Layer2</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">])</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Layer1</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">]</span><span style="color:#66d9ef">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">def</span> <span style="color:#66d9ef">operation1</span><span style="color:#f92672">(</span><span style="color:#66d9ef">in:</span> <span style="color:#66d9ef">Input</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Output</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> layer2<span style="color:#f92672">.</span>operation2<span style="color:#f92672">(</span>in<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p><code>Impl2</code> extracts a context value and verifies it.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Impl2</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">_</span><span style="color:#f92672">]](</span>
+</span></span><span style="display:flex;"><span>    verify<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Context</span> <span style="color:#f92672">=&gt;</span> F<span style="color:#f92672">[</span><span style="color:#66d9ef">Boolean</span><span style="color:#f92672">],</span>
+</span></span><span style="display:flex;"><span>    layer3<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Layer3</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">)(</span>using A<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">AskCtx</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">],</span> <span style="color:#a6e22e">MT</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">MonadError</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span>, <span style="color:#66d9ef">Throwable</span><span style="color:#f92672">])</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Layer2</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">]</span><span style="color:#66d9ef">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">def</span> <span style="color:#66d9ef">operation2</span><span style="color:#f92672">(</span><span style="color:#66d9ef">in:</span> <span style="color:#66d9ef">Input</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Output</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">for</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    context <span style="color:#66d9ef">&lt;-</span> A<span style="color:#f92672">.</span>ask
+</span></span><span style="display:flex;"><span>    result  <span style="color:#66d9ef">&lt;-</span> verify<span style="color:#f92672">(</span>context<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    output <span style="color:#66d9ef">&lt;-</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>result<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>        layer3<span style="color:#f92672">.</span>operation3<span style="color:#f92672">(</span>in<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Better way of working with errors
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// is going to be shown in the `error-handling` part
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#a6e22e">MT</span><span style="color:#f92672">.</span>raiseError<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> <span style="color:#a6e22e">RuntimeException</span><span style="color:#f92672">(</span><span style="color:#e6db74">s&#34;Could not verify context: </span><span style="color:#e6db74">$context</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span> <span style="color:#66d9ef">yield</span> output
+</span></span></code></pre></div><p><code>Impl3</code> does nothing as well.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span>  <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Impl3</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">_</span><span style="color:#f92672">]](</span>layer4<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Layer4</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">])</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Layer3</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">]</span><span style="color:#66d9ef">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">def</span> <span style="color:#66d9ef">operation3</span><span style="color:#f92672">(</span><span style="color:#66d9ef">in:</span> <span style="color:#66d9ef">Input</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Output</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> layer4<span style="color:#f92672">.</span>operation4<span style="color:#f92672">(</span>in<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>And <code>Impl4</code> does &ldquo;the real work&rdquo;.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Impl4</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">_</span><span style="color:#f92672">]</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Monad</span><span style="color:#f92672">](</span>
+</span></span><span style="display:flex;"><span>    doRealWork<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Input</span> <span style="color:#f92672">=&gt;</span> F<span style="color:#f92672">[</span><span style="color:#66d9ef">Output</span><span style="color:#f92672">],</span>
+</span></span><span style="display:flex;"><span>    println<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span> <span style="color:#f92672">=&gt;</span> F<span style="color:#f92672">[</span><span style="color:#66d9ef">Unit</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">)(</span>using
+</span></span><span style="display:flex;"><span>    A<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">AskCtx</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">)</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Layer4</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">]</span><span style="color:#66d9ef">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">def</span> <span style="color:#66d9ef">operation4</span><span style="color:#f92672">(</span><span style="color:#66d9ef">in:</span> <span style="color:#66d9ef">Input</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Output</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">for</span>
+</span></span><span style="display:flex;"><span>    context <span style="color:#66d9ef">&lt;-</span> A<span style="color:#f92672">.</span>ask
+</span></span><span style="display:flex;"><span>    output  <span style="color:#66d9ef">&lt;-</span> doRealWork<span style="color:#f92672">(</span>in<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">_</span>       <span style="color:#66d9ef">&lt;-</span> println<span style="color:#f92672">(</span><span style="color:#e6db74">s&#34;{Context: </span><span style="color:#e6db74">$context</span><span style="color:#e6db74">} -&gt; (Input: </span><span style="color:#e6db74">$in</span><span style="color:#e6db74">) -&gt; (Output: </span><span style="color:#e6db74">$output</span><span style="color:#e6db74">)&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">yield</span> output
+</span></span></code></pre></div><p>As you can see the layers that don&rsquo;t require the context for their logic has no knowledge about it - it is not passed there neither as a method argument nor a constructor parameter.
+Also this code can work both with Cats and ZIO.</p>
+<h3 id="using-cats-effect">Using Cats-Effect</h3>
+<p><code>IO[..]</code> in cats-effect does not have a channel for passing a context value. So that we use <code>Kleisli[IO, Context, ..]</code> to add a context value to <code>IO</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">object</span> <span style="color:#a6e22e">CatsExample</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">IOApp</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Simple</span> <span style="color:#66d9ef">with</span> <span style="color:#a6e22e">Example</span><span style="color:#66d9ef">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#66d9ef">User</span><span style="color:#f92672">(</span><span style="color:#66d9ef">name:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">type</span> <span style="color:#66d9ef">Context</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">User</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">type</span> <span style="color:#66d9ef">Input</span>   <span style="color:#f92672">=</span> <span style="color:#a6e22e">String</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">type</span> <span style="color:#66d9ef">Output</span>  <span style="color:#f92672">=</span> <span style="color:#a6e22e">Int</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Add Context to IO using Kleisli
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">type</span> <span style="color:#66d9ef">CtxIO</span><span style="color:#f92672">[</span><span style="color:#66d9ef">A</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Kleisli</span><span style="color:#f92672">[</span><span style="color:#66d9ef">IO</span>, <span style="color:#66d9ef">Context</span>, <span style="color:#66d9ef">A</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">def</span> doRealWork<span style="color:#f92672">(</span>in<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Input</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">CtxIO</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Output</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> in<span style="color:#f92672">.</span>length<span style="color:#f92672">.</span>pure
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">def</span> println<span style="color:#f92672">(</span>in<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">CtxIO</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Unit</span><span style="color:#f92672">]</span>     <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Console</span><span style="color:#f92672">[</span><span style="color:#66d9ef">CtxIO</span><span style="color:#f92672">].</span>println<span style="color:#f92672">(</span>in<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">def</span> verify<span style="color:#f92672">(</span>ctx<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Context</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">CtxIO</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Boolean</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> ctx<span style="color:#f92672">.</span>name<span style="color:#f92672">.</span>nonEmpty<span style="color:#f92672">.</span>pure
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">def</span> run<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">IO</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Unit</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// type definitions are for clarity only
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> layer4<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Layer4</span><span style="color:#f92672">[</span><span style="color:#66d9ef">CtxIO</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Impl4</span><span style="color:#f92672">(</span>doRealWork<span style="color:#f92672">,</span> println<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> layer3<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Layer3</span><span style="color:#f92672">[</span><span style="color:#66d9ef">CtxIO</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Impl3</span><span style="color:#f92672">(</span>layer4<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> layer2<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Layer2</span><span style="color:#f92672">[</span><span style="color:#66d9ef">CtxIO</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Impl2</span><span style="color:#f92672">(</span>verify<span style="color:#f92672">,</span> layer3<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> layer1<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Layer1</span><span style="color:#f92672">[</span><span style="color:#66d9ef">CtxIO</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Impl1</span><span style="color:#f92672">(</span>layer2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> validCtx<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Context</span>   <span style="color:#f92672">=</span> <span style="color:#a6e22e">User</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;valid_name&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> invalidCtx<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Context</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">User</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> input<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Input</span>        <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;non_empty_string&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">_</span> <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">Console</span><span style="color:#f92672">[</span><span style="color:#66d9ef">IO</span><span style="color:#f92672">].</span>println<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Let&#39;s go!&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      ctxProgram <span style="color:#66d9ef">=</span> layer1<span style="color:#f92672">.</span>operation1<span style="color:#f92672">(</span>input<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      result <span style="color:#66d9ef">&lt;-</span> ctxProgram<span style="color:#f92672">.</span>run<span style="color:#f92672">(</span>validCtx<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">//      result &lt;- ctxProgram.run(invalidCtx)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#66d9ef">_</span> <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">Console</span><span style="color:#f92672">[</span><span style="color:#66d9ef">IO</span><span style="color:#f92672">].</span>println<span style="color:#f92672">(</span><span style="color:#e6db74">s&#34;result: </span><span style="color:#e6db74">$result</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">yield</span> <span style="color:#f92672">()</span>
+</span></span></code></pre></div><h3 id="using-zio">Using ZIO</h3>
+<p><code>ZIO[..]</code> already have a channel for a context, so there is no need in using <code>Kleisli[..]</code>. Just construct a programm and run it by passing a context value wrapped with <code>ZLayer.succeed(..)</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">object</span> <span style="color:#a6e22e">ZIOExample</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">ZIOAppDefault</span> <span style="color:#66d9ef">with</span> <span style="color:#a6e22e">Example</span><span style="color:#66d9ef">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#66d9ef">User</span><span style="color:#f92672">(</span><span style="color:#66d9ef">name:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">type</span> <span style="color:#66d9ef">Context</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">User</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">type</span> <span style="color:#66d9ef">Input</span>   <span style="color:#f92672">=</span> <span style="color:#a6e22e">String</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">type</span> <span style="color:#66d9ef">Output</span>  <span style="color:#f92672">=</span> <span style="color:#a6e22e">Int</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">type</span> <span style="color:#66d9ef">CtxIO</span><span style="color:#f92672">[</span><span style="color:#66d9ef">A</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">ZIO</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Context</span>, <span style="color:#66d9ef">Throwable</span>, <span style="color:#66d9ef">A</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">def</span> doRealWork<span style="color:#f92672">(</span>in<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Input</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">CtxIO</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Output</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Exit</span><span style="color:#f92672">.</span>succeed<span style="color:#f92672">(</span>in<span style="color:#f92672">.</span>length<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">def</span> println<span style="color:#f92672">(</span>in<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">CtxIO</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Unit</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Console</span><span style="color:#f92672">.</span>printLine<span style="color:#f92672">(</span>in<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">def</span> verify<span style="color:#f92672">(</span>ctx<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Context</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">CtxIO</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Boolean</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Exit</span><span style="color:#f92672">.</span>succeed<span style="color:#f92672">(</span>ctx<span style="color:#f92672">.</span>name<span style="color:#f92672">.</span>nonEmpty<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">def</span> run<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">ZIO</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Any</span> <span style="color:#66d9ef">&amp;</span> <span style="color:#66d9ef">ZIOAppArgs</span> <span style="color:#66d9ef">&amp;</span> <span style="color:#66d9ef">Scope</span>, <span style="color:#66d9ef">Any</span>, <span style="color:#66d9ef">Any</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// type definitions are here for clarity only
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> layer4<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Layer4</span><span style="color:#f92672">[</span><span style="color:#66d9ef">CtxIO</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Impl4</span><span style="color:#f92672">[</span><span style="color:#66d9ef">CtxIO</span><span style="color:#f92672">](</span>doRealWork<span style="color:#f92672">,</span> println<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> layer3<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Layer3</span><span style="color:#f92672">[</span><span style="color:#66d9ef">CtxIO</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Impl3</span><span style="color:#f92672">(</span>layer4<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> layer2<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Layer2</span><span style="color:#f92672">[</span><span style="color:#66d9ef">CtxIO</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Impl2</span><span style="color:#f92672">(</span>verify<span style="color:#f92672">,</span> layer3<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> layer1<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Layer1</span><span style="color:#f92672">[</span><span style="color:#66d9ef">CtxIO</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Impl1</span><span style="color:#f92672">(</span>layer2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> validCtx<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Context</span>   <span style="color:#f92672">=</span> <span style="color:#a6e22e">User</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;valid_name&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> invalidCtx<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Context</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">User</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> input<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Input</span>        <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;non_empty_string&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">_</span> <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">Console</span><span style="color:#f92672">.</span>print<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Let&#39;s go!&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// Construct a program that requires a context value
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      ctxProgram <span style="color:#66d9ef">=</span> layer1<span style="color:#f92672">.</span>operation1<span style="color:#f92672">(</span>input<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// Pass the context value to run the program
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      result <span style="color:#66d9ef">&lt;-</span> ctxProgram<span style="color:#f92672">.</span>provide<span style="color:#f92672">(</span><span style="color:#a6e22e">ZLayer</span><span style="color:#f92672">.</span>succeed<span style="color:#f92672">(</span>validCtx<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//    result &lt;- ctxProgram.provide(ZLayer.succeed(invalidCtx))
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#66d9ef">_</span> <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">Console</span><span style="color:#f92672">.</span>printLine<span style="color:#f92672">(</span><span style="color:#e6db74">s&#34;result: </span><span style="color:#e6db74">$result</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">yield</span> <span style="color:#f92672">()</span>
+</span></span></code></pre></div><h2 id="links">Links</h2>
+<ul>
+<li><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/ThreadLocal.html" target="_blank">ThreadLocal JavaDoc</a></li>
+<li><a href="https://docs.oracle.com/javase%2F7%2Fdocs%2Fapi%2F%2F/java/lang/InheritableThreadLocal.html" target="_blank">InheritableThreadLocal JavaDoc</a></li>
+<li><a href="https://typelevel.org/cats-effect/docs/core/io-local#example-traceid-propagation" target="_blank">Example for Cats&rsquo; IOLocal</a></li>
+<li><a href="https://zio.dev/reference/state-management/fiberref/" target="_blank">Example for ZIO&rsquo;s FiberRef</a></li>
+</ul>
+  <hr>
+<div class="footer">
+    
+	    
+            <a class="previous-post" href="http://coffius.github.io/posts/shapeless-sums/?ref=footer"><span style="font-weight:bold;">« Previous</span><br>Sum Data Types with Shapeless</a>
+        
+	    
+    
+</div>
+
+  
+    <div class="comments">
+    
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "koff-io" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+</div>
+
+  
+</div>
+            </main>
+            
+  
+    <div class="article-toc ">
+    <div class="toc-wrapper">
+      <h4 id="contents"></h4>
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#context-and-its-way-through">Context and its way through</a>
+      <ul>
+        <li><a href="#what-is-a-context">What is a context?</a></li>
+        <li><a href="#why-do-we-need-to-pass-it">Why do we need to pass it?</a></li>
+      </ul>
+    </li>
+    <li><a href="#explicit-context-passing">Explicit context passing</a></li>
+    <li><a href="#threadlocal">ThreadLocal</a></li>
+    <li><a href="#cats-iolocal">Cats&rsquo; IOLocal</a></li>
+    <li><a href="#zios-fiberref">ZIO&rsquo;s FiberRef</a></li>
+    <li><a href="#context-passing-in-tagless-final">Context passing in Tagless Final</a>
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#using-cats-effect">Using Cats-Effect</a></li>
+        <li><a href="#using-zio">Using ZIO</a></li>
+      </ul>
+    </li>
+    <li><a href="#links">Links</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+  
+
+        </div>
+    </body>
+</html>
