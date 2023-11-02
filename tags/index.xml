@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on KOFF.io</title>
-    <link>http://coffius.github.io/tags/</link>
+    <link>https://coffius.github.io/tags/</link>
     <description>Recent content in Tags on KOFF.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-EN</language>
-    <copyright>(c) 2015-2023</copyright><atom:link href="http://coffius.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>(c) 2015-2023</copyright><atom:link href="https://coffius.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

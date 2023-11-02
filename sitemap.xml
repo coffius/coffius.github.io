@@ -2,47 +2,47 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://coffius.github.io/posts/tf-context-passing/</loc>
+    <loc>https://coffius.github.io/posts/tf-context-passing/</loc>
     <lastmod>2023-08-30T10:00:00+03:00</lastmod>
   </url><url>
-    <loc>http://coffius.github.io/</loc>
+    <loc>https://coffius.github.io/</loc>
     <lastmod>2023-08-30T10:00:00+03:00</lastmod>
   </url><url>
-    <loc>http://coffius.github.io/posts/</loc>
+    <loc>https://coffius.github.io/posts/</loc>
     <lastmod>2023-08-30T10:00:00+03:00</lastmod>
   </url><url>
-    <loc>http://coffius.github.io/posts/shapeless-sums/</loc>
+    <loc>https://coffius.github.io/posts/shapeless-sums/</loc>
     <lastmod>2018-04-16T10:00:00+03:00</lastmod>
   </url><url>
-    <loc>http://coffius.github.io/posts/hll-in-cassandra/</loc>
+    <loc>https://coffius.github.io/posts/hll-in-cassandra/</loc>
     <lastmod>2016-12-04T18:00:00+03:00</lastmod>
   </url><url>
-    <loc>http://coffius.github.io/posts/variance-tip-notes/</loc>
+    <loc>https://coffius.github.io/posts/variance-tip-notes/</loc>
     <lastmod>2016-11-26T22:51:18+03:00</lastmod>
   </url><url>
-    <loc>http://coffius.github.io/posts/pagination-and-streams/</loc>
+    <loc>https://coffius.github.io/posts/pagination-and-streams/</loc>
     <lastmod>2016-04-10T00:20:00+03:00</lastmod>
   </url><url>
-    <loc>http://coffius.github.io/posts/292173-validation-in-scala/</loc>
+    <loc>https://coffius.github.io/posts/292173-validation-in-scala/</loc>
     <lastmod>2015-11-27T00:11:00+03:00</lastmod>
   </url><url>
-    <loc>http://coffius.github.io/posts/using-t-digest/</loc>
+    <loc>https://coffius.github.io/posts/using-t-digest/</loc>
     <lastmod>2015-10-13T22:01:13+03:00</lastmod>
   </url><url>
-    <loc>http://coffius.github.io/posts/comparison-of-hll/</loc>
+    <loc>https://coffius.github.io/posts/comparison-of-hll/</loc>
     <lastmod>2015-09-22T22:01:13+03:00</lastmod>
   </url><url>
-    <loc>http://coffius.github.io/posts/292173-lens-in-scala/</loc>
+    <loc>https://coffius.github.io/posts/292173-lens-in-scala/</loc>
     <lastmod>2015-09-19T22:01:13+03:00</lastmod>
   </url><url>
-    <loc>http://coffius.github.io/posts/291279-true-fail-fast-with-expression-magic/</loc>
+    <loc>https://coffius.github.io/posts/291279-true-fail-fast-with-expression-magic/</loc>
     <lastmod>2015-09-12T22:01:13+03:00</lastmod>
   </url><url>
-    <loc>http://coffius.github.io/posts/290071-make-async-with-scalaz-either-and-futures/</loc>
+    <loc>https://coffius.github.io/posts/290071-make-async-with-scalaz-either-and-futures/</loc>
     <lastmod>2015-09-05T22:01:13+03:00</lastmod>
   </url><url>
-    <loc>http://coffius.github.io/tags/</loc>
+    <loc>https://coffius.github.io/tags/</loc>
   </url><url>
-    <loc>http://coffius.github.io/topics/</loc>
+    <loc>https://coffius.github.io/topics/</loc>
   </url>
 </urlset>

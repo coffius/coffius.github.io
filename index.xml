@@ -2,65 +2,65 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>KOFF.io</title>
-    <link>http://coffius.github.io/</link>
+    <link>https://coffius.github.io/</link>
     <description>Recent content on KOFF.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-EN</language>
     <copyright>(c) 2015-2023</copyright>
-    <lastBuildDate>Wed, 30 Aug 2023 10:00:00 +0300</lastBuildDate><atom:link href="http://coffius.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 30 Aug 2023 10:00:00 +0300</lastBuildDate><atom:link href="https://coffius.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Context Passing in Tagless Final</title>
-      <link>http://coffius.github.io/posts/tf-context-passing/</link>
+      <link>https://coffius.github.io/posts/tf-context-passing/</link>
       <pubDate>Wed, 30 Aug 2023 10:00:00 +0300</pubDate>
       
-      <guid>http://coffius.github.io/posts/tf-context-passing/</guid>
+      <guid>https://coffius.github.io/posts/tf-context-passing/</guid>
       <description>&lt;p&gt;Context passing is the thing that all programmers face regardless of a programming language they use.
 In this article I&amp;rsquo;d like to discuss show the ways how this can be solved in Scala using Cats Effect, ZIO, cats-mtl and the tagless final encoding.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Sum Data Types with Shapeless</title>
-      <link>http://coffius.github.io/posts/shapeless-sums/</link>
+      <link>https://coffius.github.io/posts/shapeless-sums/</link>
       <pubDate>Mon, 16 Apr 2018 10:00:00 +0300</pubDate>
       
-      <guid>http://coffius.github.io/posts/shapeless-sums/</guid>
+      <guid>https://coffius.github.io/posts/shapeless-sums/</guid>
       <description>&lt;p&gt;Scala has support of algebraic data types out of the box but often it is not enough for complex cases.
 In this article I will try to show its limits and how to bypass them using &lt;code&gt;shapeless&lt;/code&gt; library by the example of &lt;code&gt;sum data types&lt;/code&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;contents&#34;&gt;Contents&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://coffius.github.io/posts/shapeless-sums/#what-is-adt&#34;&gt;What is ADT?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://coffius.github.io/posts/shapeless-sums/#sealed-trait-as-a-sum-type&#34;&gt;Sealed trait as a sum type&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://coffius.github.io/posts/shapeless-sums/#extending-adts-using-wrapper-evidence&#34;&gt;Extending ADTs using Wrapper + Evidence&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://coffius.github.io/posts/shapeless-sums/#coproduct-as-a-sum-type&#34;&gt;Coproduct as a sum type&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://coffius.github.io/posts/shapeless-sums/#poly1-as-pattern-matching&#34;&gt;Poly1 as pattern matching&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://coffius.github.io/posts/shapeless-sums/#merging-sum-types-with-shapeless&#34;&gt;Merging sum types with Shapeless&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://coffius.github.io/posts/shapeless-sums/#what-is-adt&#34;&gt;What is ADT?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://coffius.github.io/posts/shapeless-sums/#sealed-trait-as-a-sum-type&#34;&gt;Sealed trait as a sum type&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://coffius.github.io/posts/shapeless-sums/#extending-adts-using-wrapper-evidence&#34;&gt;Extending ADTs using Wrapper + Evidence&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://coffius.github.io/posts/shapeless-sums/#coproduct-as-a-sum-type&#34;&gt;Coproduct as a sum type&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://coffius.github.io/posts/shapeless-sums/#poly1-as-pattern-matching&#34;&gt;Poly1 as pattern matching&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://coffius.github.io/posts/shapeless-sums/#merging-sum-types-with-shapeless&#34;&gt;Merging sum types with Shapeless&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</description>
     </item>
     
     <item>
       <title>HLL counters as Cassandra user defined aggregates</title>
-      <link>http://coffius.github.io/posts/hll-in-cassandra/</link>
+      <link>https://coffius.github.io/posts/hll-in-cassandra/</link>
       <pubDate>Sun, 04 Dec 2016 18:00:00 +0300</pubDate>
       
-      <guid>http://coffius.github.io/posts/hll-in-cassandra/</guid>
+      <guid>https://coffius.github.io/posts/hll-in-cassandra/</guid>
       <description>&lt;p&gt;In &lt;a href=&#34;../comparison-of-hll&#34;&gt;the previous article&lt;/a&gt; we discussed usage of hll countes for finding the number of unique values in a collection. But in this article we will see how to use them in Cassandra db internally in order to provide such functionality using user defined functions(UDF) and aggregates(UDA).&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Tips about variance in scala</title>
-      <link>http://coffius.github.io/posts/variance-tip-notes/</link>
+      <link>https://coffius.github.io/posts/variance-tip-notes/</link>
       <pubDate>Sat, 26 Nov 2016 22:51:18 +0300</pubDate>
       
-      <guid>http://coffius.github.io/posts/variance-tip-notes/</guid>
+      <guid>https://coffius.github.io/posts/variance-tip-notes/</guid>
       <description>&lt;p&gt;Type variance in scala is quite a tricky topic especially if you do not use it often - details might slip out of mind easily in this case. So below you can find very short tips about it which purpose is to remind how it works.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Pagination and Streams</title>
-      <link>http://coffius.github.io/posts/pagination-and-streams/</link>
+      <link>https://coffius.github.io/posts/pagination-and-streams/</link>
       <pubDate>Sun, 10 Apr 2016 00:20:00 +0300</pubDate>
       
-      <guid>http://coffius.github.io/posts/pagination-and-streams/</guid>
+      <guid>https://coffius.github.io/posts/pagination-and-streams/</guid>
       <description>&lt;p&gt;In this article we will see how to use different streams(like akka-stream) for pagination and when it can be useful.
 The main idea of pagination is partition of a big sequence of objects into several parts(or pages) in order to make possible its processing page by page.
 For example, you have a 1.000.000 users in the database and you need to send an email to all of them.
@@ -72,10 +72,10 @@ This will be a much more efficient way to deal with big collections of records.&
     
     <item>
       <title>Validation in scala</title>
-      <link>http://coffius.github.io/posts/292173-validation-in-scala/</link>
+      <link>https://coffius.github.io/posts/292173-validation-in-scala/</link>
       <pubDate>Fri, 27 Nov 2015 00:11:00 +0300</pubDate>
       
-      <guid>http://coffius.github.io/posts/292173-validation-in-scala/</guid>
+      <guid>https://coffius.github.io/posts/292173-validation-in-scala/</guid>
       <description>&lt;p&gt;This article is about possible solutions for validation in scala. Validation is the process of checking input data in order to provide its correctness and requirements compliance.&lt;/p&gt;
 &lt;h1 id=&#34;implementations&#34;&gt;Implementations&lt;/h1&gt;
 &lt;p&gt;There are several libraries in scala which can be used for validation:&lt;/p&gt;
@@ -90,10 +90,10 @@ This will be a much more efficient way to deal with big collections of records.&
     
     <item>
       <title>Using T-Digest: Median calculation and anomaly detection</title>
-      <link>http://coffius.github.io/posts/using-t-digest/</link>
+      <link>https://coffius.github.io/posts/using-t-digest/</link>
       <pubDate>Tue, 13 Oct 2015 22:01:13 +0300</pubDate>
       
-      <guid>http://coffius.github.io/posts/using-t-digest/</guid>
+      <guid>https://coffius.github.io/posts/using-t-digest/</guid>
       <description>&lt;p&gt;In this article you can find information about using &lt;code&gt;t-digest&lt;/code&gt; library in order to measure average value of some quantity(average session time).
 There is also an answer for the question: What and why should you use to make such the measurement mean or median?
 Besides, list and comparison of different implementations is presented below in the article.&lt;/p&gt;
@@ -118,10 +118,10 @@ However the calculation of the median in general case needs a lot of memory - O(
     
     <item>
       <title>Comparison of HLL implementations</title>
-      <link>http://coffius.github.io/posts/comparison-of-hll/</link>
+      <link>https://coffius.github.io/posts/comparison-of-hll/</link>
       <pubDate>Tue, 22 Sep 2015 22:01:13 +0300</pubDate>
       
-      <guid>http://coffius.github.io/posts/comparison-of-hll/</guid>
+      <guid>https://coffius.github.io/posts/comparison-of-hll/</guid>
       <description>&lt;p&gt;In this article we will look at HLL algorithm and different implementations of it.&lt;/p&gt;
 &lt;h2 id=&#34;general-info&#34;&gt;General Info&lt;/h2&gt;
 &lt;p&gt;HLL is a propabalistic algorithm which is used for a estimation of unique values.
@@ -140,10 +140,10 @@ The main reason to use HLL is necessity to estimate uniques in very big amount o
     
     <item>
       <title>Lens in scala</title>
-      <link>http://coffius.github.io/posts/292173-lens-in-scala/</link>
+      <link>https://coffius.github.io/posts/292173-lens-in-scala/</link>
       <pubDate>Sat, 19 Sep 2015 22:01:13 +0300</pubDate>
       
-      <guid>http://coffius.github.io/posts/292173-lens-in-scala/</guid>
+      <guid>https://coffius.github.io/posts/292173-lens-in-scala/</guid>
       <description>&lt;p&gt;In this article let&amp;rsquo;s take a look at such a thing as lens(or lenses).
 A Lens is an abstraction from functional programming which helps to deal with a problem of updating complex immutable nested objects like this:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-scala&#34; data-lang=&#34;scala&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;User&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;id&lt;span style=&#34;color:#66d9ef&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;UserId&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; generalInfo&lt;span style=&#34;color:#66d9ef&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;GeneralInfo&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; billInfo&lt;span style=&#34;color:#66d9ef&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;BillInfo&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
@@ -179,10 +179,10 @@ A Lens is an abstraction from functional programming which helps to deal with a 
     
     <item>
       <title>True fail-fast async error handling with Expression</title>
-      <link>http://coffius.github.io/posts/291279-true-fail-fast-with-expression-magic/</link>
+      <link>https://coffius.github.io/posts/291279-true-fail-fast-with-expression-magic/</link>
       <pubDate>Sat, 12 Sep 2015 22:01:13 +0300</pubDate>
       
-      <guid>http://coffius.github.io/posts/291279-true-fail-fast-with-expression-magic/</guid>
+      <guid>https://coffius.github.io/posts/291279-true-fail-fast-with-expression-magic/</guid>
       <description>&lt;p&gt;How it was said in the previous &lt;a href=&#34;http://koff.io/posts/290071-make-async-with-scalaz-either-and-futures&#34; target=&#34;_blank&#34;&gt;article&lt;/a&gt; there is no way to do truly fail-fast async error handling using only scala or scalaz.&lt;/p&gt;
 &lt;p&gt;Look at the example below:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-scala&#34; data-lang=&#34;scala&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;val&lt;/span&gt; longFut &lt;span style=&#34;color:#66d9ef&#34;&gt;=&lt;/span&gt; longFuture&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// very long future
@@ -209,10 +209,10 @@ A Lens is an abstraction from functional programming which helps to deal with a 
     
     <item>
       <title>Practical Scalaz: Make async operations with scalaz.Either and Futures</title>
-      <link>http://coffius.github.io/posts/290071-make-async-with-scalaz-either-and-futures/</link>
+      <link>https://coffius.github.io/posts/290071-make-async-with-scalaz-either-and-futures/</link>
       <pubDate>Sat, 05 Sep 2015 22:01:13 +0300</pubDate>
       
-      <guid>http://coffius.github.io/posts/290071-make-async-with-scalaz-either-and-futures/</guid>
+      <guid>https://coffius.github.io/posts/290071-make-async-with-scalaz-either-and-futures/</guid>
       <description>&lt;p&gt;Many of us know about such library as scalaz. For those who don&amp;rsquo;t know it is a library for functional programming in scala. You can find it &lt;a href=&#34;https://github.com/scalaz/scalaz&#34; title=&#34;Scalaz on github&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.
 Then I was trying to learn and understand this lib it was quite difficult to realize how exactly it can be used in a real code in a real system. I looked thought lots of articles about it, but there were only abstract examples. So I`ve decided to write a little example in order to show how scalaz can be used in a real system.&lt;/p&gt;
 &lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;
