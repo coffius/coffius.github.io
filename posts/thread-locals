@@ -1,0 +1,28 @@
++++
+date = "2025-08-30T10:00:00+03:00" ## Use a date from the past
+draft = true
+title = "ThreadLocal as a context in Scala"
+slug = "thread-local-scala"
++++
+
+**DISCLAIMER:** Do not use it in Scala!  
+There are much better, safer, simpler ways of passing a context in Scala apart from using `ThreadLocal`.
+
+## Idea and Example
+The idea behind using `ThreadLocal` for passing a context is next:
+* Define a static field `context: ThreadLocal[Context]` somewhere
+* Incapculate logic execution into a separate thread
+* Initialise the context with its value inside the thread
+* Use the field to get information about the context
+
+## Problems
+
+**TBD**
+
+## What to use instead?
+
+**TBD**
+
+## Links
+
+**TBD**
