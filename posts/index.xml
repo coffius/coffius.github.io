@@ -19,35 +19,6 @@ In this article I&amp;rsquo;d like to discuss show the ways how this can be solv
     </item>
     
     <item>
-      <title>Context Passing in Tagless Final</title>
-      <link>https://coffius.github.io/posts/tf-context-passing/</link>
-      <pubDate>Wed, 30 Aug 2023 10:00:00 +0300</pubDate>
-      
-      <guid>https://coffius.github.io/posts/tf-context-passing/</guid>
-      <description>&lt;p&gt;Context passing is a task that all programmers face regardless of a programming language they use.
-In this article I&amp;rsquo;d like to discuss show the ways how this task(&lt;strong&gt;???synonym???&lt;/strong&gt;) can be solved.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;TBD&lt;/strong&gt;&lt;/p&gt;
-&lt;h2 id=&#34;contents&#34;&gt;Contents&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Context and its way through
-&lt;ul&gt;
-&lt;li&gt;What is a context?&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Explicit context passing&lt;/li&gt;
-&lt;li&gt;ThreadLocal&lt;/li&gt;
-&lt;li&gt;FiberLocal&lt;/li&gt;
-&lt;li&gt;Context passing in Tagless Final
-&lt;ul&gt;
-&lt;li&gt;in Cats&lt;/li&gt;
-&lt;li&gt;in ZIO&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Links&lt;/li&gt;
-&lt;/ul&gt;</description>
-    </item>
-    
-    <item>
       <title>Sum Data Types with Shapeless</title>
       <link>https://coffius.github.io/posts/shapeless-sums/</link>
       <pubDate>Mon, 16 Apr 2018 10:00:00 +0300</pubDate>
