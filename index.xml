@@ -15,7 +15,7 @@
       
       <guid>https://coffius.github.io/posts/tf-context-passing/</guid>
       <description>&lt;p&gt;Context passing is the thing that all programmers face regardless of a programming language they use.
-In this article I&amp;rsquo;d like to discuss show the ways how this can be solved in Scala using Cats Effect, ZIO, cats-mtl and the tagless final encoding.&lt;/p&gt;</description>
+In this article I&amp;rsquo;d like to discuss the ways how this can be solved in Scala using Cats Effect, ZIO, cats-mtl and the tagless final encoding.&lt;/p&gt;</description>
     </item>
     
     <item>
