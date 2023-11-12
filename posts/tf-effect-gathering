@@ -1,0 +1,68 @@
++++
+date = "2024-08-30T10:00:00+03:00"
+draft = true
+title = "Effect Gathering in Tagless Final"
+slug = "tf-effect-gathering"
++++
+<!---
+3.  External logging - universal logging of any service interface
+    This is out of the scope of this article. It requires significant time to do that right here and also it is not directly related to the topic of the article.
+    It is more about proxy generation using macros.
+3.a Interface as an ADT
+3.b Two implementations of the interface - with logic and with data structure + conversion between them using natural transformations
+-->
+
+
+# Effect gathering in Tagless Final
+
+**TBD** <!--Add introduction for the article and for the topic -->
+
+## Idea & Motivation
+<!---
+It is possible to gather certain types of effects as a collection of data structures.
+This approach makes possible to analyze these effects later.
+-->
+
+* Define a certain class of effects that we can gather
+    * Logs
+    * Launch background tasks
+    * Generalization - Any `F[Unit]`
+
+**TBD**
+
+## Using Tell[..]
+<!---
+Short description of the `Tell[F, ..]` type class and how it helps with effect gathering on an example of internal logging. Show how to do that using `cats-mtl`
+-->
+**TBD**
+
+## Logging as a capability
+<!---
+Logging as a capability - abstraction of Tell[F, ..] + similar example of internal logging
+-->
+**TBD**
+
+## What about Errors?
+<!---
+// 4.  Errors, fail fast and Reliable WriterT
+https://t.me/scala_ru/348170
+https://github.com/manatki/manatki/blob/master/src/main/scala/manatki/data/ReliableWriterT.scala
+Is it possible to use IorT? 🤔
+// 4.  Errors, fail fast and Reliable WriterT. Define the problem/reason why it is necessary to have ReliableWriterT.
+-->
+**TBD**
+
+## Cats Example
+
+**TBD**
+
+## ZIO Example
+<!--Check if there is a ZIO monad with a channel for logs-->
+**TBD**
+
+## LInks
+* [Source code](https://github.com/coffius/advanced-scala-tf/tree/master/effect-gathering/src/main/scala/io/koff/tf/effect_gathering)
+* [ReliableWriterT](https://github.com/manatki/manatki/blob/master/src/main/scala/manatki/data/ReliableWriterT.scala)
+* [Docs for ZIO ZPure](https://zio.github.io/zio-prelude/docs/zpure/)
+
+
