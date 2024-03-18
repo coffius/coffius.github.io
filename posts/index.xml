@@ -7,7 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-EN</language>
     <copyright>(c) 2015-2023</copyright>
-    <lastBuildDate>Wed, 30 Aug 2023 10:00:00 +0300</lastBuildDate><atom:link href="https://coffius.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 18 Mar 2024 18:55:00 +0300</lastBuildDate><atom:link href="https://coffius.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Gathering effects in Tagless Final</title>
+      <link>https://coffius.github.io/posts/tf-gathering-effects/</link>
+      <pubDate>Mon, 18 Mar 2024 18:55:00 +0300</pubDate>
+      
+      <guid>https://coffius.github.io/posts/tf-gathering-effects/</guid>
+      <description>&lt;p&gt;Developers who has experience with Scala know how to work with side effects. Find them, wrap each of them with &lt;code&gt;IO.delay{..}&lt;/code&gt; to get an effect, chain them together using &lt;code&gt;Apply[F]&lt;/code&gt; or &lt;code&gt;Monad[F]&lt;/code&gt;, run the result program as &lt;code&gt;IOApp&lt;/code&gt;.
+In this case all side effects are launched in such an order as they are chained in the result &lt;code&gt;IO[..]&lt;/code&gt;. But there is another way of working with a certain type of effectful computations. It could improve testability and control over how these computations are executed. So in this article I&amp;rsquo;d like to show how to gather and process these effects later, after the logic itself is executed in full.&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Context Passing in Tagless Final</title>
       <link>https://coffius.github.io/posts/tf-context-passing/</link>

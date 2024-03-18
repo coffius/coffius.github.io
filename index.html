@@ -74,7 +74,7 @@
 <meta property="og:url" content="https://coffius.github.io/" />
 
 
-<meta property="og:updated_time" content=30008-30-10T80:00:23&#43;0300 />
+<meta property="og:updated_time" content=18003-18-06T355:00:24&#43;0300 />
 
 
 <link rel="sitemap" type="application/xml" title="Sitemap" href='https://coffius.github.io/sitemap.xml' />
@@ -224,7 +224,7 @@
         <p class="footnote">
 powered by <a target="_blank" href="https://gohugo.io">Hugo</a> | themed with <a target="_blank" href="https://github.com/lukeorth/poison">poison</a>
     <br>
-    &copy; 2023 coffius. All rights reserved.
+    &copy; 2024 coffius. All rights reserved.
 </p>
 
   </div>
@@ -234,6 +234,34 @@ powered by <a target="_blank" href="https://gohugo.io">Hugo</a> | themed with <a
                 <div class="posts">
     
     
+    <article class="post">
+        <div class="info">
+    <h1 class="post-title">
+        <a href="https://coffius.github.io/posts/tf-gathering-effects/">Gathering effects in Tagless Final</a>
+    </h1>
+    
+        <time datetime="2024-03-18T18:55:00&#43;0300" class="post-date">
+            March 18, 2024
+        </time>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+        
+        <p>Developers who has experience with Scala know how to work with side effects. Find them, wrap each of them with <code>IO.delay{..}</code> to get an effect, chain them together using <code>Apply[F]</code> or <code>Monad[F]</code>, run the result program as <code>IOApp</code>.
+In this case all side effects are launched in such an order as they are chained in the result <code>IO[..]</code>. But there is another way of working with a certain type of effectful computations. It could improve testability and control over how these computations are executed. So in this article I&rsquo;d like to show how to gather and process these effects later, after the logic itself is executed in full.</p>
+        
+        <div class="read-more-link">
+            <a href="/posts/tf-gathering-effects/">Read More…</a>
+        </div>
+        
+        
+    </article>
     <article class="post">
         <div class="info">
     <h1 class="post-title">

@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-EN" lang="en-EN">
+<head>
+    
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+<script defer language="javascript" type="text/javascript" src="/js/bundle.min.a43a549406127e0715f68083c987d71d0c71054cd57edea77aa709ed9958af6e.js"></script>
+
+
+
+
+
+
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <link rel="icon" href=/favicon.png>
+
+    
+    
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+  
+
+
+<!-- Open Graph image and Twitter Card metadata -->
+
+<title itemprop="name">Koff.io - Gathering effects in Tagless Final</title>
+<meta property="og:title" content=Koff.io&#32;-&#32;Gathering&#32;effects&#32;in&#32;Tagless&#32;Final />
+<meta name="twitter:title" content=Koff.io&#32;-&#32;Gathering&#32;effects&#32;in&#32;Tagless&#32;Final />
+<meta itemprop="name" content=Koff.io&#32;-&#32;Gathering&#32;effects&#32;in&#32;Tagless&#32;Final />
+<meta name="application-name" content=Koff.io&#32;-&#32;Gathering&#32;effects&#32;in&#32;Tagless&#32;Final />
+<meta property="og:site_name" content="KOFF.io" />
+
+
+<meta name="description" content="" />
+<meta itemprop="description" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:description" content="" />
+
+
+<base href="https://coffius.github.io/posts/tf-gathering-effects/" />
+<link rel="canonical" href="https://coffius.github.io/posts/tf-gathering-effects/" itemprop="url" />
+<meta name="url" content="https://coffius.github.io/posts/tf-gathering-effects/" />
+<meta name="twitter:url" content="https://coffius.github.io/posts/tf-gathering-effects/" />
+<meta property="og:url" content="https://coffius.github.io/posts/tf-gathering-effects/" />
+
+
+<meta property="og:updated_time" content=18003-18-06T355:00:24&#43;0300 />
+
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href='https://coffius.github.io/sitemap.xml' />
+
+<meta name="robots" content="index,follow" />
+<meta name="googlebot" content="index,follow" />
+
+
+<meta name="twitter:site" content="https://twitter.com/coffius" />
+<meta name="twitter:creator" content="https://twitter.com/coffius" />
+<meta property="fb:admins" content="" />
+
+
+<meta name="apple-mobile-web-app-title" content="KOFF.io" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+
+
+
+
+
+
+
+<meta property="og:type" content="article" />
+<meta property="article:publisher" content="" />
+<meta property="og:article:published_time" content=18003-18-06T355:00:24&#43;0300 />
+<meta property="article:published_time" content=18003-18-06T355:00:24&#43;0300 />
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.119.0">
+
+
+    
+    
+
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.840ebf68f48532db154ba044710ddddf80dfb1f4b417dbd6469c0e3cd316e782.css">
+
+
+    
+    <style>
+    body {
+        --sidebar-bg-color: #202020;
+        --sidebar-img-border-color: #515151;
+        --sidebar-p-color: #909090;
+        --sidebar-h1-color: #FFF;
+        --sidebar-a-color: #FFF;
+        --sidebar-socials-color: #FFF;
+        --text-color: #222;
+        --bkg-color: #FAF9F6;
+        --post-title-color: #303030;
+        --list-color: #5a5a5a;
+        --link-color: #268bd2;
+        --date-color: #515151;
+        --table-border-color: #E5E5E5;
+        --table-stripe-color: #F9F9F9;
+        --code-color: #000;
+        --code-background-color: #E5E5E5;
+        --code-block-color: #fff;
+        --code-block-background-color: #272822;
+        --moon-sun-color: #FFF;
+        --moon-sun-background-color: #515151;
+    }
+    body.dark-theme {
+        --text-color: #eee;
+        --bkg-color: #121212;
+        --post-title-color: #DBE2E9;
+        --list-color: #9d9d9d;
+        --link-color: #268bd2;
+        --date-color: #9a9a9a;
+        --table-border-color: #515151;
+        --table-stripe-color: #202020;
+        --code-color: #fff;
+        --code-background-color: #515151;
+        --code-block-color: #fff;
+        --code-block-background-color: #272822;
+    }
+    body {
+        background-color: var(--bkg-color);
+    }
+</style>
+
+</head>
+
+    <body class="dark-theme">
+        <div class="wrapper">
+            <aside class="sidebar">
+    <div class="container sidebar-sticky">
+        <div class="light-dark" align="right">
+    <button class="btn-light-dark" title="Toggle light/dark mode">
+        <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M6 .278a.768.768 0 0 1 .08.858a7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277c.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316a.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71C0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+        </svg>
+        <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M8 12a4 4 0 1 0 0-8a4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+        </svg>
+    </button>
+</div>
+
+        <div class="sidebar-about">
+    <h1 class="brand">
+        
+        
+            <a href="https://coffius.github.io/">
+                <h1>KOFF.io</h1>
+            </a>
+        
+    </h1>
+    <p class="lead">
+    ❤ Scala since 2015
+    </p>
+</div>
+
+        <nav>
+    <ul class="sidebar-nav">
+
+        
+        
+        
+
+    </ul>
+</nav>
+
+        <div class = "social-links">
+    
+    <a target="_blank" class="social" title="GitHub" href="https://github.com/coffius">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="-2 -2 24 24">
+            <path fill="currentColor" d="M18.88 1.099C18.147.366 17.265 0 16.233 0H3.746C2.714 0 1.832.366 1.099 1.099C.366 1.832 0 2.714 0 3.746v12.487c0 1.032.366 1.914 1.099 2.647c.733.733 1.615 1.099 2.647 1.099H6.66c.19 0 .333-.007.429-.02a.504.504 0 0 0 .286-.169c.095-.1.143-.245.143-.435l-.007-.885c-.004-.564-.006-1.01-.006-1.34l-.3.052c-.19.035-.43.05-.721.046a5.555 5.555 0 0 1-.904-.091a2.026 2.026 0 0 1-.872-.39a1.651 1.651 0 0 1-.572-.8l-.13-.3a3.25 3.25 0 0 0-.41-.663c-.186-.243-.375-.407-.566-.494l-.09-.065a.956.956 0 0 1-.17-.156a.723.723 0 0 1-.117-.182c-.026-.061-.004-.111.065-.15c.07-.04.195-.059.378-.059l.26.04c.173.034.388.138.643.311a2.1 2.1 0 0 1 .631.677c.2.355.44.626.722.813c.282.186.566.28.852.28c.286 0 .533-.022.742-.065a2.59 2.59 0 0 0 .585-.196c.078-.58.29-1.028.637-1.34a8.907 8.907 0 0 1-1.333-.234a5.314 5.314 0 0 1-1.223-.507a3.5 3.5 0 0 1-1.047-.872c-.277-.347-.505-.802-.683-1.365c-.177-.564-.266-1.215-.266-1.952c0-1.049.342-1.942 1.027-2.68c-.32-.788-.29-1.673.091-2.652c.252-.079.625-.02 1.119.175c.494.195.856.362 1.086.5c.23.14.414.257.553.352a9.233 9.233 0 0 1 2.497-.338c.859 0 1.691.113 2.498.338l.494-.312a6.997 6.997 0 0 1 1.197-.572c.46-.174.81-.221 1.054-.143c.39.98.424 1.864.103 2.653c.685.737 1.028 1.63 1.028 2.68c0 .737-.089 1.39-.267 1.957c-.177.568-.407 1.023-.689 1.366a3.65 3.65 0 0 1-1.053.865c-.42.234-.828.403-1.223.507a8.9 8.9 0 0 1-1.333.235c.45.39.676 1.005.676 1.846v3.11c0 .147.021.266.065.357a.36.36 0 0 0 .208.189c.096.034.18.056.254.064c.074.01.18.013.318.013h2.914c1.032 0 1.914-.366 2.647-1.099c.732-.732 1.099-1.615 1.099-2.647V3.746c0-1.032-.367-1.914-1.1-2.647z"/>
+        </svg>
+    </a>
+    
+    
+    
+    
+    <a target="_blank" class="social" title="Twitter" href="https://twitter.com/coffius">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 16 16">
+            <path fill="currentColor" d="M5.032 14.286c6.037 0 9.34-4.837 9.34-9.032c0-.137 0-.274-.01-.41A6.56 6.56 0 0 0 16 3.2c-.6.256-1.235.425-1.885.5a3.207 3.207 0 0 0 1.443-1.757c-.645.37-1.35.63-2.085.77a3.322 3.322 0 0 0-1.862-.958a3.384 3.384 0 0 0-2.082.334a3.223 3.223 0 0 0-1.442 1.49a3.08 3.08 0 0 0-.208 2.03a9.57 9.57 0 0 1-3.747-.963a9.269 9.269 0 0 1-3.018-2.354a3.086 3.086 0 0 0-.36 2.314c.189.787.68 1.475 1.376 1.924a3.344 3.344 0 0 1-1.49-.398v.04c0 .734.263 1.444.743 2.01a3.3 3.3 0 0 0 1.89 1.102c-.483.128-.99.146-1.482.055a3.19 3.19 0 0 0 1.168 1.577a3.36 3.36 0 0 0 1.9.627A6.732 6.732 0 0 1 0 12.86a9.527 9.527 0 0 0 5.032 1.423"/>
+        </svg>
+    </a>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</div>
+        <p class="footnote">
+powered by <a target="_blank" href="https://gohugo.io">Hugo</a> | themed with <a target="_blank" href="https://github.com/lukeorth/poison">poison</a>
+    <br>
+    &copy; 2024 coffius. All rights reserved.
+</p>
+
+  </div>
+</aside>
+
+            <main class="content container">
+                <div class="post">
+  <div class="info">
+    <h1 class="post-title">
+        <a href="https://coffius.github.io/posts/tf-gathering-effects/">Gathering effects in Tagless Final</a>
+    </h1>
+    
+        <time datetime="2024-03-18T18:55:00&#43;0300" class="post-date">
+            March 18, 2024
+        </time>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+  <p>Developers who has experience with Scala know how to work with side effects. Find them, wrap each of them with <code>IO.delay{..}</code> to get an effect, chain them together using <code>Apply[F]</code> or <code>Monad[F]</code>, run the result program as <code>IOApp</code>.
+In this case all side effects are launched in such an order as they are chained in the result <code>IO[..]</code>. But there is another way of working with a certain type of effectful computations. It could improve testability and control over how these computations are executed. So in this article I&rsquo;d like to show how to gather and process these effects later, after the logic itself is executed in full.</p>
+<h2 id="idea--motivation">Idea &amp; Motivation</h2>
+<!-- raw HTML omitted -->
+<p>Let&rsquo;s start with a more precise definition of <strong>an effectful computation</strong>. In this article I am going to use this term as a synonym for <em>a computation with a side effect that is wrapped in <code>IO.delay(..)</code></em>.</p>
+<p>Example of a computation with a side effect:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> unsafeSumAndPrint<span style="color:#f92672">(</span>in<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">List</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Int</span><span style="color:#f92672">])</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span> <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">val</span> sum <span style="color:#66d9ef">=</span> in<span style="color:#f92672">.</span>sum
+</span></span><span style="display:flex;"><span>  println<span style="color:#f92672">(</span><span style="color:#e6db74">s&#34;Sum: </span><span style="color:#e6db74">$sum</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>Example of an effectful computation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> safeSumAndPrint<span style="color:#f92672">(</span>in<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">List</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Int</span><span style="color:#f92672">])</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">IO</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Unit</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">IO</span><span style="color:#f92672">.</span>delay<span style="color:#f92672">(</span>unsafeSumAndPrint<span style="color:#f92672">(</span>in<span style="color:#f92672">))</span>
+</span></span></code></pre></div><p>The next step is to split effectful computations on several categories:</p>
+<ol>
+<li>The first one is a generic computation of <code>IO[A]</code>.<br>
+This computation returns a value of <code>A</code> as a result where the type <code>A</code> has 2 or more possible values. Like <code>IO[Boolean]</code>, <code>IO[Int]</code>, <code>Either[Err, String]</code> and so on. Also this returned value of <code>A</code> is required by the code following its computation¹.</li>
+<li>The second type is <code>IO[Nothing]</code> - a computation that runs forever.</li>
+<li>The third type is <code>IO[Unit]</code> - a finite² effectful computation that does not return anything important for logic.
+In the article this is <strong>the one that we are interested in</strong>.</li>
+</ol>
+<p>So why we are interested in <code>IO[Unit]</code>? It represents an effect without a meaningful result apart from a possible error and the fact of its execution.</p>
+<!-- raw HTML omitted -->
+<p>There are several examples of such logic in practice:</p>
+<ul>
+<li>logging</li>
+<li>tracing</li>
+<li>metrics</li>
+<li>launch of a background computation</li>
+<li>updating values:
+<ul>
+<li>setting a value of Ref[IO, ..]</li>
+<li>updating info in a cache</li>
+</ul>
+</li>
+<li>publishing an event</li>
+</ul>
+<p>and so on.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>Next question - why do we need to gather these effectful computations? Why not to run them right away?</p>
+<p>Consider the next code example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Service</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">_</span><span style="color:#f92672">]</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Monad</span><span style="color:#f92672">](</span>
+</span></span><span style="display:flex;"><span>  db<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">DB</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">],</span>
+</span></span><span style="display:flex;"><span>  metrics<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">ServiceMetrics</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">],</span>
+</span></span><span style="display:flex;"><span>  log<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Logger</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">],</span>
+</span></span><span style="display:flex;"><span>  cache<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Cache</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">def</span> process<span style="color:#f92672">(</span>user<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">User</span><span style="color:#f92672">,</span> input<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Input</span><span style="color:#f92672">,</span> data<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">UserData</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Result</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">???</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> businessLogic<span style="color:#f92672">(</span>user<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">User</span><span style="color:#f92672">,</span> input<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Input</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Result</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">for</span>
+</span></span><span style="display:flex;"><span>    userData <span style="color:#66d9ef">&lt;-</span> db<span style="color:#f92672">.</span>load<span style="color:#f92672">(</span>user<span style="color:#f92672">.</span>id<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    result   <span style="color:#66d9ef">&lt;-</span> process<span style="color:#f92672">(</span>user<span style="color:#f92672">,</span> input<span style="color:#f92672">,</span> userData<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">_</span>        <span style="color:#66d9ef">&lt;-</span> metrics<span style="color:#f92672">.</span>incrementForUser<span style="color:#f92672">(</span>user<span style="color:#f92672">.</span>id<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">_</span>        <span style="color:#66d9ef">&lt;-</span> log<span style="color:#f92672">.</span>info<span style="color:#f92672">(</span><span style="color:#e6db74">s&#34;User data for &#39;</span><span style="color:#e6db74">${</span>user<span style="color:#f92672">.</span>userName<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39; has been processed: </span><span style="color:#e6db74">$userData</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">_</span>        <span style="color:#66d9ef">&lt;-</span> cache<span style="color:#f92672">.</span>update<span style="color:#f92672">(</span>user<span style="color:#f92672">.</span>id<span style="color:#f92672">,</span> userData<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">yield</span> result
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>Above you can see a piece of business logic implemented in a classic way. All related effectful computations(metrics, logging, caching) are directly included there. But it can be implemented in a better way.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Processed</span><span style="color:#f92672">(</span>userId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">UserId</span><span style="color:#f92672">,</span> userName<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Username</span><span style="color:#f92672">,</span> data<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">UserData</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">// More info about Tell[..] will be provided later in the article
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#66d9ef">TellProcessed</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">_</span><span style="color:#f92672">]]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Tell</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span>, <span style="color:#66d9ef">Processed</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Service</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">_</span><span style="color:#f92672">]</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Monad:</span> <span style="color:#66d9ef">TellProcessed</span><span style="color:#f92672">](</span>db<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">DB</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">])</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">def</span> process<span style="color:#f92672">(</span>user<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">User</span><span style="color:#f92672">,</span> input<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Input</span><span style="color:#f92672">,</span> data<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">UserData</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Result</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">???</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> businessLogic<span style="color:#f92672">(</span>user<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">User</span><span style="color:#f92672">,</span> input<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Input</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Result</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">for</span>
+</span></span><span style="display:flex;"><span>    userData <span style="color:#66d9ef">&lt;-</span> db<span style="color:#f92672">.</span>load<span style="color:#f92672">(</span>user<span style="color:#f92672">.</span>id<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    result   <span style="color:#66d9ef">&lt;-</span> process<span style="color:#f92672">(</span>user<span style="color:#f92672">,</span> input<span style="color:#f92672">,</span> userData<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">_</span>        <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">Processed</span><span style="color:#f92672">(</span>user<span style="color:#f92672">.</span>id<span style="color:#f92672">,</span> user<span style="color:#f92672">.</span>userName<span style="color:#f92672">,</span> userData<span style="color:#f92672">).</span>tell<span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">yield</span> result
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>So here instead of launch all effectful logic right away, we generate the <code>Processed(..)</code> event and put it in the <code>F[_]</code> effect using <code>.tell[F]</code>. Of course we must put the logic of launching <code>metrics.incrementForUser(..)</code>, <code>log.info(..)</code> and <code>cache.update(..)</code> somewhere using the info from that <code>Processed(..)</code> event. But we can put it aside and do it later outside from the business logic. And now this logic is easier to understand and test as it has fewer dependencies and better decoupling.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h2 id="using-tell">Using Tell[..]</h2>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>As you can see in the example above we need <code>Tell[F[_], L]</code> to make this approach work. <code>Tell[F[_], L]</code> is a special type class from the <code>cats-mtl</code> library that can be used to put a value of <code>L</code> to the container <code>F[_]</code>.
+The function <code>.tell[F]</code> from the example above is provided by this type class and its syntax. The next thing we need is <code>WriterT[F[_], L]</code>. This data structure is a monad transformer that has an instance of <code>Tell[..]</code>. If we check the definition of <code>WriterT</code> we will see this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#a6e22e">WriterT</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">_</span><span style="color:#f92672">]</span>, <span style="color:#66d9ef">L</span>, <span style="color:#66d9ef">V</span><span style="color:#f92672">](</span>run<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[(</span><span style="color:#66d9ef">L</span>, <span style="color:#66d9ef">V</span><span style="color:#f92672">)])</span>
+</span></span></code></pre></div><p>It means that there can be only one value of <code>L</code> stored in the effect. In order to have there several values we have to explicitly use some kind of a collection there. After putting everything together we will get.<br>
+<a href="https://github.com/coffius/advanced-scala-tf/blob/master/effect-gathering/src/main/scala/io/koff/tf/effect_gathering/BasicTypes.scala" target="_blank">BasicTypes.scala</a>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">object</span> <span style="color:#a6e22e">BasicTypes</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/** Adding this additional type alias to make our types a bit more readable. */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">type</span> <span style="color:#66d9ef">TellLogs</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">_</span><span style="color:#f92672">]]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Tell</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span>, <span style="color:#66d9ef">Log</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/** Our end-of-the-world effect */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">type</span> <span style="color:#66d9ef">Eff</span><span style="color:#f92672">[</span><span style="color:#66d9ef">T</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">WriterT</span><span style="color:#f92672">[</span><span style="color:#66d9ef">IO</span>, <span style="color:#66d9ef">Chain</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Log</span><span style="color:#f92672">]</span>, <span style="color:#66d9ef">T</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/** Reliable version of the effect */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">type</span> <span style="color:#66d9ef">REff</span><span style="color:#f92672">[</span><span style="color:#66d9ef">T</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">ReliableWriterT</span><span style="color:#f92672">[</span><span style="color:#66d9ef">IO</span>, <span style="color:#66d9ef">Throwable</span>, <span style="color:#66d9ef">Chain</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Log</span><span style="color:#f92672">]</span>, <span style="color:#66d9ef">T</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h2 id="tellf-log-vs-tellf-chainlog">Tell[F, Log] vs Tell[F, Chain[Log]]</h2>
+<p>We have all but one thing. It is necessary to marry these types <code>Eff[T] = WriterT[IO, Chain[Log], T]</code> and <code>type TellLogs[F[_]] = Tell[F, Log]</code> together. As you can see, we use <code>Log</code> not <code>Chain[Log]</code> in the <code>TellLogs</code> definition. It is needed to be compatible both with <code>cats-effect</code> and <code>ZIO</code>. In the <code>cats</code> stack we have to use <code>WriterT[.., Chain[Log], ..]</code> to make a structure that contains our log records. Cats&rsquo; <code>Writer[..]</code> does not have an internal collection for these records. In ZIO though we are going to use <code>ZPure[..]</code> that already have an internal <code>Chunk[A]</code> that stores <code>Log</code>.<br>
+If we define <code>TellLogs</code> as</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">type</span> <span style="color:#66d9ef">TellLogs</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">_</span><span style="color:#f92672">]]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Tell</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span>, <span style="color:#66d9ef">Chain</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Log</span><span style="color:#f92672">]]</span>
+</span></span></code></pre></div><p>It is going to work out of the box with cats&rsquo; <code>WriterT</code> but it will be necessary to implement some additional logic for <code>ZPure</code>.</p>
+<p>If we define <code>TellLogs</code> as</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">type</span> <span style="color:#66d9ef">TellLogs</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">_</span><span style="color:#f92672">]]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Tell</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span>, <span style="color:#66d9ef">Log</span><span style="color:#f92672">]</span>
+</span></span></code></pre></div><p>then it is vice versa - a very simple implementation of Tell for <code>ZPure</code> but requires a bit of a hack for cats&rsquo; <code>WriterT</code>. The difference between these two approaches is not that big but nevertheless there is a difference.<br>
+So we have to choose. In the scope of this article I am going to use the next considerations <code>Tell[F, L]</code>:</p>
+<ul>
+<li>Tell defines an ability of pulling <em>multiple values</em> of <code>L</code> in the <code>F[_]</code> container.</li>
+<li>Adding a particular collection the definition of <code>Tell[..]</code> means to expose implementation details, thus it is better to avoid it.</li>
+</ul>
+<p>Following these considerations means that we need to stick with the second option - define <code>TellLogs[F[_]] = Tell[F, Log]</code> and make it work for cats&rsquo; <code>WriterT</code>.</p>
+<p>In order to do that we need to add a custom implementation of <code>WriterT</code> like this.
+<a href="https://github.com/coffius/advanced-scala-tf/blob/master/effect-gathering/src/main/scala/io/koff/tf/effect_gathering/TellExtension.scala#L8" target="_blank">TellExtension.scala</a>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">object</span> <span style="color:#a6e22e">TellExtension</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  given <span style="color:#a6e22e">TellForChain</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">_</span><span style="color:#f92672">]</span>, <span style="color:#66d9ef">L</span><span style="color:#f92672">](</span>using T<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Tell</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span>, <span style="color:#66d9ef">Chain</span><span style="color:#f92672">[</span><span style="color:#66d9ef">L</span><span style="color:#f92672">]])</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Tell</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span>, <span style="color:#66d9ef">L</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Tell</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span>, <span style="color:#66d9ef">L</span><span style="color:#f92672">]</span><span style="color:#66d9ef">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">def</span> <span style="color:#66d9ef">functor:</span> <span style="color:#66d9ef">Functor</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> T<span style="color:#f92672">.</span>functor
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">def</span> tell<span style="color:#f92672">(</span>l<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">L</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Unit</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> T<span style="color:#f92672">.</span>tell<span style="color:#f92672">(</span><span style="color:#a6e22e">Chain</span><span style="color:#f92672">.</span>one<span style="color:#f92672">(</span>l<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>Basically what we do here is next. If we have <code>T: Tell[F, Chain[L]]</code> then we can use it for putting <code>l: L</code> into <code>F[_]</code> by wrapping it as <code>Chain.one(..)</code>. Then we need to import this <code>TellForChain</code> when we use our <code>WriterT</code> based effect. See the example for Cats Effect below.</p>
+<p>Now we are ready to move on. Let&rsquo;s implement a service with logging using all the tools from above.</p>
+<p>Instead of defining our logging as a trait, we will use <code>enum</code> from Scala 3.<br>
+<a href="https://github.com/coffius/advanced-scala-tf/blob/master/effect-gathering/src/main/scala/io/koff/tf/effect_gathering/Log.scala" target="_blank">Log.scala:</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#75715e">/** Example of half structured log - its cases have additional info.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  * We are going to use it as a data structure for gathering info needed to be logged.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  */</span>
+</span></span><span style="display:flex;"><span>enum <span style="color:#a6e22e">Log</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">Info</span><span style="color:#f92672">(</span>tag<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> input<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> output<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">Error</span><span style="color:#f92672">(</span>tag<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> input<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> error<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Throwable</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>And at last - the service itself:<br>
+<a href="https://github.com/coffius/advanced-scala-tf/blob/master/effect-gathering/src/main/scala/io/koff/tf/effect_gathering/Example1.scala" target="_blank">Example1.scala</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">Example1</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/** This is a basic service with two operations */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">Service</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">_</span><span style="color:#f92672">]]</span><span style="color:#a6e22e">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> operation1<span style="color:#f92672">(</span>in<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Input1</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Output1</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> operation2<span style="color:#f92672">(</span>in<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Input2</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Output2</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/** This is its implementation. As constructor params it requires two low level operations. In a
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    * real system it might be DB operations or http calls to an external system. Also it requires
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    * `T: TellAppLogs[F]` which is used to put instances of `AppLog` into `F[_]`
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ServiceImpl</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">_</span><span style="color:#f92672">]</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Monad</span><span style="color:#f92672">](</span>
+</span></span><span style="display:flex;"><span>      lowLvlOp1<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Input1</span> <span style="color:#f92672">=&gt;</span> F<span style="color:#f92672">[</span><span style="color:#66d9ef">Output1</span><span style="color:#f92672">],</span>
+</span></span><span style="display:flex;"><span>      lowLvlOp2<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Output1</span> <span style="color:#f92672">=&gt;</span> F<span style="color:#f92672">[</span><span style="color:#66d9ef">Output2</span><span style="color:#f92672">],</span>
+</span></span><span style="display:flex;"><span>      lowLvlOp3<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Input2</span> <span style="color:#f92672">=&gt;</span> F<span style="color:#f92672">[</span><span style="color:#66d9ef">Output1</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">)(</span>using
+</span></span><span style="display:flex;"><span>      T<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">TellTagLogs</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">)</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Service</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">]</span><span style="color:#66d9ef">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">def</span> <span style="color:#66d9ef">operation1</span><span style="color:#f92672">(</span><span style="color:#66d9ef">in:</span> <span style="color:#66d9ef">Input1</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Output1</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">for</span>
+</span></span><span style="display:flex;"><span>      out1 <span style="color:#66d9ef">&lt;-</span> lowLvlOp1<span style="color:#f92672">(</span>in<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// Here we see how log elements can be added to F[_]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#66d9ef">_</span>    <span style="color:#66d9ef">&lt;-</span> tellOne<span style="color:#f92672">(</span><span style="color:#a6e22e">Log</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Info</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;operation1&#34;</span><span style="color:#f92672">,</span> in<span style="color:#f92672">.</span>show<span style="color:#f92672">,</span> out1<span style="color:#f92672">.</span>show<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>      out2 <span style="color:#66d9ef">&lt;-</span> lowLvlOp2<span style="color:#f92672">(</span>out1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">_</span>    <span style="color:#66d9ef">&lt;-</span> tellOne<span style="color:#f92672">(</span><span style="color:#a6e22e">Log</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Info</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;operation1&#34;</span><span style="color:#f92672">,</span> in<span style="color:#f92672">.</span>show<span style="color:#f92672">,</span> out2<span style="color:#f92672">.</span>show<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">yield</span> out1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">def</span> operation2<span style="color:#f92672">(</span>in<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Input2</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Output2</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">for</span>
+</span></span><span style="display:flex;"><span>      out1 <span style="color:#66d9ef">&lt;-</span> lowLvlOp3<span style="color:#f92672">(</span>in<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// and here as well
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#66d9ef">_</span>    <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">Log</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Info</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;operation2&#34;</span><span style="color:#f92672">,</span> in<span style="color:#f92672">.</span>show<span style="color:#f92672">,</span> out1<span style="color:#f92672">.</span>show<span style="color:#f92672">).</span>tell<span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>      out2 <span style="color:#66d9ef">&lt;-</span> lowLvlOp2<span style="color:#f92672">(</span>out1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">_</span>    <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">Log</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Info</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;operation2&#34;</span><span style="color:#f92672">,</span> in<span style="color:#f92672">.</span>show<span style="color:#f92672">,</span> out2<span style="color:#f92672">.</span>show<span style="color:#f92672">).</span>tell<span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">yield</span> out2
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h2 id="logging-as-a-capability">Logging as a capability</h2>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>It is possible to define a logger as a capability in order to abstract over the way of collecting logs.<br>
+<a href="https://github.com/coffius/advanced-scala-tf/blob/master/effect-gathering/src/main/scala/io/koff/tf/effect_gathering/capability/LogCapability.scala" target="_blank">LogCapability.scala</a>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">LogCapability</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">_</span><span style="color:#f92672">]]</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> info<span style="color:#f92672">(</span>tag<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> input<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> output<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Unit</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> error<span style="color:#f92672">(</span>tag<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> input<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> error<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Throwable</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Unit</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>This interface provides an additional layer of abstraction. It can be implemented in two ways:</p>
+<ul>
+<li>straight forward logging using Sync-based implementation</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#75715e">/** Writes log messages straight to the console */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ConsoleLogCapability</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">_</span><span style="color:#f92672">]</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Console</span><span style="color:#f92672">]</span> <span style="color:#a6e22e">extends</span> <span style="color:#a6e22e">LogCapability</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">]</span><span style="color:#66d9ef">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> <span style="color:#66d9ef">info</span><span style="color:#f92672">(</span><span style="color:#66d9ef">tag:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">input:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> output<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Unit</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Console</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">].</span>println<span style="color:#f92672">(</span><span style="color:#e6db74">s&#34;Info[tag:</span><span style="color:#e6db74">$tag</span><span style="color:#e6db74">; input:</span><span style="color:#e6db74">$input</span><span style="color:#e6db74">; output:</span><span style="color:#e6db74">$output</span><span style="color:#e6db74">]&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> error<span style="color:#f92672">(</span>tag<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> input<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> error<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Throwable</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Unit</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Console</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">].</span>println<span style="color:#f92672">(</span><span style="color:#e6db74">s&#34;Error[tag:</span><span style="color:#e6db74">$tag</span><span style="color:#e6db74">; input:</span><span style="color:#e6db74">$input</span><span style="color:#e6db74">; error:</span><span style="color:#e6db74">$error</span><span style="color:#e6db74">]&#34;</span><span style="color:#f92672">)</span>
+</span></span></code></pre></div><ul>
+<li>implementation based on WriterT</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#75715e">/** Collects logs into the F[_] */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TellBasedLogCapability</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">_</span><span style="color:#f92672">]](</span>using T<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">TellLogs</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">])</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">LogCapability</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">]</span><span style="color:#66d9ef">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> <span style="color:#66d9ef">info</span><span style="color:#f92672">(</span><span style="color:#66d9ef">tag:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">input:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> output<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Unit</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span>
+</span></span><span style="display:flex;"><span>    T<span style="color:#f92672">.</span>tell<span style="color:#f92672">(</span><span style="color:#a6e22e">Log</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Info</span><span style="color:#f92672">(</span>tag<span style="color:#f92672">,</span> input<span style="color:#f92672">,</span> output<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> error<span style="color:#f92672">(</span>tag<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> input<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> error<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Throwable</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Unit</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span>
+</span></span><span style="display:flex;"><span>    T<span style="color:#f92672">.</span>tell<span style="color:#f92672">(</span><span style="color:#a6e22e">Log</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Error</span><span style="color:#f92672">(</span>tag<span style="color:#f92672">,</span> input<span style="color:#f92672">,</span> error<span style="color:#f92672">))</span>
+</span></span></code></pre></div><p>Then it is possible to use it this way:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> <span style="color:#a6e22e">Log</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">LogCapability</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">LogCapability</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">override</span> <span style="color:#66d9ef">def</span> operation1<span style="color:#f92672">(</span>in<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Input1</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Output1</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">for</span>
+</span></span><span style="display:flex;"><span>  out1 <span style="color:#66d9ef">&lt;-</span> lowLvlOp1<span style="color:#f92672">(</span>in<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">_</span>    <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">Log</span><span style="color:#f92672">.</span>info<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;operation1: out1&#34;</span><span style="color:#f92672">,</span> in<span style="color:#f92672">.</span>show<span style="color:#f92672">,</span> out1<span style="color:#f92672">.</span>show<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  out2 <span style="color:#66d9ef">&lt;-</span> lowLvlOp2<span style="color:#f92672">(</span>out1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">_</span>    <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">Log</span><span style="color:#f92672">.</span>info<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;operation1: out2&#34;</span><span style="color:#f92672">,</span> in<span style="color:#f92672">.</span>show<span style="color:#f92672">,</span> out2<span style="color:#f92672">.</span>show<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">yield</span> out1
+</span></span></code></pre></div><p>It is possible to use this approach even with such libraries as <a href="https://typelevel.org/log4cats/" target="_blank">log4cats</a> by making a custom implementation of <a href="https://github.com/typelevel/log4cats/blob/main/core/shared/src/main/scala/org/typelevel/log4cats/Logger.scala" target="_blank">Logger[F]</a>, <a href="https://github.com/typelevel/log4cats/blob/main/core/shared/src/main/scala/org/typelevel/log4cats/MessageLogger.scala" target="_blank">MessageLogger[F]</a> and/or <a href="https://github.com/typelevel/log4cats/blob/main/core/shared/src/main/scala/org/typelevel/log4cats/ErrorLogger.scala" target="_blank">ErrorLogger[F]</a> from there similar to <code>TellBasedLogCapability[F]</code>.</p>
+<h2 id="what-about-errors">What about Errors?</h2>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>So far so good. But there is another question - how does <code>WriterT</code> work with errors?</p>
+<p>Check this code example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#66d9ef">Logs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Chain</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Log</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Error</span><span style="color:#f92672">(</span>msg<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">AnyVal</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Log</span><span style="color:#f92672">(</span>msg<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span>   <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">AnyVal</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> main<span style="color:#f92672">(</span>args<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Array</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">])</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span> <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">type</span> <span style="color:#66d9ef">Eff1</span><span style="color:#f92672">[</span><span style="color:#66d9ef">A</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">WriterT</span><span style="color:#f92672">[</span><span style="color:#66d9ef">SyncIO</span>, <span style="color:#66d9ef">Logs</span>, <span style="color:#66d9ef">A</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> eff1<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Eff1</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Int</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">for</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// this log record is lost
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">_</span> <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">Tell</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Eff1</span>, <span style="color:#66d9ef">Log</span><span style="color:#f92672">].</span>tell<span style="color:#f92672">(</span><span style="color:#a6e22e">Log</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;It is going to fail&#34;</span><span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// we can see only this error
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">_</span> <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">MonadThrow</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Eff1</span><span style="color:#f92672">].</span>raiseError<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> <span style="color:#a6e22e">RuntimeException</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;failure&#34;</span><span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">yield</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">val</span> result1<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Either</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Throwable</span>, <span style="color:#f92672">(</span><span style="color:#66d9ef">Logs</span>, <span style="color:#66d9ef">Int</span><span style="color:#f92672">)]</span> <span style="color:#66d9ef">=</span> eff1<span style="color:#f92672">.</span>run<span style="color:#f92672">.</span>attempt<span style="color:#f92672">.</span>unsafeRunSync<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>  println<span style="color:#f92672">(</span><span style="color:#e6db74">s&#34;result1: </span><span style="color:#e6db74">$result1</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">)</span> <span style="color:#75715e">// result1: Left(java.lang.RuntimeException: failure)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// omitted ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>If we run a program of type <code>WriterT[SyncIO, Chain[String], A]</code> then we will get <code>result1: Either[Throwable, (Logs, Int)]</code>. From this type we see that the <code>Logs</code> value is returned only if there are no errors during execution of the program - the right part of <code>Either</code>. In case of any error we get only <code>Throwable</code> without <code>Logs</code>.</p>
+<p><code>ReliableWriterT</code>³ can help us to solve this problem. It is a special version of <code>WriterT</code> that is aware of errors that can happen in <code>F[_]</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> main<span style="color:#f92672">(</span>args<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Array</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">])</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span> <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// omitted ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">type</span> <span style="color:#66d9ef">Eff2</span><span style="color:#f92672">[</span><span style="color:#66d9ef">A</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">ReliableWriterT</span><span style="color:#f92672">[</span><span style="color:#66d9ef">SyncIO</span>, <span style="color:#66d9ef">Throwable</span>, <span style="color:#66d9ef">Logs</span>, <span style="color:#66d9ef">A</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> eff2Success<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Eff2</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Int</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#66d9ef">_</span> <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">Tell</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Eff2</span>, <span style="color:#66d9ef">Logs</span><span style="color:#f92672">].</span>tell<span style="color:#f92672">(</span><span style="color:#a6e22e">Chain</span><span style="color:#f92672">.</span>one<span style="color:#f92672">(</span><span style="color:#a6e22e">Log</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Successful program&#34;</span><span style="color:#f92672">)))</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">yield</span> <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> eff2RaiseError<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Eff2</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Int</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">for</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">_</span> <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">Tell</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Eff2</span>, <span style="color:#66d9ef">Logs</span><span style="color:#f92672">].</span>tell<span style="color:#f92672">(</span><span style="color:#a6e22e">Chain</span><span style="color:#f92672">.</span>one<span style="color:#f92672">(</span><span style="color:#a6e22e">Log</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Faulty program&#34;</span><span style="color:#f92672">)))</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">_</span> <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">MonadThrow</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Eff2</span><span style="color:#f92672">].</span>raiseError<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> <span style="color:#a6e22e">RuntimeException</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;test error&#34;</span><span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">yield</span> <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">val</span> <span style="color:#f92672">(</span>logs1<span style="color:#f92672">,</span> success<span style="color:#f92672">)</span> <span style="color:#66d9ef">=</span> eff2Success<span style="color:#f92672">.</span>run<span style="color:#f92672">.</span>unsafeRunSync<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>  println<span style="color:#f92672">(</span><span style="color:#e6db74">s&#34;logs: </span><span style="color:#e6db74">$logs1</span><span style="color:#e6db74">; success: </span><span style="color:#e6db74">$success</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// prints &#34;logs: Chain(Log(Successful program)); success: Right(10)&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">val</span> <span style="color:#f92672">(</span>logs2<span style="color:#f92672">,</span> err<span style="color:#f92672">)</span> <span style="color:#66d9ef">=</span> eff2RaiseError<span style="color:#f92672">.</span>run<span style="color:#f92672">.</span>unsafeRunSync<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>  println<span style="color:#f92672">(</span><span style="color:#e6db74">s&#34;logs: </span><span style="color:#e6db74">$logs2</span><span style="color:#e6db74">; err: </span><span style="color:#e6db74">$err</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">)</span> 
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// prints &#34;logs: Chain(Log(Faulty program)); err: Left(test error)&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h2 id="cats-example">Cats Example</h2>
+<p>Now we have everything to make an example for <code>cats-effect</code>.<br>
+<a href="https://github.com/coffius/advanced-scala-tf/blob/master/effect-gathering/src/main/scala/io/koff/tf/effect_gathering/CatsExample.scala" target="_blank">CatsExample.scala</a>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">object</span> <span style="color:#a6e22e">CatsExample</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Example1</span> <span style="color:#66d9ef">with</span> <span style="color:#a6e22e">IOApp</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Simple</span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">def</span> run<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">IO</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Unit</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> lowLvlOp1<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Input1</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">REff</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Output1</span><span style="color:#f92672">]</span>  <span style="color:#66d9ef">=</span> s <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">Applicative</span><span style="color:#f92672">[</span><span style="color:#66d9ef">REff</span><span style="color:#f92672">].</span>pure<span style="color:#f92672">(</span>s<span style="color:#f92672">.</span>length<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> lowLvlOp2<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Output1</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">REff</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Output2</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> i <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">Applicative</span><span style="color:#f92672">[</span><span style="color:#66d9ef">REff</span><span style="color:#f92672">].</span>pure<span style="color:#f92672">(</span>i<span style="color:#f92672">.</span>toDouble<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> lowLvlOp3<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Input2</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">REff</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Output1</span><span style="color:#f92672">]</span>  <span style="color:#66d9ef">=</span> l <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">Applicative</span><span style="color:#f92672">[</span><span style="color:#66d9ef">REff</span><span style="color:#f92672">].</span>pure<span style="color:#f92672">(</span>l<span style="color:#f92672">.</span>size<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> service<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Service</span><span style="color:#f92672">[</span><span style="color:#66d9ef">REff</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">ServiceImpl</span><span style="color:#f92672">[</span><span style="color:#66d9ef">REff</span><span style="color:#f92672">](</span>lowLvlOp1<span style="color:#f92672">,</span> lowLvlOp2<span style="color:#f92672">,</span> lowLvlOp3<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> program <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">for</span>
+</span></span><span style="display:flex;"><span>      result1 <span style="color:#66d9ef">&lt;-</span> service<span style="color:#f92672">.</span>operation1<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;hello&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      result2 <span style="color:#66d9ef">&lt;-</span> service<span style="color:#f92672">.</span>operation2<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;hello&#34;</span><span style="color:#f92672">.</span>toList<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">yield</span> <span style="color:#f92672">(</span>result1<span style="color:#f92672">,</span> result2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">_</span>                   <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">Console</span><span style="color:#f92672">[</span><span style="color:#66d9ef">IO</span><span style="color:#f92672">].</span>println<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Hello Cats&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">(</span>logs<span style="color:#f92672">,</span> resultOrErr<span style="color:#f92672">)</span> <span style="color:#66d9ef">&lt;-</span> program<span style="color:#f92672">.</span>run
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">_</span>                   <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">LogProcessor</span><span style="color:#f92672">.</span>processLogs<span style="color:#f92672">[</span><span style="color:#66d9ef">IO</span>, <span style="color:#66d9ef">Chain</span><span style="color:#f92672">](</span>logs<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">(</span>r1<span style="color:#f92672">,</span> r2<span style="color:#f92672">)</span>            <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">IO</span><span style="color:#f92672">.</span>fromEither<span style="color:#f92672">(</span>resultOrErr<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">_</span>                   <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">Console</span><span style="color:#f92672">[</span><span style="color:#66d9ef">IO</span><span style="color:#f92672">].</span>println<span style="color:#f92672">(</span><span style="color:#e6db74">s&#34;result1: </span><span style="color:#e6db74">$r1</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">_</span>                   <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">Console</span><span style="color:#f92672">[</span><span style="color:#66d9ef">IO</span><span style="color:#f92672">].</span>println<span style="color:#f92672">(</span><span style="color:#e6db74">s&#34;result2: </span><span style="color:#e6db74">$r2</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">yield</span> <span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h2 id="zio-example">ZIO Example</h2>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>For the ZIO example I am going to use <code>ZPure</code> as an effect. To make it work it is also necessary to add instances of <code>Console</code>, <code>Monad</code> and <code>Tell</code>for that effect(see <a href="https://github.com/coffius/advanced-scala-tf/blob/master/effect-gathering/src/main/scala/io/koff/tf/effect_gathering/ZPureInstances.scala" target="_blank"><code>ZPureInstances.scala</code></a>).<br>
+<a href="https://github.com/coffius/advanced-scala-tf/blob/master/effect-gathering/src/main/scala/io/koff/tf/effect_gathering/ZIOExample.scala" target="_blank">ZIOExample.scala</a>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> io.koff.tf.effect_gathering.ZPureInstances.given
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">object</span> <span style="color:#a6e22e">ZIOExample</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">ZIOAppDefault</span> <span style="color:#66d9ef">with</span> <span style="color:#a6e22e">Example1</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">type</span> <span style="color:#66d9ef">REff</span><span style="color:#f92672">[</span><span style="color:#66d9ef">T</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Writer</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Log</span>, <span style="color:#66d9ef">T</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">def</span> run<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">ZIO</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Any</span> <span style="color:#66d9ef">&amp;</span> <span style="color:#66d9ef">ZIOAppArgs</span> <span style="color:#66d9ef">&amp;</span> <span style="color:#66d9ef">Scope</span>, <span style="color:#66d9ef">Any</span>, <span style="color:#66d9ef">Any</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> lowLvlOp1<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Input1</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">REff</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Output1</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> s <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">Writer</span><span style="color:#f92672">.</span>succeed<span style="color:#f92672">(</span>s<span style="color:#f92672">.</span>length<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> lowLvlOp2<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Output1</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">REff</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Output2</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> i <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">Writer</span><span style="color:#f92672">.</span>succeed<span style="color:#f92672">(</span>i<span style="color:#f92672">.</span>toDouble<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> lowLvlOp3<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Input2</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">REff</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Output1</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> l <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">Writer</span><span style="color:#f92672">.</span>succeed<span style="color:#f92672">(</span>l<span style="color:#f92672">.</span>size<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> service<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Service</span><span style="color:#f92672">[</span><span style="color:#66d9ef">REff</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">ServiceImpl</span><span style="color:#f92672">(</span>lowLvlOp1<span style="color:#f92672">,</span> lowLvlOp2<span style="color:#f92672">,</span> lowLvlOp3<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> program <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">for</span>
+</span></span><span style="display:flex;"><span>      result1 <span style="color:#66d9ef">&lt;-</span> service<span style="color:#f92672">.</span>operation1<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;hello&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      result2 <span style="color:#66d9ef">&lt;-</span> service<span style="color:#f92672">.</span>operation2<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;hello&#34;</span><span style="color:#f92672">.</span>toList<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">yield</span> <span style="color:#f92672">(</span>result1<span style="color:#f92672">,</span> result2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">_</span> <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">Console</span><span style="color:#f92672">.</span>printLine<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Let&#39;s go!&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">(</span>logs<span style="color:#f92672">,</span> resultOrErr<span style="color:#f92672">)</span> <span style="color:#66d9ef">=</span> program<span style="color:#f92672">.</span>runAll<span style="color:#f92672">(())</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">_</span> <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">LogProcessor</span><span style="color:#f92672">.</span>processLogs<span style="color:#f92672">[</span><span style="color:#66d9ef">Task</span>, <span style="color:#66d9ef">Chunk</span><span style="color:#f92672">](</span>logs<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">_</span> <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">Console</span><span style="color:#f92672">.</span>printLine<span style="color:#f92672">(</span><span style="color:#e6db74">s&#34;result: </span><span style="color:#e6db74">$resultOrErr</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">yield</span> <span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p><strong>TBD</strong></p>
+<!-- raw HTML omitted -->
+<h2 id="links">Links</h2>
+<ul>
+<li><a href="https://github.com/coffius/advanced-scala-tf/tree/master/effect-gathering/src/main/scala/io/koff/tf/effect_gathering" target="_blank">Source code</a></li>
+<li><a href="https://typelevel.org/cats-mtl/mtl-classes/tell.html" target="_blank">Tell[..] from <code>cats-mtl</code></a></li>
+<li><a href="https://typelevel.org/cats/datatypes/writer.html" target="_blank">WriterT from <code>cats</code></a></li>
+<li><a href="https://github.com/manatki/manatki/blob/master/src/main/scala/manatki/data/ReliableWriterT.scala" target="_blank">ReliableWriterT</a></li>
+<li><a href="https://zio.github.io/zio-prelude/docs/zpure/" target="_blank">Docs for ZIO ZPure</a></li>
+<li><a href="https://github.com/zio/zio-prelude/blob/series/2.x/core/shared/src/main/scala/zio/prelude/fx/ZPure.scala" target="_blank">Source code for ZPure</a></li>
+</ul>
+<h2 id="remarks">Remarks</h2>
+<ul>
+<li>¹) Consider these examples:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> func1<span style="color:#f92672">()</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">IO</span><span style="color:#f92672">[</span><span style="color:#66d9ef">A</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">???</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> func2<span style="color:#f92672">(</span>in<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">A</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">IO</span><span style="color:#f92672">[</span><span style="color:#66d9ef">B</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">???</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>
+</span></span><span style="display:flex;"><span>  a <span style="color:#66d9ef">&lt;-</span> func1<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>  b <span style="color:#66d9ef">&lt;-</span> func2<span style="color:#f92672">(</span>a<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">yield</span> b
+</span></span></code></pre></div><p>In this example above the <code>A</code> is necessary to call <code>func2()</code>. Thus it is the 1st class.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> func1<span style="color:#f92672">()</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">IO</span><span style="color:#f92672">[</span><span style="color:#66d9ef">A</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">???</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> func2<span style="color:#f92672">()</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">IO</span><span style="color:#f92672">[</span><span style="color:#66d9ef">B</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">???</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>
+</span></span><span style="display:flex;"><span>  a <span style="color:#66d9ef">&lt;-</span> func1<span style="color:#f92672">()</span> <span style="color:#75715e">// `a` can be replaced with `_`
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  b <span style="color:#66d9ef">&lt;-</span> func2<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">yield</span> b
+</span></span></code></pre></div><p>But in this example the following code has no need in <code>A</code> so it can be dropped by converting <code>A</code> to <code>Unit</code>(like <code>func1().void</code>). Thus it is the 3rd class.</p>
+<ul>
+<li>²) There is no tools in vanilla Scala 2/3 to actually prove that a certain computation is finite. In this case it is rather a strong assumption which if important better to check with tests.</li>
+<li>³) Check the difference between the usual <code>WriterT</code> and <code>ReliableWriterT</code> side by side:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">WriterT</span>        <span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">_</span><span style="color:#f92672">]</span>, <span style="color:#66d9ef">L</span>, <span style="color:#66d9ef">V</span><span style="color:#f92672">]</span>   <span style="color:#f92672">(</span>run<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[(</span><span style="color:#66d9ef">L</span>, <span style="color:#66d9ef">V</span><span style="color:#f92672">)])</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ReliableWriterT</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">_</span><span style="color:#f92672">]</span>, <span style="color:#66d9ef">E</span>, <span style="color:#66d9ef">W</span>, <span style="color:#66d9ef">A</span><span style="color:#f92672">](</span>run<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[(</span><span style="color:#66d9ef">W</span>, <span style="color:#66d9ef">Either</span><span style="color:#f92672">[</span><span style="color:#66d9ef">E</span>, <span style="color:#66d9ef">A</span><span style="color:#f92672">])])</span>
+</span></span></code></pre></div><p><code>ReliableWriterT</code> catches the <code>E</code> error and returns it <em>together</em> with the collected logs <code>W</code>.</p>
+  
+  <hr>
+<div class="footer">
+    
+	    
+            <a class="previous-post" href="https://coffius.github.io/posts/tf-context-passing/?ref=footer"><span style="font-weight:bold;">« Previous</span><br>Context Passing in Tagless Final</a>
+        
+	    
+    
+</div>
+
+  
+    <div class="comments">
+    
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "koff-io" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+</div>
+
+  
+</div>
+            </main>
+            
+  
+    <div class="article-toc ">
+    <div class="toc-wrapper">
+      <h4 id="contents"></h4>
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#idea--motivation">Idea &amp; Motivation</a></li>
+    <li><a href="#using-tell">Using Tell[..]</a></li>
+    <li><a href="#tellf-log-vs-tellf-chainlog">Tell[F, Log] vs Tell[F, Chain[Log]]</a></li>
+    <li><a href="#logging-as-a-capability">Logging as a capability</a></li>
+    <li><a href="#what-about-errors">What about Errors?</a></li>
+    <li><a href="#cats-example">Cats Example</a></li>
+    <li><a href="#zio-example">ZIO Example</a></li>
+    <li><a href="#links">Links</a></li>
+    <li><a href="#remarks">Remarks</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+  
+
+        </div>
+    </body>
+</html>
