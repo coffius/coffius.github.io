@@ -281,9 +281,9 @@ In this case all side effects are launched in such an order as they are chained 
 </span></span></code></pre></div><p>The next step is to split effectful computations on several categories:</p>
 <ol>
 <li>The first one is a generic computation of <code>IO[A]</code>.<br>
-This computation returns a value of <code>A</code> as a result where the type <code>A</code> has 2 or more possible values. Like <code>IO[Boolean]</code>, <code>IO[Int]</code>, <code>Either[Err, String]</code> and so on. Also this returned value of <code>A</code> is required by the code following its computation¹.</li>
+This computation returns a value of <code>A</code> as a result where the type <code>A</code> has 2 or more possible values. Like <code>IO[Boolean]</code>, <code>IO[Int]</code>, <code>Either[Err, String]</code> and so on. Also this returned value of <code>A</code> is required by the code following its computation<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</li>
 <li>The second type is <code>IO[Nothing]</code> - a computation that runs forever.</li>
-<li>The third type is <code>IO[Unit]</code> - a finite² effectful computation that does not return anything important for logic.
+<li>The third type is <code>IO[Unit]</code> - a finite<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> effectful computation that does not return anything important for logic.
 In the article this is <strong>the one that we are interested in</strong>.</li>
 </ol>
 <p>So why we are interested in <code>IO[Unit]</code>? It represents an effect without a meaningful result apart from a possible error and the fact of its execution.</p>
@@ -490,7 +490,7 @@ So we have to choose. In the scope of this article I am going to use the next co
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// omitted ...
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
 </span></span></code></pre></div><p>If we run a program of type <code>WriterT[SyncIO, Chain[String], A]</code> then we will get <code>result1: Either[Throwable, (Logs, Int)]</code>. From this type we see that the <code>Logs</code> value is returned only if there are no errors during execution of the program - the right part of <code>Either</code>. In case of any error we get only <code>Throwable</code> without <code>Logs</code>.</p>
-<p><code>ReliableWriterT</code>³ can help us to solve this problem. It is a special version of <code>WriterT</code> that is aware of errors that can happen in <code>F[_]</code>.</p>
+<p><code>ReliableWriterT</code><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> can help us to solve this problem. It is a special version of <code>WriterT</code> that is aware of errors that can happen in <code>F[_]</code>.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> main<span style="color:#f92672">(</span>args<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Array</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">])</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span> <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e">// omitted ...
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">type</span> <span style="color:#66d9ef">Eff2</span><span style="color:#f92672">[</span><span style="color:#66d9ef">A</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">ReliableWriterT</span><span style="color:#f92672">[</span><span style="color:#66d9ef">SyncIO</span>, <span style="color:#66d9ef">Throwable</span>, <span style="color:#66d9ef">Logs</span>, <span style="color:#66d9ef">A</span><span style="color:#f92672">]</span>
@@ -576,9 +576,11 @@ So we have to choose. In the scope of this article I am going to use the next co
 <li><a href="https://github.com/zio/zio-prelude/blob/series/2.x/core/shared/src/main/scala/zio/prelude/fx/ZPure.scala" target="_blank">Source code for ZPure</a></li>
 </ul>
 <h2 id="remarks">Remarks</h2>
-<ul>
-<li>¹) Consider these examples:</li>
-</ul>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Consider these examples:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> func1<span style="color:#f92672">()</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">IO</span><span style="color:#f92672">[</span><span style="color:#66d9ef">A</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">???</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> func2<span style="color:#f92672">(</span>in<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">A</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">IO</span><span style="color:#f92672">[</span><span style="color:#66d9ef">B</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">???</span>
 </span></span><span style="display:flex;"><span>
@@ -594,14 +596,19 @@ So we have to choose. In the scope of this article I am going to use the next co
 </span></span><span style="display:flex;"><span>  a <span style="color:#66d9ef">&lt;-</span> func1<span style="color:#f92672">()</span> <span style="color:#75715e">// `a` can be replaced with `_`
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  b <span style="color:#66d9ef">&lt;-</span> func2<span style="color:#f92672">()</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">yield</span> b
-</span></span></code></pre></div><p>But in this example the following code has no need in <code>A</code> so it can be dropped by converting <code>A</code> to <code>Unit</code>(like <code>func1().void</code>). Thus it is the 3rd class.</p>
-<ul>
-<li>²) There is no tools in vanilla Scala 2/3 to actually prove that a certain computation is finite. In this case it is rather a strong assumption which if important better to check with tests.</li>
-<li>³) Check the difference between the usual <code>WriterT</code> and <code>ReliableWriterT</code> side by side:</li>
-</ul>
+</span></span></code></pre></div><p>But in this example the following code has no need in <code>A</code> so it can be dropped by converting <code>A</code> to <code>Unit</code>(like <code>func1().void</code>). Thus it is the 3rd class.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>There is no tools in vanilla Scala 2/3 to actually prove that a certain computation is finite. In this case it is rather a strong assumption which if important better to check with tests.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>Check the difference between the usual <code>WriterT</code> and <code>ReliableWriterT</code> side by side:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">WriterT</span>        <span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">_</span><span style="color:#f92672">]</span>, <span style="color:#66d9ef">L</span>, <span style="color:#66d9ef">V</span><span style="color:#f92672">]</span>   <span style="color:#f92672">(</span>run<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[(</span><span style="color:#66d9ef">L</span>, <span style="color:#66d9ef">V</span><span style="color:#f92672">)])</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ReliableWriterT</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">_</span><span style="color:#f92672">]</span>, <span style="color:#66d9ef">E</span>, <span style="color:#66d9ef">W</span>, <span style="color:#66d9ef">A</span><span style="color:#f92672">](</span>run<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[(</span><span style="color:#66d9ef">W</span>, <span style="color:#66d9ef">Either</span><span style="color:#f92672">[</span><span style="color:#66d9ef">E</span>, <span style="color:#66d9ef">A</span><span style="color:#f92672">])])</span>
-</span></span></code></pre></div><p><code>ReliableWriterT</code> catches the <code>E</code> error and returns it <em>together</em> with the collected logs <code>W</code>.</p>
+</span></span></code></pre></div><p><code>ReliableWriterT</code> catches the <code>E</code> error and returns it <em>together</em> with the collected logs <code>W</code>.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
   
   <hr>
 <div class="footer">
